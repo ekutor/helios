@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TercerosEditPage" lazy="true">
+        <pm:header title="#{innventa.EditTercerosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TercerosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TercerosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{tercerosController.selected != null}">
+
+                    <pm:field>
+                                <h:outputLabel value="#{innventa.EditTercerosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{tercerosController.selected.id}" />
+                        <p:tooltip for="id" value="#{tercerosController.getComponentMessages('id', innventa.EditTercerosHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{tercerosController.selected.nombre}" title="#{innventa.EditTercerosTitle_nombre}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_nombre}" size="80" maxlength="80"/>
+                        <p:tooltip for="nombre" value="#{tercerosController.getComponentMessages('nombre', innventa.EditTercerosHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_observaciones}" for="observaciones" />
+                      <h:panelGroup>
+                        <p:inputTextarea rows="4" cols="30" id="observaciones" value="#{tercerosController.selected.observaciones}" title="#{innventa.EditTercerosTitle_observaciones}" />
+                        <p:tooltip for="observaciones" value="#{tercerosController.getComponentMessages('observaciones', innventa.EditTercerosHelpText_observaciones)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_direccion}" for="direccion" />
+                      <h:panelGroup>
+                        <p:inputText id="direccion" value="#{tercerosController.selected.direccion}" title="#{innventa.EditTercerosTitle_direccion}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_direccion}" size="150" maxlength="150"/>
+                        <p:tooltip for="direccion" value="#{tercerosController.getComponentMessages('direccion', innventa.EditTercerosHelpText_direccion)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_contacto}" for="contacto" />
+                      <h:panelGroup>
+                        <p:inputText id="contacto" value="#{tercerosController.selected.contacto}" title="#{innventa.EditTercerosTitle_contacto}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_contacto}" size="36" maxlength="36"/>
+                        <p:tooltip for="contacto" value="#{tercerosController.getComponentMessages('contacto', innventa.EditTercerosHelpText_contacto)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_telefono}" for="telefono" />
+                      <h:panelGroup>
+                        <p:inputText id="telefono" value="#{tercerosController.selected.telefono}" title="#{innventa.EditTercerosTitle_telefono}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_telefono}" size="20" maxlength="20"/>
+                        <p:tooltip for="telefono" value="#{tercerosController.getComponentMessages('telefono', innventa.EditTercerosHelpText_telefono)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_creadoPor}" for="creadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="creadoPor" value="#{tercerosController.selected.creadoPor}" title="#{innventa.EditTercerosTitle_creadoPor}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_creadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="creadoPor" value="#{tercerosController.getComponentMessages('creadoPor', innventa.EditTercerosHelpText_creadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_fechaCreacion}" for="fechaCreacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{tercerosController.selected.fechaCreacion}" title="#{innventa.EditTercerosTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:tooltip for="fechaCreacion" value="#{tercerosController.getComponentMessages('fechaCreacion', innventa.EditTercerosHelpText_fechaCreacion)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_modificadoPor}" for="modificadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="modificadoPor" value="#{tercerosController.selected.modificadoPor}" title="#{innventa.EditTercerosTitle_modificadoPor}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="modificadoPor" value="#{tercerosController.getComponentMessages('modificadoPor', innventa.EditTercerosHelpText_modificadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_fechaModificacion}" for="fechaModificacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{tercerosController.selected.fechaModificacion}" title="#{innventa.EditTercerosTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_fechaModificacion}" showOn="button"/>
+                        <p:tooltip for="fechaModificacion" value="#{tercerosController.getComponentMessages('fechaModificacion', innventa.EditTercerosHelpText_fechaModificacion)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTercerosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{tercerosController.selected.eliminado}" title="#{innventa.EditTercerosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditTercerosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{tercerosController.getComponentMessages('eliminado', innventa.EditTercerosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{tercerosController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:TercerosListPage:TercerosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:TercerosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

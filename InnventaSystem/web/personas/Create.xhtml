@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonasCreateDlg" widgetVar="PersonasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreatePersonasTitle}" closeOnEscape="true">
+
+            <h:form id="PersonasCreateForm">
+
+                <h:panelGroup id="display" rendered="#{personasController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{personasController.selected.id}" title="#{innventa.CreatePersonasTitle_id}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{personasController.getComponentMessages('id', innventa.CreatePersonasHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_nombre1}" for="nombre1" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre1" value="#{personasController.selected.nombre1}" title="#{innventa.CreatePersonasTitle_nombre1}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_nombre1}" size="80" maxlength="80"/>
+                        <p:tooltip for="nombre1" value="#{personasController.getComponentMessages('nombre1', innventa.CreatePersonasHelpText_nombre1)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_nombre2}" for="nombre2" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre2" value="#{personasController.selected.nombre2}" title="#{innventa.CreatePersonasTitle_nombre2}" size="80" maxlength="80"/>
+                        <p:tooltip for="nombre2" value="#{personasController.getComponentMessages('nombre2', innventa.CreatePersonasHelpText_nombre2)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_apellido1}" for="apellido1" />
+                      <h:panelGroup>
+                        <p:inputText id="apellido1" value="#{personasController.selected.apellido1}" title="#{innventa.CreatePersonasTitle_apellido1}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_apellido1}" size="80" maxlength="80"/>
+                        <p:tooltip for="apellido1" value="#{personasController.getComponentMessages('apellido1', innventa.CreatePersonasHelpText_apellido1)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_apellido2}" for="apellido2" />
+                      <h:panelGroup>
+                        <p:inputText id="apellido2" value="#{personasController.selected.apellido2}" title="#{innventa.CreatePersonasTitle_apellido2}" size="80" maxlength="80"/>
+                        <p:tooltip for="apellido2" value="#{personasController.getComponentMessages('apellido2', innventa.CreatePersonasHelpText_apellido2)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_sexo}" for="sexo" />
+                      <h:panelGroup>
+                        <p:inputText id="sexo" value="#{personasController.selected.sexo}" title="#{innventa.CreatePersonasTitle_sexo}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_sexo}" size="1" maxlength="1"/>
+                        <p:tooltip for="sexo" value="#{personasController.getComponentMessages('sexo', innventa.CreatePersonasHelpText_sexo)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_fechaNacim}" for="fechaNacim" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaNacim" pattern="MM/dd/yyyy" value="#{personasController.selected.fechaNacim}" title="#{innventa.CreatePersonasTitle_fechaNacim}"  showOn="button"/>
+                        <p:tooltip for="fechaNacim" value="#{personasController.getComponentMessages('fechaNacim', innventa.CreatePersonasHelpText_fechaNacim)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_tipoDocumento}" for="tipoDocumento" />
+                      <h:panelGroup>
+                        <p:inputText id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" title="#{innventa.CreatePersonasTitle_tipoDocumento}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_tipoDocumento}" size="36" maxlength="36"/>
+                        <p:tooltip for="tipoDocumento" value="#{personasController.getComponentMessages('tipoDocumento', innventa.CreatePersonasHelpText_tipoDocumento)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personasController.saveNew}" value="#{innventa.Save}" update="display,:PersonasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PersonasCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('PersonasCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TercerosViewDlg" widgetVar="TercerosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewTercerosTitle}" closeOnEscape="true">
+
+            <h:form id="TercerosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{tercerosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_id}"/>
+                        <h:outputText value="#{tercerosController.selected.id}" title="#{innventa.ViewTercerosTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_nombre}"/>
+                        <h:outputText value="#{tercerosController.selected.nombre}" title="#{innventa.ViewTercerosTitle_nombre}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_observaciones}"/>
+                        <h:outputText value="#{tercerosController.selected.observaciones}" title="#{innventa.ViewTercerosTitle_observaciones}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_direccion}"/>
+                        <h:outputText value="#{tercerosController.selected.direccion}" title="#{innventa.ViewTercerosTitle_direccion}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_contacto}"/>
+                        <h:outputText value="#{tercerosController.selected.contacto}" title="#{innventa.ViewTercerosTitle_contacto}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_telefono}"/>
+                        <h:outputText value="#{tercerosController.selected.telefono}" title="#{innventa.ViewTercerosTitle_telefono}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_creadoPor}"/>
+                        <h:outputText value="#{tercerosController.selected.creadoPor}" title="#{innventa.ViewTercerosTitle_creadoPor}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_fechaCreacion}"/>
+                        <h:outputText value="#{tercerosController.selected.fechaCreacion}" title="#{innventa.ViewTercerosTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_modificadoPor}"/>
+                        <h:outputText value="#{tercerosController.selected.modificadoPor}" title="#{innventa.ViewTercerosTitle_modificadoPor}"/>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_fechaModificacion}"/>
+                        <h:outputText value="#{tercerosController.selected.fechaModificacion}" title="#{innventa.ViewTercerosTitle_fechaModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{innventa.ViewTercerosLabel_eliminado}"/>
+                        <h:outputText value="#{tercerosController.selected.eliminado}" title="#{innventa.ViewTercerosTitle_eliminado}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('TercerosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

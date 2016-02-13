@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AclRolesAccionCreatePage" lazy="true">
+        <pm:header title="#{innventa.CreateAclRolesAccionTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclRolesAccionListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AclRolesAccionCreateForm">
+
+                <h:panelGroup id="display" rendered="#{aclRolesAccionController.selected != null}">
+                    <p:outputPanel>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclRolesAccionLabel_rol}" for="rol" />
+                      <h:panelGroup>
+                        <p:inputText id="rol" value="#{aclRolesAccionController.selected.rol}" title="#{innventa.CreateAclRolesAccionTitle_rol}" required="true" requiredMessage="#{innventa.CreateAclRolesAccionRequiredMessage_rol}" size="36" maxlength="36"/>
+                        <p:tooltip for="rol" value="#{aclRolesAccionController.getComponentMessages('rol', innventa.CreateAclRolesAccionHelpText_rol)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclRolesAccionLabel_accion}" for="accion" />
+                      <h:panelGroup>
+                        <p:inputText id="accion" value="#{aclRolesAccionController.selected.accion}" title="#{innventa.CreateAclRolesAccionTitle_accion}" required="true" requiredMessage="#{innventa.CreateAclRolesAccionRequiredMessage_accion}" size="36" maxlength="36"/>
+                        <p:tooltip for="accion" value="#{aclRolesAccionController.getComponentMessages('accion', innventa.CreateAclRolesAccionHelpText_accion)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclRolesAccionLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{aclRolesAccionController.selected.eliminado}" title="#{innventa.CreateAclRolesAccionTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclRolesAccionRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{aclRolesAccionController.getComponentMessages('eliminado', innventa.CreateAclRolesAccionHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{aclRolesAccionController.saveNew}" value="#{innventa.Save}" update="display,:AclRolesAccionListPage:AclRolesAccionListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AclRolesAccionListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

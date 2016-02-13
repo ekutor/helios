@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PagosViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewPagosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PagosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PagosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{pagosController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPagosLabel_id}"/>
+                        <h:outputText value="#{pagosController.selected.id}" title="#{innventa.ViewPagosTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPagosLabel_recibo}"/>
+                        <h:outputText value="#{pagosController.selected.recibo}" title="#{innventa.ViewPagosTitle_recibo}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPagosLabel_pago}"/>
+                        <h:outputText value="#{pagosController.selected.pago}" title="#{innventa.ViewPagosTitle_pago}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPagosLabel_total}"/>
+                        <h:outputText value="#{pagosController.selected.total}" title="#{innventa.ViewPagosTitle_total}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPagosLabel_idTrans}"/>
+                        <h:outputText value="#{pagosController.selected.idTrans}" title="#{innventa.ViewPagosTitle_idTrans}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPagosLabel_eliminado}"/>
+                        <h:outputText value="#{pagosController.selected.eliminado}" title="#{innventa.ViewPagosTitle_eliminado}"/>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonasViewDlg" widgetVar="PersonasViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewPersonasTitle}" closeOnEscape="true">
+
+            <h:form id="PersonasViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{personasController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_id}"/>
+                        <h:outputText value="#{personasController.selected.id}" title="#{innventa.ViewPersonasTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_nombre1}"/>
+                        <h:outputText value="#{personasController.selected.nombre1}" title="#{innventa.ViewPersonasTitle_nombre1}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_nombre2}"/>
+                        <h:outputText value="#{personasController.selected.nombre2}" title="#{innventa.ViewPersonasTitle_nombre2}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_apellido1}"/>
+                        <h:outputText value="#{personasController.selected.apellido1}" title="#{innventa.ViewPersonasTitle_apellido1}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_apellido2}"/>
+                        <h:outputText value="#{personasController.selected.apellido2}" title="#{innventa.ViewPersonasTitle_apellido2}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_sexo}"/>
+                        <h:outputText value="#{personasController.selected.sexo}" title="#{innventa.ViewPersonasTitle_sexo}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_fechaNacim}"/>
+                        <h:outputText value="#{personasController.selected.fechaNacim}" title="#{innventa.ViewPersonasTitle_fechaNacim}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_tipoDocumento}"/>
+                        <h:outputText value="#{personasController.selected.tipoDocumento}" title="#{innventa.ViewPersonasTitle_tipoDocumento}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('PersonasViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

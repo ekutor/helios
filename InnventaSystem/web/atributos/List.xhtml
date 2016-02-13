@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="AtributosListForm">
+
+            <p:panel header="#{innventa.ListAtributosTitle}">
+                <p:contextMenu id="AtributosDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('AtributosListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('AtributosListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('AtributosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('AtributosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{atributosController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{atributosController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AtributosDataTableContextMenu"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AtributosDataTableContextMenu"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('AtributosListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListAtributosTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListAtributosTitle_nombre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListAtributosTitle_eliminado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliminado}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{atributosController.prepareCreate}" update=":AtributosCreateForm" oncomplete="PF('AtributosCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":AtributosViewForm" oncomplete="PF('AtributosViewDialog').show()" disabled="#{empty atributosController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":AtributosEditForm" oncomplete="PF('AtributosEditDialog').show()" disabled="#{empty atributosController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{atributosController.delete}" update=":growl,datalist" disabled="#{empty atributosController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

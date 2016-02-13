@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaMailsCreateDlg" widgetVar="PersonaMailsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreatePersonaMailsTitle}" closeOnEscape="true">
+
+            <h:form id="PersonaMailsCreateForm">
+
+                <h:panelGroup id="display" rendered="#{personaMailsController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreatePersonaMailsLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{personaMailsController.selected.id}" title="#{innventa.CreatePersonaMailsTitle_id}" required="true" requiredMessage="#{innventa.CreatePersonaMailsRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{personaMailsController.getComponentMessages('id', innventa.CreatePersonaMailsHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonaMailsLabel_idPersona}" for="idPersona" />
+                      <h:panelGroup>
+                        <p:inputText id="idPersona" value="#{personaMailsController.selected.idPersona}" title="#{innventa.CreatePersonaMailsTitle_idPersona}" required="true" requiredMessage="#{innventa.CreatePersonaMailsRequiredMessage_idPersona}" size="36" maxlength="36"/>
+                        <p:tooltip for="idPersona" value="#{personaMailsController.getComponentMessages('idPersona', innventa.CreatePersonaMailsHelpText_idPersona)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonaMailsLabel_mail}" for="mail" />
+                      <h:panelGroup>
+                        <p:inputText id="mail" value="#{personaMailsController.selected.mail}" title="#{innventa.CreatePersonaMailsTitle_mail}" required="true" requiredMessage="#{innventa.CreatePersonaMailsRequiredMessage_mail}" size="150" maxlength="150"/>
+                        <p:tooltip for="mail" value="#{personaMailsController.getComponentMessages('mail', innventa.CreatePersonaMailsHelpText_mail)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonaMailsLabel_principal}" for="principal" />
+                      <h:panelGroup>
+                        <p:selectBooleanCheckbox id="principal" value="#{personaMailsController.selected.principal}" />
+                        <p:tooltip for="principal" value="#{personaMailsController.getComponentMessages('principal', innventa.CreatePersonaMailsHelpText_principal)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonaMailsLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:calendar id="eliminado" pattern="MM/dd/yyyy HH:mm:ss" value="#{personaMailsController.selected.eliminado}" title="#{innventa.CreatePersonaMailsTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePersonaMailsRequiredMessage_eliminado}" showOn="button"/>
+                        <p:tooltip for="eliminado" value="#{personaMailsController.getComponentMessages('eliminado', innventa.CreatePersonaMailsHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personaMailsController.saveNew}" value="#{innventa.Save}" update="display,:PersonaMailsListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PersonaMailsCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('PersonaMailsCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

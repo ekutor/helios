@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AclRolesUsuariosCreateDlg" widgetVar="AclRolesUsuariosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateAclRolesUsuariosTitle}" closeOnEscape="true">
+
+            <h:form id="AclRolesUsuariosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{aclRolesUsuariosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreateAclRolesUsuariosLabel_usuario}" for="usuario" />
+                      <h:panelGroup>
+                        <p:inputText id="usuario" value="#{aclRolesUsuariosController.selected.usuario}" title="#{innventa.CreateAclRolesUsuariosTitle_usuario}" required="true" requiredMessage="#{innventa.CreateAclRolesUsuariosRequiredMessage_usuario}" size="36" maxlength="36"/>
+                        <p:tooltip for="usuario" value="#{aclRolesUsuariosController.getComponentMessages('usuario', innventa.CreateAclRolesUsuariosHelpText_usuario)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateAclRolesUsuariosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{aclRolesUsuariosController.selected.eliminado}" title="#{innventa.CreateAclRolesUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclRolesUsuariosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{aclRolesUsuariosController.getComponentMessages('eliminado', innventa.CreateAclRolesUsuariosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateAclRolesUsuariosLabel_rol}" for="rol" />
+                      <h:panelGroup>
+                        <p:selectOneMenu id="rol" value="#{aclRolesUsuariosController.selected.rol}" required="true" requiredMessage="#{innventa.CreateAclRolesUsuariosRequiredMessage_rol}" converter="aclRolesConverter">
+                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                            <f:selectItems value="#{aclRolesController.items}"
+                                           var="rolItem"
+                                           itemValue="#{rolItem}"
+                                           itemLabel="#{rolItem.descripcion.toString()}"
+                            />
+                            
+                        </p:selectOneMenu>
+                        <p:tooltip for="rol" value="#{aclRolesUsuariosController.getComponentMessages('rol', innventa.CreateAclRolesUsuariosHelpText_rol)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aclRolesUsuariosController.saveNew}" value="#{innventa.Save}" update="display,:AclRolesUsuariosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AclRolesUsuariosCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('AclRolesUsuariosCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

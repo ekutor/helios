@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AclAccionesCreateDlg" widgetVar="AclAccionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateAclAccionesTitle}" closeOnEscape="true">
+
+            <h:form id="AclAccionesCreateForm">
+
+                <h:panelGroup id="display" rendered="#{aclAccionesController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreateAclAccionesLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{aclAccionesController.selected.id}" title="#{innventa.CreateAclAccionesTitle_id}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{aclAccionesController.getComponentMessages('id', innventa.CreateAclAccionesHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateAclAccionesLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{aclAccionesController.selected.nombre}" title="#{innventa.CreateAclAccionesTitle_nombre}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_nombre}" size="20" maxlength="20"/>
+                        <p:tooltip for="nombre" value="#{aclAccionesController.getComponentMessages('nombre', innventa.CreateAclAccionesHelpText_nombre)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateAclAccionesLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{aclAccionesController.selected.eliminado}" title="#{innventa.CreateAclAccionesTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{aclAccionesController.getComponentMessages('eliminado', innventa.CreateAclAccionesHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aclAccionesController.saveNew}" value="#{innventa.Save}" update="display,:AclAccionesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AclAccionesCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('AclAccionesCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

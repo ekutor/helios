@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PersonasViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewPersonasTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PersonasListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PersonasViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{personasController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_id}"/>
+                        <h:outputText value="#{personasController.selected.id}" title="#{innventa.ViewPersonasTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_nombre1}"/>
+                        <h:outputText value="#{personasController.selected.nombre1}" title="#{innventa.ViewPersonasTitle_nombre1}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_nombre2}"/>
+                        <h:outputText value="#{personasController.selected.nombre2}" title="#{innventa.ViewPersonasTitle_nombre2}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_apellido1}"/>
+                        <h:outputText value="#{personasController.selected.apellido1}" title="#{innventa.ViewPersonasTitle_apellido1}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_apellido2}"/>
+                        <h:outputText value="#{personasController.selected.apellido2}" title="#{innventa.ViewPersonasTitle_apellido2}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_sexo}"/>
+                        <h:outputText value="#{personasController.selected.sexo}" title="#{innventa.ViewPersonasTitle_sexo}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_fechaNacim}"/>
+                        <h:outputText value="#{personasController.selected.fechaNacim}" title="#{innventa.ViewPersonasTitle_fechaNacim}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonasLabel_tipoDocumento}"/>
+                        <h:outputText value="#{personasController.selected.tipoDocumento}" title="#{innventa.ViewPersonasTitle_tipoDocumento}"/>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

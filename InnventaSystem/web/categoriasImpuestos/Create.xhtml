@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategoriasImpuestosCreateDlg" widgetVar="CategoriasImpuestosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateCategoriasImpuestosTitle}" closeOnEscape="true">
+
+            <h:form id="CategoriasImpuestosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{categoriasImpuestosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreateCategoriasImpuestosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{categoriasImpuestosController.selected.id}" title="#{innventa.CreateCategoriasImpuestosTitle_id}" required="true" requiredMessage="#{innventa.CreateCategoriasImpuestosRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{categoriasImpuestosController.getComponentMessages('id', innventa.CreateCategoriasImpuestosHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateCategoriasImpuestosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{categoriasImpuestosController.selected.nombre}" title="#{innventa.CreateCategoriasImpuestosTitle_nombre}" required="true" requiredMessage="#{innventa.CreateCategoriasImpuestosRequiredMessage_nombre}" size="255" maxlength="255"/>
+                        <p:tooltip for="nombre" value="#{categoriasImpuestosController.getComponentMessages('nombre', innventa.CreateCategoriasImpuestosHelpText_nombre)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateCategoriasImpuestosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{categoriasImpuestosController.selected.eliminado}" title="#{innventa.CreateCategoriasImpuestosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateCategoriasImpuestosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{categoriasImpuestosController.getComponentMessages('eliminado', innventa.CreateCategoriasImpuestosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{categoriasImpuestosController.saveNew}" value="#{innventa.Save}" update="display,:CategoriasImpuestosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CategoriasImpuestosCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('CategoriasImpuestosCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

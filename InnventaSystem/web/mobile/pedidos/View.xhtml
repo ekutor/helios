@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PedidosViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewPedidosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PedidosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PedidosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{pedidosController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_id}"/>
+                        <h:outputText value="#{pedidosController.selected.id}" title="#{innventa.ViewPedidosTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_referencia}"/>
+                        <h:outputText value="#{pedidosController.selected.referencia}" title="#{innventa.ViewPedidosTitle_referencia}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_idCliente}"/>
+                        <h:outputText value="#{pedidosController.selected.idCliente}" title="#{innventa.ViewPedidosTitle_idCliente}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_fechaPedido}"/>
+                        <h:outputText value="#{pedidosController.selected.fechaPedido}" title="#{innventa.ViewPedidosTitle_fechaPedido}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_fechaEntrega}"/>
+                        <h:outputText value="#{pedidosController.selected.fechaEntrega}" title="#{innventa.ViewPedidosTitle_fechaEntrega}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_cantidadTotal}"/>
+                        <h:outputText value="#{pedidosController.selected.cantidadTotal}" title="#{innventa.ViewPedidosTitle_cantidadTotal}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_descripcion}"/>
+                        <h:outputText value="#{pedidosController.selected.descripcion}" title="#{innventa.ViewPedidosTitle_descripcion}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_observaciones}"/>
+                        <h:outputText value="#{pedidosController.selected.observaciones}" title="#{innventa.ViewPedidosTitle_observaciones}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_cantidadPendientes}"/>
+                        <h:outputText value="#{pedidosController.selected.cantidadPendientes}" title="#{innventa.ViewPedidosTitle_cantidadPendientes}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_estado}"/>
+                        <h:outputText value="#{pedidosController.selected.estado}" title="#{innventa.ViewPedidosTitle_estado}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_creadoPor}"/>
+                        <h:outputText value="#{pedidosController.selected.creadoPor}" title="#{innventa.ViewPedidosTitle_creadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_fechaCreacion}"/>
+                        <h:outputText value="#{pedidosController.selected.fechaCreacion}" title="#{innventa.ViewPedidosTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_modificadoPor}"/>
+                        <h:outputText value="#{pedidosController.selected.modificadoPor}" title="#{innventa.ViewPedidosTitle_modificadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_fechaModificacion}"/>
+                        <h:outputText value="#{pedidosController.selected.fechaModificacion}" title="#{innventa.ViewPedidosTitle_fechaModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPedidosLabel_eliminado}"/>
+                        <h:outputText value="#{pedidosController.selected.eliminado}" title="#{innventa.ViewPedidosTitle_eliminado}"/>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

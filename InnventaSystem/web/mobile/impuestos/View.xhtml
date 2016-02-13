@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ImpuestosViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewImpuestosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ImpuestosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ImpuestosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{impuestosController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_id}"/>
+                        <h:outputText value="#{impuestosController.selected.id}" title="#{innventa.ViewImpuestosTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_nombre}"/>
+                        <h:outputText value="#{impuestosController.selected.nombre}" title="#{innventa.ViewImpuestosTitle_nombre}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_categoria}"/>
+                        <h:outputText value="#{impuestosController.selected.categoria}" title="#{innventa.ViewImpuestosTitle_categoria}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_validoDesde}"/>
+                        <h:outputText value="#{impuestosController.selected.validoDesde}" title="#{innventa.ViewImpuestosTitle_validoDesde}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_tarifa}"/>
+                        <h:outputText value="#{impuestosController.selected.tarifa}" title="#{innventa.ViewImpuestosTitle_tarifa}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_creadoPor}"/>
+                        <h:outputText value="#{impuestosController.selected.creadoPor}" title="#{innventa.ViewImpuestosTitle_creadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_modificadoPor}"/>
+                        <h:outputText value="#{impuestosController.selected.modificadoPor}" title="#{innventa.ViewImpuestosTitle_modificadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_eliminado}"/>
+                        <h:outputText value="#{impuestosController.selected.eliminado}" title="#{innventa.ViewImpuestosTitle_eliminado}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewImpuestosLabel_impuestoPadre}"/>
+                        <h:outputText value="#{impuestosController.selected.impuestoPadre.id}"/>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

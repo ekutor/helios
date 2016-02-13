@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TiposClienteCreateDlg" widgetVar="TiposClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateTiposClienteTitle}" closeOnEscape="true">
+
+            <h:form id="TiposClienteCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tiposClienteController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreateTiposClienteLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{tiposClienteController.selected.id}" title="#{innventa.CreateTiposClienteTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{tiposClienteController.getComponentMessages('id', innventa.CreateTiposClienteHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTiposClienteLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{tiposClienteController.selected.nombre}" title="#{innventa.CreateTiposClienteTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_nombre}" size="20" maxlength="20"/>
+                        <p:tooltip for="nombre" value="#{tiposClienteController.getComponentMessages('nombre', innventa.CreateTiposClienteHelpText_nombre)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTiposClienteLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{tiposClienteController.selected.eliminado}" title="#{innventa.CreateTiposClienteTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{tiposClienteController.getComponentMessages('eliminado', innventa.CreateTiposClienteHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tiposClienteController.saveNew}" value="#{innventa.Save}" update="display,:TiposClienteListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TiposClienteCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('TiposClienteCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

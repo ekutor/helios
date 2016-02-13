@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ImpuestosEditPage" lazy="true">
+        <pm:header title="#{innventa.EditImpuestosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ImpuestosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ImpuestosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{impuestosController.selected != null}">
+
+                    <pm:field>
+                                <h:outputLabel value="#{innventa.EditImpuestosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{impuestosController.selected.id}" />
+                        <p:tooltip for="id" value="#{impuestosController.getComponentMessages('id', innventa.EditImpuestosHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{impuestosController.selected.nombre}" title="#{innventa.EditImpuestosTitle_nombre}" required="true" requiredMessage="#{innventa.EditImpuestosRequiredMessage_nombre}" size="255" maxlength="255"/>
+                        <p:tooltip for="nombre" value="#{impuestosController.getComponentMessages('nombre', innventa.EditImpuestosHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_categoria}" for="categoria" />
+                      <h:panelGroup>
+                        <p:inputText id="categoria" value="#{impuestosController.selected.categoria}" title="#{innventa.EditImpuestosTitle_categoria}" size="36" maxlength="36"/>
+                        <p:tooltip for="categoria" value="#{impuestosController.getComponentMessages('categoria', innventa.EditImpuestosHelpText_categoria)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_validoDesde}" for="validoDesde" />
+                      <h:panelGroup>
+                        <p:calendar id="validoDesde" pattern="MM/dd/yyyy HH:mm:ss" value="#{impuestosController.selected.validoDesde}" title="#{innventa.EditImpuestosTitle_validoDesde}" required="true" requiredMessage="#{innventa.EditImpuestosRequiredMessage_validoDesde}" showOn="button"/>
+                        <p:tooltip for="validoDesde" value="#{impuestosController.getComponentMessages('validoDesde', innventa.EditImpuestosHelpText_validoDesde)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_tarifa}" for="tarifa" />
+                      <h:panelGroup>
+                        <p:inputText id="tarifa" value="#{impuestosController.selected.tarifa}" title="#{innventa.EditImpuestosTitle_tarifa}" required="true" requiredMessage="#{innventa.EditImpuestosRequiredMessage_tarifa}"/>
+                        <p:tooltip for="tarifa" value="#{impuestosController.getComponentMessages('tarifa', innventa.EditImpuestosHelpText_tarifa)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_creadoPor}" for="creadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="creadoPor" value="#{impuestosController.selected.creadoPor}" title="#{innventa.EditImpuestosTitle_creadoPor}" required="true" requiredMessage="#{innventa.EditImpuestosRequiredMessage_creadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="creadoPor" value="#{impuestosController.getComponentMessages('creadoPor', innventa.EditImpuestosHelpText_creadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_modificadoPor}" for="modificadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="modificadoPor" value="#{impuestosController.selected.modificadoPor}" title="#{innventa.EditImpuestosTitle_modificadoPor}" required="true" requiredMessage="#{innventa.EditImpuestosRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="modificadoPor" value="#{impuestosController.getComponentMessages('modificadoPor', innventa.EditImpuestosHelpText_modificadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{impuestosController.selected.eliminado}" title="#{innventa.EditImpuestosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditImpuestosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{impuestosController.getComponentMessages('eliminado', innventa.EditImpuestosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditImpuestosLabel_impuestoPadre}" for="impuestoPadre" />
+                      <h:panelGroup>
+                        <p:selectOneMenu id="impuestoPadre" value="#{impuestosController.selected.impuestoPadre}"  converter="impuestosConverter">
+                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                            <f:selectItems value="#{impuestosController.items}"
+                                           var="impuestoPadreItem"
+                                           itemValue="#{impuestoPadreItem}"
+                                           itemLabel="#{impuestoPadreItem.id.toString()}"
+                            />
+                            
+                        </p:selectOneMenu>
+                        <p:tooltip for="impuestoPadre" value="#{impuestosController.getComponentMessages('impuestoPadre', innventa.EditImpuestosHelpText_impuestoPadre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{impuestosController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ImpuestosListPage:ImpuestosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ImpuestosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

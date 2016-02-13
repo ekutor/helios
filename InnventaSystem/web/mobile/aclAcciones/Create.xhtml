@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AclAccionesCreatePage" lazy="true">
+        <pm:header title="#{innventa.CreateAclAccionesTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclAccionesListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AclAccionesCreateForm">
+
+                <h:panelGroup id="display" rendered="#{aclAccionesController.selected != null}">
+                    <p:outputPanel>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclAccionesLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{aclAccionesController.selected.id}" title="#{innventa.CreateAclAccionesTitle_id}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{aclAccionesController.getComponentMessages('id', innventa.CreateAclAccionesHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclAccionesLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{aclAccionesController.selected.nombre}" title="#{innventa.CreateAclAccionesTitle_nombre}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_nombre}" size="20" maxlength="20"/>
+                        <p:tooltip for="nombre" value="#{aclAccionesController.getComponentMessages('nombre', innventa.CreateAclAccionesHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclAccionesLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{aclAccionesController.selected.eliminado}" title="#{innventa.CreateAclAccionesTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{aclAccionesController.getComponentMessages('eliminado', innventa.CreateAclAccionesHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{aclAccionesController.saveNew}" value="#{innventa.Save}" update="display,:AclAccionesListPage:AclAccionesListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AclAccionesListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

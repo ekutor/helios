@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AclRolesUsuariosCreatePage" lazy="true">
+        <pm:header title="#{innventa.CreateAclRolesUsuariosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclRolesUsuariosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AclRolesUsuariosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{aclRolesUsuariosController.selected != null}">
+                    <p:outputPanel>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclRolesUsuariosLabel_usuario}" for="usuario" />
+                      <h:panelGroup>
+                        <p:inputText id="usuario" value="#{aclRolesUsuariosController.selected.usuario}" title="#{innventa.CreateAclRolesUsuariosTitle_usuario}" required="true" requiredMessage="#{innventa.CreateAclRolesUsuariosRequiredMessage_usuario}" size="36" maxlength="36"/>
+                        <p:tooltip for="usuario" value="#{aclRolesUsuariosController.getComponentMessages('usuario', innventa.CreateAclRolesUsuariosHelpText_usuario)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclRolesUsuariosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{aclRolesUsuariosController.selected.eliminado}" title="#{innventa.CreateAclRolesUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclRolesUsuariosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{aclRolesUsuariosController.getComponentMessages('eliminado', innventa.CreateAclRolesUsuariosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAclRolesUsuariosLabel_rol}" for="rol" />
+                      <h:panelGroup>
+                        <p:selectOneMenu id="rol" value="#{aclRolesUsuariosController.selected.rol}" required="true" requiredMessage="#{innventa.CreateAclRolesUsuariosRequiredMessage_rol}" converter="aclRolesConverter">
+                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                            <f:selectItems value="#{aclRolesController.items}"
+                                           var="rolItem"
+                                           itemValue="#{rolItem}"
+                                           itemLabel="#{rolItem.descripcion.toString()}"
+                            />
+                            
+                        </p:selectOneMenu>
+                        <p:tooltip for="rol" value="#{aclRolesUsuariosController.getComponentMessages('rol', innventa.CreateAclRolesUsuariosHelpText_rol)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{aclRolesUsuariosController.saveNew}" value="#{innventa.Save}" update="display,:AclRolesUsuariosListPage:AclRolesUsuariosListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AclRolesUsuariosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="PersonasListForm">
+
+            <p:panel header="#{innventa.ListPersonasTitle}">
+                <p:contextMenu id="PersonasDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('PersonasListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('PersonasListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('PersonasListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PersonasListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                    <p:separator/>
+                    <p:menuitem value="#{innventa.PersonasMenuItem_clienteContactosCollection}" icon="ui-icon-search"  action="#{personasController.navigateClienteContactosCollection}" disabled="#{empty personasController.selected.clienteContactosCollection}" ajax="false"/>  
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{personasController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{personasController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PersonasDataTableContextMenu"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PersonasDataTableContextMenu"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('PersonasListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.nombre1}" filterBy="#{item.nombre1}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_nombre1}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre1}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.nombre2}" filterBy="#{item.nombre2}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_nombre2}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre2}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.apellido1}" filterBy="#{item.apellido1}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_apellido1}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.apellido1}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.apellido2}" filterBy="#{item.apellido2}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_apellido2}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.apellido2}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.sexo}" filterBy="#{item.sexo}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_sexo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sexo}"/>
+                    </p:column>
+
+<!--
+                    <p:column sortBy="#{item.fechaNacim}" filterBy="#{item.fechaNacim}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_fechaNacim}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaNacim}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.tipoDocumento}" filterBy="#{item.tipoDocumento}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTitle_tipoDocumento}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoDocumento}"/>
+                    </p:column>
+-->
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{personasController.prepareCreate}" update=":PersonasCreateForm" oncomplete="PF('PersonasCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PersonasViewForm" oncomplete="PF('PersonasViewDialog').show()" disabled="#{empty personasController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PersonasEditForm" oncomplete="PF('PersonasEditDialog').show()" disabled="#{empty personasController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{personasController.delete}" update=":growl,datalist" disabled="#{empty personasController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

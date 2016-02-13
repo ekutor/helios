@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="PagosEditDlg" widgetVar="PagosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditPagosTitle}" closeOnEscape="true">
+
+            <h:form id="PagosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{pagosController.selected != null}">
+
+        
+                        <h:outputLabel value="#{innventa.EditPagosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{pagosController.selected.id}" />
+                        <p:tooltip for="id" value="#{pagosController.getComponentMessages('id', innventa.EditPagosHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPagosLabel_recibo}" for="recibo" />
+                      <h:panelGroup>
+                        <p:inputText id="recibo" value="#{pagosController.selected.recibo}" title="#{innventa.EditPagosTitle_recibo}" required="true" requiredMessage="#{innventa.EditPagosRequiredMessage_recibo}" size="36" maxlength="36"/>
+                        <p:tooltip for="recibo" value="#{pagosController.getComponentMessages('recibo', innventa.EditPagosHelpText_recibo)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPagosLabel_pago}" for="pago" />
+                      <h:panelGroup>
+                        <p:inputTextarea rows="4" cols="30" id="pago" value="#{pagosController.selected.pago}" title="#{innventa.EditPagosTitle_pago}" required="true" requiredMessage="#{innventa.EditPagosRequiredMessage_pago}"/>
+                        <p:tooltip for="pago" value="#{pagosController.getComponentMessages('pago', innventa.EditPagosHelpText_pago)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPagosLabel_total}" for="total" />
+                      <h:panelGroup>
+                        <p:inputText id="total" value="#{pagosController.selected.total}" title="#{innventa.EditPagosTitle_total}" required="true" requiredMessage="#{innventa.EditPagosRequiredMessage_total}"/>
+                        <p:tooltip for="total" value="#{pagosController.getComponentMessages('total', innventa.EditPagosHelpText_total)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPagosLabel_idTrans}" for="idTrans" />
+                      <h:panelGroup>
+                        <p:inputTextarea rows="4" cols="30" id="idTrans" value="#{pagosController.selected.idTrans}" title="#{innventa.EditPagosTitle_idTrans}" required="true" requiredMessage="#{innventa.EditPagosRequiredMessage_idTrans}"/>
+                        <p:tooltip for="idTrans" value="#{pagosController.getComponentMessages('idTrans', innventa.EditPagosHelpText_idTrans)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPagosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{pagosController.selected.eliminado}" title="#{innventa.EditPagosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditPagosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{pagosController.getComponentMessages('eliminado', innventa.EditPagosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pagosController.save}" value="#{innventa.Save}" update="display,:PagosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PagosEditDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('PagosEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

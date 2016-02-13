@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="RemisionesProductoListForm">
+
+            <p:panel header="#{innventa.ListRemisionesProductoTitle}">
+                <p:contextMenu id="RemisionesProductoDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('RemisionesProductoListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('RemisionesProductoListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('RemisionesProductoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('RemisionesProductoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                    <p:separator/>
+                    <p:menuitem value="#{innventa.RemisionesProductoMenuItem_idRemision}" icon="ui-icon-search"  actionListener="#{remisionesProductoController.prepareIdRemision}" update=":RemisionesViewForm" oncomplete="PF('RemisionesViewDialog').show()" disabled="#{empty remisionesProductoController.selected.idRemision}"/>  
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{remisionesProductoController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{remisionesProductoController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesProductoDataTableContextMenu" listener="#{remisionesProductoController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesProductoDataTableContextMenu" listener="#{remisionesProductoController.resetParents}"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{remisionesProductoController.resetParents}"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('RemisionesProductoListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesProductoTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.idProducto}" filterBy="#{item.idProducto}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesProductoTitle_idProducto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idProducto}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.cantidad}" filterBy="#{item.cantidad}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesProductoTitle_cantidad}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidad}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesProductoTitle_eliminado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliminado}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.idRemision.id}" filterBy="#{item.idRemision.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesProductoTitle_idRemision}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idRemision.id}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{remisionesProductoController.prepareCreate}" update=":RemisionesProductoCreateForm" oncomplete="PF('RemisionesProductoCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":RemisionesProductoViewForm" oncomplete="PF('RemisionesProductoViewDialog').show()" disabled="#{empty remisionesProductoController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":RemisionesProductoEditForm" oncomplete="PF('RemisionesProductoEditDialog').show()" disabled="#{empty remisionesProductoController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{remisionesProductoController.delete}" update=":growl,datalist" disabled="#{empty remisionesProductoController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

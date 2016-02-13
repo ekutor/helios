@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="AclRolesAccionListForm">
+
+            <p:panel header="#{innventa.ListAclRolesAccionTitle}">
+                <p:contextMenu id="AclRolesAccionDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('AclRolesAccionListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('AclRolesAccionListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('AclRolesAccionListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('AclRolesAccionListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{aclRolesAccionController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{aclRolesAccionController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesAccionDataTableContextMenu"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesAccionDataTableContextMenu"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('AclRolesAccionListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListAclRolesAccionTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.rol}" filterBy="#{item.rol}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListAclRolesAccionTitle_rol}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.rol}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.accion}" filterBy="#{item.accion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListAclRolesAccionTitle_accion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.accion}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListAclRolesAccionTitle_eliminado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliminado}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{aclRolesAccionController.prepareCreate}" update=":AclRolesAccionCreateForm" oncomplete="PF('AclRolesAccionCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":AclRolesAccionViewForm" oncomplete="PF('AclRolesAccionViewDialog').show()" disabled="#{empty aclRolesAccionController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":AclRolesAccionEditForm" oncomplete="PF('AclRolesAccionEditDialog').show()" disabled="#{empty aclRolesAccionController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{aclRolesAccionController.delete}" update=":growl,datalist" disabled="#{empty aclRolesAccionController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

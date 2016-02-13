@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="RecibosCreatePage" lazy="true">
+        <pm:header title="#{innventa.CreateRecibosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:RecibosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="RecibosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{recibosController.selected != null}">
+                    <p:outputPanel>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateRecibosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{recibosController.selected.id}" title="#{innventa.CreateRecibosTitle_id}" required="true" requiredMessage="#{innventa.CreateRecibosRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{recibosController.getComponentMessages('id', innventa.CreateRecibosHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateRecibosLabel_fechaInicio}" for="fechaInicio" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{recibosController.selected.fechaInicio}" title="#{innventa.CreateRecibosTitle_fechaInicio}" required="true" requiredMessage="#{innventa.CreateRecibosRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:tooltip for="fechaInicio" value="#{recibosController.getComponentMessages('fechaInicio', innventa.CreateRecibosHelpText_fechaInicio)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateRecibosLabel_atributos}" for="atributos" />
+                      <h:panelGroup>
+                        <p:inputText id="atributos" value="#{recibosController.selected.atributos}" title="#{innventa.CreateRecibosTitle_atributos}" required="true" requiredMessage="#{innventa.CreateRecibosRequiredMessage_atributos}"/>
+                        <p:tooltip for="atributos" value="#{recibosController.getComponentMessages('atributos', innventa.CreateRecibosHelpText_atributos)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateRecibosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{recibosController.selected.eliminado}" title="#{innventa.CreateRecibosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateRecibosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{recibosController.getComponentMessages('eliminado', innventa.CreateRecibosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateRecibosLabel_fechaFin}" for="fechaFin" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy HH:mm:ss" value="#{recibosController.selected.fechaFin}" title="#{innventa.CreateRecibosTitle_fechaFin}"  showOn="button"/>
+                        <p:tooltip for="fechaFin" value="#{recibosController.getComponentMessages('fechaFin', innventa.CreateRecibosHelpText_fechaFin)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{recibosController.saveNew}" value="#{innventa.Save}" update="display,:RecibosListPage:RecibosListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:RecibosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="RemisionesViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewRemisionesTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:RemisionesListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="RemisionesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{remisionesController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_id}"/>
+                        <h:outputText value="#{remisionesController.selected.id}" title="#{innventa.ViewRemisionesTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_fechaRemision}"/>
+                        <h:outputText value="#{remisionesController.selected.fechaRemision}" title="#{innventa.ViewRemisionesTitle_fechaRemision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_detalles}"/>
+                        <h:outputText value="#{remisionesController.selected.detalles}" title="#{innventa.ViewRemisionesTitle_detalles}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_totalProductos}"/>
+                        <h:outputText value="#{remisionesController.selected.totalProductos}" title="#{innventa.ViewRemisionesTitle_totalProductos}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_estado}"/>
+                        <h:outputText value="#{remisionesController.selected.estado}" title="#{innventa.ViewRemisionesTitle_estado}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_entregadoA}"/>
+                        <h:outputText value="#{remisionesController.selected.entregadoA}" title="#{innventa.ViewRemisionesTitle_entregadoA}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_creadoPor}"/>
+                        <h:outputText value="#{remisionesController.selected.creadoPor}" title="#{innventa.ViewRemisionesTitle_creadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_fechaCreacion}"/>
+                        <h:outputText value="#{remisionesController.selected.fechaCreacion}" title="#{innventa.ViewRemisionesTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_modificadoPor}"/>
+                        <h:outputText value="#{remisionesController.selected.modificadoPor}" title="#{innventa.ViewRemisionesTitle_modificadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_fechaModificacion}"/>
+                        <h:outputText value="#{remisionesController.selected.fechaModificacion}" title="#{innventa.ViewRemisionesTitle_fechaModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_eliminado}"/>
+                        <h:outputText value="#{remisionesController.selected.eliminado}" title="#{innventa.ViewRemisionesTitle_eliminado}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewRemisionesLabel_idPedido}"/>
+                        <h:outputText value="#{remisionesController.selected.idPedido.descripcion}"/>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

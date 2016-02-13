@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="PersonasTelsEditDlg" widgetVar="PersonasTelsEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditPersonasTelsTitle}" closeOnEscape="true">
+
+            <h:form id="PersonasTelsEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{personasTelsController.selected != null}">
+
+        
+                        <h:outputLabel value="#{innventa.EditPersonasTelsLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{personasTelsController.selected.id}" />
+                        <p:tooltip for="id" value="#{personasTelsController.getComponentMessages('id', innventa.EditPersonasTelsHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPersonasTelsLabel_idPersona}" for="idPersona" />
+                      <h:panelGroup>
+                        <p:inputText id="idPersona" value="#{personasTelsController.selected.idPersona}" title="#{innventa.EditPersonasTelsTitle_idPersona}" required="true" requiredMessage="#{innventa.EditPersonasTelsRequiredMessage_idPersona}" size="36" maxlength="36"/>
+                        <p:tooltip for="idPersona" value="#{personasTelsController.getComponentMessages('idPersona', innventa.EditPersonasTelsHelpText_idPersona)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPersonasTelsLabel_telefono}" for="telefono" />
+                      <h:panelGroup>
+                        <p:inputText id="telefono" value="#{personasTelsController.selected.telefono}" title="#{innventa.EditPersonasTelsTitle_telefono}" required="true" requiredMessage="#{innventa.EditPersonasTelsRequiredMessage_telefono}" size="20" maxlength="20"/>
+                        <p:tooltip for="telefono" value="#{personasTelsController.getComponentMessages('telefono', innventa.EditPersonasTelsHelpText_telefono)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPersonasTelsLabel_tipo}" for="tipo" />
+                      <h:panelGroup>
+                        <p:inputText id="tipo" value="#{personasTelsController.selected.tipo}" title="#{innventa.EditPersonasTelsTitle_tipo}" required="true" requiredMessage="#{innventa.EditPersonasTelsRequiredMessage_tipo}" size="36" maxlength="36"/>
+                        <p:tooltip for="tipo" value="#{personasTelsController.getComponentMessages('tipo', innventa.EditPersonasTelsHelpText_tipo)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPersonasTelsLabel_extension}" for="extension" />
+                      <h:panelGroup>
+                        <p:inputText id="extension" value="#{personasTelsController.selected.extension}" title="#{innventa.EditPersonasTelsTitle_extension}" size="10" maxlength="10"/>
+                        <p:tooltip for="extension" value="#{personasTelsController.getComponentMessages('extension', innventa.EditPersonasTelsHelpText_extension)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPersonasTelsLabel_principal}" for="principal" />
+                      <h:panelGroup>
+                        <p:selectBooleanCheckbox id="principal" value="#{personasTelsController.selected.principal}" />
+                        <p:tooltip for="principal" value="#{personasTelsController.getComponentMessages('principal', innventa.EditPersonasTelsHelpText_principal)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditPersonasTelsLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{personasTelsController.selected.eliminado}" title="#{innventa.EditPersonasTelsTitle_eliminado}" required="true" requiredMessage="#{innventa.EditPersonasTelsRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{personasTelsController.getComponentMessages('eliminado', innventa.EditPersonasTelsHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personasTelsController.save}" value="#{innventa.Save}" update="display,:PersonasTelsListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PersonasTelsEditDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('PersonasTelsEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

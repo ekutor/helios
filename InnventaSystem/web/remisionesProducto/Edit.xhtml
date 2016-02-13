@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="RemisionesProductoEditDlg" widgetVar="RemisionesProductoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditRemisionesProductoTitle}" closeOnEscape="true">
+
+            <h:form id="RemisionesProductoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{remisionesProductoController.selected != null}">
+
+        
+                        <h:outputLabel value="#{innventa.EditRemisionesProductoLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{remisionesProductoController.selected.id}" />
+                        <p:tooltip for="id" value="#{remisionesProductoController.getComponentMessages('id', innventa.EditRemisionesProductoHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRemisionesProductoLabel_idProducto}" for="idProducto" />
+                      <h:panelGroup>
+                        <p:inputText id="idProducto" value="#{remisionesProductoController.selected.idProducto}" title="#{innventa.EditRemisionesProductoTitle_idProducto}" required="true" requiredMessage="#{innventa.EditRemisionesProductoRequiredMessage_idProducto}" size="36" maxlength="36"/>
+                        <p:tooltip for="idProducto" value="#{remisionesProductoController.getComponentMessages('idProducto', innventa.EditRemisionesProductoHelpText_idProducto)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRemisionesProductoLabel_cantidad}" for="cantidad" />
+                      <h:panelGroup>
+                        <p:inputText id="cantidad" value="#{remisionesProductoController.selected.cantidad}" title="#{innventa.EditRemisionesProductoTitle_cantidad}" required="true" requiredMessage="#{innventa.EditRemisionesProductoRequiredMessage_cantidad}"/>
+                        <p:tooltip for="cantidad" value="#{remisionesProductoController.getComponentMessages('cantidad', innventa.EditRemisionesProductoHelpText_cantidad)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRemisionesProductoLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{remisionesProductoController.selected.eliminado}" title="#{innventa.EditRemisionesProductoTitle_eliminado}" required="true" requiredMessage="#{innventa.EditRemisionesProductoRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{remisionesProductoController.getComponentMessages('eliminado', innventa.EditRemisionesProductoHelpText_eliminado)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRemisionesProductoLabel_idRemision}" for="idRemision" />
+                      <h:panelGroup>
+                        <p:selectOneMenu id="idRemision" value="#{remisionesProductoController.selected.idRemision}" required="true" requiredMessage="#{innventa.EditRemisionesProductoRequiredMessage_idRemision}" converter="remisionesConverter">
+                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                            <f:selectItems value="#{remisionesController.items}"
+                                           var="idRemisionItem"
+                                           itemValue="#{idRemisionItem}"
+                                           itemLabel="#{idRemisionItem.id.toString()}"
+                            />
+                            
+                        </p:selectOneMenu>
+                        <p:tooltip for="idRemision" value="#{remisionesProductoController.getComponentMessages('idRemision', innventa.EditRemisionesProductoHelpText_idRemision)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{remisionesProductoController.save}" value="#{innventa.Save}" update="display,:RemisionesProductoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('RemisionesProductoEditDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('RemisionesProductoEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

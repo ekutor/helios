@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LineasImpuestosViewDlg" widgetVar="LineasImpuestosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewLineasImpuestosTitle}" closeOnEscape="true">
+
+            <h:form id="LineasImpuestosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{lineasImpuestosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewLineasImpuestosLabel_id}"/>
+                        <h:outputText value="#{lineasImpuestosController.selected.id}" title="#{innventa.ViewLineasImpuestosTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewLineasImpuestosLabel_recibo}"/>
+                        <h:outputText value="#{lineasImpuestosController.selected.recibo}" title="#{innventa.ViewLineasImpuestosTitle_recibo}"/>
+
+                        <h:outputText value="#{innventa.ViewLineasImpuestosLabel_impuesto}"/>
+                        <h:outputText value="#{lineasImpuestosController.selected.impuesto}" title="#{innventa.ViewLineasImpuestosTitle_impuesto}"/>
+
+                        <h:outputText value="#{innventa.ViewLineasImpuestosLabel_base}"/>
+                        <h:outputText value="#{lineasImpuestosController.selected.base}" title="#{innventa.ViewLineasImpuestosTitle_base}"/>
+
+                        <h:outputText value="#{innventa.ViewLineasImpuestosLabel_monto}"/>
+                        <h:outputText value="#{lineasImpuestosController.selected.monto}" title="#{innventa.ViewLineasImpuestosTitle_monto}"/>
+
+                        <h:outputText value="#{innventa.ViewLineasImpuestosLabel_eliminado}"/>
+                        <h:outputText value="#{lineasImpuestosController.selected.eliminado}" title="#{innventa.ViewLineasImpuestosTitle_eliminado}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('LineasImpuestosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

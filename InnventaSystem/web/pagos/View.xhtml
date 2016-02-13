@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PagosViewDlg" widgetVar="PagosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewPagosTitle}" closeOnEscape="true">
+
+            <h:form id="PagosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{pagosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewPagosLabel_id}"/>
+                        <h:outputText value="#{pagosController.selected.id}" title="#{innventa.ViewPagosTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewPagosLabel_recibo}"/>
+                        <h:outputText value="#{pagosController.selected.recibo}" title="#{innventa.ViewPagosTitle_recibo}"/>
+
+                        <h:outputText value="#{innventa.ViewPagosLabel_pago}"/>
+                        <h:outputText value="#{pagosController.selected.pago}" title="#{innventa.ViewPagosTitle_pago}"/>
+
+                        <h:outputText value="#{innventa.ViewPagosLabel_total}"/>
+                        <h:outputText value="#{pagosController.selected.total}" title="#{innventa.ViewPagosTitle_total}"/>
+
+                        <h:outputText value="#{innventa.ViewPagosLabel_idTrans}"/>
+                        <h:outputText value="#{pagosController.selected.idTrans}" title="#{innventa.ViewPagosTitle_idTrans}"/>
+
+                        <h:outputText value="#{innventa.ViewPagosLabel_eliminado}"/>
+                        <h:outputText value="#{pagosController.selected.eliminado}" title="#{innventa.ViewPagosTitle_eliminado}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('PagosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
