@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategoriasImpuestosViewDlg" widgetVar="CategoriasImpuestosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewCategoriasImpuestosTitle}" closeOnEscape="true">
+
+            <h:form id="CategoriasImpuestosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{categoriasImpuestosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_id}"/>
+                        <h:outputText value="#{categoriasImpuestosController.selected.id}" title="#{innventa.ViewCategoriasImpuestosTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_nombre}"/>
+                        <h:outputText value="#{categoriasImpuestosController.selected.nombre}" title="#{innventa.ViewCategoriasImpuestosTitle_nombre}"/>
+
+                        <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_eliminado}"/>
+                        <h:outputText value="#{categoriasImpuestosController.selected.eliminado}" title="#{innventa.ViewCategoriasImpuestosTitle_eliminado}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('CategoriasImpuestosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

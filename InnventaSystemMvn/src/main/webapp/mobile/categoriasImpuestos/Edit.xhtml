@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CategoriasImpuestosEditPage" lazy="true">
+        <pm:header title="#{innventa.EditCategoriasImpuestosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:CategoriasImpuestosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CategoriasImpuestosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{categoriasImpuestosController.selected != null}">
+
+                    <pm:field>
+                                <h:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{categoriasImpuestosController.selected.id}" />
+                        <p:tooltip for="id" value="#{categoriasImpuestosController.getComponentMessages('id', innventa.EditCategoriasImpuestosHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{categoriasImpuestosController.selected.nombre}" title="#{innventa.EditCategoriasImpuestosTitle_nombre}" required="true" requiredMessage="#{innventa.EditCategoriasImpuestosRequiredMessage_nombre}" size="255" maxlength="255"/>
+                        <p:tooltip for="nombre" value="#{categoriasImpuestosController.getComponentMessages('nombre', innventa.EditCategoriasImpuestosHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{categoriasImpuestosController.selected.eliminado}" title="#{innventa.EditCategoriasImpuestosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditCategoriasImpuestosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{categoriasImpuestosController.getComponentMessages('eliminado', innventa.EditCategoriasImpuestosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{categoriasImpuestosController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:CategoriasImpuestosListPage:CategoriasImpuestosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:CategoriasImpuestosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

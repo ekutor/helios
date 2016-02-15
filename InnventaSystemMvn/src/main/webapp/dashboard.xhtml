@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+      <h:head>
+         <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
+            <title><ui:insert name="title">Innventa System</ui:insert></title>
+        </f:facet>
+       <f:facet name="middle">
+        <h:outputStylesheet library="css" name="ie10-viewport-bug-workaround.css"/>
+        <h:outputScript library="scripts" name="bootstrap/js/ie-emulation-modes-warning.js"/>
+        <h:outputScript library="scripts" name="bootstrap/js/ie10-viewport-bug-workaround.js"/>
+       
+        </f:facet>
+       <f:facet name="last">
+ 
+       </f:facet>
+    </h:head>
+
+    <h:body>
+       
+       <p:layout fullPage="true">
+ <ui:include src="header.xhtml" />
+            <p:layoutUnit position="north" size="70" resizable="false" closable="false" collapsible="false" >
+              
+
+            </p:layoutUnit>
+
+
+            <p:layoutUnit position="west" size="195" header="Modulos" resizable="true" closable="false" collapsible="true" >
+                <h:form id="form" >
+
+                    <p:menu>
+                        <p:menuitem id="abc" value="Dashboard" action="/" update=":content:pcenter" />
+                        <p:submenu label="Modulos" >
+                            <p:menuitem id="mnuPedidos" value="Pedidos" action="#{navigation.pedidos}" update=":content:pcenter"/>
+                            <p:menuitem id="mnuRemisiones" value="Pedidos" action="#{navigation.remisiones}" update=":content:pcenter"/>
+                            <p:menuitem id="mnuProductos" value="Pedidos" action="#{navigation.productos}" update=":content:pcenter"/>
+                            <p:menuitem id="mnuClientes" value="Pedidos" action="#{navigation.clientes}" update=":content:pcenter"/>
+                            <p:menuitem id="mnuTerceros" value="Pedidos" action="#{navigation.terceros}" update=":content:pcenter"/>
+                        </p:submenu>
+                    </p:menu>
+
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" header="Dashboard" >
+                <h:form id="content">
+                    <p:panel id="pcenter">  
+                        <ui:include src="#{navigation.actualPage}.xhtml" />
+                    </p:panel>
+                 </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="false">
+                <h:outputText id="message" value="South unit content." />
+            </p:layoutUnit>
+
+        </p:layout>        
+
+    </h:body>
+
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ClientesCreatePage" lazy="true">
+        <pm:header title="#{innventa.CreateClientesTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ClientesListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ClientesCreateForm">
+
+                <h:panelGroup id="display" rendered="#{clientesController.selected != null}">
+                    <p:outputPanel>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{clientesController.selected.id}" title="#{innventa.CreateClientesTitle_id}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{clientesController.getComponentMessages('id', innventa.CreateClientesHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{clientesController.selected.nombre}" title="#{innventa.CreateClientesTitle_nombre}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_nombre}" size="80" maxlength="80"/>
+                        <p:tooltip for="nombre" value="#{clientesController.getComponentMessages('nombre', innventa.CreateClientesHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_tipoCliente}" for="tipoCliente" />
+                      <h:panelGroup>
+                        <p:inputText id="tipoCliente" value="#{clientesController.selected.tipoCliente}" title="#{innventa.CreateClientesTitle_tipoCliente}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_tipoCliente}" size="36" maxlength="36"/>
+                        <p:tooltip for="tipoCliente" value="#{clientesController.getComponentMessages('tipoCliente', innventa.CreateClientesHelpText_tipoCliente)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_estado}" for="estado" />
+                      <h:panelGroup>
+                        <p:inputText id="estado" value="#{clientesController.selected.estado}" title="#{innventa.CreateClientesTitle_estado}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_estado}" size="36" maxlength="36"/>
+                        <p:tooltip for="estado" value="#{clientesController.getComponentMessages('estado', innventa.CreateClientesHelpText_estado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{clientesController.selected.eliminado}" title="#{innventa.CreateClientesTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{clientesController.getComponentMessages('eliminado', innventa.CreateClientesHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_creadoPor}" for="creadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="creadoPor" value="#{clientesController.selected.creadoPor}" title="#{innventa.CreateClientesTitle_creadoPor}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_creadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="creadoPor" value="#{clientesController.getComponentMessages('creadoPor', innventa.CreateClientesHelpText_creadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_fechaCreacion}" for="fechaCreacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientesController.selected.fechaCreacion}" title="#{innventa.CreateClientesTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:tooltip for="fechaCreacion" value="#{clientesController.getComponentMessages('fechaCreacion', innventa.CreateClientesHelpText_fechaCreacion)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_modificadoPor}" for="modificadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="modificadoPor" value="#{clientesController.selected.modificadoPor}" title="#{innventa.CreateClientesTitle_modificadoPor}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="modificadoPor" value="#{clientesController.getComponentMessages('modificadoPor', innventa.CreateClientesHelpText_modificadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateClientesLabel_fechaModificacion}" for="fechaModificacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientesController.selected.fechaModificacion}" title="#{innventa.CreateClientesTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreateClientesRequiredMessage_fechaModificacion}" showOn="button"/>
+                        <p:tooltip for="fechaModificacion" value="#{clientesController.getComponentMessages('fechaModificacion', innventa.CreateClientesHelpText_fechaModificacion)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{clientesController.saveNew}" value="#{innventa.Save}" update="display,:ClientesListPage:ClientesListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:ClientesListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

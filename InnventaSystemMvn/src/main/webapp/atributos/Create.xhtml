@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AtributosCreateDlg" widgetVar="AtributosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateAtributosTitle}" closeOnEscape="true">
+
+            <h:form id="AtributosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{atributosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreateAtributosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{atributosController.selected.id}" title="#{innventa.CreateAtributosTitle_id}" required="true" requiredMessage="#{innventa.CreateAtributosRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{atributosController.getComponentMessages('id', innventa.CreateAtributosHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateAtributosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputTextarea rows="4" cols="30" id="nombre" value="#{atributosController.selected.nombre}" title="#{innventa.CreateAtributosTitle_nombre}" required="true" requiredMessage="#{innventa.CreateAtributosRequiredMessage_nombre}"/>
+                        <p:tooltip for="nombre" value="#{atributosController.getComponentMessages('nombre', innventa.CreateAtributosHelpText_nombre)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateAtributosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{atributosController.selected.eliminado}" title="#{innventa.CreateAtributosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAtributosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{atributosController.getComponentMessages('eliminado', innventa.CreateAtributosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{atributosController.saveNew}" value="#{innventa.Save}" update="display,:AtributosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AtributosCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('AtributosCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

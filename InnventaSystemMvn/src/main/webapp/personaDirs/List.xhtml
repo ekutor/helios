@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="PersonaDirsListForm">
+
+            <p:panel header="#{innventa.ListPersonaDirsTitle}">
+                <p:contextMenu id="PersonaDirsDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('PersonaDirsListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('PersonaDirsListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('PersonaDirsListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PersonaDirsListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{personaDirsController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{personaDirsController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PersonaDirsDataTableContextMenu"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PersonaDirsDataTableContextMenu"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('PersonaDirsListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonaDirsTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.idPersona}" filterBy="#{item.idPersona}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonaDirsTitle_idPersona}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPersona}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.direccion}" filterBy="#{item.direccion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonaDirsTitle_direccion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.direccion}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.tipo}" filterBy="#{item.tipo}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonaDirsTitle_tipo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipo}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.observacion}" filterBy="#{item.observacion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonaDirsTitle_observacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.observacion}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.principal}" filterBy="#{item.principal}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonaDirsTitle_principal}"/>
+                        </f:facet>
+                        <h:selectBooleanCheckbox id="principal" value="#{item.principal}" title="#{innventa.EditPersonaDirsTitle_principal}" required="true" requiredMessage="#{innventa.EditPersonaDirsRequiredMessage_principal}" disabled="true"/>
+                    </p:column>
+
+<!--
+                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonaDirsTitle_eliminado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliminado}"/>
+                    </p:column>
+-->
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{personaDirsController.prepareCreate}" update=":PersonaDirsCreateForm" oncomplete="PF('PersonaDirsCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PersonaDirsViewForm" oncomplete="PF('PersonaDirsViewDialog').show()" disabled="#{empty personaDirsController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PersonaDirsEditForm" oncomplete="PF('PersonaDirsEditDialog').show()" disabled="#{empty personaDirsController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{personaDirsController.delete}" update=":growl,datalist" disabled="#{empty personaDirsController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

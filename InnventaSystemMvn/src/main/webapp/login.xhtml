@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+         <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
+            <title><ui:insert name="title">#{innventa.AppName}</ui:insert></title>
+        </f:facet>
+       <f:facet name="middle">
+        <h:outputStylesheet library="css" name="ie10-viewport-bug-workaround.css"/>
+        <h:outputScript library="scripts" name="bootstrap/js/ie-emulation-modes-warning.js"/>
+        <h:outputScript library="scripts" name="bootstrap/js/ie10-viewport-bug-workaround.js"/>
+       
+        </f:facet>
+       <f:facet name="last">
+ 
+        </f:facet>
+    </h:head>
+
+    <h:body>
+       <ui:include src="header.xhtml" />
+       <b:container id="content">
+       <b:panel id="pdata" title="Bienvenido" collapsible="true" look="info">
+       
+        <ui:fragment>
+
+          <h:form>
+            <b:row>
+                 <b:column span="8">
+               <b:panel title="MettaGrup SAS">
+                   <b:image id="ImagenMetta" 
+                            name="ImagenMetta" value="images/mettagrup.jpg" 
+                            alt="Sin Imagen" width="700px"/>
+               </b:panel>
+            </b:column>
+             <b:column span="4">
+               <b:panel look="primary" title="#{innventa.Login}">
+                <p>Por favor ingrese su informacion de autenticación.</p>
+                <b:inputText id="usuario" value="#{loginController.username}" label="Usuario" placeholder="Usuario..." />
+                <b:inputSecret id="password" value="#{loginController.password}" />
+                
+           
+                <b:commandButton value="Ingresaar" id="btnIngresar" update="@form" ajax="true" 
+                                 look="success" action="#{loginController.login}">Ingresar</b:commandButton>
+                
+               </b:panel>
+            </b:column>
+            <b:column>
+            <b:well id="messages">
+
+            </b:well>
+            </b:column>
+           </b:row>
+          </h:form>
+        </ui:fragment>
+    </b:panel>
+    </b:container>
+    </h:body>
+    
+</html>

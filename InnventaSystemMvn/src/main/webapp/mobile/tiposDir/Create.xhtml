@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TiposDirCreatePage" lazy="true">
+        <pm:header title="#{innventa.CreateTiposDirTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TiposDirListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TiposDirCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tiposDirController.selected != null}">
+                    <p:outputPanel>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateTiposDirLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{tiposDirController.selected.id}" title="#{innventa.CreateTiposDirTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposDirRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{tiposDirController.getComponentMessages('id', innventa.CreateTiposDirHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateTiposDirLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{tiposDirController.selected.nombre}" title="#{innventa.CreateTiposDirTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposDirRequiredMessage_nombre}" size="20" maxlength="20"/>
+                        <p:tooltip for="nombre" value="#{tiposDirController.getComponentMessages('nombre', innventa.CreateTiposDirHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{tiposDirController.saveNew}" value="#{innventa.Save}" update="display,:TiposDirListPage:TiposDirListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:TiposDirListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

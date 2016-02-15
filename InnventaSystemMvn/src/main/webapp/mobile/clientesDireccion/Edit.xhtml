@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ClientesDireccionEditPage" lazy="true">
+        <pm:header title="#{innventa.EditClientesDireccionTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ClientesDireccionListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ClientesDireccionEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{clientesDireccionController.selected != null}">
+
+                    <pm:field>
+                                <h:outputLabel value="#{innventa.EditClientesDireccionLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{clientesDireccionController.selected.id}" />
+                        <p:tooltip for="id" value="#{clientesDireccionController.getComponentMessages('id', innventa.EditClientesDireccionHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditClientesDireccionLabel_direccion}" for="direccion" />
+                      <h:panelGroup>
+                        <p:inputText id="direccion" value="#{clientesDireccionController.selected.direccion}" title="#{innventa.EditClientesDireccionTitle_direccion}" required="true" requiredMessage="#{innventa.EditClientesDireccionRequiredMessage_direccion}" size="80" maxlength="80"/>
+                        <p:tooltip for="direccion" value="#{clientesDireccionController.getComponentMessages('direccion', innventa.EditClientesDireccionHelpText_direccion)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditClientesDireccionLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{clientesDireccionController.selected.eliminado}" title="#{innventa.EditClientesDireccionTitle_eliminado}" required="true" requiredMessage="#{innventa.EditClientesDireccionRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{clientesDireccionController.getComponentMessages('eliminado', innventa.EditClientesDireccionHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditClientesDireccionLabel_idCliente}" for="idCliente" />
+                      <h:panelGroup>
+                        <p:selectOneMenu id="idCliente" value="#{clientesDireccionController.selected.idCliente}" required="true" requiredMessage="#{innventa.EditClientesDireccionRequiredMessage_idCliente}" converter="clientesConverter">
+                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                            <f:selectItems value="#{clientesController.items}"
+                                           var="idClienteItem"
+                                           itemValue="#{idClienteItem}"
+                                           itemLabel="#{idClienteItem.id.toString()}"
+                            />
+                            
+                        </p:selectOneMenu>
+                        <p:tooltip for="idCliente" value="#{clientesDireccionController.getComponentMessages('idCliente', innventa.EditClientesDireccionHelpText_idCliente)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{clientesDireccionController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ClientesDireccionListPage:ClientesDireccionListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ClientesDireccionListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

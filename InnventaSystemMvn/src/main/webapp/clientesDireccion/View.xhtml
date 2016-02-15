@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientesDireccionViewDlg" widgetVar="ClientesDireccionViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewClientesDireccionTitle}" closeOnEscape="true">
+
+            <h:form id="ClientesDireccionViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{clientesDireccionController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewClientesDireccionLabel_id}"/>
+                        <h:outputText value="#{clientesDireccionController.selected.id}" title="#{innventa.ViewClientesDireccionTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesDireccionLabel_direccion}"/>
+                        <h:outputText value="#{clientesDireccionController.selected.direccion}" title="#{innventa.ViewClientesDireccionTitle_direccion}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesDireccionLabel_eliminado}"/>
+                        <h:outputText value="#{clientesDireccionController.selected.eliminado}" title="#{innventa.ViewClientesDireccionTitle_eliminado}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesDireccionLabel_idCliente}"/>
+                        <h:outputText value="#{clientesDireccionController.selected.idCliente.id}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('ClientesDireccionViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

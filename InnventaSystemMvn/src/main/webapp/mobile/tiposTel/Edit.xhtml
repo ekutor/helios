@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TiposTelEditPage" lazy="true">
+        <pm:header title="#{innventa.EditTiposTelTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TiposTelListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TiposTelEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{tiposTelController.selected != null}">
+
+                    <pm:field>
+                                <h:outputLabel value="#{innventa.EditTiposTelLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{tiposTelController.selected.id}" />
+                        <p:tooltip for="id" value="#{tiposTelController.getComponentMessages('id', innventa.EditTiposTelHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditTiposTelLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{tiposTelController.selected.nombre}" title="#{innventa.EditTiposTelTitle_nombre}" required="true" requiredMessage="#{innventa.EditTiposTelRequiredMessage_nombre}" size="20" maxlength="20"/>
+                        <p:tooltip for="nombre" value="#{tiposTelController.getComponentMessages('nombre', innventa.EditTiposTelHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{tiposTelController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:TiposTelListPage:TiposTelListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:TiposTelListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

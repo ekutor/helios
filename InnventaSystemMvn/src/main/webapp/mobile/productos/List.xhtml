@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ProductosListPage">
+        <pm:header title="#{innventa.ListProductosTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{innventa.Create}" update=":ProductosCreatePage:ProductosCreateForm" actionListener="#{productosController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:ProductosCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+        <h:form id="ProductosListForm">
+
+                <p:dataList id="datalist"
+                            paginator="true"
+                            rows="30"
+                            rowsPerPageTemplate="10,20,30,40,50,100"
+                            pt:data-inset="true"
+                            value="#{productosController.items}"
+                            var="item">
+
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListProductosTitle}"/>
+                    </f:facet>
+
+                    <p:commandLink update=":ProductosEditPage:ProductosEditForm" action="pm:ProductosEditPage">
+                        <p>
+
+
+    
+                        <h:outputText value="#{item.id}"/>
+
+
+
+    ,&nbsp;
+                        <h:outputText value="#{item.referencia}"/>
+
+
+
+    ,&nbsp;
+                        <h:outputText value="#{item.codigo}"/>
+
+
+
+    ,&nbsp;
+                        <h:outputText value="#{item.tipoCodigo}"/>
+
+
+
+    ,&nbsp;
+                        <h:outputText value="#{item.nombre}"/>
+
+
+
+    ,&nbsp;
+                        <h:outputText value="#{item.precioCompra}"/>
+
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.precioVenta}"/>
+-->
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.categoria}"/>
+-->
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.categoriaImpuesto}"/>
+-->
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.atributo}"/>
+-->
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.stock}"/>
+-->
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.creadoPor}"/>
+-->
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.modificadoPor}"/>
+-->
+
+<!--
+    ,&nbsp;
+                        <h:outputText value="#{item.eliminado}"/>
+-->
+                        </p>
+                        <f:setPropertyActionListener value="#{item}" target="#{productosController.selected}" />
+                    </p:commandLink>
+
+                    <f:facet name="footer">
+                        <h:outputText value="#{innventa.ListProductosTitle}"/>
+                    </f:facet>
+
+                </p:dataList>
+        </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

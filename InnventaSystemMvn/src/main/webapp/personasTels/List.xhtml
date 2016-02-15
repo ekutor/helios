@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="PersonasTelsListForm">
+
+            <p:panel header="#{innventa.ListPersonasTelsTitle}">
+                <p:contextMenu id="PersonasTelsDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('PersonasTelsListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('PersonasTelsListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('PersonasTelsListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PersonasTelsListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{personasTelsController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{personasTelsController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PersonasTelsDataTableContextMenu"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PersonasTelsDataTableContextMenu"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('PersonasTelsListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTelsTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.idPersona}" filterBy="#{item.idPersona}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTelsTitle_idPersona}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPersona}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.telefono}" filterBy="#{item.telefono}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTelsTitle_telefono}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.telefono}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.tipo}" filterBy="#{item.tipo}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTelsTitle_tipo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipo}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.extension}" filterBy="#{item.extension}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTelsTitle_extension}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.extension}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.principal}" filterBy="#{item.principal}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTelsTitle_principal}"/>
+                        </f:facet>
+                        <h:selectBooleanCheckbox id="principal" value="#{item.principal}" title="#{innventa.EditPersonasTelsTitle_principal}"  disabled="true"/>
+                    </p:column>
+
+<!--
+                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPersonasTelsTitle_eliminado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliminado}"/>
+                    </p:column>
+-->
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{personasTelsController.prepareCreate}" update=":PersonasTelsCreateForm" oncomplete="PF('PersonasTelsCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PersonasTelsViewForm" oncomplete="PF('PersonasTelsViewDialog').show()" disabled="#{empty personasTelsController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PersonasTelsEditForm" oncomplete="PF('PersonasTelsEditDialog').show()" disabled="#{empty personasTelsController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{personasTelsController.delete}" update=":growl,datalist" disabled="#{empty personasTelsController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

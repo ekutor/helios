@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TiposTelEditDlg" widgetVar="TiposTelEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditTiposTelTitle}" closeOnEscape="true">
+
+            <h:form id="TiposTelEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{tiposTelController.selected != null}">
+
+        
+                        <h:outputLabel value="#{innventa.EditTiposTelLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{tiposTelController.selected.id}" />
+                        <p:tooltip for="id" value="#{tiposTelController.getComponentMessages('id', innventa.EditTiposTelHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditTiposTelLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{tiposTelController.selected.nombre}" title="#{innventa.EditTiposTelTitle_nombre}" required="true" requiredMessage="#{innventa.EditTiposTelRequiredMessage_nombre}" size="20" maxlength="20"/>
+                        <p:tooltip for="nombre" value="#{tiposTelController.getComponentMessages('nombre', innventa.EditTiposTelHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tiposTelController.save}" value="#{innventa.Save}" update="display,:TiposTelListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TiposTelEditDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('TiposTelEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

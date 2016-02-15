@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="AclAccionesEditDlg" widgetVar="AclAccionesEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditAclAccionesTitle}" closeOnEscape="true">
+
+            <h:form id="AclAccionesEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{aclAccionesController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditAclAccionesLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{aclAccionesController.selected.id}" />
+                            <p:tooltip for="id" value="#{aclAccionesController.getComponentMessages('id', myBundle.EditAclAccionesHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{myBundle.EditAclAccionesLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{aclAccionesController.selected.nombre}" title="#{myBundle.EditAclAccionesTitle_nombre}" required="true" requiredMessage="#{myBundle.EditAclAccionesRequiredMessage_nombre}" size="20" maxlength="20"/>
+                            <p:tooltip for="nombre" value="#{aclAccionesController.getComponentMessages('nombre', myBundle.EditAclAccionesHelpText_nombre)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{myBundle.EditAclAccionesLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{aclAccionesController.selected.eliminado}" title="#{myBundle.EditAclAccionesTitle_eliminado}" required="true" requiredMessage="#{myBundle.EditAclAccionesRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{aclAccionesController.getComponentMessages('eliminado', myBundle.EditAclAccionesHelpText_eliminado)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aclAccionesController.save}" value="#{myBundle.Save}" update="display,:AclAccionesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AclAccionesEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="PF('AclAccionesEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

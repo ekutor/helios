@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ClientesEditDlg" widgetVar="ClientesEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditClientesTitle}" closeOnEscape="true">
+
+            <h:form id="ClientesEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{clientesController.selected != null}">
+
+        
+                        <h:outputLabel value="#{innventa.EditClientesLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{clientesController.selected.id}" />
+                        <p:tooltip for="id" value="#{clientesController.getComponentMessages('id', innventa.EditClientesHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{clientesController.selected.nombre}" title="#{innventa.EditClientesTitle_nombre}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_nombre}" size="80" maxlength="80"/>
+                        <p:tooltip for="nombre" value="#{clientesController.getComponentMessages('nombre', innventa.EditClientesHelpText_nombre)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_tipoCliente}" for="tipoCliente" />
+                      <h:panelGroup>
+                        <p:inputText id="tipoCliente" value="#{clientesController.selected.tipoCliente}" title="#{innventa.EditClientesTitle_tipoCliente}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_tipoCliente}" size="36" maxlength="36"/>
+                        <p:tooltip for="tipoCliente" value="#{clientesController.getComponentMessages('tipoCliente', innventa.EditClientesHelpText_tipoCliente)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_estado}" for="estado" />
+                      <h:panelGroup>
+                        <p:inputText id="estado" value="#{clientesController.selected.estado}" title="#{innventa.EditClientesTitle_estado}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_estado}" size="36" maxlength="36"/>
+                        <p:tooltip for="estado" value="#{clientesController.getComponentMessages('estado', innventa.EditClientesHelpText_estado)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{clientesController.selected.eliminado}" title="#{innventa.EditClientesTitle_eliminado}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{clientesController.getComponentMessages('eliminado', innventa.EditClientesHelpText_eliminado)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_creadoPor}" for="creadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="creadoPor" value="#{clientesController.selected.creadoPor}" title="#{innventa.EditClientesTitle_creadoPor}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_creadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="creadoPor" value="#{clientesController.getComponentMessages('creadoPor', innventa.EditClientesHelpText_creadoPor)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_fechaCreacion}" for="fechaCreacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientesController.selected.fechaCreacion}" title="#{innventa.EditClientesTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:tooltip for="fechaCreacion" value="#{clientesController.getComponentMessages('fechaCreacion', innventa.EditClientesHelpText_fechaCreacion)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_modificadoPor}" for="modificadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="modificadoPor" value="#{clientesController.selected.modificadoPor}" title="#{innventa.EditClientesTitle_modificadoPor}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="modificadoPor" value="#{clientesController.getComponentMessages('modificadoPor', innventa.EditClientesHelpText_modificadoPor)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditClientesLabel_fechaModificacion}" for="fechaModificacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{clientesController.selected.fechaModificacion}" title="#{innventa.EditClientesTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.EditClientesRequiredMessage_fechaModificacion}" showOn="button"/>
+                        <p:tooltip for="fechaModificacion" value="#{clientesController.getComponentMessages('fechaModificacion', innventa.EditClientesHelpText_fechaModificacion)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clientesController.save}" value="#{innventa.Save}" update="display,:ClientesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ClientesEditDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('ClientesEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

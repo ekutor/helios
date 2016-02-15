@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TercerosCreateDlg" widgetVar="TercerosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateTercerosTitle}" closeOnEscape="true">
+
+            <h:form id="TercerosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tercerosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{tercerosController.selected.id}" title="#{innventa.CreateTercerosTitle_id}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{tercerosController.getComponentMessages('id', innventa.CreateTercerosHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{tercerosController.selected.nombre}" title="#{innventa.CreateTercerosTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_nombre}" size="80" maxlength="80"/>
+                        <p:tooltip for="nombre" value="#{tercerosController.getComponentMessages('nombre', innventa.CreateTercerosHelpText_nombre)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_observaciones}" for="observaciones" />
+                      <h:panelGroup>
+                        <p:inputTextarea rows="4" cols="30" id="observaciones" value="#{tercerosController.selected.observaciones}" title="#{innventa.CreateTercerosTitle_observaciones}" />
+                        <p:tooltip for="observaciones" value="#{tercerosController.getComponentMessages('observaciones', innventa.CreateTercerosHelpText_observaciones)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_direccion}" for="direccion" />
+                      <h:panelGroup>
+                        <p:inputText id="direccion" value="#{tercerosController.selected.direccion}" title="#{innventa.CreateTercerosTitle_direccion}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_direccion}" size="150" maxlength="150"/>
+                        <p:tooltip for="direccion" value="#{tercerosController.getComponentMessages('direccion', innventa.CreateTercerosHelpText_direccion)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_contacto}" for="contacto" />
+                      <h:panelGroup>
+                        <p:inputText id="contacto" value="#{tercerosController.selected.contacto}" title="#{innventa.CreateTercerosTitle_contacto}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_contacto}" size="36" maxlength="36"/>
+                        <p:tooltip for="contacto" value="#{tercerosController.getComponentMessages('contacto', innventa.CreateTercerosHelpText_contacto)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_telefono}" for="telefono" />
+                      <h:panelGroup>
+                        <p:inputText id="telefono" value="#{tercerosController.selected.telefono}" title="#{innventa.CreateTercerosTitle_telefono}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_telefono}" size="20" maxlength="20"/>
+                        <p:tooltip for="telefono" value="#{tercerosController.getComponentMessages('telefono', innventa.CreateTercerosHelpText_telefono)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_creadoPor}" for="creadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="creadoPor" value="#{tercerosController.selected.creadoPor}" title="#{innventa.CreateTercerosTitle_creadoPor}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_creadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="creadoPor" value="#{tercerosController.getComponentMessages('creadoPor', innventa.CreateTercerosHelpText_creadoPor)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_fechaCreacion}" for="fechaCreacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{tercerosController.selected.fechaCreacion}" title="#{innventa.CreateTercerosTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:tooltip for="fechaCreacion" value="#{tercerosController.getComponentMessages('fechaCreacion', innventa.CreateTercerosHelpText_fechaCreacion)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_modificadoPor}" for="modificadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="modificadoPor" value="#{tercerosController.selected.modificadoPor}" title="#{innventa.CreateTercerosTitle_modificadoPor}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="modificadoPor" value="#{tercerosController.getComponentMessages('modificadoPor', innventa.CreateTercerosHelpText_modificadoPor)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_fechaModificacion}" for="fechaModificacion" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{tercerosController.selected.fechaModificacion}" title="#{innventa.CreateTercerosTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_fechaModificacion}" showOn="button"/>
+                        <p:tooltip for="fechaModificacion" value="#{tercerosController.getComponentMessages('fechaModificacion', innventa.CreateTercerosHelpText_fechaModificacion)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreateTercerosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{tercerosController.selected.eliminado}" title="#{innventa.CreateTercerosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{tercerosController.getComponentMessages('eliminado', innventa.CreateTercerosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tercerosController.saveNew}" value="#{innventa.Save}" update="display,:TercerosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TercerosCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('TercerosCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="ImpuestosListForm">
+
+            <p:panel header="#{innventa.ListImpuestosTitle}">
+                <p:contextMenu id="ImpuestosDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('ImpuestosListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('ImpuestosListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('ImpuestosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('ImpuestosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                    <p:separator/>
+                    <p:menuitem value="#{innventa.ImpuestosMenuItem_impuestosCollection}" icon="ui-icon-search"  action="#{impuestosController.navigateImpuestosCollection}" disabled="#{empty impuestosController.selected.impuestosCollection}" ajax="false"/>  
+                    <p:menuitem value="#{innventa.ImpuestosMenuItem_impuestoPadre}" icon="ui-icon-search"  actionListener="#{impuestosController.prepareImpuestoPadre}" update=":ImpuestosViewForm" oncomplete="PF('ImpuestosViewDialog').show()" disabled="#{empty impuestosController.selected.impuestoPadre}"/>  
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{impuestosController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{impuestosController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ImpuestosDataTableContextMenu" listener="#{impuestosController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ImpuestosDataTableContextMenu" listener="#{impuestosController.resetParents}"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{impuestosController.resetParents}"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('ImpuestosListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_nombre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.categoria}" filterBy="#{item.categoria}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_categoria}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.categoria}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.validoDesde}" filterBy="#{item.validoDesde}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_validoDesde}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.validoDesde}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.tarifa}" filterBy="#{item.tarifa}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_tarifa}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tarifa}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_creadoPor}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.creadoPor}"/>
+                    </p:column>
+
+<!--
+                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_modificadoPor}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.modificadoPor}"/>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_eliminado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliminado}"/>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.impuestoPadre.id}" filterBy="#{item.impuestoPadre.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListImpuestosTitle_impuestoPadre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.impuestoPadre.id}"/>
+                    </p:column>
+-->
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{impuestosController.prepareCreate}" update=":ImpuestosCreateForm" oncomplete="PF('ImpuestosCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ImpuestosViewForm" oncomplete="PF('ImpuestosViewDialog').show()" disabled="#{empty impuestosController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ImpuestosEditForm" oncomplete="PF('ImpuestosEditDialog').show()" disabled="#{empty impuestosController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{impuestosController.delete}" update=":growl,datalist" disabled="#{empty impuestosController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

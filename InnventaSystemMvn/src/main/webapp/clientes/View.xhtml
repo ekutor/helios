@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientesViewDlg" widgetVar="ClientesViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewClientesTitle}" closeOnEscape="true">
+
+            <h:form id="ClientesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{clientesController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_id}"/>
+                        <h:outputText value="#{clientesController.selected.id}" title="#{innventa.ViewClientesTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_nombre}"/>
+                        <h:outputText value="#{clientesController.selected.nombre}" title="#{innventa.ViewClientesTitle_nombre}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_tipoCliente}"/>
+                        <h:outputText value="#{clientesController.selected.tipoCliente}" title="#{innventa.ViewClientesTitle_tipoCliente}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_estado}"/>
+                        <h:outputText value="#{clientesController.selected.estado}" title="#{innventa.ViewClientesTitle_estado}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_eliminado}"/>
+                        <h:outputText value="#{clientesController.selected.eliminado}" title="#{innventa.ViewClientesTitle_eliminado}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_creadoPor}"/>
+                        <h:outputText value="#{clientesController.selected.creadoPor}" title="#{innventa.ViewClientesTitle_creadoPor}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_fechaCreacion}"/>
+                        <h:outputText value="#{clientesController.selected.fechaCreacion}" title="#{innventa.ViewClientesTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_modificadoPor}"/>
+                        <h:outputText value="#{clientesController.selected.modificadoPor}" title="#{innventa.ViewClientesTitle_modificadoPor}"/>
+
+                        <h:outputText value="#{innventa.ViewClientesLabel_fechaModificacion}"/>
+                        <h:outputText value="#{clientesController.selected.fechaModificacion}" title="#{innventa.ViewClientesTitle_fechaModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('ClientesViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

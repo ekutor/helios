@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonasTelsViewDlg" widgetVar="PersonasTelsViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewPersonasTelsTitle}" closeOnEscape="true">
+
+            <h:form id="PersonasTelsViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{personasTelsController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewPersonasTelsLabel_id}"/>
+                        <h:outputText value="#{personasTelsController.selected.id}" title="#{innventa.ViewPersonasTelsTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasTelsLabel_idPersona}"/>
+                        <h:outputText value="#{personasTelsController.selected.idPersona}" title="#{innventa.ViewPersonasTelsTitle_idPersona}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasTelsLabel_telefono}"/>
+                        <h:outputText value="#{personasTelsController.selected.telefono}" title="#{innventa.ViewPersonasTelsTitle_telefono}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasTelsLabel_tipo}"/>
+                        <h:outputText value="#{personasTelsController.selected.tipo}" title="#{innventa.ViewPersonasTelsTitle_tipo}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasTelsLabel_extension}"/>
+                        <h:outputText value="#{personasTelsController.selected.extension}" title="#{innventa.ViewPersonasTelsTitle_extension}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasTelsLabel_principal}"/>
+                        <h:selectBooleanCheckbox id="principal" value="#{personasTelsController.selected.principal}" title="#{innventa.EditPersonasTelsTitle_principal}"  disabled="true"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasTelsLabel_eliminado}"/>
+                        <h:outputText value="#{personasTelsController.selected.eliminado}" title="#{innventa.ViewPersonasTelsTitle_eliminado}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('PersonasTelsViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

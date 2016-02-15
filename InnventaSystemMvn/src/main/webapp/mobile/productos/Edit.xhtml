@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ProductosEditPage" lazy="true">
+        <pm:header title="#{innventa.EditProductosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ProductosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ProductosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{productosController.selected != null}">
+
+                    <pm:field>
+                                <h:outputLabel value="#{innventa.EditProductosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{productosController.selected.id}" />
+                        <p:tooltip for="id" value="#{productosController.getComponentMessages('id', innventa.EditProductosHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_referencia}" for="referencia" />
+                      <h:panelGroup>
+                        <p:inputText id="referencia" value="#{productosController.selected.referencia}" title="#{innventa.EditProductosTitle_referencia}" size="255" maxlength="255"/>
+                        <p:tooltip for="referencia" value="#{productosController.getComponentMessages('referencia', innventa.EditProductosHelpText_referencia)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_codigo}" for="codigo" />
+                      <h:panelGroup>
+                        <p:inputText id="codigo" value="#{productosController.selected.codigo}" title="#{innventa.EditProductosTitle_codigo}" size="255" maxlength="255"/>
+                        <p:tooltip for="codigo" value="#{productosController.getComponentMessages('codigo', innventa.EditProductosHelpText_codigo)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_tipoCodigo}" for="tipoCodigo" />
+                      <h:panelGroup>
+                        <p:inputText id="tipoCodigo" value="#{productosController.selected.tipoCodigo}" title="#{innventa.EditProductosTitle_tipoCodigo}" size="36" maxlength="36"/>
+                        <p:tooltip for="tipoCodigo" value="#{productosController.getComponentMessages('tipoCodigo', innventa.EditProductosHelpText_tipoCodigo)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputText id="nombre" value="#{productosController.selected.nombre}" title="#{innventa.EditProductosTitle_nombre}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_nombre}" size="255" maxlength="255"/>
+                        <p:tooltip for="nombre" value="#{productosController.getComponentMessages('nombre', innventa.EditProductosHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_precioCompra}" for="precioCompra" />
+                      <h:panelGroup>
+                        <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.EditProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_precioCompra}"/>
+                        <p:tooltip for="precioCompra" value="#{productosController.getComponentMessages('precioCompra', innventa.EditProductosHelpText_precioCompra)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_precioVenta}" for="precioVenta" />
+                      <h:panelGroup>
+                        <p:inputText id="precioVenta" value="#{productosController.selected.precioVenta}" title="#{innventa.EditProductosTitle_precioVenta}"/>
+                        <p:tooltip for="precioVenta" value="#{productosController.getComponentMessages('precioVenta', innventa.EditProductosHelpText_precioVenta)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_categoria}" for="categoria" />
+                      <h:panelGroup>
+                        <p:inputText id="categoria" value="#{productosController.selected.categoria}" title="#{innventa.EditProductosTitle_categoria}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_categoria}" size="36" maxlength="36"/>
+                        <p:tooltip for="categoria" value="#{productosController.getComponentMessages('categoria', innventa.EditProductosHelpText_categoria)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_categoriaImpuesto}" for="categoriaImpuesto" />
+                      <h:panelGroup>
+                        <p:inputText id="categoriaImpuesto" value="#{productosController.selected.categoriaImpuesto}" title="#{innventa.EditProductosTitle_categoriaImpuesto}" size="36" maxlength="36"/>
+                        <p:tooltip for="categoriaImpuesto" value="#{productosController.getComponentMessages('categoriaImpuesto', innventa.EditProductosHelpText_categoriaImpuesto)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_atributo}" for="atributo" />
+                      <h:panelGroup>
+                        <p:inputText id="atributo" value="#{productosController.selected.atributo}" title="#{innventa.EditProductosTitle_atributo}" size="36" maxlength="36"/>
+                        <p:tooltip for="atributo" value="#{productosController.getComponentMessages('atributo', innventa.EditProductosHelpText_atributo)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_stock}" for="stock" />
+                      <h:panelGroup>
+                        <p:inputText id="stock" value="#{productosController.selected.stock}" title="#{innventa.EditProductosTitle_stock}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_stock}"/>
+                        <p:tooltip for="stock" value="#{productosController.getComponentMessages('stock', innventa.EditProductosHelpText_stock)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_creadoPor}" for="creadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="creadoPor" value="#{productosController.selected.creadoPor}" title="#{innventa.EditProductosTitle_creadoPor}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_creadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="creadoPor" value="#{productosController.getComponentMessages('creadoPor', innventa.EditProductosHelpText_creadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_modificadoPor}" for="modificadoPor" />
+                      <h:panelGroup>
+                        <p:inputText id="modificadoPor" value="#{productosController.selected.modificadoPor}" title="#{innventa.EditProductosTitle_modificadoPor}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
+                        <p:tooltip for="modificadoPor" value="#{productosController.getComponentMessages('modificadoPor', innventa.EditProductosHelpText_modificadoPor)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.EditProductosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{productosController.selected.eliminado}" title="#{innventa.EditProductosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{productosController.getComponentMessages('eliminado', innventa.EditProductosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{productosController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ProductosListPage:ProductosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ProductosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

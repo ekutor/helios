@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategoriasViewDlg" widgetVar="CategoriasViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewCategoriasTitle}" closeOnEscape="true">
+
+            <h:form id="CategoriasViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{categoriasController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewCategoriasLabel_id}"/>
+                        <h:outputText value="#{categoriasController.selected.id}" title="#{innventa.ViewCategoriasTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewCategoriasLabel_nombre}"/>
+                        <h:outputText value="#{categoriasController.selected.nombre}" title="#{innventa.ViewCategoriasTitle_nombre}"/>
+
+                        <h:outputText value="#{innventa.ViewCategoriasLabel_imagen}"/>
+                        <h:outputText value="#{categoriasController.selected.imagen}" title="#{innventa.ViewCategoriasTitle_imagen}"/>
+
+                        <h:outputText value="#{innventa.ViewCategoriasLabel_eliminado}"/>
+                        <h:outputText value="#{categoriasController.selected.eliminado}" title="#{innventa.ViewCategoriasTitle_eliminado}"/>
+
+                        <h:outputText value="#{innventa.ViewCategoriasLabel_idpadre}"/>
+                        <h:outputText value="#{categoriasController.selected.idpadre.id}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('CategoriasViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

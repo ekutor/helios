@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+     >
+
+      <b:container id="menu">
+        <h:form>
+          <b:navBar brand="Innventa System" inverse="true"
+            brandHref="#" fixed="top"
+            onclick="$('.modalPseudoClass').modal();return false;">
+            <b:navbarLinks>
+              <b:navCommandLink value="home" href="principal" iconAwesome="home" />
+              <b:navCommandLink value="#{innventa.Maintenance}" 
+                                href="/aclAcciones/index" rendered="#{loginController.loggedIn}"/>
+              <b:navLink value="#{innventa.About}" href="#"
+                onclick="$('.modalPseudoClass').modal();return false;" />
+            </b:navbarLinks>
+          </b:navBar>
+        </h:form>
+      </b:container>
+    
+    
+     <b:modal title="#{innventa.About} #{innventa.AppName}" styleClass="modalPseudoClass">
+    <p>Innventa System es un sistema  de Gestion de Productos,Inventarios, 
+        Proyectos , Clientes 
+        y Facturación para crecer.</p>
+    <p>Innventa System le permitirá una correcta gestion de los proyectos 
+        de su empresa de tal forma que le facilite la creacion de nuevos 
+        productos, las ordenes de compra de los mismos, los inventarios 
+        de los productos  y de los insumos de los mismos; tambien podra 
+        tener de una manera eficiente y en tiempo real la informacion 
+        de las ordenes de compra realizada por sus clientes, las entregas o 
+        remisiones realizadas a  cada cliente asociadas a sus ordenes de compra
+        el estado de las remisiones y la facturacion de las mismas.</p>
+    <p>Adicionalmente puede:</p>
+    <ul>
+      <li>Permitirle a sus clientes revisar las remisiones realizadas 
+          y el historico de las mismas desde el inicio de su relacion comercial.</li>
+      <li>Gestionar las OC y Remisiones de toda su empresa.</li>
+      <li>Imprimir la informacion que necesita .</li>
+      <li>Ver Inventarios en tiempo real.</li>
+      <li>y mucho mas...</li>
+
+    </ul>
+
+    <f:facet name="footer">
+      <p>Invennta System gestiona tu empresa de una Manera más sencilla y eficiente.</p>
+      <b:button value="close" dismiss="modal" onclick="return false;" />
+    </f:facet>
+  </b:modal>
+</html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="RecibosEditDlg" widgetVar="RecibosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditRecibosTitle}" closeOnEscape="true">
+
+            <h:form id="RecibosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{recibosController.selected != null}">
+
+        
+                        <h:outputLabel value="#{innventa.EditRecibosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <h:outputText id="id" value="#{recibosController.selected.id}" />
+                        <p:tooltip for="id" value="#{recibosController.getComponentMessages('id', innventa.EditRecibosHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRecibosLabel_fechaInicio}" for="fechaInicio" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{recibosController.selected.fechaInicio}" title="#{innventa.EditRecibosTitle_fechaInicio}" required="true" requiredMessage="#{innventa.EditRecibosRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:tooltip for="fechaInicio" value="#{recibosController.getComponentMessages('fechaInicio', innventa.EditRecibosHelpText_fechaInicio)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRecibosLabel_atributos}" for="atributos" />
+                      <h:panelGroup>
+                        <p:inputText id="atributos" value="#{recibosController.selected.atributos}" title="#{innventa.EditRecibosTitle_atributos}" required="true" requiredMessage="#{innventa.EditRecibosRequiredMessage_atributos}"/>
+                        <p:tooltip for="atributos" value="#{recibosController.getComponentMessages('atributos', innventa.EditRecibosHelpText_atributos)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRecibosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{recibosController.selected.eliminado}" title="#{innventa.EditRecibosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditRecibosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{recibosController.getComponentMessages('eliminado', innventa.EditRecibosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditRecibosLabel_fechaFin}" for="fechaFin" />
+                      <h:panelGroup>
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy HH:mm:ss" value="#{recibosController.selected.fechaFin}" title="#{innventa.EditRecibosTitle_fechaFin}"  showOn="button"/>
+                        <p:tooltip for="fechaFin" value="#{recibosController.getComponentMessages('fechaFin', innventa.EditRecibosHelpText_fechaFin)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{recibosController.save}" value="#{innventa.Save}" update="display,:RecibosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('RecibosEditDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('RecibosEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

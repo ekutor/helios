@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PersonaDirsViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewPersonaDirsTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PersonaDirsListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PersonaDirsViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{personaDirsController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_id}"/>
+                        <h:outputText value="#{personaDirsController.selected.id}" title="#{innventa.ViewPersonaDirsTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_idPersona}"/>
+                        <h:outputText value="#{personaDirsController.selected.idPersona}" title="#{innventa.ViewPersonaDirsTitle_idPersona}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_direccion}"/>
+                        <h:outputText value="#{personaDirsController.selected.direccion}" title="#{innventa.ViewPersonaDirsTitle_direccion}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_tipo}"/>
+                        <h:outputText value="#{personaDirsController.selected.tipo}" title="#{innventa.ViewPersonaDirsTitle_tipo}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_observacion}"/>
+                        <h:outputText value="#{personaDirsController.selected.observacion}" title="#{innventa.ViewPersonaDirsTitle_observacion}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_principal}"/>
+                        <h:selectBooleanCheckbox id="principal" value="#{personaDirsController.selected.principal}" title="#{innventa.EditPersonaDirsTitle_principal}" required="true" requiredMessage="#{innventa.EditPersonaDirsRequiredMessage_principal}" disabled="true"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_eliminado}"/>
+                        <h:outputText value="#{personaDirsController.selected.eliminado}" title="#{innventa.ViewPersonaDirsTitle_eliminado}"/>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

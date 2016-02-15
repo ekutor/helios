@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AtributosViewDlg" widgetVar="AtributosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewAtributosTitle}" closeOnEscape="true">
+
+            <h:form id="AtributosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{atributosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewAtributosLabel_id}"/>
+                        <h:outputText value="#{atributosController.selected.id}" title="#{innventa.ViewAtributosTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewAtributosLabel_nombre}"/>
+                        <h:outputText value="#{atributosController.selected.nombre}" title="#{innventa.ViewAtributosTitle_nombre}"/>
+
+                        <h:outputText value="#{innventa.ViewAtributosLabel_eliminado}"/>
+                        <h:outputText value="#{atributosController.selected.eliminado}" title="#{innventa.ViewAtributosTitle_eliminado}"/>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('AtributosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

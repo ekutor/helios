@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ClientesViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewClientesTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ClientesListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ClientesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{clientesController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_id}"/>
+                        <h:outputText value="#{clientesController.selected.id}" title="#{innventa.ViewClientesTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_nombre}"/>
+                        <h:outputText value="#{clientesController.selected.nombre}" title="#{innventa.ViewClientesTitle_nombre}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_tipoCliente}"/>
+                        <h:outputText value="#{clientesController.selected.tipoCliente}" title="#{innventa.ViewClientesTitle_tipoCliente}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_estado}"/>
+                        <h:outputText value="#{clientesController.selected.estado}" title="#{innventa.ViewClientesTitle_estado}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_eliminado}"/>
+                        <h:outputText value="#{clientesController.selected.eliminado}" title="#{innventa.ViewClientesTitle_eliminado}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_creadoPor}"/>
+                        <h:outputText value="#{clientesController.selected.creadoPor}" title="#{innventa.ViewClientesTitle_creadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_fechaCreacion}"/>
+                        <h:outputText value="#{clientesController.selected.fechaCreacion}" title="#{innventa.ViewClientesTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_modificadoPor}"/>
+                        <h:outputText value="#{clientesController.selected.modificadoPor}" title="#{innventa.ViewClientesTitle_modificadoPor}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewClientesLabel_fechaModificacion}"/>
+                        <h:outputText value="#{clientesController.selected.fechaModificacion}" title="#{innventa.ViewClientesTitle_fechaModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

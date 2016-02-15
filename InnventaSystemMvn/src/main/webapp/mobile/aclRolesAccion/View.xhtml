@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AclRolesAccionViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewAclRolesAccionTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclRolesAccionListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AclRolesAccionViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{aclRolesAccionController.selected != null}">
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewAclRolesAccionLabel_id}"/>
+                        <h:outputText value="#{aclRolesAccionController.selected.id}" title="#{innventa.ViewAclRolesAccionTitle_id}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewAclRolesAccionLabel_rol}"/>
+                        <h:outputText value="#{aclRolesAccionController.selected.rol}" title="#{innventa.ViewAclRolesAccionTitle_rol}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewAclRolesAccionLabel_accion}"/>
+                        <h:outputText value="#{aclRolesAccionController.selected.accion}" title="#{innventa.ViewAclRolesAccionTitle_accion}"/>
+                    </pm:field>
+
+                    <pm:field>
+                        <h:outputText value="#{innventa.ViewAclRolesAccionLabel_eliminado}"/>
+                        <h:outputText value="#{aclRolesAccionController.selected.eliminado}" title="#{innventa.ViewAclRolesAccionTitle_eliminado}"/>
+                    </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

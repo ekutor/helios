@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaMailsViewDlg" widgetVar="PersonaMailsViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewPersonaMailsTitle}" closeOnEscape="true">
+
+            <h:form id="PersonaMailsViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{personaMailsController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewPersonaMailsLabel_id}"/>
+                        <h:outputText value="#{personaMailsController.selected.id}" title="#{innventa.ViewPersonaMailsTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonaMailsLabel_idPersona}"/>
+                        <h:outputText value="#{personaMailsController.selected.idPersona}" title="#{innventa.ViewPersonaMailsTitle_idPersona}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonaMailsLabel_mail}"/>
+                        <h:outputText value="#{personaMailsController.selected.mail}" title="#{innventa.ViewPersonaMailsTitle_mail}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonaMailsLabel_principal}"/>
+                        <h:selectBooleanCheckbox id="principal" value="#{personaMailsController.selected.principal}" title="#{innventa.EditPersonaMailsTitle_principal}"  disabled="true"/>
+
+                        <h:outputText value="#{innventa.ViewPersonaMailsLabel_eliminado}"/>
+                        <h:outputText value="#{personaMailsController.selected.eliminado}" title="#{innventa.ViewPersonaMailsTitle_eliminado}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('PersonaMailsViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

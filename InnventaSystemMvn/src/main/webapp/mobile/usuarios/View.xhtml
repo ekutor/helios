@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="UsuariosViewPage" lazy="true">
+        <pm:header title="#{innventa.ViewUsuariosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:UsuariosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="UsuariosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{usuariosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_usuario}"/>
+                            <h:outputText value="#{usuariosController.selected.usuario}" title="#{innventa.ViewUsuariosTitle_usuario}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_passw}"/>
+                            <h:outputText value="#{usuariosController.selected.passw}" title="#{innventa.ViewUsuariosTitle_passw}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_persona}"/>
+                            <h:outputText value="#{usuariosController.selected.persona}" title="#{innventa.ViewUsuariosTitle_persona}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_eliminado}"/>
+                            <h:outputText value="#{usuariosController.selected.eliminado}" title="#{innventa.ViewUsuariosTitle_eliminado}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_fechaCreacion}"/>
+                            <h:outputText value="#{usuariosController.selected.fechaCreacion}" title="#{innventa.ViewUsuariosTitle_fechaCreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_creadoPor}"/>
+                            <h:outputText value="#{usuariosController.selected.creadoPor}" title="#{innventa.ViewUsuariosTitle_creadoPor}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_modificadoPor}"/>
+                            <h:outputText value="#{usuariosController.selected.modificadoPor}" title="#{innventa.ViewUsuariosTitle_modificadoPor}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_fechaModificacion}"/>
+                            <h:outputText value="#{usuariosController.selected.fechaModificacion}" title="#{innventa.ViewUsuariosTitle_fechaModificacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

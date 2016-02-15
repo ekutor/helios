@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="UsuariosEditPage" lazy="true">
+        <pm:header title="#{innventa.EditUsuariosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:UsuariosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="UsuariosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{usuariosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{innventa.EditUsuariosLabel_usuario}" for="usuario" />
+                            <h:panelGroup>
+                                <h:outputText id="usuario" value="#{usuariosController.selected.usuario}" />
+                                <p:tooltip for="usuario" value="#{usuariosController.getComponentMessages('usuario', innventa.EditUsuariosHelpText_usuario)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditUsuariosLabel_passw}" for="passw" />
+                            <h:panelGroup>
+                                <p:inputText id="passw" value="#{usuariosController.selected.passw}" title="#{innventa.EditUsuariosTitle_passw}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_passw}" size="20" maxlength="20"/>
+                                <p:tooltip for="passw" value="#{usuariosController.getComponentMessages('passw', innventa.EditUsuariosHelpText_passw)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditUsuariosLabel_persona}" for="persona" />
+                            <h:panelGroup>
+                                <p:inputText id="persona" value="#{usuariosController.selected.persona}" title="#{innventa.EditUsuariosTitle_persona}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_persona}" size="36" maxlength="36"/>
+                                <p:tooltip for="persona" value="#{usuariosController.getComponentMessages('persona', innventa.EditUsuariosHelpText_persona)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditUsuariosLabel_eliminado}" for="eliminado" />
+                            <h:panelGroup>
+                                <p:inputText id="eliminado" value="#{usuariosController.selected.eliminado}" title="#{innventa.EditUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_eliminado}"/>
+                                <p:tooltip for="eliminado" value="#{usuariosController.getComponentMessages('eliminado', innventa.EditUsuariosHelpText_eliminado)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditUsuariosLabel_fechaCreacion}" for="fechaCreacion" />
+                            <h:panelGroup>
+                                <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuariosController.selected.fechaCreacion}" title="#{innventa.EditUsuariosTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_fechaCreacion}" showOn="button"/>
+                                <p:tooltip for="fechaCreacion" value="#{usuariosController.getComponentMessages('fechaCreacion', innventa.EditUsuariosHelpText_fechaCreacion)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditUsuariosLabel_creadoPor}" for="creadoPor" />
+                            <h:panelGroup>
+                                <p:inputText id="creadoPor" value="#{usuariosController.selected.creadoPor}" title="#{innventa.EditUsuariosTitle_creadoPor}" size="36" maxlength="36"/>
+                                <p:tooltip for="creadoPor" value="#{usuariosController.getComponentMessages('creadoPor', innventa.EditUsuariosHelpText_creadoPor)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditUsuariosLabel_modificadoPor}" for="modificadoPor" />
+                            <h:panelGroup>
+                                <p:inputText id="modificadoPor" value="#{usuariosController.selected.modificadoPor}" title="#{innventa.EditUsuariosTitle_modificadoPor}" size="36" maxlength="36"/>
+                                <p:tooltip for="modificadoPor" value="#{usuariosController.getComponentMessages('modificadoPor', innventa.EditUsuariosHelpText_modificadoPor)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditUsuariosLabel_fechaModificacion}" for="fechaModificacion" />
+                            <h:panelGroup>
+                                <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuariosController.selected.fechaModificacion}" title="#{innventa.EditUsuariosTitle_fechaModificacion}"  showOn="button"/>
+                                <p:tooltip for="fechaModificacion" value="#{usuariosController.getComponentMessages('fechaModificacion', innventa.EditUsuariosHelpText_fechaModificacion)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{usuariosController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:UsuariosListPage:UsuariosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:UsuariosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

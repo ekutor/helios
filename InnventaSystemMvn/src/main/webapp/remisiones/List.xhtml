@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+        <h:form id="RemisionesListForm">
+
+            <p:panel header="#{innventa.ListRemisionesTitle}">
+                <p:contextMenu id="RemisionesDataTableContextMenu" for="datalist">  
+                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('RemisionesListForm:createButton').click();" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('RemisionesListForm:viewButton').click();" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('RemisionesListForm:editButton').click();" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('RemisionesListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                    <p:separator/>
+                    <p:menuitem value="#{innventa.RemisionesMenuItem_idPedido}" icon="ui-icon-search"  actionListener="#{remisionesController.prepareIdPedido}" update=":PedidosViewForm" oncomplete="PF('PedidosViewDialog').show()" disabled="#{empty remisionesController.selected.idPedido}"/>  
+                    <p:menuitem value="#{innventa.RemisionesMenuItem_remisionesProductoCollection}" icon="ui-icon-search"  action="#{remisionesController.navigateRemisionesProductoCollection}" disabled="#{empty remisionesController.selected.remisionesProductoCollection}" ajax="false"/>  
+                </p:contextMenu>
+                <p:dataTable id="datalist"
+                             value="#{remisionesController.items}"
+                             var="item"
+                             rowKey="#{item.id}"
+                             paginator="true"
+                             rows="30"
+                             rowsPerPageTemplate="10,20,30,40,50,100"
+                             selectionMode="single"
+                             selection="#{remisionesController.selected}">
+
+                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
+                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
+                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{remisionesController.resetParents}"/>
+                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('RemisionesListForm:viewButton').click();"/>
+
+                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.fechaRemision}" filterBy="#{item.fechaRemision}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_fechaRemision}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaRemision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.detalles}" filterBy="#{item.detalles}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_detalles}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.detalles}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.totalProductos}" filterBy="#{item.totalProductos}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_totalProductos}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.totalProductos}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_estado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.estado}"/>
+                    </p:column>
+
+
+                    <p:column sortBy="#{item.entregadoA}" filterBy="#{item.entregadoA}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_entregadoA}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.entregadoA}"/>
+                    </p:column>
+
+<!--
+                    <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_creadoPor}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.creadoPor}"/>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_fechaCreacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_modificadoPor}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.modificadoPor}"/>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_fechaModificacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_eliminado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.eliminado}"/>
+                    </p:column>
+-->
+<!--
+                    <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListRemisionesTitle_idPedido}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPedido.descripcion}"/>
+                    </p:column>
+-->
+
+                </p:dataTable>
+
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update=":RemisionesCreateForm" oncomplete="PF('RemisionesCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":RemisionesViewForm" oncomplete="PF('RemisionesViewDialog').show()" disabled="#{empty remisionesController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":RemisionesEditForm" oncomplete="PF('RemisionesEditDialog').show()" disabled="#{empty remisionesController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{remisionesController.delete}" update=":growl,datalist" disabled="#{empty remisionesController.selected}">
+                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        </p:commandButton>
+
+            </p:panel>
+            <ui:include src="/confirmation.xhtml"/>
+        </h:form>
+
+</ui:composition>

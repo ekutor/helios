@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecibosViewDlg" widgetVar="RecibosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewRecibosTitle}" closeOnEscape="true">
+
+            <h:form id="RecibosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{recibosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewRecibosLabel_id}"/>
+                        <h:outputText value="#{recibosController.selected.id}" title="#{innventa.ViewRecibosTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewRecibosLabel_fechaInicio}"/>
+                        <h:outputText value="#{recibosController.selected.fechaInicio}" title="#{innventa.ViewRecibosTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{innventa.ViewRecibosLabel_atributos}"/>
+                        <h:outputText value="#{recibosController.selected.atributos}" title="#{innventa.ViewRecibosTitle_atributos}"/>
+
+                        <h:outputText value="#{innventa.ViewRecibosLabel_eliminado}"/>
+                        <h:outputText value="#{recibosController.selected.eliminado}" title="#{innventa.ViewRecibosTitle_eliminado}"/>
+
+                        <h:outputText value="#{innventa.ViewRecibosLabel_fechaFin}"/>
+                        <h:outputText value="#{recibosController.selected.fechaFin}" title="#{innventa.ViewRecibosTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                  <p:commandButton value="#{innventa.Close}" onclick="PF('RecibosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="AtributosCreatePage" lazy="true">
+        <pm:header title="#{innventa.CreateAtributosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AtributosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="AtributosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{atributosController.selected != null}">
+                    <p:outputPanel>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAtributosLabel_id}" for="id" />
+                      <h:panelGroup>
+                        <p:inputText id="id" value="#{atributosController.selected.id}" title="#{innventa.CreateAtributosTitle_id}" required="true" requiredMessage="#{innventa.CreateAtributosRequiredMessage_id}" size="36" maxlength="36"/>
+                        <p:tooltip for="id" value="#{atributosController.getComponentMessages('id', innventa.CreateAtributosHelpText_id)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAtributosLabel_nombre}" for="nombre" />
+                      <h:panelGroup>
+                        <p:inputTextarea rows="4" cols="30" id="nombre" value="#{atributosController.selected.nombre}" title="#{innventa.CreateAtributosTitle_nombre}" required="true" requiredMessage="#{innventa.CreateAtributosRequiredMessage_nombre}"/>
+                        <p:tooltip for="nombre" value="#{atributosController.getComponentMessages('nombre', innventa.CreateAtributosHelpText_nombre)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+
+                    <pm:field>
+                                <p:outputLabel value="#{innventa.CreateAtributosLabel_eliminado}" for="eliminado" />
+                      <h:panelGroup>
+                        <p:inputText id="eliminado" value="#{atributosController.selected.eliminado}" title="#{innventa.CreateAtributosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAtributosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{atributosController.getComponentMessages('eliminado', innventa.CreateAtributosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{atributosController.saveNew}" value="#{innventa.Save}" update="display,:AtributosListPage:AtributosListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AtributosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>
