@@ -47,7 +47,9 @@ public class LoginController extends AbstractController<Usuarios> {
         FacesContext context = FacesContext.getCurrentInstance();
 
         if (user == null || !user.getPassw().equals(password)) {
-            context.addMessage(null, new FacesMessage("Usuario o Clave incorrectos, Intente Nuevamente"));
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuario o Clave incorrectos, Intente Nuevamente");
+            FacesContext.getCurrentInstance().addMessage("loginForm:usuario", msg);
+          
             username = null;
             password = null;
             return null;

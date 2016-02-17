@@ -4,16 +4,17 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
 
         <h:form id="ProductosListForm">
-
-            <p:panel header="#{innventa.ListProductosTitle}">
+           <b:panel id="pdata" title="#{innventa.ListProductosTitle}" collapsible="true" look="primary">
+          
                 <p:contextMenu id="ProductosDataTableContextMenu" for="datalist">  
-                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>
-                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('ProductosListForm:viewButton').click();" icon="ui-icon-search"/>
-                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('ProductosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('ProductosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                    <p:menuitem value="#{innventa.Create}" onclick="" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="" icon="ui-icon-trash"/>
                 </p:contextMenu>
                 <p:dataTable id="datalist"
                              value="#{productosController.items}"
@@ -23,12 +24,9 @@
                              rows="30"
                              rowsPerPageTemplate="10,20,30,40,50,100"
                              selectionMode="single"
-                             selection="#{productosController.selected}">
+                             selection="#{productosController.selected}" >
 
-                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ProductosDataTableContextMenu"/>
-                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ProductosDataTableContextMenu"/>
-                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
-                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('ProductosListForm:viewButton').click();"/>
+            
 
                     <p:column sortBy="#{item.id}" filterBy="#{item.id}">
                         <f:facet name="header">
@@ -144,14 +142,14 @@
 
                 </p:dataTable>
 
-                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm" oncomplete="PF('ProductosCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
-                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
-                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete}" update=":growl,datalist" disabled="#{empty productosController.selected}">
-                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}"  oncomplete="PF('ProductosCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}"  oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete}"  disabled="#{empty productosController.selected}">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
                         </p:commandButton>
 
-            </p:panel>
+            </b:panel>
             <ui:include src="/confirmation.xhtml"/>
         </h:form>
 
