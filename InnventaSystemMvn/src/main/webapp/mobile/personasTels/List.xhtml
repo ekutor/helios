@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="PersonasTelsListForm">
+            <h:form id="PersonasTelsListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,39 +38,39 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idPersona}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idPersona}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.telefono}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.telefono}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.tipo}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.tipo}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.extension}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.extension}"/>
 
 
 
-    ,&nbsp;
-                        <h:selectBooleanCheckbox id="principal" value="#{item.principal}" title="#{innventa.EditPersonasTelsTitle_principal}"  disabled="true"/>
+                            ,&nbsp;
+                            <h:selectBooleanCheckbox id="principal" value="#{item.principal}" title="#{innventa.EditPersonasTelsTitle_principal}"  disabled="true"/>
 
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
--->
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
+
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{personasTelsController.selected}" />
                     </p:commandLink>
@@ -80,7 +80,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

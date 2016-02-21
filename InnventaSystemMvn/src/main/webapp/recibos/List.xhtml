@@ -6,85 +6,85 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-        <h:form id="RecibosListForm">
+    <h:form id="RecibosListForm">
 
-            <p:panel header="#{innventa.ListRecibosTitle}">
-                <p:contextMenu id="RecibosDataTableContextMenu" for="datalist">  
-                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('RecibosListForm:createButton').click();" icon="ui-icon-plus"/>
-                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('RecibosListForm:viewButton').click();" icon="ui-icon-search"/>
-                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('RecibosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('RecibosListForm:deleteButton').click();" icon="ui-icon-trash"/>
-                </p:contextMenu>
-                <p:dataTable id="datalist"
-                             value="#{recibosController.items}"
-                             var="item"
-                             rowKey="#{item.id}"
-                             paginator="true"
-                             rows="30"
-                             rowsPerPageTemplate="10,20,30,40,50,100"
-                             selectionMode="single"
-                             selection="#{recibosController.selected}">
+        <p:panel header="#{innventa.ListRecibosTitle}">
+            <p:contextMenu id="RecibosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('RecibosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('RecibosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('RecibosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('RecibosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{recibosController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="30"
+                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         selectionMode="single"
+                         selection="#{recibosController.selected}">
 
-                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RecibosDataTableContextMenu"/>
-                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RecibosDataTableContextMenu"/>
-                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
-                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('RecibosListForm:viewButton').click();"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RecibosDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RecibosDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('RecibosListForm:viewButton').click();"/>
 
-                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListRecibosTitle_id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-
-
-                    <p:column sortBy="#{item.fechaInicio}" filterBy="#{item.fechaInicio}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListRecibosTitle_fechaInicio}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaInicio}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </p:column>
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListRecibosTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.atributos}" filterBy="#{item.atributos}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListRecibosTitle_atributos}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.atributos}"/>
-                    </p:column>
+                <p:column sortBy="#{item.fechaInicio}" filterBy="#{item.fechaInicio}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListRecibosTitle_fechaInicio}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaInicio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListRecibosTitle_eliminado}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.eliminado}"/>
-                    </p:column>
+                <p:column sortBy="#{item.atributos}" filterBy="#{item.atributos}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListRecibosTitle_atributos}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.atributos}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.fechaFin}" filterBy="#{item.fechaFin}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListRecibosTitle_fechaFin}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaFin}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </p:column>
+                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListRecibosTitle_eliminado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.eliminado}"/>
+                </p:column>
 
 
-                </p:dataTable>
+                <p:column sortBy="#{item.fechaFin}" filterBy="#{item.fechaFin}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListRecibosTitle_fechaFin}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaFin}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
 
-                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{recibosController.prepareCreate}" update=":RecibosCreateForm" oncomplete="PF('RecibosCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":RecibosViewForm" oncomplete="PF('RecibosViewDialog').show()" disabled="#{empty recibosController.selected}"/>
-                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":RecibosEditForm" oncomplete="PF('RecibosEditDialog').show()" disabled="#{empty recibosController.selected}"/>
-                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{recibosController.delete}" update=":growl,datalist" disabled="#{empty recibosController.selected}">
-                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-                        </p:commandButton>
 
-            </p:panel>
-            <ui:include src="/confirmation.xhtml"/>
-        </h:form>
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{recibosController.prepareCreate}" update=":RecibosCreateForm" oncomplete="PF('RecibosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":RecibosViewForm" oncomplete="PF('RecibosViewDialog').show()" disabled="#{empty recibosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":RecibosEditForm" oncomplete="PF('RecibosEditDialog').show()" disabled="#{empty recibosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{recibosController.delete}" update=":growl,datalist" disabled="#{empty recibosController.selected}">
+                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
 
 </ui:composition>

@@ -49,11 +49,6 @@
 
 
                             ,&nbsp;
-                            <h:outputText value="#{item.persona}"/>
-
-
-
-                            ,&nbsp;
                             <h:outputText value="#{item.eliminado}"/>
 
 
@@ -69,16 +64,21 @@
                             <h:outputText value="#{item.creadoPor}"/>
 
 
-                            <!--
-                                ,&nbsp;
-                                                    <h:outputText value="#{item.modificadoPor}"/>
-                            -->
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.modificadoPor}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaModificacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+
 
                             <!--
                                 ,&nbsp;
-                                                    <h:outputText value="#{item.fechaModificacion}">
-                                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                                    </h:outputText>
+                                                    <h:outputText value="#{item.persona.id}"/>
                             -->
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{usuariosController.selected}" />

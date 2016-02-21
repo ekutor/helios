@@ -8,56 +8,56 @@
 
     <ui:composition>
 
-        <p:dialog id="ProductosViewDlg" widgetVar="ProductosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewProductosTitle}" closeOnEscape="true">
+        <p:dialog id="ProductosViewDlg" widgetVar="ProductosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewProductosTitle}" closeOnEscape="true">
 
             <h:form id="ProductosViewForm">
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="column" rendered="#{productosController.selected != null}">
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_id}"/>
-                        <h:outputText value="#{productosController.selected.id}" title="#{myBundle.ViewProductosTitle_id}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_id}"/>
+                        <h:outputText value="#{productosController.selected.id}" title="#{innventa.ViewProductosTitle_id}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_referencia}"/>
-                        <h:outputText value="#{productosController.selected.referencia}" title="#{myBundle.ViewProductosTitle_referencia}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_referencia}"/>
+                        <h:outputText value="#{productosController.selected.referencia}" title="#{innventa.ViewProductosTitle_referencia}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_codigo}"/>
-                        <h:outputText value="#{productosController.selected.codigo}" title="#{myBundle.ViewProductosTitle_codigo}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_codigo}"/>
+                        <h:outputText value="#{productosController.selected.codigo}" title="#{innventa.ViewProductosTitle_codigo}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_tipoCodigo}"/>
-                        <h:outputText value="#{productosController.selected.tipoCodigo}" title="#{myBundle.ViewProductosTitle_tipoCodigo}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_tipoCodigo}"/>
+                        <h:outputText value="#{productosController.selected.tipoCodigo}" title="#{innventa.ViewProductosTitle_tipoCodigo}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_nombre}"/>
-                        <h:outputText value="#{productosController.selected.nombre}" title="#{myBundle.ViewProductosTitle_nombre}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_nombre}"/>
+                        <h:outputText value="#{productosController.selected.nombre}" title="#{innventa.ViewProductosTitle_nombre}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_precioCompra}"/>
-                        <h:outputText value="#{productosController.selected.precioCompra}" title="#{myBundle.ViewProductosTitle_precioCompra}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_precioCompra}"/>
+                        <h:outputText value="#{productosController.selected.precioCompra}" title="#{innventa.ViewProductosTitle_precioCompra}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_precioVenta}"/>
-                        <h:outputText value="#{productosController.selected.precioVenta}" title="#{myBundle.ViewProductosTitle_precioVenta}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_precioVenta}"/>
+                        <h:outputText value="#{productosController.selected.precioVenta}" title="#{innventa.ViewProductosTitle_precioVenta}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_categoria}"/>
-                        <h:outputText value="#{productosController.selected.categoria}" title="#{myBundle.ViewProductosTitle_categoria}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_categoria}"/>
+                        <h:outputText value="#{productosController.selected.categoria}" title="#{innventa.ViewProductosTitle_categoria}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_categoriaImpuesto}"/>
-                        <h:outputText value="#{productosController.selected.categoriaImpuesto}" title="#{myBundle.ViewProductosTitle_categoriaImpuesto}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_categoriaImpuesto}"/>
+                        <h:outputText value="#{productosController.selected.categoriaImpuesto}" title="#{innventa.ViewProductosTitle_categoriaImpuesto}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_atributo}"/>
-                        <h:outputText value="#{productosController.selected.atributo}" title="#{myBundle.ViewProductosTitle_atributo}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_atributo}"/>
+                        <h:outputText value="#{productosController.selected.atributo}" title="#{innventa.ViewProductosTitle_atributo}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_stock}"/>
-                        <h:outputText value="#{productosController.selected.stock}" title="#{myBundle.ViewProductosTitle_stock}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_stock}"/>
+                        <h:outputText value="#{productosController.selected.stock}" title="#{innventa.ViewProductosTitle_stock}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_creadoPor}"/>
-                        <h:outputText value="#{productosController.selected.creadoPor}" title="#{myBundle.ViewProductosTitle_creadoPor}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_creadoPor}"/>
+                        <h:outputText value="#{productosController.selected.creadoPor}" title="#{innventa.ViewProductosTitle_creadoPor}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_modificadoPor}"/>
-                        <h:outputText value="#{productosController.selected.modificadoPor}" title="#{myBundle.ViewProductosTitle_modificadoPor}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_modificadoPor}"/>
+                        <h:outputText value="#{productosController.selected.modificadoPor}" title="#{innventa.ViewProductosTitle_modificadoPor}"/>
 
-                        <h:outputText value="#{myBundle.ViewProductosLabel_eliminado}"/>
-                        <h:outputText value="#{productosController.selected.eliminado}" title="#{myBundle.ViewProductosTitle_eliminado}"/>
+                        <h:outputText value="#{innventa.ViewProductosLabel_eliminado}"/>
+                        <h:outputText value="#{productosController.selected.eliminado}" title="#{innventa.ViewProductosTitle_eliminado}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{myBundle.Close}" onclick="PF('ProductosViewDialog').hide()"/>
+                    <p:commandButton value="#{innventa.Close}" onclick="PF('ProductosViewDialog').hide()"/>
                 </h:panelGroup>
 
             </h:form>

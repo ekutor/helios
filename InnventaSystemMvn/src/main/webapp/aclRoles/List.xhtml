@@ -6,111 +6,111 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-        <h:form id="AclRolesListForm">
+    <h:form id="AclRolesListForm">
 
-            <p:panel header="#{innventa.ListAclRolesTitle}">
-                <p:contextMenu id="AclRolesDataTableContextMenu" for="datalist">  
-                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('AclRolesListForm:createButton').click();" icon="ui-icon-plus"/>
-                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('AclRolesListForm:viewButton').click();" icon="ui-icon-search"/>
-                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('AclRolesListForm:editButton').click();" icon="ui-icon-pencil"/>
-                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('AclRolesListForm:deleteButton').click();" icon="ui-icon-trash"/>
-                    <p:separator/>
-                    <p:menuitem value="#{innventa.AclRolesMenuItem_aclRolesUsuariosCollection}" icon="ui-icon-search"  action="#{aclRolesController.navigateAclRolesUsuariosCollection}" disabled="#{empty aclRolesController.selected.aclRolesUsuariosCollection}" ajax="false"/>  
-                </p:contextMenu>
-                <p:dataTable id="datalist"
-                             value="#{aclRolesController.items}"
-                             var="item"
-                             rowKey="#{item.id}"
-                             paginator="true"
-                             rows="30"
-                             rowsPerPageTemplate="10,20,30,40,50,100"
-                             selectionMode="single"
-                             selection="#{aclRolesController.selected}">
+        <p:panel header="#{innventa.ListAclRolesTitle}">
+            <p:contextMenu id="AclRolesDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('AclRolesListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('AclRolesListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('AclRolesListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('AclRolesListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{innventa.AclRolesMenuItem_aclRolesUsuariosList}" icon="ui-icon-search"  action="#{aclRolesController.navigateAclRolesUsuariosList}" disabled="#{empty aclRolesController.selected.aclRolesUsuariosList}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{aclRolesController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="30"
+                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         selectionMode="single"
+                         selection="#{aclRolesController.selected}">
 
-                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesDataTableContextMenu"/>
-                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesDataTableContextMenu"/>
-                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
-                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('AclRolesListForm:viewButton').click();"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('AclRolesListForm:viewButton').click();"/>
 
-                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-
-
-                    <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_nombre}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nombre}"/>
-                    </p:column>
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclRolesTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.descripcion}" filterBy="#{item.descripcion}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_descripcion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.descripcion}"/>
-                    </p:column>
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclRolesTitle_nombre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_fechaCreacion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaCreacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </p:column>
+                <p:column sortBy="#{item.descripcion}" filterBy="#{item.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclRolesTitle_descripcion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descripcion}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_creadoPor}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.creadoPor}"/>
-                    </p:column>
+                <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclRolesTitle_fechaCreacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaCreacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_fechaModificacion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaModificacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </p:column>
+                <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclRolesTitle_creadoPor}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.creadoPor}"/>
+                </p:column>
 
-<!--
-                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_modificadoPor}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.modificadoPor}"/>
-                    </p:column>
--->
-<!--
-                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListAclRolesTitle_eliminado}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.eliminado}"/>
-                    </p:column>
--->
 
-                </p:dataTable>
+                <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclRolesTitle_fechaModificacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaModificacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
 
-                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{aclRolesController.prepareCreate}" update=":AclRolesCreateForm" oncomplete="PF('AclRolesCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":AclRolesViewForm" oncomplete="PF('AclRolesViewDialog').show()" disabled="#{empty aclRolesController.selected}"/>
-                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":AclRolesEditForm" oncomplete="PF('AclRolesEditDialog').show()" disabled="#{empty aclRolesController.selected}"/>
-                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{aclRolesController.delete}" update=":growl,datalist" disabled="#{empty aclRolesController.selected}">
-                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-                        </p:commandButton>
 
-            </p:panel>
-            <ui:include src="/confirmation.xhtml"/>
-        </h:form>
+                <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclRolesTitle_modificadoPor}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.modificadoPor}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{innventa.ListAclRolesTitle_eliminado}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.eliminado}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{aclRolesController.prepareCreate}" update=":AclRolesCreateForm" oncomplete="PF('AclRolesCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":AclRolesViewForm" oncomplete="PF('AclRolesViewDialog').show()" disabled="#{empty aclRolesController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":AclRolesEditForm" oncomplete="PF('AclRolesEditDialog').show()" disabled="#{empty aclRolesController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{aclRolesController.delete}" update=":growl,datalist" disabled="#{empty aclRolesController.selected}">
+                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
 
 </ui:composition>

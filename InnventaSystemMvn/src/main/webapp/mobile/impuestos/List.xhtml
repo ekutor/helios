@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="ImpuestosListForm">
+            <h:form id="ImpuestosListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,52 +38,52 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.nombre}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.categoria}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.categoria}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.validoDesde}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.validoDesde}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.tarifa}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.tarifa}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.creadoPor}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.creadoPor}"/>
 
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.modificadoPor}"/>
--->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
--->
+                            ,&nbsp;
+                            <h:outputText value="#{item.modificadoPor}"/>
 
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.impuestoPadre.id}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.eliminado}"/>
+                            -->
+
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.impuestoPadre.id}"/>
+                            -->
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{impuestosController.selected}" />
                     </p:commandLink>
@@ -93,7 +93,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

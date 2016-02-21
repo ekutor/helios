@@ -14,42 +14,42 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{lineasImpuestosController.selected != null}">
 
-        
+
                         <h:outputLabel value="#{innventa.EditLineasImpuestosLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{lineasImpuestosController.selected.id}" />
-                        <p:tooltip for="id" value="#{lineasImpuestosController.getComponentMessages('id', innventa.EditLineasImpuestosHelpText_id)}"/>
-                      </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{lineasImpuestosController.selected.id}" />
+                            <p:tooltip for="id" value="#{lineasImpuestosController.getComponentMessages('id', innventa.EditLineasImpuestosHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_recibo}" for="recibo" />
-                      <h:panelGroup>
-                        <p:inputText id="recibo" value="#{lineasImpuestosController.selected.recibo}" title="#{innventa.EditLineasImpuestosTitle_recibo}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_recibo}" size="36" maxlength="36"/>
-                        <p:tooltip for="recibo" value="#{lineasImpuestosController.getComponentMessages('recibo', innventa.EditLineasImpuestosHelpText_recibo)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_recibo}" for="recibo" />
+                        <h:panelGroup>
+                            <p:inputText id="recibo" value="#{lineasImpuestosController.selected.recibo}" title="#{innventa.EditLineasImpuestosTitle_recibo}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_recibo}" size="36" maxlength="36"/>
+                            <p:tooltip for="recibo" value="#{lineasImpuestosController.getComponentMessages('recibo', innventa.EditLineasImpuestosHelpText_recibo)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_impuesto}" for="impuesto" />
-                      <h:panelGroup>
-                        <p:inputText id="impuesto" value="#{lineasImpuestosController.selected.impuesto}" title="#{innventa.EditLineasImpuestosTitle_impuesto}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_impuesto}" size="36" maxlength="36"/>
-                        <p:tooltip for="impuesto" value="#{lineasImpuestosController.getComponentMessages('impuesto', innventa.EditLineasImpuestosHelpText_impuesto)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_impuesto}" for="impuesto" />
+                        <h:panelGroup>
+                            <p:inputText id="impuesto" value="#{lineasImpuestosController.selected.impuesto}" title="#{innventa.EditLineasImpuestosTitle_impuesto}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_impuesto}" size="36" maxlength="36"/>
+                            <p:tooltip for="impuesto" value="#{lineasImpuestosController.getComponentMessages('impuesto', innventa.EditLineasImpuestosHelpText_impuesto)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_base}" for="base" />
-                      <h:panelGroup>
-                        <p:inputText id="base" value="#{lineasImpuestosController.selected.base}" title="#{innventa.EditLineasImpuestosTitle_base}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_base}"/>
-                        <p:tooltip for="base" value="#{lineasImpuestosController.getComponentMessages('base', innventa.EditLineasImpuestosHelpText_base)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_base}" for="base" />
+                        <h:panelGroup>
+                            <p:inputText id="base" value="#{lineasImpuestosController.selected.base}" title="#{innventa.EditLineasImpuestosTitle_base}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_base}"/>
+                            <p:tooltip for="base" value="#{lineasImpuestosController.getComponentMessages('base', innventa.EditLineasImpuestosHelpText_base)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_monto}" for="monto" />
-                      <h:panelGroup>
-                        <p:inputText id="monto" value="#{lineasImpuestosController.selected.monto}" title="#{innventa.EditLineasImpuestosTitle_monto}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_monto}"/>
-                        <p:tooltip for="monto" value="#{lineasImpuestosController.getComponentMessages('monto', innventa.EditLineasImpuestosHelpText_monto)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_monto}" for="monto" />
+                        <h:panelGroup>
+                            <p:inputText id="monto" value="#{lineasImpuestosController.selected.monto}" title="#{innventa.EditLineasImpuestosTitle_monto}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_monto}"/>
+                            <p:tooltip for="monto" value="#{lineasImpuestosController.getComponentMessages('monto', innventa.EditLineasImpuestosHelpText_monto)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{lineasImpuestosController.selected.eliminado}" title="#{innventa.EditLineasImpuestosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{lineasImpuestosController.getComponentMessages('eliminado', innventa.EditLineasImpuestosHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditLineasImpuestosLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{lineasImpuestosController.selected.eliminado}" title="#{innventa.EditLineasImpuestosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditLineasImpuestosRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{lineasImpuestosController.getComponentMessages('eliminado', innventa.EditLineasImpuestosHelpText_eliminado)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{lineasImpuestosController.save}" value="#{innventa.Save}" update="display,:LineasImpuestosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('LineasImpuestosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

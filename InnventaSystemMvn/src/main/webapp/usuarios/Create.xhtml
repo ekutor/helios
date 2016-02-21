@@ -27,12 +27,6 @@
                             <p:tooltip for="passw" value="#{usuariosController.getComponentMessages('passw', innventa.CreateUsuariosHelpText_passw)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_persona}" for="persona" />
-                        <h:panelGroup>
-                            <p:inputText id="persona" value="#{usuariosController.selected.persona}" title="#{innventa.CreateUsuariosTitle_persona}" required="true" requiredMessage="#{innventa.CreateUsuariosRequiredMessage_persona}" size="36" maxlength="36"/>
-                            <p:tooltip for="persona" value="#{usuariosController.getComponentMessages('persona', innventa.CreateUsuariosHelpText_persona)}"/>
-                        </h:panelGroup>
-
                         <p:outputLabel value="#{innventa.CreateUsuariosLabel_eliminado}" for="eliminado" />
                         <h:panelGroup>
                             <p:inputText id="eliminado" value="#{usuariosController.selected.eliminado}" title="#{innventa.CreateUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateUsuariosRequiredMessage_eliminado}"/>
@@ -61,6 +55,20 @@
                         <h:panelGroup>
                             <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuariosController.selected.fechaModificacion}" title="#{innventa.CreateUsuariosTitle_fechaModificacion}"  showOn="button"/>
                             <p:tooltip for="fechaModificacion" value="#{usuariosController.getComponentMessages('fechaModificacion', innventa.CreateUsuariosHelpText_fechaModificacion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_persona}" for="persona" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="persona" value="#{usuariosController.selected.persona}" required="true" requiredMessage="#{innventa.CreateUsuariosRequiredMessage_persona}" converter="personasConverter">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{personasController.items}"
+                                               var="personaItem"
+                                               itemValue="#{personaItem}"
+                                               itemLabel="#{personaItem.id.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="persona" value="#{usuariosController.getComponentMessages('persona', innventa.CreateUsuariosHelpText_persona)}"/>
                         </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuariosController.saveNew}" value="#{innventa.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosCreateDialog'));">

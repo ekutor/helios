@@ -14,6 +14,8 @@
                 <p:menuitem value="#{innventa.View}" onclick="document.getElementById('UsuariosListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('UsuariosListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('UsuariosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{innventa.UsuariosMenuItem_persona}" icon="ui-icon-search"  actionListener="#{usuariosController.preparePersona}" update=":PersonasViewForm" oncomplete="PF('PersonasViewDialog').show()" disabled="#{empty usuariosController.selected.persona}"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{usuariosController.items}"
@@ -25,9 +27,9 @@
                          selectionMode="single"
                          selection="#{usuariosController.selected}">
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{usuariosController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('UsuariosListForm:viewButton').click();"/>
 
                 <p:column sortBy="#{item.usuario}" filterBy="#{item.usuario}">
@@ -43,14 +45,6 @@
                         <h:outputText value="#{innventa.ListUsuariosTitle_passw}"/>
                     </f:facet>
                     <h:outputText value="#{item.passw}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.persona}" filterBy="#{item.persona}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListUsuariosTitle_persona}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.persona}"/>
                 </p:column>
 
 
@@ -79,22 +73,30 @@
                     <h:outputText value="#{item.creadoPor}"/>
                 </p:column>
 
+
+                <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListUsuariosTitle_modificadoPor}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.modificadoPor}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListUsuariosTitle_fechaModificacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaModificacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
                 <!--
-                                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                                    <p:column sortBy="#{item.persona.id}" filterBy="#{item.persona.id}">
                                         <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListUsuariosTitle_modificadoPor}"/>
+                                            <h:outputText value="#{innventa.ListUsuariosTitle_persona}"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.modificadoPor}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListUsuariosTitle_fechaModificacion}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaModificacion}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </h:outputText>
+                                        <h:outputText value="#{item.persona.id}"/>
                                     </p:column>
                 -->
 

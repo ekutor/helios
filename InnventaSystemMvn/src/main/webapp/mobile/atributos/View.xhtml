@@ -21,20 +21,20 @@
                 <h:panelGroup id="display">
                     <p:outputPanel rendered="#{atributosController.selected != null}">
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewAtributosLabel_id}"/>
-                        <h:outputText value="#{atributosController.selected.id}" title="#{innventa.ViewAtributosTitle_id}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewAtributosLabel_id}"/>
+                            <h:outputText value="#{atributosController.selected.id}" title="#{innventa.ViewAtributosTitle_id}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewAtributosLabel_nombre}"/>
-                        <h:outputText value="#{atributosController.selected.nombre}" title="#{innventa.ViewAtributosTitle_nombre}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewAtributosLabel_nombre}"/>
+                            <h:outputText value="#{atributosController.selected.nombre}" title="#{innventa.ViewAtributosTitle_nombre}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewAtributosLabel_eliminado}"/>
-                        <h:outputText value="#{atributosController.selected.eliminado}" title="#{innventa.ViewAtributosTitle_eliminado}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewAtributosLabel_eliminado}"/>
+                            <h:outputText value="#{atributosController.selected.eliminado}" title="#{innventa.ViewAtributosTitle_eliminado}"/>
+                        </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>
 

@@ -14,24 +14,24 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{categoriasImpuestosController.selected != null}">
 
-        
+
                         <h:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{categoriasImpuestosController.selected.id}" />
-                        <p:tooltip for="id" value="#{categoriasImpuestosController.getComponentMessages('id', innventa.EditCategoriasImpuestosHelpText_id)}"/>
-                      </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{categoriasImpuestosController.selected.id}" />
+                            <p:tooltip for="id" value="#{categoriasImpuestosController.getComponentMessages('id', innventa.EditCategoriasImpuestosHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{categoriasImpuestosController.selected.nombre}" title="#{innventa.EditCategoriasImpuestosTitle_nombre}" required="true" requiredMessage="#{innventa.EditCategoriasImpuestosRequiredMessage_nombre}" size="255" maxlength="255"/>
-                        <p:tooltip for="nombre" value="#{categoriasImpuestosController.getComponentMessages('nombre', innventa.EditCategoriasImpuestosHelpText_nombre)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{categoriasImpuestosController.selected.nombre}" title="#{innventa.EditCategoriasImpuestosTitle_nombre}" required="true" requiredMessage="#{innventa.EditCategoriasImpuestosRequiredMessage_nombre}" size="255" maxlength="255"/>
+                            <p:tooltip for="nombre" value="#{categoriasImpuestosController.getComponentMessages('nombre', innventa.EditCategoriasImpuestosHelpText_nombre)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{categoriasImpuestosController.selected.eliminado}" title="#{innventa.EditCategoriasImpuestosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditCategoriasImpuestosRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{categoriasImpuestosController.getComponentMessages('eliminado', innventa.EditCategoriasImpuestosHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditCategoriasImpuestosLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{categoriasImpuestosController.selected.eliminado}" title="#{innventa.EditCategoriasImpuestosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditCategoriasImpuestosRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{categoriasImpuestosController.getComponentMessages('eliminado', innventa.EditCategoriasImpuestosHelpText_eliminado)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{categoriasImpuestosController.save}" value="#{innventa.Save}" update="display,:CategoriasImpuestosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CategoriasImpuestosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="ClientesDireccionListForm">
+            <h:form id="ClientesDireccionListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,23 +38,23 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.direccion}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.direccion}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idCliente.id}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idCliente.id}"/>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{clientesDireccionController.selected}" />
@@ -65,7 +65,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

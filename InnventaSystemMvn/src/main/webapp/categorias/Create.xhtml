@@ -15,43 +15,43 @@
                 <h:panelGroup id="display" rendered="#{categoriasController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                                <p:outputLabel value="#{innventa.CreateCategoriasLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{categoriasController.selected.id}" title="#{innventa.CreateCategoriasTitle_id}" required="true" requiredMessage="#{innventa.CreateCategoriasRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{categoriasController.getComponentMessages('id', innventa.CreateCategoriasHelpText_id)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateCategoriasLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <p:inputText id="id" value="#{categoriasController.selected.id}" title="#{innventa.CreateCategoriasTitle_id}" required="true" requiredMessage="#{innventa.CreateCategoriasRequiredMessage_id}" size="36" maxlength="36"/>
+                            <p:tooltip for="id" value="#{categoriasController.getComponentMessages('id', innventa.CreateCategoriasHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateCategoriasLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{categoriasController.selected.nombre}" title="#{innventa.CreateCategoriasTitle_nombre}" required="true" requiredMessage="#{innventa.CreateCategoriasRequiredMessage_nombre}" size="255" maxlength="255"/>
-                        <p:tooltip for="nombre" value="#{categoriasController.getComponentMessages('nombre', innventa.CreateCategoriasHelpText_nombre)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateCategoriasLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{categoriasController.selected.nombre}" title="#{innventa.CreateCategoriasTitle_nombre}" required="true" requiredMessage="#{innventa.CreateCategoriasRequiredMessage_nombre}" size="255" maxlength="255"/>
+                            <p:tooltip for="nombre" value="#{categoriasController.getComponentMessages('nombre', innventa.CreateCategoriasHelpText_nombre)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateCategoriasLabel_imagen}" for="imagen" />
-                      <h:panelGroup>
-                        <p:inputTextarea rows="4" cols="30" id="imagen" value="#{categoriasController.selected.imagen}" title="#{innventa.CreateCategoriasTitle_imagen}" />
-                        <p:tooltip for="imagen" value="#{categoriasController.getComponentMessages('imagen', innventa.CreateCategoriasHelpText_imagen)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateCategoriasLabel_imagen}" for="imagen" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="imagen" value="#{categoriasController.selected.imagen}" title="#{innventa.CreateCategoriasTitle_imagen}" />
+                            <p:tooltip for="imagen" value="#{categoriasController.getComponentMessages('imagen', innventa.CreateCategoriasHelpText_imagen)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateCategoriasLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{categoriasController.selected.eliminado}" title="#{innventa.CreateCategoriasTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateCategoriasRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{categoriasController.getComponentMessages('eliminado', innventa.CreateCategoriasHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateCategoriasLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{categoriasController.selected.eliminado}" title="#{innventa.CreateCategoriasTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateCategoriasRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{categoriasController.getComponentMessages('eliminado', innventa.CreateCategoriasHelpText_eliminado)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateCategoriasLabel_idpadre}" for="idpadre" />
-                      <h:panelGroup>
-                        <p:selectOneMenu id="idpadre" value="#{categoriasController.selected.idpadre}"  converter="categoriasConverter">
-                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                            <f:selectItems value="#{categoriasController.items}"
-                                           var="idpadreItem"
-                                           itemValue="#{idpadreItem}"
-                                           itemLabel="#{idpadreItem.id.toString()}"
-                            />
-                            
-                        </p:selectOneMenu>
-                        <p:tooltip for="idpadre" value="#{categoriasController.getComponentMessages('idpadre', innventa.CreateCategoriasHelpText_idpadre)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateCategoriasLabel_idpadre}" for="idpadre" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idpadre" value="#{categoriasController.selected.idpadre}"  converter="categoriasConverter">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{categoriasController.items}"
+                                               var="idpadreItem"
+                                               itemValue="#{idpadreItem}"
+                                               itemLabel="#{idpadreItem.id.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idpadre" value="#{categoriasController.getComponentMessages('idpadre', innventa.CreateCategoriasHelpText_idpadre)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{categoriasController.saveNew}" value="#{innventa.Save}" update="display,:CategoriasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CategoriasCreateDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>

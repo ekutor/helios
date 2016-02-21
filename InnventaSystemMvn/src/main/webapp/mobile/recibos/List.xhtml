@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="RecibosListForm">
+            <h:form id="RecibosListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,32 +38,32 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaInicio}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaInicio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.atributos}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.atributos}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaFin}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaFin}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{recibosController.selected}" />
@@ -74,7 +74,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

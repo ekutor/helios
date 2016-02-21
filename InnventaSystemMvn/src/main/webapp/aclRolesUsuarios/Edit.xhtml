@@ -14,38 +14,38 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{aclRolesUsuariosController.selected != null}">
 
-        
+
                         <h:outputLabel value="#{innventa.EditAclRolesUsuariosLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{aclRolesUsuariosController.selected.id}" />
-                        <p:tooltip for="id" value="#{aclRolesUsuariosController.getComponentMessages('id', innventa.EditAclRolesUsuariosHelpText_id)}"/>
-                      </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{aclRolesUsuariosController.selected.id}" />
+                            <p:tooltip for="id" value="#{aclRolesUsuariosController.getComponentMessages('id', innventa.EditAclRolesUsuariosHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAclRolesUsuariosLabel_usuario}" for="usuario" />
-                      <h:panelGroup>
-                        <p:inputText id="usuario" value="#{aclRolesUsuariosController.selected.usuario}" title="#{innventa.EditAclRolesUsuariosTitle_usuario}" required="true" requiredMessage="#{innventa.EditAclRolesUsuariosRequiredMessage_usuario}" size="36" maxlength="36"/>
-                        <p:tooltip for="usuario" value="#{aclRolesUsuariosController.getComponentMessages('usuario', innventa.EditAclRolesUsuariosHelpText_usuario)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAclRolesUsuariosLabel_usuario}" for="usuario" />
+                        <h:panelGroup>
+                            <p:inputText id="usuario" value="#{aclRolesUsuariosController.selected.usuario}" title="#{innventa.EditAclRolesUsuariosTitle_usuario}" required="true" requiredMessage="#{innventa.EditAclRolesUsuariosRequiredMessage_usuario}" size="36" maxlength="36"/>
+                            <p:tooltip for="usuario" value="#{aclRolesUsuariosController.getComponentMessages('usuario', innventa.EditAclRolesUsuariosHelpText_usuario)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAclRolesUsuariosLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{aclRolesUsuariosController.selected.eliminado}" title="#{innventa.EditAclRolesUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditAclRolesUsuariosRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{aclRolesUsuariosController.getComponentMessages('eliminado', innventa.EditAclRolesUsuariosHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAclRolesUsuariosLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{aclRolesUsuariosController.selected.eliminado}" title="#{innventa.EditAclRolesUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditAclRolesUsuariosRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{aclRolesUsuariosController.getComponentMessages('eliminado', innventa.EditAclRolesUsuariosHelpText_eliminado)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAclRolesUsuariosLabel_rol}" for="rol" />
-                      <h:panelGroup>
-                        <p:selectOneMenu id="rol" value="#{aclRolesUsuariosController.selected.rol}" required="true" requiredMessage="#{innventa.EditAclRolesUsuariosRequiredMessage_rol}" converter="aclRolesConverter">
-                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                            <f:selectItems value="#{aclRolesController.items}"
-                                           var="rolItem"
-                                           itemValue="#{rolItem}"
-                                           itemLabel="#{rolItem.descripcion.toString()}"
-                            />
-                            
-                        </p:selectOneMenu>
-                        <p:tooltip for="rol" value="#{aclRolesUsuariosController.getComponentMessages('rol', innventa.EditAclRolesUsuariosHelpText_rol)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAclRolesUsuariosLabel_rol}" for="rol" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="rol" value="#{aclRolesUsuariosController.selected.rol}" required="true" requiredMessage="#{innventa.EditAclRolesUsuariosRequiredMessage_rol}" converter="aclRolesConverter">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{aclRolesController.items}"
+                                               var="rolItem"
+                                               itemValue="#{rolItem}"
+                                               itemLabel="#{rolItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="rol" value="#{aclRolesUsuariosController.getComponentMessages('rol', innventa.EditAclRolesUsuariosHelpText_rol)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{aclRolesUsuariosController.save}" value="#{innventa.Save}" update="display,:AclRolesUsuariosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AclRolesUsuariosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

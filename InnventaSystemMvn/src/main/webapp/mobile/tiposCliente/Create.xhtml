@@ -21,29 +21,29 @@
                 <h:panelGroup id="display" rendered="#{tiposClienteController.selected != null}">
                     <p:outputPanel>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateTiposClienteLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{tiposClienteController.selected.id}" title="#{innventa.CreateTiposClienteTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{tiposClienteController.getComponentMessages('id', innventa.CreateTiposClienteHelpText_id)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateTiposClienteLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <p:inputText id="id" value="#{tiposClienteController.selected.id}" title="#{innventa.CreateTiposClienteTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_id}" size="36" maxlength="36"/>
+                                <p:tooltip for="id" value="#{tiposClienteController.getComponentMessages('id', innventa.CreateTiposClienteHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateTiposClienteLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{tiposClienteController.selected.nombre}" title="#{innventa.CreateTiposClienteTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_nombre}" size="20" maxlength="20"/>
-                        <p:tooltip for="nombre" value="#{tiposClienteController.getComponentMessages('nombre', innventa.CreateTiposClienteHelpText_nombre)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateTiposClienteLabel_nombre}" for="nombre" />
+                            <h:panelGroup>
+                                <p:inputText id="nombre" value="#{tiposClienteController.selected.nombre}" title="#{innventa.CreateTiposClienteTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_nombre}" size="20" maxlength="20"/>
+                                <p:tooltip for="nombre" value="#{tiposClienteController.getComponentMessages('nombre', innventa.CreateTiposClienteHelpText_nombre)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateTiposClienteLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{tiposClienteController.selected.eliminado}" title="#{innventa.CreateTiposClienteTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{tiposClienteController.getComponentMessages('eliminado', innventa.CreateTiposClienteHelpText_eliminado)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateTiposClienteLabel_eliminado}" for="eliminado" />
+                            <h:panelGroup>
+                                <p:inputText id="eliminado" value="#{tiposClienteController.selected.eliminado}" title="#{innventa.CreateTiposClienteTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateTiposClienteRequiredMessage_eliminado}"/>
+                                <p:tooltip for="eliminado" value="#{tiposClienteController.getComponentMessages('eliminado', innventa.CreateTiposClienteHelpText_eliminado)}"/>
+                            </h:panelGroup>
+                        </pm:field>
                     </p:outputPanel>
                     <p:commandButton actionListener="#{tiposClienteController.saveNew}" value="#{innventa.Save}" update="display,:TiposClienteListPage:TiposClienteListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:TiposClienteListPage')}"/>
 

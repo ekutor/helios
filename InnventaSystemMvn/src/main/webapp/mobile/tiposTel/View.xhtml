@@ -21,15 +21,15 @@
                 <h:panelGroup id="display">
                     <p:outputPanel rendered="#{tiposTelController.selected != null}">
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewTiposTelLabel_id}"/>
-                        <h:outputText value="#{tiposTelController.selected.id}" title="#{innventa.ViewTiposTelTitle_id}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewTiposTelLabel_id}"/>
+                            <h:outputText value="#{tiposTelController.selected.id}" title="#{innventa.ViewTiposTelTitle_id}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewTiposTelLabel_nombre}"/>
-                        <h:outputText value="#{tiposTelController.selected.nombre}" title="#{innventa.ViewTiposTelTitle_nombre}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewTiposTelLabel_nombre}"/>
+                            <h:outputText value="#{tiposTelController.selected.nombre}" title="#{innventa.ViewTiposTelTitle_nombre}"/>
+                        </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>
 

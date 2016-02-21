@@ -6,84 +6,84 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-        <h:form id="ClienteContactosListForm">
+    <h:form id="ClienteContactosListForm">
 
-            <p:panel header="#{innventa.ListClienteContactosTitle}">
-                <p:contextMenu id="ClienteContactosDataTableContextMenu" for="datalist">  
-                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('ClienteContactosListForm:createButton').click();" icon="ui-icon-plus"/>
-                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('ClienteContactosListForm:viewButton').click();" icon="ui-icon-search"/>
-                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('ClienteContactosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('ClienteContactosListForm:deleteButton').click();" icon="ui-icon-trash"/>
-                    <p:separator/>
-                    <p:menuitem value="#{innventa.ClienteContactosMenuItem_idPersona}" icon="ui-icon-search"  actionListener="#{clienteContactosController.prepareIdPersona}" update=":PersonasViewForm" oncomplete="PF('PersonasViewDialog').show()" disabled="#{empty clienteContactosController.selected.idPersona}"/>  
-                    <p:menuitem value="#{innventa.ClienteContactosMenuItem_idCliente}" icon="ui-icon-search"  actionListener="#{clienteContactosController.prepareIdCliente}" update=":ClientesViewForm" oncomplete="PF('ClientesViewDialog').show()" disabled="#{empty clienteContactosController.selected.idCliente}"/>  
-                </p:contextMenu>
-                <p:dataTable id="datalist"
-                             value="#{clienteContactosController.items}"
-                             var="item"
-                             rowKey="#{item.id}"
-                             paginator="true"
-                             rows="30"
-                             rowsPerPageTemplate="10,20,30,40,50,100"
-                             selectionMode="single"
-                             selection="#{clienteContactosController.selected}">
+        <p:panel header="#{innventa.ListClienteContactosTitle}">
+            <p:contextMenu id="ClienteContactosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('ClienteContactosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('ClienteContactosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('ClienteContactosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('ClienteContactosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{innventa.ClienteContactosMenuItem_idPersona}" icon="ui-icon-search"  actionListener="#{clienteContactosController.prepareIdPersona}" update=":PersonasViewForm" oncomplete="PF('PersonasViewDialog').show()" disabled="#{empty clienteContactosController.selected.idPersona}"/>  
+                <p:menuitem value="#{innventa.ClienteContactosMenuItem_idCliente}" icon="ui-icon-search"  actionListener="#{clienteContactosController.prepareIdCliente}" update=":ClientesViewForm" oncomplete="PF('ClientesViewDialog').show()" disabled="#{empty clienteContactosController.selected.idCliente}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{clienteContactosController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="30"
+                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         selectionMode="single"
+                         selection="#{clienteContactosController.selected}">
 
-                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ClienteContactosDataTableContextMenu" listener="#{clienteContactosController.resetParents}"/>
-                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ClienteContactosDataTableContextMenu" listener="#{clienteContactosController.resetParents}"/>
-                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{clienteContactosController.resetParents}"/>
-                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('ClienteContactosListForm:viewButton').click();"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ClienteContactosDataTableContextMenu" listener="#{clienteContactosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ClienteContactosDataTableContextMenu" listener="#{clienteContactosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{clienteContactosController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ClienteContactosListForm:viewButton').click();"/>
 
-                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListClienteContactosTitle_id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-
-
-                    <p:column sortBy="#{item.cargo}" filterBy="#{item.cargo}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListClienteContactosTitle_cargo}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cargo}"/>
-                    </p:column>
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListClienteContactosTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListClienteContactosTitle_eliminado}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.eliminado}"/>
-                    </p:column>
+                <p:column sortBy="#{item.cargo}" filterBy="#{item.cargo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListClienteContactosTitle_cargo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cargo}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.idPersona.id}" filterBy="#{item.idPersona.id}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListClienteContactosTitle_idPersona}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idPersona.id}"/>
-                    </p:column>
+                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListClienteContactosTitle_eliminado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.eliminado}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.idCliente.id}" filterBy="#{item.idCliente.id}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListClienteContactosTitle_idCliente}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idCliente.id}"/>
-                    </p:column>
+                <p:column sortBy="#{item.idPersona.id}" filterBy="#{item.idPersona.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListClienteContactosTitle_idPersona}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPersona.id}"/>
+                </p:column>
 
 
-                </p:dataTable>
+                <p:column sortBy="#{item.idCliente.id}" filterBy="#{item.idCliente.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListClienteContactosTitle_idCliente}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idCliente.id}"/>
+                </p:column>
 
-                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{clienteContactosController.prepareCreate}" update=":ClienteContactosCreateForm" oncomplete="PF('ClienteContactosCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ClienteContactosViewForm" oncomplete="PF('ClienteContactosViewDialog').show()" disabled="#{empty clienteContactosController.selected}"/>
-                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ClienteContactosEditForm" oncomplete="PF('ClienteContactosEditDialog').show()" disabled="#{empty clienteContactosController.selected}"/>
-                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{clienteContactosController.delete}" update=":growl,datalist" disabled="#{empty clienteContactosController.selected}">
-                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-                        </p:commandButton>
 
-            </p:panel>
-            <ui:include src="/confirmation.xhtml"/>
-        </h:form>
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{clienteContactosController.prepareCreate}" update=":ClienteContactosCreateForm" oncomplete="PF('ClienteContactosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ClienteContactosViewForm" oncomplete="PF('ClienteContactosViewDialog').show()" disabled="#{empty clienteContactosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ClienteContactosEditForm" oncomplete="PF('ClienteContactosEditDialog').show()" disabled="#{empty clienteContactosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{clienteContactosController.delete}" update=":growl,datalist" disabled="#{empty clienteContactosController.selected}">
+                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
 
 </ui:composition>

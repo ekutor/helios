@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="ClienteContactosListForm">
+            <h:form id="ClienteContactosListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,28 +38,28 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.cargo}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.cargo}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idPersona.id}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idPersona.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idCliente.id}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idCliente.id}"/>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{clienteContactosController.selected}" />
@@ -70,7 +70,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

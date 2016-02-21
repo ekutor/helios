@@ -15,53 +15,53 @@
                 <h:panelGroup id="display" rendered="#{aclRolesController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{aclRolesController.selected.id}" title="#{innventa.CreateAclRolesTitle_id}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{aclRolesController.getComponentMessages('id', innventa.CreateAclRolesHelpText_id)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <p:inputText id="id" value="#{aclRolesController.selected.id}" title="#{innventa.CreateAclRolesTitle_id}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_id}" size="36" maxlength="36"/>
+                            <p:tooltip for="id" value="#{aclRolesController.getComponentMessages('id', innventa.CreateAclRolesHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{aclRolesController.selected.nombre}" title="#{innventa.CreateAclRolesTitle_nombre}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_nombre}" size="30" maxlength="30"/>
-                        <p:tooltip for="nombre" value="#{aclRolesController.getComponentMessages('nombre', innventa.CreateAclRolesHelpText_nombre)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{aclRolesController.selected.nombre}" title="#{innventa.CreateAclRolesTitle_nombre}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_nombre}" size="30" maxlength="30"/>
+                            <p:tooltip for="nombre" value="#{aclRolesController.getComponentMessages('nombre', innventa.CreateAclRolesHelpText_nombre)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_descripcion}" for="descripcion" />
-                      <h:panelGroup>
-                        <p:inputText id="descripcion" value="#{aclRolesController.selected.descripcion}" title="#{innventa.CreateAclRolesTitle_descripcion}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_descripcion}" size="255" maxlength="255"/>
-                        <p:tooltip for="descripcion" value="#{aclRolesController.getComponentMessages('descripcion', innventa.CreateAclRolesHelpText_descripcion)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_descripcion}" for="descripcion" />
+                        <h:panelGroup>
+                            <p:inputText id="descripcion" value="#{aclRolesController.selected.descripcion}" title="#{innventa.CreateAclRolesTitle_descripcion}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_descripcion}" size="255" maxlength="255"/>
+                            <p:tooltip for="descripcion" value="#{aclRolesController.getComponentMessages('descripcion', innventa.CreateAclRolesHelpText_descripcion)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_fechaCreacion}" for="fechaCreacion" />
-                      <h:panelGroup>
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{aclRolesController.selected.fechaCreacion}" title="#{innventa.CreateAclRolesTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_fechaCreacion}" showOn="button"/>
-                        <p:tooltip for="fechaCreacion" value="#{aclRolesController.getComponentMessages('fechaCreacion', innventa.CreateAclRolesHelpText_fechaCreacion)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_fechaCreacion}" for="fechaCreacion" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{aclRolesController.selected.fechaCreacion}" title="#{innventa.CreateAclRolesTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_fechaCreacion}" showOn="button"/>
+                            <p:tooltip for="fechaCreacion" value="#{aclRolesController.getComponentMessages('fechaCreacion', innventa.CreateAclRolesHelpText_fechaCreacion)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_creadoPor}" for="creadoPor" />
-                      <h:panelGroup>
-                        <p:inputText id="creadoPor" value="#{aclRolesController.selected.creadoPor}" title="#{innventa.CreateAclRolesTitle_creadoPor}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_creadoPor}" size="36" maxlength="36"/>
-                        <p:tooltip for="creadoPor" value="#{aclRolesController.getComponentMessages('creadoPor', innventa.CreateAclRolesHelpText_creadoPor)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_creadoPor}" for="creadoPor" />
+                        <h:panelGroup>
+                            <p:inputText id="creadoPor" value="#{aclRolesController.selected.creadoPor}" title="#{innventa.CreateAclRolesTitle_creadoPor}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_creadoPor}" size="36" maxlength="36"/>
+                            <p:tooltip for="creadoPor" value="#{aclRolesController.getComponentMessages('creadoPor', innventa.CreateAclRolesHelpText_creadoPor)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_fechaModificacion}" for="fechaModificacion" />
-                      <h:panelGroup>
-                        <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{aclRolesController.selected.fechaModificacion}" title="#{innventa.CreateAclRolesTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_fechaModificacion}" showOn="button"/>
-                        <p:tooltip for="fechaModificacion" value="#{aclRolesController.getComponentMessages('fechaModificacion', innventa.CreateAclRolesHelpText_fechaModificacion)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_fechaModificacion}" for="fechaModificacion" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{aclRolesController.selected.fechaModificacion}" title="#{innventa.CreateAclRolesTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_fechaModificacion}" showOn="button"/>
+                            <p:tooltip for="fechaModificacion" value="#{aclRolesController.getComponentMessages('fechaModificacion', innventa.CreateAclRolesHelpText_fechaModificacion)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_modificadoPor}" for="modificadoPor" />
-                      <h:panelGroup>
-                        <p:inputText id="modificadoPor" value="#{aclRolesController.selected.modificadoPor}" title="#{innventa.CreateAclRolesTitle_modificadoPor}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
-                        <p:tooltip for="modificadoPor" value="#{aclRolesController.getComponentMessages('modificadoPor', innventa.CreateAclRolesHelpText_modificadoPor)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_modificadoPor}" for="modificadoPor" />
+                        <h:panelGroup>
+                            <p:inputText id="modificadoPor" value="#{aclRolesController.selected.modificadoPor}" title="#{innventa.CreateAclRolesTitle_modificadoPor}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
+                            <p:tooltip for="modificadoPor" value="#{aclRolesController.getComponentMessages('modificadoPor', innventa.CreateAclRolesHelpText_modificadoPor)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateAclRolesLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{aclRolesController.selected.eliminado}" title="#{innventa.CreateAclRolesTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{aclRolesController.getComponentMessages('eliminado', innventa.CreateAclRolesHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateAclRolesLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{aclRolesController.selected.eliminado}" title="#{innventa.CreateAclRolesTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclRolesRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{aclRolesController.getComponentMessages('eliminado', innventa.CreateAclRolesHelpText_eliminado)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{aclRolesController.saveNew}" value="#{innventa.Save}" update="display,:AclRolesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AclRolesCreateDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>

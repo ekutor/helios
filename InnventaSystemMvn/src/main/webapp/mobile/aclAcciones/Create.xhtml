@@ -8,9 +8,9 @@
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="AclAccionesCreatePage" lazy="true">
-        <pm:header title="#{myBundle.CreateAclAccionesTitle}">
+        <pm:header title="#{innventa.CreateAclAccionesTitle}">
             <h:form>
-                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclAccionesListPage')}"/>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclAccionesListPage')}"/>
             </h:form>
         </pm:header>
 
@@ -22,32 +22,30 @@
                     <p:outputPanel>
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateAclAccionesLabel_id}" for="id" />
+                            <p:outputLabel value="#{innventa.CreateAclAccionesLabel_id}" for="id" />
                             <h:panelGroup>
-                                <p:inputText id="id" value="#{aclAccionesController.selected.id}" title="#{myBundle.CreateAclAccionesTitle_id}" required="true" requiredMessage="#{myBundle.CreateAclAccionesRequiredMessage_id}" size="36" maxlength="36"/>
-                                <p:tooltip for="id" value="#{aclAccionesController.getComponentMessages('id', myBundle.CreateAclAccionesHelpText_id)}"/>
+                                <p:inputText id="id" value="#{aclAccionesController.selected.id}" title="#{innventa.CreateAclAccionesTitle_id}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_id}" size="36" maxlength="36"/>
+                                <p:tooltip for="id" value="#{aclAccionesController.getComponentMessages('id', innventa.CreateAclAccionesHelpText_id)}"/>
                             </h:panelGroup>
                         </pm:field>
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateAclAccionesLabel_nombre}" for="nombre" />
+                            <p:outputLabel value="#{innventa.CreateAclAccionesLabel_nombre}" for="nombre" />
                             <h:panelGroup>
-                                <p:inputText id="nombre" value="#{aclAccionesController.selected.nombre}" title="#{myBundle.CreateAclAccionesTitle_nombre}" required="true" requiredMessage="#{myBundle.CreateAclAccionesRequiredMessage_nombre}" size="20" maxlength="20"/>
-                                <p:tooltip for="nombre" value="#{aclAccionesController.getComponentMessages('nombre', myBundle.CreateAclAccionesHelpText_nombre)}"/>
+                                <p:inputText id="nombre" value="#{aclAccionesController.selected.nombre}" title="#{innventa.CreateAclAccionesTitle_nombre}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_nombre}" size="20" maxlength="20"/>
+                                <p:tooltip for="nombre" value="#{aclAccionesController.getComponentMessages('nombre', innventa.CreateAclAccionesHelpText_nombre)}"/>
                             </h:panelGroup>
                         </pm:field>
 
                         <pm:field>
-                            <p:outputLabel value="#{myBundle.CreateAclAccionesLabel_eliminado}" for="eliminado" />
+                            <p:outputLabel value="#{innventa.CreateAclAccionesLabel_eliminado}" for="eliminado" />
                             <h:panelGroup>
-                                <p:inputText id="eliminado" value="#{aclAccionesController.selected.eliminado}" title="#{myBundle.CreateAclAccionesTitle_eliminado}" required="true" requiredMessage="#{myBundle.CreateAclAccionesRequiredMessage_eliminado}"/>
-                                <p:tooltip for="eliminado" value="#{aclAccionesController.getComponentMessages('eliminado', myBundle.CreateAclAccionesHelpText_eliminado)}"/>
+                                <p:inputText id="eliminado" value="#{aclAccionesController.selected.eliminado}" title="#{innventa.CreateAclAccionesTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateAclAccionesRequiredMessage_eliminado}"/>
+                                <p:tooltip for="eliminado" value="#{aclAccionesController.getComponentMessages('eliminado', innventa.CreateAclAccionesHelpText_eliminado)}"/>
                             </h:panelGroup>
                         </pm:field>
                     </p:outputPanel>
-                    <p:commandButton actionListener="#{aclAccionesController.saveNew}" value="#{myBundle.Save}" update="display,:AclAccionesListPage:AclAccionesListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AclAccionesListPage')}">
-                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
-                    </p:commandButton>
+                    <p:commandButton actionListener="#{aclAccionesController.saveNew}" value="#{innventa.Save}" update="display,:AclAccionesListPage:AclAccionesListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:AclAccionesListPage')}"/>
 
                 </h:panelGroup>
 

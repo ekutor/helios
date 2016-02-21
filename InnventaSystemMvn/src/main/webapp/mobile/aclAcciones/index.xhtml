@@ -8,12 +8,11 @@
                 template="/mobile/template.xhtml">
 
     <ui:define name="title">
-        <h:outputText value="#{myBundle.AclAccionesTitle}"/>
+        <h:outputText value="#{innventa.AclAccionesTitle}"/>
     </ui:define>
 
     <ui:define name="body">
 
-        <ui:include src="/mobile/confirmation.xhtml"/>
         <ui:include src="/mobile/aclAcciones/List.xhtml"/>
         <ui:include src="/mobile/aclAcciones/Edit.xhtml"/>
         <ui:include src="/mobile/aclAcciones/Create.xhtml"/>

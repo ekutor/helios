@@ -6,65 +6,65 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
-        <h:form id="TiposClienteListForm">
+    <h:form id="TiposClienteListForm">
 
-            <p:panel header="#{innventa.ListTiposClienteTitle}">
-                <p:contextMenu id="TiposClienteDataTableContextMenu" for="datalist">  
-                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('TiposClienteListForm:createButton').click();" icon="ui-icon-plus"/>
-                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('TiposClienteListForm:viewButton').click();" icon="ui-icon-search"/>
-                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('TiposClienteListForm:editButton').click();" icon="ui-icon-pencil"/>
-                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('TiposClienteListForm:deleteButton').click();" icon="ui-icon-trash"/>
-                </p:contextMenu>
-                <p:dataTable id="datalist"
-                             value="#{tiposClienteController.items}"
-                             var="item"
-                             rowKey="#{item.id}"
-                             paginator="true"
-                             rows="30"
-                             rowsPerPageTemplate="10,20,30,40,50,100"
-                             selectionMode="single"
-                             selection="#{tiposClienteController.selected}">
+        <p:panel header="#{innventa.ListTiposClienteTitle}">
+            <p:contextMenu id="TiposClienteDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('TiposClienteListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('TiposClienteListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('TiposClienteListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('TiposClienteListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{tiposClienteController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="30"
+                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         selectionMode="single"
+                         selection="#{tiposClienteController.selected}">
 
-                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TiposClienteDataTableContextMenu"/>
-                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TiposClienteDataTableContextMenu"/>
-                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
-                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('TiposClienteListForm:viewButton').click();"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TiposClienteDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TiposClienteDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('TiposClienteListForm:viewButton').click();"/>
 
-                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListTiposClienteTitle_id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-
-
-                    <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListTiposClienteTitle_nombre}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nombre}"/>
-                    </p:column>
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListTiposClienteTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
 
 
-                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListTiposClienteTitle_eliminado}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.eliminado}"/>
-                    </p:column>
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListTiposClienteTitle_nombre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
 
 
-                </p:dataTable>
+                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListTiposClienteTitle_eliminado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.eliminado}"/>
+                </p:column>
 
-                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{tiposClienteController.prepareCreate}" update=":TiposClienteCreateForm" oncomplete="PF('TiposClienteCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":TiposClienteViewForm" oncomplete="PF('TiposClienteViewDialog').show()" disabled="#{empty tiposClienteController.selected}"/>
-                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":TiposClienteEditForm" oncomplete="PF('TiposClienteEditDialog').show()" disabled="#{empty tiposClienteController.selected}"/>
-                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{tiposClienteController.delete}" update=":growl,datalist" disabled="#{empty tiposClienteController.selected}">
-                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-                        </p:commandButton>
 
-            </p:panel>
-            <ui:include src="/confirmation.xhtml"/>
-        </h:form>
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{tiposClienteController.prepareCreate}" update=":TiposClienteCreateForm" oncomplete="PF('TiposClienteCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":TiposClienteViewForm" oncomplete="PF('TiposClienteViewDialog').show()" disabled="#{empty tiposClienteController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":TiposClienteEditForm" oncomplete="PF('TiposClienteEditDialog').show()" disabled="#{empty tiposClienteController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{tiposClienteController.delete}" update=":growl,datalist" disabled="#{empty tiposClienteController.selected}">
+                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
 
 </ui:composition>

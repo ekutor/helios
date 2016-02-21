@@ -14,24 +14,24 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{tiposClienteController.selected != null}">
 
-        
+
                         <h:outputLabel value="#{innventa.EditTiposClienteLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{tiposClienteController.selected.id}" />
-                        <p:tooltip for="id" value="#{tiposClienteController.getComponentMessages('id', innventa.EditTiposClienteHelpText_id)}"/>
-                      </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{tiposClienteController.selected.id}" />
+                            <p:tooltip for="id" value="#{tiposClienteController.getComponentMessages('id', innventa.EditTiposClienteHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditTiposClienteLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{tiposClienteController.selected.nombre}" title="#{innventa.EditTiposClienteTitle_nombre}" required="true" requiredMessage="#{innventa.EditTiposClienteRequiredMessage_nombre}" size="20" maxlength="20"/>
-                        <p:tooltip for="nombre" value="#{tiposClienteController.getComponentMessages('nombre', innventa.EditTiposClienteHelpText_nombre)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditTiposClienteLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{tiposClienteController.selected.nombre}" title="#{innventa.EditTiposClienteTitle_nombre}" required="true" requiredMessage="#{innventa.EditTiposClienteRequiredMessage_nombre}" size="20" maxlength="20"/>
+                            <p:tooltip for="nombre" value="#{tiposClienteController.getComponentMessages('nombre', innventa.EditTiposClienteHelpText_nombre)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditTiposClienteLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{tiposClienteController.selected.eliminado}" title="#{innventa.EditTiposClienteTitle_eliminado}" required="true" requiredMessage="#{innventa.EditTiposClienteRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{tiposClienteController.getComponentMessages('eliminado', innventa.EditTiposClienteHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditTiposClienteLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{tiposClienteController.selected.eliminado}" title="#{innventa.EditTiposClienteTitle_eliminado}" required="true" requiredMessage="#{innventa.EditTiposClienteRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{tiposClienteController.getComponentMessages('eliminado', innventa.EditTiposClienteHelpText_eliminado)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tiposClienteController.save}" value="#{innventa.Save}" update="display,:TiposClienteListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TiposClienteEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

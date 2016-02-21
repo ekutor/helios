@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="PedidosProductoListForm">
+
+        <p:panel header="#{innventa.ListPedidosProductoTitle}">
+            <p:contextMenu id="PedidosProductoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('PedidosProductoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('PedidosProductoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('PedidosProductoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PedidosProductoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{innventa.PedidosProductoMenuItem_idPedido}" icon="ui-icon-search"  actionListener="#{pedidosProductoController.prepareIdPedido}" update=":PedidosViewForm" oncomplete="PF('PedidosViewDialog').show()" disabled="#{empty pedidosProductoController.selected.idPedido}"/>  
+                <p:menuitem value="#{innventa.PedidosProductoMenuItem_idProducto}" icon="ui-icon-search"  actionListener="#{pedidosProductoController.prepareIdProducto}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty pedidosProductoController.selected.idProducto}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{pedidosProductoController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="30"
+                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         selectionMode="single"
+                         selection="#{pedidosProductoController.selected}">
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PedidosProductoDataTableContextMenu" listener="#{pedidosProductoController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PedidosProductoDataTableContextMenu" listener="#{pedidosProductoController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{pedidosProductoController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('PedidosProductoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosProductoTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.cantidad}" filterBy="#{item.cantidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosProductoTitle_cantidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidad}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosProductoTitle_eliminado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.eliminado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosProductoTitle_idPedido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPedido.descripcion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.idProducto.id}" filterBy="#{item.idProducto.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosProductoTitle_idProducto}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idProducto.id}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{pedidosProductoController.prepareCreate}" update=":PedidosProductoCreateForm" oncomplete="PF('PedidosProductoCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PedidosProductoViewForm" oncomplete="PF('PedidosProductoViewDialog').show()" disabled="#{empty pedidosProductoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PedidosProductoEditForm" oncomplete="PF('PedidosProductoEditDialog').show()" disabled="#{empty pedidosProductoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{pedidosProductoController.delete}" update=":growl,datalist" disabled="#{empty pedidosProductoController.selected}">
+                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

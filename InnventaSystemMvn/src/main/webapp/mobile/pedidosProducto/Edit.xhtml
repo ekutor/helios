@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PedidosProductoEditPage" lazy="true">
+        <pm:header title="#{innventa.EditPedidosProductoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PedidosProductoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PedidosProductoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{pedidosProductoController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{innventa.EditPedidosProductoLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <h:outputText id="id" value="#{pedidosProductoController.selected.id}" />
+                                <p:tooltip for="id" value="#{pedidosProductoController.getComponentMessages('id', innventa.EditPedidosProductoHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditPedidosProductoLabel_cantidad}" for="cantidad" />
+                            <h:panelGroup>
+                                <p:inputText id="cantidad" value="#{pedidosProductoController.selected.cantidad}" title="#{innventa.EditPedidosProductoTitle_cantidad}" required="true" requiredMessage="#{innventa.EditPedidosProductoRequiredMessage_cantidad}"/>
+                                <p:tooltip for="cantidad" value="#{pedidosProductoController.getComponentMessages('cantidad', innventa.EditPedidosProductoHelpText_cantidad)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditPedidosProductoLabel_eliminado}" for="eliminado" />
+                            <h:panelGroup>
+                                <p:inputText id="eliminado" value="#{pedidosProductoController.selected.eliminado}" title="#{innventa.EditPedidosProductoTitle_eliminado}" required="true" requiredMessage="#{innventa.EditPedidosProductoRequiredMessage_eliminado}"/>
+                                <p:tooltip for="eliminado" value="#{pedidosProductoController.getComponentMessages('eliminado', innventa.EditPedidosProductoHelpText_eliminado)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditPedidosProductoLabel_idPedido}" for="idPedido" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="idPedido" value="#{pedidosProductoController.selected.idPedido}" required="true" requiredMessage="#{innventa.EditPedidosProductoRequiredMessage_idPedido}" converter="pedidosConverter">
+                                    <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                    <f:selectItems value="#{pedidosController.items}"
+                                                   var="idPedidoItem"
+                                                   itemValue="#{idPedidoItem}"
+                                                   itemLabel="#{idPedidoItem.descripcion.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="idPedido" value="#{pedidosProductoController.getComponentMessages('idPedido', innventa.EditPedidosProductoHelpText_idPedido)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.EditPedidosProductoLabel_idProducto}" for="idProducto" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="idProducto" value="#{pedidosProductoController.selected.idProducto}" required="true" requiredMessage="#{innventa.EditPedidosProductoRequiredMessage_idProducto}" converter="productosConverter">
+                                    <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                    <f:selectItems value="#{productosController.items}"
+                                                   var="idProductoItem"
+                                                   itemValue="#{idProductoItem}"
+                                                   itemLabel="#{idProductoItem.id.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="idProducto" value="#{pedidosProductoController.getComponentMessages('idProducto', innventa.EditPedidosProductoHelpText_idProducto)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{pedidosProductoController.save}" value="#{innventa.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:PedidosProductoListPage:PedidosProductoListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:PedidosProductoListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

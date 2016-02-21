@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="PersonaMailsListForm">
+            <h:form id="PersonaMailsListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,30 +38,30 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idPersona}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idPersona}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.mail}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.mail}"/>
 
 
 
-    ,&nbsp;
-                        <h:selectBooleanCheckbox id="principal" value="#{item.principal}" title="#{innventa.EditPersonaMailsTitle_principal}"  disabled="true"/>
+                            ,&nbsp;
+                            <h:selectBooleanCheckbox id="principal" value="#{item.principal}" title="#{innventa.EditPersonaMailsTitle_principal}"  disabled="true"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{personaMailsController.selected}" />
@@ -72,7 +72,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

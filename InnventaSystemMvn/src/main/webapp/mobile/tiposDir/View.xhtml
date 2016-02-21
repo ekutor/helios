@@ -21,15 +21,15 @@
                 <h:panelGroup id="display">
                     <p:outputPanel rendered="#{tiposDirController.selected != null}">
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewTiposDirLabel_id}"/>
-                        <h:outputText value="#{tiposDirController.selected.id}" title="#{innventa.ViewTiposDirTitle_id}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewTiposDirLabel_id}"/>
+                            <h:outputText value="#{tiposDirController.selected.id}" title="#{innventa.ViewTiposDirTitle_id}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewTiposDirLabel_nombre}"/>
-                        <h:outputText value="#{tiposDirController.selected.nombre}" title="#{innventa.ViewTiposDirTitle_nombre}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewTiposDirLabel_nombre}"/>
+                            <h:outputText value="#{tiposDirController.selected.nombre}" title="#{innventa.ViewTiposDirTitle_nombre}"/>
+                        </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>
 

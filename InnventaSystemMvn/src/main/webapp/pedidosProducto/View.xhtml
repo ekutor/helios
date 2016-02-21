@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PedidosProductoViewDlg" widgetVar="PedidosProductoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewPedidosProductoTitle}" closeOnEscape="true">
+
+            <h:form id="PedidosProductoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{pedidosProductoController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewPedidosProductoLabel_id}"/>
+                        <h:outputText value="#{pedidosProductoController.selected.id}" title="#{innventa.ViewPedidosProductoTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewPedidosProductoLabel_cantidad}"/>
+                        <h:outputText value="#{pedidosProductoController.selected.cantidad}" title="#{innventa.ViewPedidosProductoTitle_cantidad}"/>
+
+                        <h:outputText value="#{innventa.ViewPedidosProductoLabel_eliminado}"/>
+                        <h:outputText value="#{pedidosProductoController.selected.eliminado}" title="#{innventa.ViewPedidosProductoTitle_eliminado}"/>
+
+                        <h:outputText value="#{innventa.ViewPedidosProductoLabel_idPedido}"/>
+                        <h:outputText value="#{pedidosProductoController.selected.idPedido.descripcion}"/>
+
+                        <h:outputText value="#{innventa.ViewPedidosProductoLabel_idProducto}"/>
+                        <h:outputText value="#{pedidosProductoController.selected.idProducto.id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{innventa.Close}" onclick="PF('PedidosProductoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

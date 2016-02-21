@@ -5,13 +5,14 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="AclAccionesListPage">
-        <pm:header title="#{myBundle.ListAclAccionesTitle}">
+        <pm:header title="#{innventa.ListAclAccionesTitle}">
             <h:form>
                 <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
-                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{myBundle.Create}" update=":AclAccionesCreatePage:AclAccionesCreateForm" actionListener="#{aclAccionesController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:AclAccionesCreatePage')}">
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{innventa.Create}" update=":AclAccionesCreatePage:AclAccionesCreateForm" actionListener="#{aclAccionesController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:AclAccionesCreatePage')}">
                     <f:actionListener binding="#{currentPageListener}"/>
                 </p:commandButton>
             </h:form>
@@ -21,41 +22,44 @@
 
             <h:form id="AclAccionesListForm">
 
-                <p:dataTable id="datalist"
-                             value="#{aclAccionesController.items}"
-                             var="item"
-                             rowKey="#{item.id}"
-                             paginator="true"
-                             rows="10"
-                             rowsPerPageTemplate="10,20,30,40,50"
-                             selectionMode="single"
-                             selection="#{aclAccionesController.selected}"
-                             reflow="true">
+                <p:dataList id="datalist"
+                            paginator="true"
+                            rows="30"
+                            rowsPerPageTemplate="10,20,30,40,50,100"
+                            pt:data-inset="true"
+                            value="#{aclAccionesController.items}"
+                            var="item">
 
-                    <p:ajax event="rowSelect"   update="@form:editButton,@form:deleteButton"/>
-                    <p:ajax event="rowUnselect" update="@form:editButton,@form:deleteButton"/>
-                    <p:ajax event="swipeleft"   oncomplete="document.getElementById('AclAccionesListPage:AclAccionesListForm:deleteButton').click();"/>
-                    <p:ajax event="tap"         oncomplete="document.getElementById('AclAccionesListPage:AclAccionesListForm:editButton').click();"/>
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListAclAccionesTitle}"/>
+                    </f:facet>
 
-                    <p:column sortBy="#{item.id}" filterBy="#{item.id}" headerText="#{myBundle.ListAclAccionesTitle_id}">
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
+                    <p:commandLink update=":AclAccionesEditPage:AclAccionesEditForm" action="pm:AclAccionesEditPage">
+                        <p>
 
 
-                    <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}" headerText="#{myBundle.ListAclAccionesTitle_nombre}">
-                        <h:outputText value="#{item.nombre}"/>
-                    </p:column>
+
+                            <h:outputText value="#{item.id}"/>
 
 
-                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}" headerText="#{myBundle.ListAclAccionesTitle_eliminado}">
-                        <h:outputText value="#{item.eliminado}"/>
-                    </p:column>
 
-                </p:dataTable>
-                <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":AclAccionesEditPage:AclAccionesEditForm" disabled="#{empty aclAccionesController.selected}" actionListener="#{mobilePageController.currentPageListener}" action="#{mobilePageController.navigateWithHistory('pm:AclAccionesEditPage')}"/>
-                <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{aclAccionesController.delete}" update=":growl,datalist" disabled="#{empty aclAccionesController.selected}">
-                    <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-                </p:commandButton>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
+
+                        </p>
+                        <f:setPropertyActionListener value="#{item}" target="#{aclAccionesController.selected}" />
+                    </p:commandLink>
+
+                    <f:facet name="footer">
+                        <h:outputText value="#{innventa.ListAclAccionesTitle}"/>
+                    </f:facet>
+
+                </p:dataList>
             </h:form>
 
         </pm:content>

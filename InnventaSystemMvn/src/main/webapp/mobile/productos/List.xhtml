@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="ProductosListForm">
+            <h:form id="ProductosListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,74 +38,75 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.referencia}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.referencia}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.codigo}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.codigo}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.tipoCodigo}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.tipoCodigo}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.nombre}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.precioCompra}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.precioCompra}"/>
 
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.precioVenta}"/>
--->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.categoria}"/>
--->
+                            ,&nbsp;
+                            <h:outputText value="#{item.precioVenta}"/>
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.categoriaImpuesto}"/>
--->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.atributo}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.categoria}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.stock}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.categoriaImpuesto}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.creadoPor}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.atributo}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.modificadoPor}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.stock}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.creadoPor}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.modificadoPor}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.eliminado}"/>
+                            -->
+
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{productosController.selected}" />
                     </p:commandLink>
@@ -115,7 +116,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

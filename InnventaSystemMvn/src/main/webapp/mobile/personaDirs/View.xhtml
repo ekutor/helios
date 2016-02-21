@@ -21,40 +21,40 @@
                 <h:panelGroup id="display">
                     <p:outputPanel rendered="#{personaDirsController.selected != null}">
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_id}"/>
-                        <h:outputText value="#{personaDirsController.selected.id}" title="#{innventa.ViewPersonaDirsTitle_id}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewPersonaDirsLabel_id}"/>
+                            <h:outputText value="#{personaDirsController.selected.id}" title="#{innventa.ViewPersonaDirsTitle_id}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_idPersona}"/>
-                        <h:outputText value="#{personaDirsController.selected.idPersona}" title="#{innventa.ViewPersonaDirsTitle_idPersona}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewPersonaDirsLabel_idPersona}"/>
+                            <h:outputText value="#{personaDirsController.selected.idPersona}" title="#{innventa.ViewPersonaDirsTitle_idPersona}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_direccion}"/>
-                        <h:outputText value="#{personaDirsController.selected.direccion}" title="#{innventa.ViewPersonaDirsTitle_direccion}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewPersonaDirsLabel_direccion}"/>
+                            <h:outputText value="#{personaDirsController.selected.direccion}" title="#{innventa.ViewPersonaDirsTitle_direccion}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_tipo}"/>
-                        <h:outputText value="#{personaDirsController.selected.tipo}" title="#{innventa.ViewPersonaDirsTitle_tipo}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewPersonaDirsLabel_tipo}"/>
+                            <h:outputText value="#{personaDirsController.selected.tipo}" title="#{innventa.ViewPersonaDirsTitle_tipo}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_observacion}"/>
-                        <h:outputText value="#{personaDirsController.selected.observacion}" title="#{innventa.ViewPersonaDirsTitle_observacion}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewPersonaDirsLabel_observacion}"/>
+                            <h:outputText value="#{personaDirsController.selected.observacion}" title="#{innventa.ViewPersonaDirsTitle_observacion}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_principal}"/>
-                        <h:selectBooleanCheckbox id="principal" value="#{personaDirsController.selected.principal}" title="#{innventa.EditPersonaDirsTitle_principal}" required="true" requiredMessage="#{innventa.EditPersonaDirsRequiredMessage_principal}" disabled="true"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewPersonaDirsLabel_principal}"/>
+                            <h:selectBooleanCheckbox id="principal" value="#{personaDirsController.selected.principal}" title="#{innventa.EditPersonaDirsTitle_principal}" required="true" requiredMessage="#{innventa.EditPersonaDirsRequiredMessage_principal}" disabled="true"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewPersonaDirsLabel_eliminado}"/>
-                        <h:outputText value="#{personaDirsController.selected.eliminado}" title="#{innventa.ViewPersonaDirsTitle_eliminado}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewPersonaDirsLabel_eliminado}"/>
+                            <h:outputText value="#{personaDirsController.selected.eliminado}" title="#{innventa.ViewPersonaDirsTitle_eliminado}"/>
+                        </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>
 

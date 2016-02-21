@@ -21,9 +21,6 @@
                         <h:outputText value="#{innventa.ViewUsuariosLabel_passw}"/>
                         <h:outputText value="#{usuariosController.selected.passw}" title="#{innventa.ViewUsuariosTitle_passw}"/>
 
-                        <h:outputText value="#{innventa.ViewUsuariosLabel_persona}"/>
-                        <h:outputText value="#{usuariosController.selected.persona}" title="#{innventa.ViewUsuariosTitle_persona}"/>
-
                         <h:outputText value="#{innventa.ViewUsuariosLabel_eliminado}"/>
                         <h:outputText value="#{usuariosController.selected.eliminado}" title="#{innventa.ViewUsuariosTitle_eliminado}"/>
 
@@ -42,6 +39,9 @@
                         <h:outputText value="#{usuariosController.selected.fechaModificacion}" title="#{innventa.ViewUsuariosTitle_fechaModificacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
+
+                        <h:outputText value="#{innventa.ViewUsuariosLabel_persona}"/>
+                        <h:outputText value="#{usuariosController.selected.persona.id}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{innventa.Close}" onclick="PF('UsuariosViewDialog').hide()"/>
                 </h:panelGroup>

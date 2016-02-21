@@ -9,10 +9,37 @@
 
     <h:form id="menuForm">
         <p:menu>
-            <p:submenu label="#{myBundle.Maintenance}">
-                <p:menuitem value="#{myBundle.AclAccionesHeading}..." outcome="/mobile/aclAcciones/index" />
+            <p:submenu label="#{innventa.Maintenance}">
+                <p:menuitem value="#{innventa.AclAccionesHeading}..." outcome="/mobile/aclAcciones/index" />
+                <p:menuitem value="#{innventa.AclRolesHeading}..." outcome="/mobile/aclRoles/index" />
+                <p:menuitem value="#{innventa.AclRolesAccionHeading}..." outcome="/mobile/aclRolesAccion/index" />
+                <p:menuitem value="#{innventa.AclRolesUsuariosHeading}..." outcome="/mobile/aclRolesUsuarios/index" />
+                <p:menuitem value="#{innventa.AtributosHeading}..." outcome="/mobile/atributos/index" />
+                <p:menuitem value="#{innventa.CategoriasHeading}..." outcome="/mobile/categorias/index" />
+                <p:menuitem value="#{innventa.CategoriasImpuestosHeading}..." outcome="/mobile/categoriasImpuestos/index" />
+                <p:menuitem value="#{innventa.ClienteContactosHeading}..." outcome="/mobile/clienteContactos/index" />
+                <p:menuitem value="#{innventa.ClientesHeading}..." outcome="/mobile/clientes/index" />
+                <p:menuitem value="#{innventa.ClientesDireccionHeading}..." outcome="/mobile/clientesDireccion/index" />
+                <p:menuitem value="#{innventa.ImpuestosHeading}..." outcome="/mobile/impuestos/index" />
+                <p:menuitem value="#{innventa.LineasImpuestosHeading}..." outcome="/mobile/lineasImpuestos/index" />
+                <p:menuitem value="#{innventa.PagosHeading}..." outcome="/mobile/pagos/index" />
+                <p:menuitem value="#{innventa.PedidosHeading}..." outcome="/mobile/pedidos/index" />
+                <p:menuitem value="#{innventa.PedidosProductoHeading}..." outcome="/mobile/pedidosProducto/index" />
+                <p:menuitem value="#{innventa.PersonaDirsHeading}..." outcome="/mobile/personaDirs/index" />
+                <p:menuitem value="#{innventa.PersonaMailsHeading}..." outcome="/mobile/personaMails/index" />
+                <p:menuitem value="#{innventa.PersonasHeading}..." outcome="/mobile/personas/index" />
+                <p:menuitem value="#{innventa.PersonasTelsHeading}..." outcome="/mobile/personasTels/index" />
+                <p:menuitem value="#{innventa.ProductosHeading}..." outcome="/mobile/productos/index" />
+                <p:menuitem value="#{innventa.RecibosHeading}..." outcome="/mobile/recibos/index" />
+                <p:menuitem value="#{innventa.RemisionesHeading}..." outcome="/mobile/remisiones/index" />
+                <p:menuitem value="#{innventa.RemisionesProductoHeading}..." outcome="/mobile/remisionesProducto/index" />
+                <p:menuitem value="#{innventa.TercerosHeading}..." outcome="/mobile/terceros/index" />
+                <p:menuitem value="#{innventa.TiposClienteHeading}..." outcome="/mobile/tiposCliente/index" />
+                <p:menuitem value="#{innventa.TiposDirHeading}..." outcome="/mobile/tiposDir/index" />
+                <p:menuitem value="#{innventa.TiposTelHeading}..." outcome="/mobile/tiposTel/index" />
+                <p:menuitem value="#{innventa.UsuariosHeading}..." outcome="/mobile/usuarios/index" />
             </p:submenu>
-            <p:menuitem value="#{myBundle.FullApp}" outcome="/index" icon="ui-icon-home"/>
+            <p:menuitem value="#{innventa.FullApp}" outcome="/index" icon="ui-icon-home"/>
         </p:menu>
     </h:form>
 </ui:composition>

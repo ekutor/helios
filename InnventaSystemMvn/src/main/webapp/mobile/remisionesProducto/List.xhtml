@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="RemisionesProductoListForm">
+            <h:form id="RemisionesProductoListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,28 +38,28 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idProducto}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idProducto}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.cantidad}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.cantidad}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idRemision.id}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idRemision.id}"/>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{remisionesProductoController.selected}" />
@@ -70,7 +70,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

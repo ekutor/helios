@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="AclRolesListForm">
+            <h:form id="AclRolesListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,48 +38,48 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.nombre}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.descripcion}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.descripcion}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaCreacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.creadoPor}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.creadoPor}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaModificacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaModificacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
 
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.modificadoPor}"/>
--->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
--->
+                            ,&nbsp;
+                            <h:outputText value="#{item.modificadoPor}"/>
+
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.eliminado}"/>
+                            -->
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{aclRolesController.selected}" />
@@ -90,7 +90,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

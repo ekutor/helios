@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="LineasImpuestosListForm">
+            <h:form id="LineasImpuestosListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,33 +38,33 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.recibo}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.recibo}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.impuesto}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.impuesto}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.base}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.base}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.monto}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.monto}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{lineasImpuestosController.selected}" />
@@ -75,7 +75,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

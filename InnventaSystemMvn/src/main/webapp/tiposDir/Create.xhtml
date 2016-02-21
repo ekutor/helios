@@ -15,17 +15,17 @@
                 <h:panelGroup id="display" rendered="#{tiposDirController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                                <p:outputLabel value="#{innventa.CreateTiposDirLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{tiposDirController.selected.id}" title="#{innventa.CreateTiposDirTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposDirRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{tiposDirController.getComponentMessages('id', innventa.CreateTiposDirHelpText_id)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateTiposDirLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <p:inputText id="id" value="#{tiposDirController.selected.id}" title="#{innventa.CreateTiposDirTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposDirRequiredMessage_id}" size="36" maxlength="36"/>
+                            <p:tooltip for="id" value="#{tiposDirController.getComponentMessages('id', innventa.CreateTiposDirHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreateTiposDirLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{tiposDirController.selected.nombre}" title="#{innventa.CreateTiposDirTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposDirRequiredMessage_nombre}" size="20" maxlength="20"/>
-                        <p:tooltip for="nombre" value="#{tiposDirController.getComponentMessages('nombre', innventa.CreateTiposDirHelpText_nombre)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateTiposDirLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{tiposDirController.selected.nombre}" title="#{innventa.CreateTiposDirTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposDirRequiredMessage_nombre}" size="20" maxlength="20"/>
+                            <p:tooltip for="nombre" value="#{tiposDirController.getComponentMessages('nombre', innventa.CreateTiposDirHelpText_nombre)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tiposDirController.saveNew}" value="#{innventa.Save}" update="display,:TiposDirListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TiposDirCreateDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>

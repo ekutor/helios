@@ -32,11 +32,6 @@
                         </pm:field>
 
                         <pm:field>
-                            <h:outputText value="#{innventa.ViewUsuariosLabel_persona}"/>
-                            <h:outputText value="#{usuariosController.selected.persona}" title="#{innventa.ViewUsuariosTitle_persona}"/>
-                        </pm:field>
-
-                        <pm:field>
                             <h:outputText value="#{innventa.ViewUsuariosLabel_eliminado}"/>
                             <h:outputText value="#{usuariosController.selected.eliminado}" title="#{innventa.ViewUsuariosTitle_eliminado}"/>
                         </pm:field>
@@ -63,6 +58,11 @@
                             <h:outputText value="#{usuariosController.selected.fechaModificacion}" title="#{innventa.ViewUsuariosTitle_fechaModificacion}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewUsuariosLabel_persona}"/>
+                            <h:outputText value="#{usuariosController.selected.persona.id}"/>
                         </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>

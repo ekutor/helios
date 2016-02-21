@@ -21,45 +21,45 @@
                 <h:panelGroup id="display" rendered="#{clientesDireccionController.selected != null}">
                     <p:outputPanel>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{clientesDireccionController.selected.id}" title="#{innventa.CreateClientesDireccionTitle_id}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{clientesDireccionController.getComponentMessages('id', innventa.CreateClientesDireccionHelpText_id)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <p:inputText id="id" value="#{clientesDireccionController.selected.id}" title="#{innventa.CreateClientesDireccionTitle_id}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_id}" size="36" maxlength="36"/>
+                                <p:tooltip for="id" value="#{clientesDireccionController.getComponentMessages('id', innventa.CreateClientesDireccionHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_direccion}" for="direccion" />
-                      <h:panelGroup>
-                        <p:inputText id="direccion" value="#{clientesDireccionController.selected.direccion}" title="#{innventa.CreateClientesDireccionTitle_direccion}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_direccion}" size="80" maxlength="80"/>
-                        <p:tooltip for="direccion" value="#{clientesDireccionController.getComponentMessages('direccion', innventa.CreateClientesDireccionHelpText_direccion)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_direccion}" for="direccion" />
+                            <h:panelGroup>
+                                <p:inputText id="direccion" value="#{clientesDireccionController.selected.direccion}" title="#{innventa.CreateClientesDireccionTitle_direccion}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_direccion}" size="80" maxlength="80"/>
+                                <p:tooltip for="direccion" value="#{clientesDireccionController.getComponentMessages('direccion', innventa.CreateClientesDireccionHelpText_direccion)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{clientesDireccionController.selected.eliminado}" title="#{innventa.CreateClientesDireccionTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{clientesDireccionController.getComponentMessages('eliminado', innventa.CreateClientesDireccionHelpText_eliminado)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_eliminado}" for="eliminado" />
+                            <h:panelGroup>
+                                <p:inputText id="eliminado" value="#{clientesDireccionController.selected.eliminado}" title="#{innventa.CreateClientesDireccionTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_eliminado}"/>
+                                <p:tooltip for="eliminado" value="#{clientesDireccionController.getComponentMessages('eliminado', innventa.CreateClientesDireccionHelpText_eliminado)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_idCliente}" for="idCliente" />
-                      <h:panelGroup>
-                        <p:selectOneMenu id="idCliente" value="#{clientesDireccionController.selected.idCliente}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_idCliente}" converter="clientesConverter">
-                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                            <f:selectItems value="#{clientesController.items}"
-                                           var="idClienteItem"
-                                           itemValue="#{idClienteItem}"
-                                           itemLabel="#{idClienteItem.id.toString()}"
-                            />
-                            
-                        </p:selectOneMenu>
-                        <p:tooltip for="idCliente" value="#{clientesDireccionController.getComponentMessages('idCliente', innventa.CreateClientesDireccionHelpText_idCliente)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClientesDireccionLabel_idCliente}" for="idCliente" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="idCliente" value="#{clientesDireccionController.selected.idCliente}" required="true" requiredMessage="#{innventa.CreateClientesDireccionRequiredMessage_idCliente}" converter="clientesConverter">
+                                    <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                    <f:selectItems value="#{clientesController.items}"
+                                                   var="idClienteItem"
+                                                   itemValue="#{idClienteItem}"
+                                                   itemLabel="#{idClienteItem.id.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="idCliente" value="#{clientesDireccionController.getComponentMessages('idCliente', innventa.CreateClientesDireccionHelpText_idCliente)}"/>
+                            </h:panelGroup>
+                        </pm:field>
                     </p:outputPanel>
                     <p:commandButton actionListener="#{clientesDireccionController.saveNew}" value="#{innventa.Save}" update="display,:ClientesDireccionListPage:ClientesDireccionListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:ClientesDireccionListPage')}"/>
 

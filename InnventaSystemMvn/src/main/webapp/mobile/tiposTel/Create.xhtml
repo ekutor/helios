@@ -21,21 +21,21 @@
                 <h:panelGroup id="display" rendered="#{tiposTelController.selected != null}">
                     <p:outputPanel>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateTiposTelLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{tiposTelController.selected.id}" title="#{innventa.CreateTiposTelTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposTelRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{tiposTelController.getComponentMessages('id', innventa.CreateTiposTelHelpText_id)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateTiposTelLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <p:inputText id="id" value="#{tiposTelController.selected.id}" title="#{innventa.CreateTiposTelTitle_id}" required="true" requiredMessage="#{innventa.CreateTiposTelRequiredMessage_id}" size="36" maxlength="36"/>
+                                <p:tooltip for="id" value="#{tiposTelController.getComponentMessages('id', innventa.CreateTiposTelHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateTiposTelLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{tiposTelController.selected.nombre}" title="#{innventa.CreateTiposTelTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposTelRequiredMessage_nombre}" size="20" maxlength="20"/>
-                        <p:tooltip for="nombre" value="#{tiposTelController.getComponentMessages('nombre', innventa.CreateTiposTelHelpText_nombre)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateTiposTelLabel_nombre}" for="nombre" />
+                            <h:panelGroup>
+                                <p:inputText id="nombre" value="#{tiposTelController.selected.nombre}" title="#{innventa.CreateTiposTelTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTiposTelRequiredMessage_nombre}" size="20" maxlength="20"/>
+                                <p:tooltip for="nombre" value="#{tiposTelController.getComponentMessages('nombre', innventa.CreateTiposTelHelpText_nombre)}"/>
+                            </h:panelGroup>
+                        </pm:field>
                     </p:outputPanel>
                     <p:commandButton actionListener="#{tiposTelController.saveNew}" value="#{innventa.Save}" update="display,:TiposTelListPage:TiposTelListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:TiposTelListPage')}"/>
 

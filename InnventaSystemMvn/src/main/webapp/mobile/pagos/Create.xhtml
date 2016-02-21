@@ -21,53 +21,53 @@
                 <h:panelGroup id="display" rendered="#{pagosController.selected != null}">
                     <p:outputPanel>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreatePagosLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{pagosController.selected.id}" title="#{innventa.CreatePagosTitle_id}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{pagosController.getComponentMessages('id', innventa.CreatePagosHelpText_id)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreatePagosLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <p:inputText id="id" value="#{pagosController.selected.id}" title="#{innventa.CreatePagosTitle_id}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_id}" size="36" maxlength="36"/>
+                                <p:tooltip for="id" value="#{pagosController.getComponentMessages('id', innventa.CreatePagosHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreatePagosLabel_recibo}" for="recibo" />
-                      <h:panelGroup>
-                        <p:inputText id="recibo" value="#{pagosController.selected.recibo}" title="#{innventa.CreatePagosTitle_recibo}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_recibo}" size="36" maxlength="36"/>
-                        <p:tooltip for="recibo" value="#{pagosController.getComponentMessages('recibo', innventa.CreatePagosHelpText_recibo)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreatePagosLabel_recibo}" for="recibo" />
+                            <h:panelGroup>
+                                <p:inputText id="recibo" value="#{pagosController.selected.recibo}" title="#{innventa.CreatePagosTitle_recibo}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_recibo}" size="36" maxlength="36"/>
+                                <p:tooltip for="recibo" value="#{pagosController.getComponentMessages('recibo', innventa.CreatePagosHelpText_recibo)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreatePagosLabel_pago}" for="pago" />
-                      <h:panelGroup>
-                        <p:inputTextarea rows="4" cols="30" id="pago" value="#{pagosController.selected.pago}" title="#{innventa.CreatePagosTitle_pago}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_pago}"/>
-                        <p:tooltip for="pago" value="#{pagosController.getComponentMessages('pago', innventa.CreatePagosHelpText_pago)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreatePagosLabel_pago}" for="pago" />
+                            <h:panelGroup>
+                                <p:inputTextarea rows="4" cols="30" id="pago" value="#{pagosController.selected.pago}" title="#{innventa.CreatePagosTitle_pago}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_pago}"/>
+                                <p:tooltip for="pago" value="#{pagosController.getComponentMessages('pago', innventa.CreatePagosHelpText_pago)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreatePagosLabel_total}" for="total" />
-                      <h:panelGroup>
-                        <p:inputText id="total" value="#{pagosController.selected.total}" title="#{innventa.CreatePagosTitle_total}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_total}"/>
-                        <p:tooltip for="total" value="#{pagosController.getComponentMessages('total', innventa.CreatePagosHelpText_total)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreatePagosLabel_total}" for="total" />
+                            <h:panelGroup>
+                                <p:inputText id="total" value="#{pagosController.selected.total}" title="#{innventa.CreatePagosTitle_total}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_total}"/>
+                                <p:tooltip for="total" value="#{pagosController.getComponentMessages('total', innventa.CreatePagosHelpText_total)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreatePagosLabel_idTrans}" for="idTrans" />
-                      <h:panelGroup>
-                        <p:inputTextarea rows="4" cols="30" id="idTrans" value="#{pagosController.selected.idTrans}" title="#{innventa.CreatePagosTitle_idTrans}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_idTrans}"/>
-                        <p:tooltip for="idTrans" value="#{pagosController.getComponentMessages('idTrans', innventa.CreatePagosHelpText_idTrans)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreatePagosLabel_idTrans}" for="idTrans" />
+                            <h:panelGroup>
+                                <p:inputTextarea rows="4" cols="30" id="idTrans" value="#{pagosController.selected.idTrans}" title="#{innventa.CreatePagosTitle_idTrans}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_idTrans}"/>
+                                <p:tooltip for="idTrans" value="#{pagosController.getComponentMessages('idTrans', innventa.CreatePagosHelpText_idTrans)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreatePagosLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{pagosController.selected.eliminado}" title="#{innventa.CreatePagosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{pagosController.getComponentMessages('eliminado', innventa.CreatePagosHelpText_eliminado)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreatePagosLabel_eliminado}" for="eliminado" />
+                            <h:panelGroup>
+                                <p:inputText id="eliminado" value="#{pagosController.selected.eliminado}" title="#{innventa.CreatePagosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePagosRequiredMessage_eliminado}"/>
+                                <p:tooltip for="eliminado" value="#{pagosController.getComponentMessages('eliminado', innventa.CreatePagosHelpText_eliminado)}"/>
+                            </h:panelGroup>
+                        </pm:field>
                     </p:outputPanel>
                     <p:commandButton actionListener="#{pagosController.saveNew}" value="#{innventa.Save}" update="display,:PagosListPage:PagosListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:PagosListPage')}"/>
 

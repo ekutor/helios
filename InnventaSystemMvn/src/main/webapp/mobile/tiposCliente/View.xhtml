@@ -21,20 +21,20 @@
                 <h:panelGroup id="display">
                     <p:outputPanel rendered="#{tiposClienteController.selected != null}">
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewTiposClienteLabel_id}"/>
-                        <h:outputText value="#{tiposClienteController.selected.id}" title="#{innventa.ViewTiposClienteTitle_id}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewTiposClienteLabel_id}"/>
+                            <h:outputText value="#{tiposClienteController.selected.id}" title="#{innventa.ViewTiposClienteTitle_id}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewTiposClienteLabel_nombre}"/>
-                        <h:outputText value="#{tiposClienteController.selected.nombre}" title="#{innventa.ViewTiposClienteTitle_nombre}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewTiposClienteLabel_nombre}"/>
+                            <h:outputText value="#{tiposClienteController.selected.nombre}" title="#{innventa.ViewTiposClienteTitle_nombre}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewTiposClienteLabel_eliminado}"/>
-                        <h:outputText value="#{tiposClienteController.selected.eliminado}" title="#{innventa.ViewTiposClienteTitle_eliminado}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewTiposClienteLabel_eliminado}"/>
+                            <h:outputText value="#{tiposClienteController.selected.eliminado}" title="#{innventa.ViewTiposClienteTitle_eliminado}"/>
+                        </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>
 

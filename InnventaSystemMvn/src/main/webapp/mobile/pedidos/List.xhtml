@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="PedidosListForm">
+            <h:form id="PedidosListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,87 +38,88 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.referencia}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.referencia}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idCliente}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idCliente}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaPedido}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaPedido}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaEntrega}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaEntrega}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.cantidadTotal}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.cantidadTotal}"/>
 
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.descripcion}"/>
--->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.observaciones}"/>
--->
+                            ,&nbsp;
+                            <h:outputText value="#{item.descripcion}"/>
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.cantidadPendientes}"/>
--->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.estado}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.observaciones}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.creadoPor}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.cantidadPendientes}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaCreacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.estado}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.modificadoPor}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.creadoPor}"/>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaModificacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.fechaCreacion}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                            -->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
--->
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.modificadoPor}"/>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.fechaModificacion}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                            -->
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.eliminado}"/>
+                            -->
+
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{pedidosController.selected}" />
@@ -129,7 +130,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

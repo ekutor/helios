@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="CategoriasListForm">
+            <h:form id="CategoriasListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,29 +38,29 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.nombre}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.imagen}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.imagen}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.eliminado}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
 
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.idpadre.id}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.idpadre.id}"/>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{categoriasController.selected}" />
@@ -71,7 +71,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

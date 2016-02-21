@@ -21,34 +21,34 @@
                 <h:panelGroup id="display">
                     <p:outputPanel rendered="#{recibosController.selected != null}">
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewRecibosLabel_id}"/>
-                        <h:outputText value="#{recibosController.selected.id}" title="#{innventa.ViewRecibosTitle_id}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewRecibosLabel_id}"/>
+                            <h:outputText value="#{recibosController.selected.id}" title="#{innventa.ViewRecibosTitle_id}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewRecibosLabel_fechaInicio}"/>
-                        <h:outputText value="#{recibosController.selected.fechaInicio}" title="#{innventa.ViewRecibosTitle_fechaInicio}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewRecibosLabel_fechaInicio}"/>
+                            <h:outputText value="#{recibosController.selected.fechaInicio}" title="#{innventa.ViewRecibosTitle_fechaInicio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewRecibosLabel_atributos}"/>
-                        <h:outputText value="#{recibosController.selected.atributos}" title="#{innventa.ViewRecibosTitle_atributos}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewRecibosLabel_atributos}"/>
+                            <h:outputText value="#{recibosController.selected.atributos}" title="#{innventa.ViewRecibosTitle_atributos}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewRecibosLabel_eliminado}"/>
-                        <h:outputText value="#{recibosController.selected.eliminado}" title="#{innventa.ViewRecibosTitle_eliminado}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewRecibosLabel_eliminado}"/>
+                            <h:outputText value="#{recibosController.selected.eliminado}" title="#{innventa.ViewRecibosTitle_eliminado}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewRecibosLabel_fechaFin}"/>
-                        <h:outputText value="#{recibosController.selected.fechaFin}" title="#{innventa.ViewRecibosTitle_fechaFin}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewRecibosLabel_fechaFin}"/>
+                            <h:outputText value="#{recibosController.selected.fechaFin}" title="#{innventa.ViewRecibosTitle_fechaFin}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>
 

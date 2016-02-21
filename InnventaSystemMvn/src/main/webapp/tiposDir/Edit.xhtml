@@ -14,18 +14,18 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{tiposDirController.selected != null}">
 
-        
-                        <h:outputLabel value="#{innventa.EditTiposDirLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{tiposDirController.selected.id}" />
-                        <p:tooltip for="id" value="#{tiposDirController.getComponentMessages('id', innventa.EditTiposDirHelpText_id)}"/>
-                      </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditTiposDirLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre" value="#{tiposDirController.selected.nombre}" title="#{innventa.EditTiposDirTitle_nombre}" required="true" requiredMessage="#{innventa.EditTiposDirRequiredMessage_nombre}" size="20" maxlength="20"/>
-                        <p:tooltip for="nombre" value="#{tiposDirController.getComponentMessages('nombre', innventa.EditTiposDirHelpText_nombre)}"/>
-                      </h:panelGroup>
+                        <h:outputLabel value="#{innventa.EditTiposDirLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{tiposDirController.selected.id}" />
+                            <p:tooltip for="id" value="#{tiposDirController.getComponentMessages('id', innventa.EditTiposDirHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.EditTiposDirLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{tiposDirController.selected.nombre}" title="#{innventa.EditTiposDirTitle_nombre}" required="true" requiredMessage="#{innventa.EditTiposDirRequiredMessage_nombre}" size="20" maxlength="20"/>
+                            <p:tooltip for="nombre" value="#{tiposDirController.getComponentMessages('nombre', innventa.EditTiposDirHelpText_nombre)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tiposDirController.save}" value="#{innventa.Save}" update="display,:TiposDirListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TiposDirEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

@@ -21,61 +21,61 @@
                 <h:panelGroup id="display" rendered="#{clienteContactosController.selected != null}">
                     <p:outputPanel>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClienteContactosLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <p:inputText id="id" value="#{clienteContactosController.selected.id}" title="#{innventa.CreateClienteContactosTitle_id}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_id}" size="36" maxlength="36"/>
-                        <p:tooltip for="id" value="#{clienteContactosController.getComponentMessages('id', innventa.CreateClienteContactosHelpText_id)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClienteContactosLabel_id}" for="id" />
+                            <h:panelGroup>
+                                <p:inputText id="id" value="#{clienteContactosController.selected.id}" title="#{innventa.CreateClienteContactosTitle_id}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_id}" size="36" maxlength="36"/>
+                                <p:tooltip for="id" value="#{clienteContactosController.getComponentMessages('id', innventa.CreateClienteContactosHelpText_id)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClienteContactosLabel_cargo}" for="cargo" />
-                      <h:panelGroup>
-                        <p:inputText id="cargo" value="#{clienteContactosController.selected.cargo}" title="#{innventa.CreateClienteContactosTitle_cargo}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_cargo}"/>
-                        <p:tooltip for="cargo" value="#{clienteContactosController.getComponentMessages('cargo', innventa.CreateClienteContactosHelpText_cargo)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClienteContactosLabel_cargo}" for="cargo" />
+                            <h:panelGroup>
+                                <p:inputText id="cargo" value="#{clienteContactosController.selected.cargo}" title="#{innventa.CreateClienteContactosTitle_cargo}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_cargo}"/>
+                                <p:tooltip for="cargo" value="#{clienteContactosController.getComponentMessages('cargo', innventa.CreateClienteContactosHelpText_cargo)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClienteContactosLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{clienteContactosController.selected.eliminado}" title="#{innventa.CreateClienteContactosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{clienteContactosController.getComponentMessages('eliminado', innventa.CreateClienteContactosHelpText_eliminado)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClienteContactosLabel_eliminado}" for="eliminado" />
+                            <h:panelGroup>
+                                <p:inputText id="eliminado" value="#{clienteContactosController.selected.eliminado}" title="#{innventa.CreateClienteContactosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_eliminado}"/>
+                                <p:tooltip for="eliminado" value="#{clienteContactosController.getComponentMessages('eliminado', innventa.CreateClienteContactosHelpText_eliminado)}"/>
+                            </h:panelGroup>
+                        </pm:field>
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClienteContactosLabel_idPersona}" for="idPersona" />
-                      <h:panelGroup>
-                        <p:selectOneMenu id="idPersona" value="#{clienteContactosController.selected.idPersona}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_idPersona}" converter="personasConverter">
-                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                            <f:selectItems value="#{personasController.items}"
-                                           var="idPersonaItem"
-                                           itemValue="#{idPersonaItem}"
-                                           itemLabel="#{idPersonaItem.id.toString()}"
-                            />
-                            
-                        </p:selectOneMenu>
-                        <p:tooltip for="idPersona" value="#{clienteContactosController.getComponentMessages('idPersona', innventa.CreateClienteContactosHelpText_idPersona)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClienteContactosLabel_idPersona}" for="idPersona" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="idPersona" value="#{clienteContactosController.selected.idPersona}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_idPersona}" converter="personasConverter">
+                                    <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                    <f:selectItems value="#{personasController.items}"
+                                                   var="idPersonaItem"
+                                                   itemValue="#{idPersonaItem}"
+                                                   itemLabel="#{idPersonaItem.id.toString()}"
+                                                   />
 
-                    <pm:field>
-                                <p:outputLabel value="#{innventa.CreateClienteContactosLabel_idCliente}" for="idCliente" />
-                      <h:panelGroup>
-                        <p:selectOneMenu id="idCliente" value="#{clienteContactosController.selected.idCliente}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_idCliente}" converter="clientesConverter">
-                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                            <f:selectItems value="#{clientesController.items}"
-                                           var="idClienteItem"
-                                           itemValue="#{idClienteItem}"
-                                           itemLabel="#{idClienteItem.id.toString()}"
-                            />
-                            
-                        </p:selectOneMenu>
-                        <p:tooltip for="idCliente" value="#{clienteContactosController.getComponentMessages('idCliente', innventa.CreateClienteContactosHelpText_idCliente)}"/>
-                      </h:panelGroup>
-                    </pm:field>
+                                </p:selectOneMenu>
+                                <p:tooltip for="idPersona" value="#{clienteContactosController.getComponentMessages('idPersona', innventa.CreateClienteContactosHelpText_idPersona)}"/>
+                            </h:panelGroup>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{innventa.CreateClienteContactosLabel_idCliente}" for="idCliente" />
+                            <h:panelGroup>
+                                <p:selectOneMenu id="idCliente" value="#{clienteContactosController.selected.idCliente}" required="true" requiredMessage="#{innventa.CreateClienteContactosRequiredMessage_idCliente}" converter="clientesConverter">
+                                    <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                    <f:selectItems value="#{clientesController.items}"
+                                                   var="idClienteItem"
+                                                   itemValue="#{idClienteItem}"
+                                                   itemLabel="#{idClienteItem.id.toString()}"
+                                                   />
+
+                                </p:selectOneMenu>
+                                <p:tooltip for="idCliente" value="#{clienteContactosController.getComponentMessages('idCliente', innventa.CreateClienteContactosHelpText_idCliente)}"/>
+                            </h:panelGroup>
+                        </pm:field>
                     </p:outputPanel>
                     <p:commandButton actionListener="#{clienteContactosController.saveNew}" value="#{innventa.Save}" update="display,:ClienteContactosListPage:ClienteContactosListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:ClienteContactosListPage')}"/>
 

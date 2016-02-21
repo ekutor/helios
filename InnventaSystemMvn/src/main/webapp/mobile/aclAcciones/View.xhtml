@@ -8,9 +8,9 @@
                 xmlns:pm="http://primefaces.org/mobile">
 
     <pm:page id="AclAccionesViewPage" lazy="true">
-        <pm:header title="#{myBundle.ViewAclAccionesTitle}">
+        <pm:header title="#{innventa.ViewAclAccionesTitle}">
             <h:form>
-                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclAccionesListPage')}"/>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{innventa.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:AclAccionesListPage')}"/>
             </h:form>
         </pm:header>
 
@@ -22,18 +22,18 @@
                     <p:outputPanel rendered="#{aclAccionesController.selected != null}">
 
                         <pm:field>
-                            <h:outputText value="#{myBundle.ViewAclAccionesLabel_id}"/>
-                            <h:outputText value="#{aclAccionesController.selected.id}" title="#{myBundle.ViewAclAccionesTitle_id}"/>
+                            <h:outputText value="#{innventa.ViewAclAccionesLabel_id}"/>
+                            <h:outputText value="#{aclAccionesController.selected.id}" title="#{innventa.ViewAclAccionesTitle_id}"/>
                         </pm:field>
 
                         <pm:field>
-                            <h:outputText value="#{myBundle.ViewAclAccionesLabel_nombre}"/>
-                            <h:outputText value="#{aclAccionesController.selected.nombre}" title="#{myBundle.ViewAclAccionesTitle_nombre}"/>
+                            <h:outputText value="#{innventa.ViewAclAccionesLabel_nombre}"/>
+                            <h:outputText value="#{aclAccionesController.selected.nombre}" title="#{innventa.ViewAclAccionesTitle_nombre}"/>
                         </pm:field>
 
                         <pm:field>
-                            <h:outputText value="#{myBundle.ViewAclAccionesLabel_eliminado}"/>
-                            <h:outputText value="#{aclAccionesController.selected.eliminado}" title="#{myBundle.ViewAclAccionesTitle_eliminado}"/>
+                            <h:outputText value="#{innventa.ViewAclAccionesLabel_eliminado}"/>
+                            <h:outputText value="#{aclAccionesController.selected.eliminado}" title="#{innventa.ViewAclAccionesTitle_eliminado}"/>
                         </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>

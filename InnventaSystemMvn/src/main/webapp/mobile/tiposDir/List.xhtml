@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="TiposDirListForm">
+            <h:form id="TiposDirListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,13 +38,13 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.nombre}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre}"/>
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{tiposDirController.selected}" />
@@ -55,7 +55,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

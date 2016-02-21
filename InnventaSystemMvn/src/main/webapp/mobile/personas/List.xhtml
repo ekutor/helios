@@ -20,7 +20,7 @@
 
         <pm:content>
 
-        <h:form id="PersonasListForm">
+            <h:form id="PersonasListForm">
 
                 <p:dataList id="datalist"
                             paginator="true"
@@ -38,46 +38,47 @@
                         <p>
 
 
-    
-                        <h:outputText value="#{item.id}"/>
+
+                            <h:outputText value="#{item.id}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.nombre1}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre1}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.nombre2}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.nombre2}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.apellido1}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.apellido1}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.apellido2}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.apellido2}"/>
 
 
 
-    ,&nbsp;
-                        <h:outputText value="#{item.sexo}"/>
+                            ,&nbsp;
+                            <h:outputText value="#{item.sexo}"/>
 
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.fechaNacim}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
--->
 
-<!--
-    ,&nbsp;
-                        <h:outputText value="#{item.tipoDocumento}"/>
--->
+                            ,&nbsp;
+                            <h:outputText value="#{item.fechaNacim}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+
+
+                            <!--
+                                ,&nbsp;
+                                                    <h:outputText value="#{item.tipoDocumento}"/>
+                            -->
+
 
                         </p>
                         <f:setPropertyActionListener value="#{item}" target="#{personasController.selected}" />
@@ -88,7 +89,7 @@
                     </f:facet>
 
                 </p:dataList>
-        </h:form>
+            </h:form>
 
         </pm:content>
 

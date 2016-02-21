@@ -21,20 +21,20 @@
                 <h:panelGroup id="display">
                     <p:outputPanel rendered="#{categoriasImpuestosController.selected != null}">
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_id}"/>
-                        <h:outputText value="#{categoriasImpuestosController.selected.id}" title="#{innventa.ViewCategoriasImpuestosTitle_id}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_id}"/>
+                            <h:outputText value="#{categoriasImpuestosController.selected.id}" title="#{innventa.ViewCategoriasImpuestosTitle_id}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_nombre}"/>
-                        <h:outputText value="#{categoriasImpuestosController.selected.nombre}" title="#{innventa.ViewCategoriasImpuestosTitle_nombre}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_nombre}"/>
+                            <h:outputText value="#{categoriasImpuestosController.selected.nombre}" title="#{innventa.ViewCategoriasImpuestosTitle_nombre}"/>
+                        </pm:field>
 
-                    <pm:field>
-                        <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_eliminado}"/>
-                        <h:outputText value="#{categoriasImpuestosController.selected.eliminado}" title="#{innventa.ViewCategoriasImpuestosTitle_eliminado}"/>
-                    </pm:field>
+                        <pm:field>
+                            <h:outputText value="#{innventa.ViewCategoriasImpuestosLabel_eliminado}"/>
+                            <h:outputText value="#{categoriasImpuestosController.selected.eliminado}" title="#{innventa.ViewCategoriasImpuestosTitle_eliminado}"/>
+                        </pm:field>
                     </p:outputPanel>
                 </h:panelGroup>
 

@@ -14,24 +14,24 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{atributosController.selected != null}">
 
-        
+
                         <h:outputLabel value="#{innventa.EditAtributosLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{atributosController.selected.id}" />
-                        <p:tooltip for="id" value="#{atributosController.getComponentMessages('id', innventa.EditAtributosHelpText_id)}"/>
-                      </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{atributosController.selected.id}" />
+                            <p:tooltip for="id" value="#{atributosController.getComponentMessages('id', innventa.EditAtributosHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAtributosLabel_nombre}" for="nombre" />
-                      <h:panelGroup>
-                        <p:inputTextarea rows="4" cols="30" id="nombre" value="#{atributosController.selected.nombre}" title="#{innventa.EditAtributosTitle_nombre}" required="true" requiredMessage="#{innventa.EditAtributosRequiredMessage_nombre}"/>
-                        <p:tooltip for="nombre" value="#{atributosController.getComponentMessages('nombre', innventa.EditAtributosHelpText_nombre)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAtributosLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="nombre" value="#{atributosController.selected.nombre}" title="#{innventa.EditAtributosTitle_nombre}" required="true" requiredMessage="#{innventa.EditAtributosRequiredMessage_nombre}"/>
+                            <p:tooltip for="nombre" value="#{atributosController.getComponentMessages('nombre', innventa.EditAtributosHelpText_nombre)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAtributosLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{atributosController.selected.eliminado}" title="#{innventa.EditAtributosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditAtributosRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{atributosController.getComponentMessages('eliminado', innventa.EditAtributosHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAtributosLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{atributosController.selected.eliminado}" title="#{innventa.EditAtributosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditAtributosRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{atributosController.getComponentMessages('eliminado', innventa.EditAtributosHelpText_eliminado)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{atributosController.save}" value="#{innventa.Save}" update="display,:AtributosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AtributosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

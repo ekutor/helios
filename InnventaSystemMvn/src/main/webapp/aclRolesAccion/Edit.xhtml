@@ -14,30 +14,30 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{aclRolesAccionController.selected != null}">
 
-        
+
                         <h:outputLabel value="#{innventa.EditAclRolesAccionLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{aclRolesAccionController.selected.id}" />
-                        <p:tooltip for="id" value="#{aclRolesAccionController.getComponentMessages('id', innventa.EditAclRolesAccionHelpText_id)}"/>
-                      </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{aclRolesAccionController.selected.id}" />
+                            <p:tooltip for="id" value="#{aclRolesAccionController.getComponentMessages('id', innventa.EditAclRolesAccionHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAclRolesAccionLabel_rol}" for="rol" />
-                      <h:panelGroup>
-                        <p:inputText id="rol" value="#{aclRolesAccionController.selected.rol}" title="#{innventa.EditAclRolesAccionTitle_rol}" required="true" requiredMessage="#{innventa.EditAclRolesAccionRequiredMessage_rol}" size="36" maxlength="36"/>
-                        <p:tooltip for="rol" value="#{aclRolesAccionController.getComponentMessages('rol', innventa.EditAclRolesAccionHelpText_rol)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAclRolesAccionLabel_rol}" for="rol" />
+                        <h:panelGroup>
+                            <p:inputText id="rol" value="#{aclRolesAccionController.selected.rol}" title="#{innventa.EditAclRolesAccionTitle_rol}" required="true" requiredMessage="#{innventa.EditAclRolesAccionRequiredMessage_rol}" size="36" maxlength="36"/>
+                            <p:tooltip for="rol" value="#{aclRolesAccionController.getComponentMessages('rol', innventa.EditAclRolesAccionHelpText_rol)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAclRolesAccionLabel_accion}" for="accion" />
-                      <h:panelGroup>
-                        <p:inputText id="accion" value="#{aclRolesAccionController.selected.accion}" title="#{innventa.EditAclRolesAccionTitle_accion}" required="true" requiredMessage="#{innventa.EditAclRolesAccionRequiredMessage_accion}" size="36" maxlength="36"/>
-                        <p:tooltip for="accion" value="#{aclRolesAccionController.getComponentMessages('accion', innventa.EditAclRolesAccionHelpText_accion)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAclRolesAccionLabel_accion}" for="accion" />
+                        <h:panelGroup>
+                            <p:inputText id="accion" value="#{aclRolesAccionController.selected.accion}" title="#{innventa.EditAclRolesAccionTitle_accion}" required="true" requiredMessage="#{innventa.EditAclRolesAccionRequiredMessage_accion}" size="36" maxlength="36"/>
+                            <p:tooltip for="accion" value="#{aclRolesAccionController.getComponentMessages('accion', innventa.EditAclRolesAccionHelpText_accion)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditAclRolesAccionLabel_eliminado}" for="eliminado" />
-                      <h:panelGroup>
-                        <p:inputText id="eliminado" value="#{aclRolesAccionController.selected.eliminado}" title="#{innventa.EditAclRolesAccionTitle_eliminado}" required="true" requiredMessage="#{innventa.EditAclRolesAccionRequiredMessage_eliminado}"/>
-                        <p:tooltip for="eliminado" value="#{aclRolesAccionController.getComponentMessages('eliminado', innventa.EditAclRolesAccionHelpText_eliminado)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditAclRolesAccionLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{aclRolesAccionController.selected.eliminado}" title="#{innventa.EditAclRolesAccionTitle_eliminado}" required="true" requiredMessage="#{innventa.EditAclRolesAccionRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{aclRolesAccionController.getComponentMessages('eliminado', innventa.EditAclRolesAccionHelpText_eliminado)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{aclRolesAccionController.save}" value="#{innventa.Save}" update="display,:AclRolesAccionListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('AclRolesAccionEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

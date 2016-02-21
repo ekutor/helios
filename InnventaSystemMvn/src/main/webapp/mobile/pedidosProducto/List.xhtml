@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PedidosProductoListPage">
+        <pm:header title="#{innventa.ListPedidosProductoTitle}">
+            <h:form>
+                <p:commandButton id="backButton"   styleClass="ui-btn-left  ui-btn-inline" icon="ui-icon-arrow-l" value="#{myBundle.Back}" action="#{mobilePageController.navigateBackInHistory('/mobile/index')}"/>
+                <p:commandButton id="createButton" styleClass="ui-btn-right ui-btn-inline" icon="ui-icon-plus"    value="#{innventa.Create}" update=":PedidosProductoCreatePage:PedidosProductoCreateForm" actionListener="#{pedidosProductoController.prepareCreate}" action="#{mobilePageController.navigateWithHistory('pm:PedidosProductoCreatePage')}">
+                    <f:actionListener binding="#{currentPageListener}"/>
+                </p:commandButton>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PedidosProductoListForm">
+
+                <p:dataList id="datalist"
+                            paginator="true"
+                            rows="30"
+                            rowsPerPageTemplate="10,20,30,40,50,100"
+                            pt:data-inset="true"
+                            value="#{pedidosProductoController.items}"
+                            var="item">
+
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosProductoTitle}"/>
+                    </f:facet>
+
+                    <p:commandLink update=":PedidosProductoEditPage:PedidosProductoEditForm" action="pm:PedidosProductoEditPage">
+                        <p>
+
+
+
+                            <h:outputText value="#{item.id}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.cantidad}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.eliminado}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.idPedido.descripcion}"/>
+
+
+
+                            ,&nbsp;
+                            <h:outputText value="#{item.idProducto.id}"/>
+
+                        </p>
+                        <f:setPropertyActionListener value="#{item}" target="#{pedidosProductoController.selected}" />
+                    </p:commandLink>
+
+                    <f:facet name="footer">
+                        <h:outputText value="#{innventa.ListPedidosProductoTitle}"/>
+                    </f:facet>
+
+                </p:dataList>
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

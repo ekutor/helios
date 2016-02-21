@@ -14,54 +14,54 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{personasController.selected != null}">
 
-        
+
                         <h:outputLabel value="#{innventa.EditPersonasLabel_id}" for="id" />
-                      <h:panelGroup>
-                        <h:outputText id="id" value="#{personasController.selected.id}" />
-                        <p:tooltip for="id" value="#{personasController.getComponentMessages('id', innventa.EditPersonasHelpText_id)}"/>
-                      </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{personasController.selected.id}" />
+                            <p:tooltip for="id" value="#{personasController.getComponentMessages('id', innventa.EditPersonasHelpText_id)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditPersonasLabel_nombre1}" for="nombre1" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre1" value="#{personasController.selected.nombre1}" title="#{innventa.EditPersonasTitle_nombre1}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_nombre1}" size="80" maxlength="80"/>
-                        <p:tooltip for="nombre1" value="#{personasController.getComponentMessages('nombre1', innventa.EditPersonasHelpText_nombre1)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_nombre1}" for="nombre1" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre1" value="#{personasController.selected.nombre1}" title="#{innventa.EditPersonasTitle_nombre1}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_nombre1}" size="80" maxlength="80"/>
+                            <p:tooltip for="nombre1" value="#{personasController.getComponentMessages('nombre1', innventa.EditPersonasHelpText_nombre1)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditPersonasLabel_nombre2}" for="nombre2" />
-                      <h:panelGroup>
-                        <p:inputText id="nombre2" value="#{personasController.selected.nombre2}" title="#{innventa.EditPersonasTitle_nombre2}" size="80" maxlength="80"/>
-                        <p:tooltip for="nombre2" value="#{personasController.getComponentMessages('nombre2', innventa.EditPersonasHelpText_nombre2)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_nombre2}" for="nombre2" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre2" value="#{personasController.selected.nombre2}" title="#{innventa.EditPersonasTitle_nombre2}" size="80" maxlength="80"/>
+                            <p:tooltip for="nombre2" value="#{personasController.getComponentMessages('nombre2', innventa.EditPersonasHelpText_nombre2)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditPersonasLabel_apellido1}" for="apellido1" />
-                      <h:panelGroup>
-                        <p:inputText id="apellido1" value="#{personasController.selected.apellido1}" title="#{innventa.EditPersonasTitle_apellido1}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_apellido1}" size="80" maxlength="80"/>
-                        <p:tooltip for="apellido1" value="#{personasController.getComponentMessages('apellido1', innventa.EditPersonasHelpText_apellido1)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_apellido1}" for="apellido1" />
+                        <h:panelGroup>
+                            <p:inputText id="apellido1" value="#{personasController.selected.apellido1}" title="#{innventa.EditPersonasTitle_apellido1}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_apellido1}" size="80" maxlength="80"/>
+                            <p:tooltip for="apellido1" value="#{personasController.getComponentMessages('apellido1', innventa.EditPersonasHelpText_apellido1)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditPersonasLabel_apellido2}" for="apellido2" />
-                      <h:panelGroup>
-                        <p:inputText id="apellido2" value="#{personasController.selected.apellido2}" title="#{innventa.EditPersonasTitle_apellido2}" size="80" maxlength="80"/>
-                        <p:tooltip for="apellido2" value="#{personasController.getComponentMessages('apellido2', innventa.EditPersonasHelpText_apellido2)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_apellido2}" for="apellido2" />
+                        <h:panelGroup>
+                            <p:inputText id="apellido2" value="#{personasController.selected.apellido2}" title="#{innventa.EditPersonasTitle_apellido2}" size="80" maxlength="80"/>
+                            <p:tooltip for="apellido2" value="#{personasController.getComponentMessages('apellido2', innventa.EditPersonasHelpText_apellido2)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditPersonasLabel_sexo}" for="sexo" />
-                      <h:panelGroup>
-                        <p:inputText id="sexo" value="#{personasController.selected.sexo}" title="#{innventa.EditPersonasTitle_sexo}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_sexo}" size="1" maxlength="1"/>
-                        <p:tooltip for="sexo" value="#{personasController.getComponentMessages('sexo', innventa.EditPersonasHelpText_sexo)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_sexo}" for="sexo" />
+                        <h:panelGroup>
+                            <p:inputText id="sexo" value="#{personasController.selected.sexo}" title="#{innventa.EditPersonasTitle_sexo}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_sexo}" size="1" maxlength="1"/>
+                            <p:tooltip for="sexo" value="#{personasController.getComponentMessages('sexo', innventa.EditPersonasHelpText_sexo)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditPersonasLabel_fechaNacim}" for="fechaNacim" />
-                      <h:panelGroup>
-                        <p:calendar id="fechaNacim" pattern="MM/dd/yyyy" value="#{personasController.selected.fechaNacim}" title="#{innventa.EditPersonasTitle_fechaNacim}"  showOn="button"/>
-                        <p:tooltip for="fechaNacim" value="#{personasController.getComponentMessages('fechaNacim', innventa.EditPersonasHelpText_fechaNacim)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_fechaNacim}" for="fechaNacim" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaNacim" pattern="MM/dd/yyyy" value="#{personasController.selected.fechaNacim}" title="#{innventa.EditPersonasTitle_fechaNacim}"  showOn="button"/>
+                            <p:tooltip for="fechaNacim" value="#{personasController.getComponentMessages('fechaNacim', innventa.EditPersonasHelpText_fechaNacim)}"/>
+                        </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.EditPersonasLabel_tipoDocumento}" for="tipoDocumento" />
-                      <h:panelGroup>
-                        <p:inputText id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" title="#{innventa.EditPersonasTitle_tipoDocumento}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_tipoDocumento}" size="36" maxlength="36"/>
-                        <p:tooltip for="tipoDocumento" value="#{personasController.getComponentMessages('tipoDocumento', innventa.EditPersonasHelpText_tipoDocumento)}"/>
-                      </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_tipoDocumento}" for="tipoDocumento" />
+                        <h:panelGroup>
+                            <p:inputText id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" title="#{innventa.EditPersonasTitle_tipoDocumento}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_tipoDocumento}" size="36" maxlength="36"/>
+                            <p:tooltip for="tipoDocumento" value="#{personasController.getComponentMessages('tipoDocumento', innventa.EditPersonasHelpText_tipoDocumento)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{personasController.save}" value="#{innventa.Save}" update="display,:PersonasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PersonasEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
