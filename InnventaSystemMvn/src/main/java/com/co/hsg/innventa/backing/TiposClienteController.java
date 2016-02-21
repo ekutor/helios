@@ -7,7 +7,8 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="tiposClienteController")
+
+@Named(value = "tiposClienteController")
 @ViewScoped
 public class TiposClienteController extends AbstractController<TiposCliente> {
 
@@ -17,8 +18,8 @@ public class TiposClienteController extends AbstractController<TiposCliente> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete TiposCliente controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete TiposCliente controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -30,7 +31,5 @@ public class TiposClienteController extends AbstractController<TiposCliente> {
         // Inform the Abstract parent controller of the concrete TiposCliente Entity
         super(TiposCliente.class);
     }
-
-
 
 }

@@ -8,7 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="clienteContactosController")
+
+@Named(value = "clienteContactosController")
 @ViewScoped
 public class ClienteContactosController extends AbstractController<ClienteContactos> {
 
@@ -22,8 +23,8 @@ public class ClienteContactosController extends AbstractController<ClienteContac
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete ClienteContactos controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete ClienteContactos controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -36,7 +37,6 @@ public class ClienteContactosController extends AbstractController<ClienteContac
         super(ClienteContactos.class);
     }
 
-
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
      */
@@ -46,8 +46,8 @@ public class ClienteContactosController extends AbstractController<ClienteContac
     }
 
     /**
-     * Sets the "selected" attribute of the Personas controller
-     * in order to display its data in its View dialog.
+     * Sets the "selected" attribute of the Personas controller in order to
+     * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action
      */
@@ -56,9 +56,10 @@ public class ClienteContactosController extends AbstractController<ClienteContac
             idPersonaController.setSelected(this.getSelected().getIdPersona());
         }
     }
+
     /**
-     * Sets the "selected" attribute of the Clientes controller
-     * in order to display its data in its View dialog.
+     * Sets the "selected" attribute of the Clientes controller in order to
+     * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action
      */

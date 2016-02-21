@@ -7,7 +7,8 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="tiposDirController")
+
+@Named(value = "tiposDirController")
 @ViewScoped
 public class TiposDirController extends AbstractController<TiposDir> {
 
@@ -17,8 +18,8 @@ public class TiposDirController extends AbstractController<TiposDir> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete TiposDir controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete TiposDir controller bean. The AbstractController
+     * requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -30,7 +31,5 @@ public class TiposDirController extends AbstractController<TiposDir> {
         // Inform the Abstract parent controller of the concrete TiposDir Entity
         super(TiposDir.class);
     }
-
-
 
 }

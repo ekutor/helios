@@ -3,11 +3,7 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.session.UsuariosFacade;
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
-import javax.ejb.Startup;
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

@@ -6,8 +6,8 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -81,7 +81,7 @@ public class AclRoles implements Serializable {
     @NotNull
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
-    private Collection<AclRolesUsuarios> aclRolesUsuariosCollection;
+    private List<AclRolesUsuarios> aclRolesUsuariosList;
 
     public AclRoles() {
     }
@@ -166,12 +166,12 @@ public class AclRoles implements Serializable {
     }
 
     @XmlTransient
-    public Collection<AclRolesUsuarios> getAclRolesUsuariosCollection() {
-        return aclRolesUsuariosCollection;
+    public List<AclRolesUsuarios> getAclRolesUsuariosList() {
+        return aclRolesUsuariosList;
     }
 
-    public void setAclRolesUsuariosCollection(Collection<AclRolesUsuarios> aclRolesUsuariosCollection) {
-        this.aclRolesUsuariosCollection = aclRolesUsuariosCollection;
+    public void setAclRolesUsuariosList(List<AclRolesUsuarios> aclRolesUsuariosList) {
+        this.aclRolesUsuariosList = aclRolesUsuariosList;
     }
 
     @Override

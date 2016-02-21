@@ -6,7 +6,7 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -50,7 +50,7 @@ public class Categorias implements Serializable {
     @NotNull
     private short eliminado;
     @OneToMany(mappedBy = "idpadre")
-    private Collection<Categorias> categoriasCollection;
+    private List<Categorias> categoriasList;
     @JoinColumn(name = "idpadre", referencedColumnName = "id")
     @ManyToOne
     private Categorias idpadre;
@@ -101,12 +101,12 @@ public class Categorias implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Categorias> getCategoriasCollection() {
-        return categoriasCollection;
+    public List<Categorias> getCategoriasList() {
+        return categoriasList;
     }
 
-    public void setCategoriasCollection(Collection<Categorias> categoriasCollection) {
-        this.categoriasCollection = categoriasCollection;
+    public void setCategoriasList(List<Categorias> categoriasList) {
+        this.categoriasList = categoriasList;
     }
 
     public Categorias getIdpadre() {

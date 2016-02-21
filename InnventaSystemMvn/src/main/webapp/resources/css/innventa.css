@@ -1,0 +1,14 @@
+.nav > li > a:hover, .nav > li > a:active {
+  color: #23527c;
+}
+
+div[id="loginForm:growl_container"] {
+   position: absolute;
+   top:10px;
+}
+
+.row-fluid .span6 {
+  display: table-cell;
+  vertical-align: bottom;
+  float: none;
+}

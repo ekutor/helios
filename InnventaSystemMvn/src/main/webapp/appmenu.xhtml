@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">
+            <p:menubar>
+                <p:menuitem value="#{innventa.Home}" outcome="/index" icon="ui-icon-home"/>
+                <p:submenu label="#{innventa.Maintenance}">
+                    <p:menuitem value="#{innventa.AclAccionesHeading}..." outcome="/aclAcciones/index" />
+                    <p:menuitem value="#{innventa.AclRolesHeading}..." outcome="/aclRoles/index" />
+                    <p:menuitem value="#{innventa.AclRolesAccionHeading}..." outcome="/aclRolesAccion/index" />
+                    <p:menuitem value="#{innventa.AclRolesUsuariosHeading}..." outcome="/aclRolesUsuarios/index" />
+                    <p:menuitem value="#{innventa.AtributosHeading}..." outcome="/atributos/index" />
+                    <p:menuitem value="#{innventa.CategoriasHeading}..." outcome="/categorias/index" />
+                    <p:menuitem value="#{innventa.CategoriasImpuestosHeading}..." outcome="/categoriasImpuestos/index" />
+                    <p:menuitem value="#{innventa.ClienteContactosHeading}..." outcome="/clienteContactos/index" />
+                    <p:menuitem value="#{innventa.ClientesHeading}..." outcome="/clientes/index" />
+                    <p:menuitem value="#{innventa.ClientesDireccionHeading}..." outcome="/clientesDireccion/index" />
+                    <p:menuitem value="#{innventa.ImpuestosHeading}..." outcome="/impuestos/index" />
+                    <p:menuitem value="#{innventa.LineasImpuestosHeading}..." outcome="/lineasImpuestos/index" />
+                    <p:menuitem value="#{innventa.PagosHeading}..." outcome="/pagos/index" />
+                    <p:menuitem value="#{innventa.PedidosHeading}..." outcome="/pedidos/index" />
+                    <p:menuitem value="#{innventa.PersonaDirsHeading}..." outcome="/personaDirs/index" />
+                    <p:menuitem value="#{innventa.PersonaMailsHeading}..." outcome="/personaMails/index" />
+                    <p:menuitem value="#{innventa.PersonasHeading}..." outcome="/personas/index" />
+                    <p:menuitem value="#{innventa.PersonasTelsHeading}..." outcome="/personasTels/index" />
+                    <p:menuitem value="#{innventa.ProductosHeading}..." outcome="/productos/index" />
+                    <p:menuitem value="#{innventa.RecibosHeading}..." outcome="/recibos/index" />
+                    <p:menuitem value="#{innventa.RemisionesHeading}..." outcome="/remisiones/index" />
+                    <p:menuitem value="#{innventa.RemisionesProductoHeading}..." outcome="/remisionesProducto/index" />
+                    <p:menuitem value="#{innventa.TercerosHeading}..." outcome="/terceros/index" />
+                    <p:menuitem value="#{innventa.TiposClienteHeading}..." outcome="/tiposCliente/index" />
+                    <p:menuitem value="#{innventa.TiposDirHeading}..." outcome="/tiposDir/index" />
+                    <p:menuitem value="#{innventa.TiposTelHeading}..." outcome="/tiposTel/index" />
+                    <p:menuitem value="#{innventa.UsuariosHeading}..." outcome="/usuarios/index" />
+                </p:submenu>
+                <p:menuitem value="#{innventa.Mobile}" outcome="/mobile/index" icon="ui-icon-signal"/>
+            </p:menubar>
+        </h:form>
+    </ui:composition>
+
+</html>

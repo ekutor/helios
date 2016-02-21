@@ -7,7 +7,8 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="personaDirsController")
+
+@Named(value = "personaDirsController")
 @ViewScoped
 public class PersonaDirsController extends AbstractController<PersonaDirs> {
 
@@ -17,8 +18,8 @@ public class PersonaDirsController extends AbstractController<PersonaDirs> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete PersonaDirs controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete PersonaDirs controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -30,7 +31,5 @@ public class PersonaDirsController extends AbstractController<PersonaDirs> {
         // Inform the Abstract parent controller of the concrete PersonaDirs Entity
         super(PersonaDirs.class);
     }
-
-
 
 }

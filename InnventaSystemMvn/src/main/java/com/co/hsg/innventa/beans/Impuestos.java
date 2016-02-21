@@ -6,8 +6,8 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -76,7 +76,7 @@ public class Impuestos implements Serializable {
     @NotNull
     private short eliminado;
     @OneToMany(mappedBy = "impuestoPadre")
-    private Collection<Impuestos> impuestosCollection;
+    private List<Impuestos> impuestosList;
     @JoinColumn(name = "impuesto_padre", referencedColumnName = "id")
     @ManyToOne
     private Impuestos impuestoPadre;
@@ -163,12 +163,12 @@ public class Impuestos implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Impuestos> getImpuestosCollection() {
-        return impuestosCollection;
+    public List<Impuestos> getImpuestosList() {
+        return impuestosList;
     }
 
-    public void setImpuestosCollection(Collection<Impuestos> impuestosCollection) {
-        this.impuestosCollection = impuestosCollection;
+    public void setImpuestosList(List<Impuestos> impuestosList) {
+        this.impuestosList = impuestosList;
     }
 
     public Impuestos getImpuestoPadre() {

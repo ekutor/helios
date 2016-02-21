@@ -8,7 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="aclRolesController")
+
+@Named(value = "aclRolesController")
 @ViewScoped
 public class AclRolesController extends AbstractController<AclRoles> {
 
@@ -18,8 +19,8 @@ public class AclRolesController extends AbstractController<AclRoles> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete AclRoles controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete AclRoles controller bean. The AbstractController
+     * requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -32,17 +33,16 @@ public class AclRolesController extends AbstractController<AclRoles> {
         super(AclRoles.class);
     }
 
-
-
     /**
-    * Sets the "items" attribute with a collection of AclRolesUsuarios entities that are retrieved from AclRoles?cap_first
-     * and returns the navigation outcome.
+     * Sets the "items" attribute with a collection of AclRolesUsuarios entities
+     * that are retrieved from AclRoles?cap_first and returns the navigation
+     * outcome.
      *
-     * @return  navigation outcome for AclRolesUsuarios page
+     * @return navigation outcome for AclRolesUsuarios page
      */
-    public String navigateAclRolesUsuariosCollection() {
+    public String navigateAclRolesUsuariosList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("AclRolesUsuarios_items", this.getSelected().getAclRolesUsuariosCollection());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("AclRolesUsuarios_items", this.getSelected().getAclRolesUsuariosList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/aclRolesUsuarios/index";
     }

@@ -9,7 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="categoriasController")
+
+@Named(value = "categoriasController")
 @ViewScoped
 public class CategoriasController extends AbstractController<Categorias> {
 
@@ -21,8 +22,8 @@ public class CategoriasController extends AbstractController<Categorias> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete Categorias controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete Categorias controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -35,7 +36,6 @@ public class CategoriasController extends AbstractController<Categorias> {
         super(Categorias.class);
     }
 
-
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
      */
@@ -44,21 +44,22 @@ public class CategoriasController extends AbstractController<Categorias> {
     }
 
     /**
-    * Sets the "items" attribute with a collection of Categorias entities that are retrieved from Categorias?cap_first
-     * and returns the navigation outcome.
+     * Sets the "items" attribute with a collection of Categorias entities that
+     * are retrieved from Categorias?cap_first and returns the navigation
+     * outcome.
      *
-     * @return  navigation outcome for Categorias page
+     * @return navigation outcome for Categorias page
      */
-    public String navigateCategoriasCollection() {
+    public String navigateCategoriasList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Categorias_items", this.getSelected().getCategoriasCollection());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Categorias_items", this.getSelected().getCategoriasList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/categorias/index";
     }
 
     /**
-     * Sets the "selected" attribute of the Categorias controller
-     * in order to display its data in its View dialog.
+     * Sets the "selected" attribute of the Categorias controller in order to
+     * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action
      */

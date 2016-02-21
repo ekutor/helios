@@ -6,8 +6,8 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -72,7 +72,9 @@ public class Personas implements Serializable {
     @Column(name = "tipo_documento")
     private String tipoDocumento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
-    private Collection<ClienteContactos> clienteContactosCollection;
+    private List<ClienteContactos> clienteContactosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    private List<Usuarios> usuariosList;
 
     public Personas() {
     }
@@ -154,12 +156,21 @@ public class Personas implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ClienteContactos> getClienteContactosCollection() {
-        return clienteContactosCollection;
+    public List<ClienteContactos> getClienteContactosList() {
+        return clienteContactosList;
     }
 
-    public void setClienteContactosCollection(Collection<ClienteContactos> clienteContactosCollection) {
-        this.clienteContactosCollection = clienteContactosCollection;
+    public void setClienteContactosList(List<ClienteContactos> clienteContactosList) {
+        this.clienteContactosList = clienteContactosList;
+    }
+
+    @XmlTransient
+    public List<Usuarios> getUsuariosList() {
+        return usuariosList;
+    }
+
+    public void setUsuariosList(List<Usuarios> usuariosList) {
+        this.usuariosList = usuariosList;
     }
 
     @Override

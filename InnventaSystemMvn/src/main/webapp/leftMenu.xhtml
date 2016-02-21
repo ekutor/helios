@@ -8,35 +8,58 @@
       xmlns:p="http://primefaces.org/ui">
 
     
-    <b:container id="leftmenu"  >
-        <p> </p>
-        <b:navbarLinks pull="left" >
-            <b:listLinks
-                tooltip-position="left">
-                <b:navLink value="Action" href="#"/>
-              
-                <b:navLink value="Something else" href="#"
-                           tooltip="Tooltip of the navLink"
-                           tooltip-position="right"/>
-                          
-            
-            <b:navLink value="Something else" href="#"
-                           tooltip="Tooltip of the navLink"
-                           tooltip-position="right"/>
-               
-            <b:navLink value="Something else" href="#"
-                           tooltip="Tooltip of the navLink"
-                           tooltip-position="right"/>
-                
-            <b:navLink value="Something else" href="#"
-                           tooltip="Tooltip of the navLink"
-                           tooltip-position="right"/>
-                
-                            </b:listLinks>
-
-        </b:navbarLinks>       
+    <ui:composition id="leftMenu">
         
-    </b:container>
-   
-
+        <ul id="listMenu" class="nav nav-tabs nav-stacked">
+            <li class="nav-header"><p:outputLabel id="mnuModulos"
+                               value="Modulos Activos" 
+                               styleClass="nav-header"
+                               /></li>
+            <li><p:commandLink id="mnuProductos"
+                               update="contentPanel labelModule"
+                               value="Productos" 
+                               actionListener="#{navigation.productos}">
+                </p:commandLink>
+            </li>
+             <li><p:commandLink id="mnuPedidos" update="contentPanel labelModule" 
+                               value="Pedidos" actionListener="#{navigation.pedidos}">
+                               
+                </p:commandLink>
+            </li>
+            <li><p:commandLink id="mnuRemisiones"
+                               update="contentPanel labelModule"
+                               value="Remisiones" 
+                               actionListener="#{navigation.remisiones}">
+                </p:commandLink>
+            </li>     
+            <li><p:commandLink id="mnuClientes"
+                               update="contentPanel labelModule"
+                               value="Clientes" 
+                               actionListener="#{navigation.clientes}">
+                </p:commandLink>
+            </li>
+             <li><p:commandLink id="mnuTerceros"
+                               update="contentPanel labelModule"
+                               value="Terceros" 
+                               actionListener="#{navigation.productos}">
+                </p:commandLink>
+            </li>
+        </ul>
+        <ul class="nav  nav-tabs nav-stacked">
+            <li><p:outputLabel id="mnuUtil"
+                               value="Utilidades" 
+                               styleClass="nav-header"
+                               >
+                </p:outputLabel>
+            </li>
+            <li><p:commandLink id="mnuReportes"
+                               update="contentPanel labelModule"
+                               value="Reportes" 
+                               >
+                </p:commandLink>
+            </li>
+            
+        </ul>
+       
+    </ui:composition>
 </html>

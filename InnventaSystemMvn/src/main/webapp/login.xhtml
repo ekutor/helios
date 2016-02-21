@@ -1,106 +1,87 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ui:composition template="/templateLogin.xhtml">
+        <ui:define name="titlePpal">
+            <h:outputText value="#{innventa.AppName}"></h:outputText>
+        </ui:define>
 
-            <title><ui:insert name="title">#{innventa.AppName}</ui:insert></title>
-        </f:facet>
-        <f:facet name="middle">
-            <h:outputStylesheet library="css" name="ie10-viewport-bug-workaround.css"/>
-            <h:outputScript library="scripts" name="bootstrap/js/ie-emulation-modes-warning.js"/>
-            <h:outputScript library="scripts" name="bootstrap/js/ie10-viewport-bug-workaround.js"/>
+        <ui:define name="initContent">  
+            <p:panel id="contentPanel" class="hide">  
+                 <p:outputLabel  id="labelModule" />
+            </p:panel>
+            <h1 class="page-header "> <i class="fa fa-diamond"></i> Mettagrup </h1>
+            <img src="images/mettagrup.jpg" alt="Mettagrup" width="100%" class="img-rounded"/>
+        </ui:define>
 
-        </f:facet>
-        <f:facet name="last">
+        <ui:define name="login">  
 
-        </f:facet>
-    </h:head>
+            <h1 class="page-header "> <i class="fa fa-desktop"></i> Login</h1>
 
-    <h:body>
-        <ui:include src="header.xhtml" />
-        <b:container id="content">
-            <b:panel id="pdata" title="Bienvenido" collapsible="true" look="info">
+            <h:form id="loginForm" class="form-horizontal" >
+                <p:growl id="growl" showDetail="true" life="3000" />
+                <div class="form-group">
+                    <label for="usuario" class="col-lg-4 control-label glyphicon glyphicon-user"></label>
 
-                <ui:fragment>
+                    <div class="col-lg-6">
 
-                    <h:form id="loginForm">
-                        <b:row>
-                            <b:column span="8">
-                                <b:panel title="MettaGrup SAS">
-                                    <b:image id="ImagenMetta" 
-                                             name="ImagenMetta" value="images/mettagrup.jpg" 
-                                             alt="Sin Imagen" width="700px"/>
-                                </b:panel>
-                            </b:column>
-                            <b:column span="4">
-                                <b:container fluid="true">
-                                    <b:panel look="primary" title="#{innventa.Login}">
-                                        <b:row>
-                                            <b:column>
-                                                <p>Por favor ingrese su informacion de autenticación.</p>
-                                            </b:column>
-                                        </b:row>
-                                         <b:row>
-                                            <b:column>
-                                                <b:messages for="usuario" />
-                                            </b:column>
-                                        </b:row>
-                                        <b:row>
-                                            <b:column>
-                                                <b:inputText id="usuario" required="true" value="#{loginController.username}" label="Usuario" placeholder="Usuario" />
-                                                <f:facet name="prepend">
-                                                    <b:icon name="user" />
-                                                </f:facet>
-                                            </b:column>
-                                        </b:row>
-                                       
+                        <p:inputText class="form-control" id="usuario" value="#{app.username}"
+                                     placeholder="Usuario" required="true">
+                            <f:validateLength minimum="4" />
+                        </p:inputText>
+                        <p:messages id="msgLogin" showDetail="true" closable="true" style="color:red"  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtPassw" class="col-lg-4 control-label glyphicon glyphicon-lock" ></label>
+                    <div class="col-lg-6">
+                        <p:password class="form-control" id="txtPassw" value="#{app.password}"
+                                    placeholder="Contraseña">
+                            <f:validateLength minimum="4" />
+                        </p:password>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"/> No cerrar sesión
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class=" col-lg-offset-2 col-lg-3 ">
+                        <p:commandButton id="loginButton" 
+                                         action="#{app.login}"
+                                         update="loginForm" 
+                                         class="btn btn-primary" value="Ingresar"
 
-                                        <b:row>
-                                            <b:column>
-                                                <b:inputSecret id="password" required="true" value="#{loginController.password}" />
-                                                <f:facet name="prepend">
-                                                    <b:iconAwesome name="key" />
-                                                </f:facet>
-                                            </b:column>
-                                        </b:row>
-                                        <b:row>
-                                            <b:column>
-                                               
-                                            </b:column>
-                                        </b:row>
+                                         />
+                    </div>
+                    <div class="col-lg-1">
+                        <p:commandButton id="loginRecordar" class="btn btn-default" 
+                                         process="@this"
+                                         resetValues="true"
+                                         value="borrar"
+                                         update="loginForm"
+                                         oncomplete="manejarLogin(xhr, status, args">
 
-                                        <b:row>
-                                            <b:column span="4">
-                                                <b:commandButton value="Ingresaar" id="btnIngresar" update="@form" ajax="true" 
-                                                                 look="success" action="#{loginController.login}">Ingresar</b:commandButton>
-                                            </b:column>
-                                            <b:column span="4">
-                                                <b:commandButton value="Ingresaar" id="btnRecordar" update="@form" ajax="true" 
-                                                                 look="default" action="#{loginController.login}">Recordar Contraseña</b:commandButton>
-                                            </b:column>
-                                        </b:row>
-                                    </b:panel>
-                                </b:container>
-                            </b:column>
-                            <b:column>
-                                <b:well id="messages">
+                        </p:commandButton>
+                    </div>
+                </div>
 
-                                </b:well>
-                            </b:column>
-                        </b:row>
-                    </h:form>
-                </ui:fragment>
-            </b:panel>
-        </b:container>
-    </h:body>
+            </h:form>
+            <script type="text/javascript">
+                
+            </script>
+        </ui:define>
+
+    </ui:composition>
 
 </html>

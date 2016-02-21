@@ -7,7 +7,8 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="tercerosController")
+
+@Named(value = "tercerosController")
 @ViewScoped
 public class TercerosController extends AbstractController<Terceros> {
 
@@ -17,8 +18,8 @@ public class TercerosController extends AbstractController<Terceros> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete Terceros controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete Terceros controller bean. The AbstractController
+     * requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -30,7 +31,5 @@ public class TercerosController extends AbstractController<Terceros> {
         // Inform the Abstract parent controller of the concrete Terceros Entity
         super(Terceros.class);
     }
-
-
 
 }

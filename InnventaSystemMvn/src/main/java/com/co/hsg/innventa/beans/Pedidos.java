@@ -6,8 +6,8 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -111,7 +111,9 @@ public class Pedidos implements Serializable {
     @NotNull
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
-    private Collection<Remisiones> remisionesCollection;
+    private List<Remisiones> remisionesList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
+    private List<PedidosProducto> pedidosProductoList;
 
     public Pedidos() {
     }
@@ -256,12 +258,21 @@ public class Pedidos implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Remisiones> getRemisionesCollection() {
-        return remisionesCollection;
+    public List<Remisiones> getRemisionesList() {
+        return remisionesList;
     }
 
-    public void setRemisionesCollection(Collection<Remisiones> remisionesCollection) {
-        this.remisionesCollection = remisionesCollection;
+    public void setRemisionesList(List<Remisiones> remisionesList) {
+        this.remisionesList = remisionesList;
+    }
+
+    @XmlTransient
+    public List<PedidosProducto> getPedidosProductoList() {
+        return pedidosProductoList;
+    }
+
+    public void setPedidosProductoList(List<PedidosProducto> pedidosProductoList) {
+        this.pedidosProductoList = pedidosProductoList;
     }
 
     @Override

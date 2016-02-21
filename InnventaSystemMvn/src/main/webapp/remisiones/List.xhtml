@@ -7,8 +7,8 @@
                 xmlns:p="http://primefaces.org/ui">
 
         <h:form id="RemisionesListForm">
-
-            <p:panel header="#{innventa.ListRemisionesTitle}">
+           <div class="panel panel-#{navigation.moduleType}">
+         
                 <p:contextMenu id="RemisionesDataTableContextMenu" for="datalist">  
                     <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('RemisionesListForm:createButton').click();" icon="ui-icon-plus"/>
                     <p:menuitem value="#{innventa.View}" onclick="document.getElementById('RemisionesListForm:viewButton').click();" icon="ui-icon-search"/>
@@ -26,7 +26,8 @@
                              rows="30"
                              rowsPerPageTemplate="10,20,30,40,50,100"
                              selectionMode="single"
-                             selection="#{remisionesController.selected}">
+                             selection="#{remisionesController.selected}"
+                             tableStyleClass="table table-striped">
 
                     <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
                     <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
@@ -144,7 +145,7 @@
                             <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
                         </p:commandButton>
 
-            </p:panel>
+            </div>
             <ui:include src="/confirmation.xhtml"/>
         </h:form>
 

@@ -8,7 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="clientesDireccionController")
+
+@Named(value = "clientesDireccionController")
 @ViewScoped
 public class ClientesDireccionController extends AbstractController<ClientesDireccion> {
 
@@ -20,8 +21,8 @@ public class ClientesDireccionController extends AbstractController<ClientesDire
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete ClientesDireccion controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete ClientesDireccion controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -34,7 +35,6 @@ public class ClientesDireccionController extends AbstractController<ClientesDire
         super(ClientesDireccion.class);
     }
 
-
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
      */
@@ -43,8 +43,8 @@ public class ClientesDireccionController extends AbstractController<ClientesDire
     }
 
     /**
-     * Sets the "selected" attribute of the Clientes controller
-     * in order to display its data in its View dialog.
+     * Sets the "selected" attribute of the Clientes controller in order to
+     * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action
      */

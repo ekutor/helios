@@ -6,8 +6,8 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -93,7 +93,7 @@ public class Remisiones implements Serializable {
     @ManyToOne(optional = false)
     private Pedidos idPedido;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRemision")
-    private Collection<RemisionesProducto> remisionesProductoCollection;
+    private List<RemisionesProducto> remisionesProductoList;
 
     public Remisiones() {
     }
@@ -209,12 +209,12 @@ public class Remisiones implements Serializable {
     }
 
     @XmlTransient
-    public Collection<RemisionesProducto> getRemisionesProductoCollection() {
-        return remisionesProductoCollection;
+    public List<RemisionesProducto> getRemisionesProductoList() {
+        return remisionesProductoList;
     }
 
-    public void setRemisionesProductoCollection(Collection<RemisionesProducto> remisionesProductoCollection) {
-        this.remisionesProductoCollection = remisionesProductoCollection;
+    public void setRemisionesProductoList(List<RemisionesProducto> remisionesProductoList) {
+        this.remisionesProductoList = remisionesProductoList;
     }
 
     @Override

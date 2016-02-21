@@ -8,7 +8,10 @@
             <base-name>/Innventa</base-name>
             <var>innventa</var>
         </resource-bundle>
-        
+       
         <navigation-handler>org.primefaces.mobile.application.MobileNavigationHandler</navigation-handler>
     </application>
+    <lifecycle>
+        <phase-listener>com.co.hsg.innventa.backing.security.SecurityAuditorSession</phase-listener>
+    </lifecycle>
 </faces-config>

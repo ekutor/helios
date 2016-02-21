@@ -6,8 +6,8 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -85,9 +85,9 @@ public class Clientes implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
-    private Collection<ClientesDireccion> clientesDireccionCollection;
+    private List<ClientesDireccion> clientesDireccionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
-    private Collection<ClienteContactos> clienteContactosCollection;
+    private List<ClienteContactos> clienteContactosList;
 
     public Clientes() {
     }
@@ -181,21 +181,21 @@ public class Clientes implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ClientesDireccion> getClientesDireccionCollection() {
-        return clientesDireccionCollection;
+    public List<ClientesDireccion> getClientesDireccionList() {
+        return clientesDireccionList;
     }
 
-    public void setClientesDireccionCollection(Collection<ClientesDireccion> clientesDireccionCollection) {
-        this.clientesDireccionCollection = clientesDireccionCollection;
+    public void setClientesDireccionList(List<ClientesDireccion> clientesDireccionList) {
+        this.clientesDireccionList = clientesDireccionList;
     }
 
     @XmlTransient
-    public Collection<ClienteContactos> getClienteContactosCollection() {
-        return clienteContactosCollection;
+    public List<ClienteContactos> getClienteContactosList() {
+        return clienteContactosList;
     }
 
-    public void setClienteContactosCollection(Collection<ClienteContactos> clienteContactosCollection) {
-        this.clienteContactosCollection = clienteContactosCollection;
+    public void setClienteContactosList(List<ClienteContactos> clienteContactosList) {
+        this.clienteContactosList = clienteContactosList;
     }
 
     @Override

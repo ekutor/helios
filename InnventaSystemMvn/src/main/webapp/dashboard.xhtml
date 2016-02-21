@@ -30,6 +30,9 @@
        
        <p:layout fullPage="true">
  <ui:include src="header.xhtml" />
+ <h:form id="pageCreate">
+     <ui:include src="#{navigation.actualPageCreate}.xhtml"/>
+ </h:form>
             <p:layoutUnit position="north" size="70" resizable="false" closable="false" collapsible="false" >
               
 
@@ -37,17 +40,17 @@
 
 
             <p:layoutUnit position="west" size="195" header="Modulos" resizable="true" closable="false" collapsible="true" >
+                
                 <h:form id="form" >
 
                     <p:menu>
-                        <p:menuitem id="abc" value="Inicio" action="/" update=":content:pcenter" />
-                        <p:submenu label="Modulos" >
-                            <p:menuitem id="mnuPedidos" value="Pedidos" action="#{navigation.pedidos}" update=":content:pcenter"/>
-                            <p:menuitem id="mnuRemisiones" value="Remisiones" action="#{navigation.remisiones}" update=":content:pcenter"/>
-                            <p:menuitem id="mnuProductos" value="Productos" action="#{navigation.productos}" update=":content:pcenter"/>
-                            <p:menuitem id="mnuClientes" value="Clientes" action="#{navigation.clientes}" update=":content:pcenter"/>
-                            <p:menuitem id="mnuTerceros" value="Terceros" action="#{navigation.terceros}" update=":content:pcenter"/>
+                      <p:submenu label="Modulos" >
+                            <p:menuitem id="mnuPedidos" value="Pedidos" action="#{navigation.pedidos}" update="content pageCreate"/>
+                            
+                            <p:menuitem id="mnuProductos" value="Productos" action="#{navigation.productos}" update="content pageCreate"/>
+                           
                         </p:submenu>
+                        
                     </p:menu>
 
                 </h:form>

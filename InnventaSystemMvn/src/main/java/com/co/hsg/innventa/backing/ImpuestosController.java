@@ -9,7 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="impuestosController")
+
+@Named(value = "impuestosController")
 @ViewScoped
 public class ImpuestosController extends AbstractController<Impuestos> {
 
@@ -21,8 +22,8 @@ public class ImpuestosController extends AbstractController<Impuestos> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete Impuestos controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete Impuestos controller bean. The AbstractController
+     * requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -35,7 +36,6 @@ public class ImpuestosController extends AbstractController<Impuestos> {
         super(Impuestos.class);
     }
 
-
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
      */
@@ -44,21 +44,22 @@ public class ImpuestosController extends AbstractController<Impuestos> {
     }
 
     /**
-    * Sets the "items" attribute with a collection of Impuestos entities that are retrieved from Impuestos?cap_first
-     * and returns the navigation outcome.
+     * Sets the "items" attribute with a collection of Impuestos entities that
+     * are retrieved from Impuestos?cap_first and returns the navigation
+     * outcome.
      *
-     * @return  navigation outcome for Impuestos page
+     * @return navigation outcome for Impuestos page
      */
-    public String navigateImpuestosCollection() {
+    public String navigateImpuestosList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Impuestos_items", this.getSelected().getImpuestosCollection());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Impuestos_items", this.getSelected().getImpuestosList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/impuestos/index";
     }
 
     /**
-     * Sets the "selected" attribute of the Impuestos controller
-     * in order to display its data in its View dialog.
+     * Sets the "selected" attribute of the Impuestos controller in order to
+     * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action
      */

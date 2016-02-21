@@ -11,13 +11,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-
 @FacesConverter(value = "personasConverter")
 public class PersonasConverter implements Converter {
 
     @Inject
     private PersonasFacade ejbFacade;
-
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -29,20 +27,20 @@ public class PersonasConverter implements Converter {
 
     java.lang.String getKey(String value) {
         java.lang.String key;
-            key = value;
+        key = value;
         return key;
     }
 
     String getStringKey(java.lang.String value) {
         StringBuffer sb = new StringBuffer();
-            sb.append(value);
+        sb.append(value);
         return sb.toString();
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-        if (object == null || 
-            (object instanceof String && ((String) object).length() == 0)) {
+        if (object == null
+                || (object instanceof String && ((String) object).length() == 0)) {
             return null;
         }
         if (object instanceof Personas) {

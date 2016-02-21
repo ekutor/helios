@@ -8,7 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="clientesController")
+
+@Named(value = "clientesController")
 @ViewScoped
 public class ClientesController extends AbstractController<Clientes> {
 
@@ -18,8 +19,8 @@ public class ClientesController extends AbstractController<Clientes> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete Clientes controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete Clientes controller bean. The AbstractController
+     * requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -32,30 +33,30 @@ public class ClientesController extends AbstractController<Clientes> {
         super(Clientes.class);
     }
 
-
-
     /**
-    * Sets the "items" attribute with a collection of ClientesDireccion entities that are retrieved from Clientes?cap_first
-     * and returns the navigation outcome.
+     * Sets the "items" attribute with a collection of ClientesDireccion
+     * entities that are retrieved from Clientes?cap_first and returns the
+     * navigation outcome.
      *
-     * @return  navigation outcome for ClientesDireccion page
+     * @return navigation outcome for ClientesDireccion page
      */
-    public String navigateClientesDireccionCollection() {
+    public String navigateClientesDireccionList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ClientesDireccion_items", this.getSelected().getClientesDireccionCollection());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ClientesDireccion_items", this.getSelected().getClientesDireccionList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/clientesDireccion/index";
     }
 
     /**
-    * Sets the "items" attribute with a collection of ClienteContactos entities that are retrieved from Clientes?cap_first
-     * and returns the navigation outcome.
+     * Sets the "items" attribute with a collection of ClienteContactos entities
+     * that are retrieved from Clientes?cap_first and returns the navigation
+     * outcome.
      *
-     * @return  navigation outcome for ClienteContactos page
+     * @return navigation outcome for ClienteContactos page
      */
-    public String navigateClienteContactosCollection() {
+    public String navigateClienteContactosList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ClienteContactos_items", this.getSelected().getClienteContactosCollection());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ClienteContactos_items", this.getSelected().getClienteContactosList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/clienteContactos/index";
     }

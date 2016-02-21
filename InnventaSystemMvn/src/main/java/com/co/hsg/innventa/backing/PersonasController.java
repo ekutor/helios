@@ -8,7 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="personasController")
+
+@Named(value = "personasController")
 @ViewScoped
 public class PersonasController extends AbstractController<Personas> {
 
@@ -18,8 +19,8 @@ public class PersonasController extends AbstractController<Personas> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete Personas controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete Personas controller bean. The AbstractController
+     * requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -32,19 +33,31 @@ public class PersonasController extends AbstractController<Personas> {
         super(Personas.class);
     }
 
-
-
     /**
-    * Sets the "items" attribute with a collection of ClienteContactos entities that are retrieved from Personas?cap_first
-     * and returns the navigation outcome.
+     * Sets the "items" attribute with a collection of ClienteContactos entities
+     * that are retrieved from Personas?cap_first and returns the navigation
+     * outcome.
      *
-     * @return  navigation outcome for ClienteContactos page
+     * @return navigation outcome for ClienteContactos page
      */
-    public String navigateClienteContactosCollection() {
+    public String navigateClienteContactosList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ClienteContactos_items", this.getSelected().getClienteContactosCollection());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ClienteContactos_items", this.getSelected().getClienteContactosList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/clienteContactos/index";
+    }
+
+    /**
+     * Sets the "items" attribute with a collection of Usuarios entities that
+     * are retrieved from Personas?cap_first and returns the navigation outcome.
+     *
+     * @return navigation outcome for Usuarios page
+     */
+    public String navigateUsuariosList() {
+        if (this.getSelected() != null) {
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Usuarios_items", this.getSelected().getUsuariosList());
+        }
+        return this.mobilePageController.getMobilePagesPrefix() + "/usuarios/index";
     }
 
 }

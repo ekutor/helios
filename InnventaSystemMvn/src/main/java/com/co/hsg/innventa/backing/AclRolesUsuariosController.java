@@ -8,7 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="aclRolesUsuariosController")
+
+@Named(value = "aclRolesUsuariosController")
 @ViewScoped
 public class AclRolesUsuariosController extends AbstractController<AclRolesUsuarios> {
 
@@ -20,8 +21,8 @@ public class AclRolesUsuariosController extends AbstractController<AclRolesUsuar
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete AclRolesUsuarios controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete AclRolesUsuarios controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -34,7 +35,6 @@ public class AclRolesUsuariosController extends AbstractController<AclRolesUsuar
         super(AclRolesUsuarios.class);
     }
 
-
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
      */
@@ -43,8 +43,8 @@ public class AclRolesUsuariosController extends AbstractController<AclRolesUsuar
     }
 
     /**
-     * Sets the "selected" attribute of the AclRoles controller
-     * in order to display its data in its View dialog.
+     * Sets the "selected" attribute of the AclRoles controller in order to
+     * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action
      */

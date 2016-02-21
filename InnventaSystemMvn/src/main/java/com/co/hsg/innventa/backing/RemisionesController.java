@@ -9,7 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="remisionesController")
+
+@Named(value = "remisionesController")
 @ViewScoped
 public class RemisionesController extends AbstractController<Remisiones> {
 
@@ -21,8 +22,8 @@ public class RemisionesController extends AbstractController<Remisiones> {
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete Remisiones controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete Remisiones controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -35,7 +36,6 @@ public class RemisionesController extends AbstractController<Remisiones> {
         super(Remisiones.class);
     }
 
-
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
      */
@@ -44,8 +44,8 @@ public class RemisionesController extends AbstractController<Remisiones> {
     }
 
     /**
-     * Sets the "selected" attribute of the Pedidos controller
-     * in order to display its data in its View dialog.
+     * Sets the "selected" attribute of the Pedidos controller in order to
+     * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action
      */
@@ -54,15 +54,17 @@ public class RemisionesController extends AbstractController<Remisiones> {
             idPedidoController.setSelected(this.getSelected().getIdPedido());
         }
     }
+
     /**
-    * Sets the "items" attribute with a collection of RemisionesProducto entities that are retrieved from Remisiones?cap_first
-     * and returns the navigation outcome.
+     * Sets the "items" attribute with a collection of RemisionesProducto
+     * entities that are retrieved from Remisiones?cap_first and returns the
+     * navigation outcome.
      *
-     * @return  navigation outcome for RemisionesProducto page
+     * @return navigation outcome for RemisionesProducto page
      */
-    public String navigateRemisionesProductoCollection() {
+    public String navigateRemisionesProductoList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("RemisionesProducto_items", this.getSelected().getRemisionesProductoCollection());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("RemisionesProducto_items", this.getSelected().getRemisionesProductoList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/remisionesProducto/index";
     }

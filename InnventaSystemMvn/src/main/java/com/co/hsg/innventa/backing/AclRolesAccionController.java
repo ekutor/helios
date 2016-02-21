@@ -7,7 +7,8 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-@Named(value="aclRolesAccionController")
+
+@Named(value = "aclRolesAccionController")
 @ViewScoped
 public class AclRolesAccionController extends AbstractController<AclRolesAccion> {
 
@@ -17,8 +18,8 @@ public class AclRolesAccionController extends AbstractController<AclRolesAccion>
     private MobilePageController mobilePageController;
 
     /**
-     * Initialize the concrete AclRolesAccion controller bean.
-     * The AbstractController requires the EJB Facade object for most operations.
+     * Initialize the concrete AclRolesAccion controller bean. The
+     * AbstractController requires the EJB Facade object for most operations.
      */
     @PostConstruct
     @Override
@@ -30,7 +31,5 @@ public class AclRolesAccionController extends AbstractController<AclRolesAccion>
         // Inform the Abstract parent controller of the concrete AclRolesAccion Entity
         super(AclRolesAccion.class);
     }
-
-
 
 }
