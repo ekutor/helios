@@ -5,13 +5,13 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-
+<h:outputScript name="js/innventa.js" />
     <ui:composition>
 
-        <p:dialog id="PedidosCreateDlg" widgetVar="PedidosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreatePedidosTitle}" closeOnEscape="true">
+        <p:dialog id="PedidosCreateDlg" widgetVar="PedidosCreateDialog" modal="true"
+                  resizable="true" width="490" height="520" position="450,60" appendTo="@parent" header="#{innventa.CreatePedidosTitle}" closeOnEscape="true">
 
-            <h:form id="PedidosCreateForm">
-
+            <h:form id="PedidosCreateForm"> 
                 <h:panelGroup id="display" rendered="#{pedidosController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
@@ -35,13 +35,21 @@
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaPedido}" for="fechaPedido" />
                         <h:panelGroup>
-                            <p:calendar id="fechaPedido" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaPedido}" title="#{innventa.CreatePedidosTitle_fechaPedido}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaPedido}" showOn="button"/>
+                            <p:calendar id="fechaPedido" pattern="MM/dd/yyyy" 
+                                        value="#{pedidosController.selected.fechaPedido}" 
+                                        title="#{innventa.CreatePedidosTitle_fechaPedido}" 
+                                        required="true" 
+                                        requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaPedido}">
+                                <span class="glyphicon glyphicon-calendar"></span>         
+                            </p:calendar>
                             <p:tooltip for="fechaPedido" value="#{pedidosController.getComponentMessages('fechaPedido', innventa.CreatePedidosHelpText_fechaPedido)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaEntrega}" for="fechaEntrega" />
                         <h:panelGroup>
-                            <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaEntrega}" title="#{innventa.CreatePedidosTitle_fechaEntrega}"  showOn="button"/>
+                            <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaEntrega}" title="#{innventa.CreatePedidosTitle_fechaEntrega}">
+                            <span class="glyphicon glyphicon-calendar"></span>         
+                            </p:calendar>
                             <p:tooltip for="fechaEntrega" value="#{pedidosController.getComponentMessages('fechaEntrega', innventa.CreatePedidosHelpText_fechaEntrega)}"/>
                         </h:panelGroup>
 
@@ -83,7 +91,13 @@
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaCreacion}" for="fechaCreacion" />
                         <h:panelGroup>
-                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaCreacion}" title="#{innventa.CreatePedidosTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaCreacion}" showOn="button"/>
+                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" 
+                                        value="#{pedidosController.selected.fechaCreacion}" 
+                                        title="#{innventa.CreatePedidosTitle_fechaCreacion}" 
+                                        required="true" 
+                                       requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaCreacion}">
+                               <span class="glyphicon glyphicon-calendar"></span>         
+                            </p:calendar>
                             <p:tooltip for="fechaCreacion" value="#{pedidosController.getComponentMessages('fechaCreacion', innventa.CreatePedidosHelpText_fechaCreacion)}"/>
                         </h:panelGroup>
 
@@ -95,7 +109,9 @@
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaModificacion}" for="fechaModificacion" />
                         <h:panelGroup>
-                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaModificacion}" title="#{innventa.CreatePedidosTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaModificacion}" showOn="button"/>
+                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaModificacion}" title="#{innventa.CreatePedidosTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaModificacion}">
+                             <span class="glyphicon glyphicon-calendar"></span>         
+                            </p:calendar>
                             <p:tooltip for="fechaModificacion" value="#{pedidosController.getComponentMessages('fechaModificacion', innventa.CreatePedidosHelpText_fechaModificacion)}"/>
                         </h:panelGroup>
 
@@ -105,12 +121,14 @@
                             <p:tooltip for="eliminado" value="#{pedidosController.getComponentMessages('eliminado', innventa.CreatePedidosHelpText_eliminado)}"/>
                         </h:panelGroup>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{pedidosController.saveNew}" value="#{innventa.Save}" update="display,:PedidosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PedidosCreateDialog'));">
+                     </h:panelGroup>
+                    <p:commandButton class="btn btn-primary" actionListener="#{pedidosController.saveNew}" value="#{innventa.Save}" update="display,:PedidosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PedidosCreateDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
+        
 
                     <p:commandButton value="#{innventa.Cancel}" onclick="PF('PedidosCreateDialog').hide()"/>
-                </h:panelGroup>
+               
 
             </h:form>
 
