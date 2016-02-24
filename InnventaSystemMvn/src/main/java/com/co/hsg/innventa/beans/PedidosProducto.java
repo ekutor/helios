@@ -44,12 +44,12 @@ public class PedidosProducto implements Serializable {
     @Basic(optional = false)
     @NotNull
     private short eliminado;
-    @JoinColumn(name = "id_pedido", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Pedidos idPedido;
     @JoinColumn(name = "id_producto", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Productos idProducto;
+    @JoinColumn(name = "id_pedido", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Pedidos idPedido;
 
     public PedidosProducto() {
     }
@@ -88,20 +88,20 @@ public class PedidosProducto implements Serializable {
         this.eliminado = eliminado;
     }
 
-    public Pedidos getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(Pedidos idPedido) {
-        this.idPedido = idPedido;
-    }
-
     public Productos getIdProducto() {
         return idProducto;
     }
 
     public void setIdProducto(Productos idProducto) {
         this.idProducto = idProducto;
+    }
+
+    public Pedidos getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Pedidos idPedido) {
+        this.idPedido = idPedido;
     }
 
     @Override

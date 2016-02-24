@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="CuentasDireccionEditDlg" widgetVar="CuentasDireccionEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditCuentasDireccionTitle}" closeOnEscape="true">
+
+            <h:form id="CuentasDireccionEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{cuentasDireccionController.selected != null}">
+
+
+                        <h:outputLabel value="#{innventa.EditCuentasDireccionLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{cuentasDireccionController.selected.id}" />
+                            <p:tooltip for="id" value="#{cuentasDireccionController.getComponentMessages('id', innventa.EditCuentasDireccionHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.EditCuentasDireccionLabel_direccion}" for="direccion" />
+                        <h:panelGroup>
+                            <p:inputText id="direccion" value="#{cuentasDireccionController.selected.direccion}" title="#{innventa.EditCuentasDireccionTitle_direccion}" required="true" requiredMessage="#{innventa.EditCuentasDireccionRequiredMessage_direccion}" size="80" maxlength="80"/>
+                            <p:tooltip for="direccion" value="#{cuentasDireccionController.getComponentMessages('direccion', innventa.EditCuentasDireccionHelpText_direccion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.EditCuentasDireccionLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{cuentasDireccionController.selected.eliminado}" title="#{innventa.EditCuentasDireccionTitle_eliminado}" required="true" requiredMessage="#{innventa.EditCuentasDireccionRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{cuentasDireccionController.getComponentMessages('eliminado', innventa.EditCuentasDireccionHelpText_eliminado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.EditCuentasDireccionLabel_idCliente}" for="idCliente" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idCliente" value="#{cuentasDireccionController.selected.idCliente}" required="true" requiredMessage="#{innventa.EditCuentasDireccionRequiredMessage_idCliente}" converter="cuentasConverter">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{cuentasController.items}"
+                                               var="idClienteItem"
+                                               itemValue="#{idClienteItem}"
+                                               itemLabel="#{idClienteItem.id.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idCliente" value="#{cuentasDireccionController.getComponentMessages('idCliente', innventa.EditCuentasDireccionHelpText_idCliente)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cuentasDireccionController.save}" value="#{innventa.Save}" update="display,:CuentasDireccionListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CuentasDireccionEditDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('CuentasDireccionEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

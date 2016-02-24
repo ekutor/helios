@@ -15,7 +15,8 @@
                 <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('PersonasListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PersonasListForm:deleteButton').click();" icon="ui-icon-trash"/>
                 <p:separator/>
-                <p:menuitem value="#{innventa.PersonasMenuItem_clienteContactosList}" icon="ui-icon-search"  action="#{personasController.navigateClienteContactosList}" disabled="#{empty personasController.selected.clienteContactosList}" ajax="false"/>  
+                <p:menuitem value="#{innventa.PersonasMenuItem_pedidosList}" icon="ui-icon-search"  action="#{personasController.navigatePedidosList}" disabled="#{empty personasController.selected.pedidosList}" ajax="false"/>  
+                <p:menuitem value="#{innventa.PersonasMenuItem_cuentasContactosList}" icon="ui-icon-search"  action="#{personasController.navigateCuentasContactosList}" disabled="#{empty personasController.selected.cuentasContactosList}" ajax="false"/>  
                 <p:menuitem value="#{innventa.PersonasMenuItem_usuariosList}" icon="ui-icon-search"  action="#{personasController.navigateUsuariosList}" disabled="#{empty personasController.selected.usuariosList}" ajax="false"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
@@ -23,8 +24,8 @@
                          var="item"
                          rowKey="#{item.id}"
                          paginator="true"
-                         rows="30"
-                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
                          selectionMode="single"
                          selection="#{personasController.selected}">
 
@@ -80,22 +81,30 @@
                     <h:outputText value="#{item.sexo}"/>
                 </p:column>
 
-
-                <p:column sortBy="#{item.fechaNacim}" filterBy="#{item.fechaNacim}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListPersonasTitle_fechaNacim}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.fechaNacim}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                </p:column>
-
+                <!--
+                                    <p:column sortBy="#{item.fechaNacim}" filterBy="#{item.fechaNacim}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{innventa.ListPersonasTitle_fechaNacim}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaNacim}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                -->
                 <!--
                                     <p:column sortBy="#{item.tipoDocumento}" filterBy="#{item.tipoDocumento}">
                                         <f:facet name="header">
                                             <h:outputText value="#{innventa.ListPersonasTitle_tipoDocumento}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.tipoDocumento}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{innventa.ListPersonasTitle_eliminado}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.eliminado}"/>
                                     </p:column>
                 -->
 

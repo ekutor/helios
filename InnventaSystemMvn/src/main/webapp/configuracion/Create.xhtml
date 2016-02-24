@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:outputScript name="js/innventa.js" />
+    <ui:composition>
+        <h:form id="configurationForm"> 
+            <h:panelGroup id="display" >
+                <h2>#{innventa.ConfOCTitle}</h2>
+                <p>#{innventa.ConfOCMessage}</p>
+                <p:panelGrid columns="2" columnClasses="column">
+
+
+                    <p:outputLabel value="#{innventa.ConfOCPre}" for="OCPre" />
+                    <h:panelGroup>
+    
+                        <p:messages showDetail="true" closable="true" style="color:red"  />
+                        
+                        <p:inputText id="OCPre" value="#{parametrosController.selected.clave1}" 
+                                     title="#{innventa.ConfOCPre}" required="true" 
+                                     requiredMessage="#{innventa.ConfOCRequiredMessage_pre}" 
+                                     size="20" maxlength="20"
+                                     class="form-control">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:tooltip for="OCPre" value="#{parametrosController.getComponentMessages('clave1', innventa.ConfOCHelpText_Pre)}"/>
+                    </h:panelGroup>
+                    <p:outputLabel value="#{innventa.ConfOCSequence}" for="OcSeq" />
+                    <h:panelGroup>
+                        <p:inputText id="OcSeq" value="#{parametrosController.selected.clave2}" title="#{innventa.ConfOCSequence}" required="true" requiredMessage="#{innventa.ConfOCRequiredMessage_seq}" size="20" maxlength="20"/>
+                        <p:tooltip for="OcSeq" value="#{parametrosController.getComponentMessages('clave2', innventa.ConfOCHelpText_Secuencia)}"/>
+                    </h:panelGroup>
+
+                </p:panelGrid>
+            </h:panelGroup>
+            <p:commandButton class="btn btn-primary" actionListener="#{parametrosController.save}" value="#{innventa.Save}" 
+                             update="display,contentPanel,labelModule,growl" 
+                          >
+
+            </p:commandButton>
+
+
+            <p:commandButton value="#{innventa.Cancel}" actionListener="#{navigation.inicio}" update="contentPanel"/>
+
+
+        </h:form>
+
+
+
+    </ui:composition>
+
+</html>

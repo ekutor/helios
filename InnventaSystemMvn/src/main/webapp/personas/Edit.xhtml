@@ -62,6 +62,12 @@
                             <p:inputText id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" title="#{innventa.EditPersonasTitle_tipoDocumento}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_tipoDocumento}" size="36" maxlength="36"/>
                             <p:tooltip for="tipoDocumento" value="#{personasController.getComponentMessages('tipoDocumento', innventa.EditPersonasHelpText_tipoDocumento)}"/>
                         </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.EditPersonasLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{personasController.selected.eliminado}" title="#{innventa.EditPersonasTitle_eliminado}" required="true" requiredMessage="#{innventa.EditPersonasRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{personasController.getComponentMessages('eliminado', innventa.EditPersonasHelpText_eliminado)}"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{personasController.save}" value="#{innventa.Save}" update="display,:PersonasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PersonasEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

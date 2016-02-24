@@ -23,14 +23,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hectsaga
  */
 @Entity
-@Table(name = "cliente_contactos")
+@Table(name = "cuentas_contactos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ClienteContactos.findAll", query = "SELECT c FROM ClienteContactos c"),
-    @NamedQuery(name = "ClienteContactos.findById", query = "SELECT c FROM ClienteContactos c WHERE c.id = :id"),
-    @NamedQuery(name = "ClienteContactos.findByCargo", query = "SELECT c FROM ClienteContactos c WHERE c.cargo = :cargo"),
-    @NamedQuery(name = "ClienteContactos.findByEliminado", query = "SELECT c FROM ClienteContactos c WHERE c.eliminado = :eliminado")})
-public class ClienteContactos implements Serializable {
+    @NamedQuery(name = "CuentasContactos.findAll", query = "SELECT c FROM CuentasContactos c"),
+    @NamedQuery(name = "CuentasContactos.findById", query = "SELECT c FROM CuentasContactos c WHERE c.id = :id"),
+    @NamedQuery(name = "CuentasContactos.findByCargo", query = "SELECT c FROM CuentasContactos c WHERE c.cargo = :cargo"),
+    @NamedQuery(name = "CuentasContactos.findByEliminado", query = "SELECT c FROM CuentasContactos c WHERE c.eliminado = :eliminado")})
+public class CuentasContactos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,16 +49,16 @@ public class ClienteContactos implements Serializable {
     private Personas idPersona;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Clientes idCliente;
+    private Cuentas idCliente;
 
-    public ClienteContactos() {
+    public CuentasContactos() {
     }
 
-    public ClienteContactos(String id) {
+    public CuentasContactos(String id) {
         this.id = id;
     }
 
-    public ClienteContactos(String id, int cargo, short eliminado) {
+    public CuentasContactos(String id, int cargo, short eliminado) {
         this.id = id;
         this.cargo = cargo;
         this.eliminado = eliminado;
@@ -96,11 +96,11 @@ public class ClienteContactos implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public Clientes getIdCliente() {
+    public Cuentas getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Clientes idCliente) {
+    public void setIdCliente(Cuentas idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -114,10 +114,10 @@ public class ClienteContactos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClienteContactos)) {
+        if (!(object instanceof CuentasContactos)) {
             return false;
         }
-        ClienteContactos other = (ClienteContactos) object;
+        CuentasContactos other = (CuentasContactos) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,7 +126,7 @@ public class ClienteContactos implements Serializable {
 
     @Override
     public String toString() {
-        return "com.co.hsg.innventa.beans.ClienteContactos[ id=" + id + " ]";
+        return "com.co.hsg.innventa.beans.CuentasContactos[ id=" + id + " ]";
     }
     
 }

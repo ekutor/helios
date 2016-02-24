@@ -1,40 +1,26 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
-import com.co.hsg.innventa.beans.ClienteContactos;
-import com.co.hsg.innventa.session.ClienteContactosFacade;
+import com.co.hsg.innventa.beans.CuentasContactos;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-@Named(value = "clienteContactosController")
+@Named(value = "cuentasContactosController")
 @ViewScoped
-public class ClienteContactosController extends AbstractController<ClienteContactos> {
+public class CuentasContactosController extends AbstractController<CuentasContactos> {
 
-    @Inject
-    private ClienteContactosFacade ejbFacade;
     @Inject
     private PersonasController idPersonaController;
     @Inject
-    private ClientesController idClienteController;
+    private CuentasController idClienteController;
     @Inject
     private MobilePageController mobilePageController;
 
-    /**
-     * Initialize the concrete ClienteContactos controller bean. The
-     * AbstractController requires the EJB Facade object for most operations.
-     */
-    @PostConstruct
-    @Override
-    public void init() {
-        super.setFacade(ejbFacade);
-    }
-
-    public ClienteContactosController() {
-        // Inform the Abstract parent controller of the concrete ClienteContactos Entity
-        super(ClienteContactos.class);
+    public CuentasContactosController() {
+        // Inform the Abstract parent controller of the concrete CuentasContactos Entity
+        super(CuentasContactos.class);
     }
 
     /**
@@ -58,7 +44,7 @@ public class ClienteContactosController extends AbstractController<ClienteContac
     }
 
     /**
-     * Sets the "selected" attribute of the Clientes controller in order to
+     * Sets the "selected" attribute of the Cuentas controller in order to
      * display its data in its View dialog.
      *
      * @param event Event object for the widget that triggered an action

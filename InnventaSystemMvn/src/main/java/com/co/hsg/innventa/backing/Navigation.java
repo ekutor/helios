@@ -23,7 +23,10 @@ public class Navigation implements Serializable {
     private String actualPage = "/inicio";
     @Inject
     AppController app;
-
+    
+    @Inject
+    ParametrosController parametrosController;
+    
     public void inicio() {
         actualModule = "inicio";
         moduleType = "primary";
@@ -34,6 +37,13 @@ public class Navigation implements Serializable {
         actualModule = "pedidos";
         moduleType = "warning";
         icon = "clipboard";
+    }
+    
+    public void orders() {
+        parametrosController.cargarObj("orders");
+        actualModule = "configuracion";
+        moduleType = "warning";
+        icon = "gears";
     }
 
     public void remisiones() {
@@ -54,8 +64,8 @@ public class Navigation implements Serializable {
         icon = "shopping-cart";
     }
 
-    public void clientes() {
-        actualModule = "clientes";
+    public void cuentas() {
+        actualModule = "cuentas";
         moduleType = "info";
         icon = "users";
     }
@@ -94,7 +104,7 @@ public class Navigation implements Serializable {
     }
 
     public String getActualModuleCap() {
-
+        try{
         if (actualModule.equalsIgnoreCase("inicio")) {
             SexType st = SexType.getType(app.getUser().getPersona().getSexo());
             String bnv = "";
@@ -109,6 +119,9 @@ public class Navigation implements Serializable {
             actualModuleCap = bnv + Utils.capitalizes(app.getUser().getPersona().getNombre1());
         } else {
             actualModuleCap = Utils.capitalizes(actualModule);
+        }
+        }catch(java.lang.NullPointerException ne){
+            
         }
         return actualModuleCap;
     }

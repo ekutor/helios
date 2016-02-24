@@ -26,12 +26,6 @@ public class LoginController extends AbstractController<Usuarios> {
     @Inject
     private UsuariosFacade ejbFacade;
     
-    
-     @PostConstruct
-    @Override
-    public void init() {
-        super.setFacade(ejbFacade);
-    }
 
     public LoginController() {
         // Inform the Abstract parent controller of the concrete Usuarios Entity

@@ -4,13 +4,18 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <application>
-      <resource-bundle>
+        <resource-bundle>
             <base-name>/Innventa</base-name>
             <var>innventa</var>
         </resource-bundle>
        
         <navigation-handler>org.primefaces.mobile.application.MobileNavigationHandler</navigation-handler>
     </application>
+    <managed-bean>
+        <managed-bean-name>personasConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.PersonasConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <lifecycle>
         <phase-listener>com.co.hsg.innventa.backing.security.SecurityAuditorSession</phase-listener>
     </lifecycle>

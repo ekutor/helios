@@ -5,8 +5,11 @@
  */
 package com.co.hsg.innventa.session;
 
+import com.co.hsg.innventa.backing.AppController;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -15,6 +18,9 @@ import javax.persistence.EntityManager;
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
+    
+    @Inject
+    AppController app;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -37,11 +43,19 @@ public abstract class AbstractFacade<T> {
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
+    
+    public T findByQuery(String namedQuery) {
+        TypedQuery<T> q = getEntityManager().createNamedQuery(namedQuery,entityClass);
+        return q.getSingleResult();
+    }
 
     public List<T> findAll() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        /*javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+        return getEntityManager().createQuery(cq).getResultList();*/
+        String className = entityClass.getName().substring(entityClass.getName().lastIndexOf(".")+1);
+        TypedQuery<T> q = getEntityManager().createNamedQuery(className+".findAll",entityClass);
+        return q.getResultList();
     }
 
     public List<T> findRange(int[] range) {

@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Personas.findByApellido2", query = "SELECT p FROM Personas p WHERE p.apellido2 = :apellido2"),
     @NamedQuery(name = "Personas.findBySexo", query = "SELECT p FROM Personas p WHERE p.sexo = :sexo"),
     @NamedQuery(name = "Personas.findByFechaNacim", query = "SELECT p FROM Personas p WHERE p.fechaNacim = :fechaNacim"),
-    @NamedQuery(name = "Personas.findByTipoDocumento", query = "SELECT p FROM Personas p WHERE p.tipoDocumento = :tipoDocumento")})
+    @NamedQuery(name = "Personas.findByTipoDocumento", query = "SELECT p FROM Personas p WHERE p.tipoDocumento = :tipoDocumento"),
+    @NamedQuery(name = "Personas.findByEliminado", query = "SELECT p FROM Personas p WHERE p.eliminado = :eliminado")})
 public class Personas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,8 +72,13 @@ public class Personas implements Serializable {
     @Size(min = 1, max = 36)
     @Column(name = "tipo_documento")
     private String tipoDocumento;
+    @Basic(optional = false)
+    @NotNull
+    private short eliminado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    private List<Pedidos> pedidosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
-    private List<ClienteContactos> clienteContactosList;
+    private List<CuentasContactos> cuentasContactosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
     private List<Usuarios> usuariosList;
 
@@ -83,12 +89,13 @@ public class Personas implements Serializable {
         this.id = id;
     }
 
-    public Personas(String id, String nombre1, String apellido1, String sexo, String tipoDocumento) {
+    public Personas(String id, String nombre1, String apellido1, String sexo, String tipoDocumento, short eliminado) {
         this.id = id;
         this.nombre1 = nombre1;
         this.apellido1 = apellido1;
         this.sexo = sexo;
         this.tipoDocumento = tipoDocumento;
+        this.eliminado = eliminado;
     }
 
     public String getId() {
@@ -155,13 +162,30 @@ public class Personas implements Serializable {
         this.tipoDocumento = tipoDocumento;
     }
 
-    @XmlTransient
-    public List<ClienteContactos> getClienteContactosList() {
-        return clienteContactosList;
+    public short getEliminado() {
+        return eliminado;
     }
 
-    public void setClienteContactosList(List<ClienteContactos> clienteContactosList) {
-        this.clienteContactosList = clienteContactosList;
+    public void setEliminado(short eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    @XmlTransient
+    public List<Pedidos> getPedidosList() {
+        return pedidosList;
+    }
+
+    public void setPedidosList(List<Pedidos> pedidosList) {
+        this.pedidosList = pedidosList;
+    }
+
+    @XmlTransient
+    public List<CuentasContactos> getCuentasContactosList() {
+        return cuentasContactosList;
+    }
+
+    public void setCuentasContactosList(List<CuentasContactos> cuentasContactosList) {
+        this.cuentasContactosList = cuentasContactosList;
     }
 
     @XmlTransient

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentasViewDlg" widgetVar="CuentasViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewCuentasTitle}" closeOnEscape="true">
+
+            <h:form id="CuentasViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{cuentasController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_id}"/>
+                        <h:outputText value="#{cuentasController.selected.id}" title="#{innventa.ViewCuentasTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_nombre}"/>
+                        <h:outputText value="#{cuentasController.selected.nombre}" title="#{innventa.ViewCuentasTitle_nombre}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_tipoCliente}"/>
+                        <h:outputText value="#{cuentasController.selected.tipoCliente}" title="#{innventa.ViewCuentasTitle_tipoCliente}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_estado}"/>
+                        <h:outputText value="#{cuentasController.selected.estado}" title="#{innventa.ViewCuentasTitle_estado}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_eliminado}"/>
+                        <h:outputText value="#{cuentasController.selected.eliminado}" title="#{innventa.ViewCuentasTitle_eliminado}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_creadoPor}"/>
+                        <h:outputText value="#{cuentasController.selected.creadoPor}" title="#{innventa.ViewCuentasTitle_creadoPor}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_fechaCreacion}"/>
+                        <h:outputText value="#{cuentasController.selected.fechaCreacion}" title="#{innventa.ViewCuentasTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_modificadoPor}"/>
+                        <h:outputText value="#{cuentasController.selected.modificadoPor}" title="#{innventa.ViewCuentasTitle_modificadoPor}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasLabel_fechaModificacion}"/>
+                        <h:outputText value="#{cuentasController.selected.fechaModificacion}" title="#{innventa.ViewCuentasTitle_fechaModificacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{innventa.Close}" onclick="PF('CuentasViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

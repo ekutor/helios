@@ -23,14 +23,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hectsaga
  */
 @Entity
-@Table(name = "clientes_direccion")
+@Table(name = "cuentas_direccion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ClientesDireccion.findAll", query = "SELECT c FROM ClientesDireccion c"),
-    @NamedQuery(name = "ClientesDireccion.findById", query = "SELECT c FROM ClientesDireccion c WHERE c.id = :id"),
-    @NamedQuery(name = "ClientesDireccion.findByDireccion", query = "SELECT c FROM ClientesDireccion c WHERE c.direccion = :direccion"),
-    @NamedQuery(name = "ClientesDireccion.findByEliminado", query = "SELECT c FROM ClientesDireccion c WHERE c.eliminado = :eliminado")})
-public class ClientesDireccion implements Serializable {
+    @NamedQuery(name = "CuentasDireccion.findAll", query = "SELECT c FROM CuentasDireccion c"),
+    @NamedQuery(name = "CuentasDireccion.findById", query = "SELECT c FROM CuentasDireccion c WHERE c.id = :id"),
+    @NamedQuery(name = "CuentasDireccion.findByDireccion", query = "SELECT c FROM CuentasDireccion c WHERE c.direccion = :direccion"),
+    @NamedQuery(name = "CuentasDireccion.findByEliminado", query = "SELECT c FROM CuentasDireccion c WHERE c.eliminado = :eliminado")})
+public class CuentasDireccion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,16 +47,16 @@ public class ClientesDireccion implements Serializable {
     private short eliminado;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Clientes idCliente;
+    private Cuentas idCliente;
 
-    public ClientesDireccion() {
+    public CuentasDireccion() {
     }
 
-    public ClientesDireccion(String id) {
+    public CuentasDireccion(String id) {
         this.id = id;
     }
 
-    public ClientesDireccion(String id, String direccion, short eliminado) {
+    public CuentasDireccion(String id, String direccion, short eliminado) {
         this.id = id;
         this.direccion = direccion;
         this.eliminado = eliminado;
@@ -86,11 +86,11 @@ public class ClientesDireccion implements Serializable {
         this.eliminado = eliminado;
     }
 
-    public Clientes getIdCliente() {
+    public Cuentas getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Clientes idCliente) {
+    public void setIdCliente(Cuentas idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -104,10 +104,10 @@ public class ClientesDireccion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClientesDireccion)) {
+        if (!(object instanceof CuentasDireccion)) {
             return false;
         }
-        ClientesDireccion other = (ClientesDireccion) object;
+        CuentasDireccion other = (CuentasDireccion) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -116,7 +116,7 @@ public class ClientesDireccion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.co.hsg.innventa.beans.ClientesDireccion[ id=" + id + " ]";
+        return "com.co.hsg.innventa.beans.CuentasDireccion[ id=" + id + " ]";
     }
     
 }

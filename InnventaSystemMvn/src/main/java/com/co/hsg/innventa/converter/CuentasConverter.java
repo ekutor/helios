@@ -1,7 +1,7 @@
 package com.co.hsg.innventa.converter;
 
-import com.co.hsg.innventa.beans.ClienteContactos;
-import com.co.hsg.innventa.session.ClienteContactosFacade;
+import com.co.hsg.innventa.beans.Cuentas;
+import com.co.hsg.innventa.session.CuentasFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,11 +11,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-@FacesConverter(value = "clienteContactosConverter")
-public class ClienteContactosConverter implements Converter {
+@FacesConverter(value = "cuentasConverter")
+public class CuentasConverter implements Converter {
 
     @Inject
-    private ClienteContactosFacade ejbFacade;
+    private CuentasFacade ejbFacade;
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -43,11 +43,11 @@ public class ClienteContactosConverter implements Converter {
                 || (object instanceof String && ((String) object).length() == 0)) {
             return null;
         }
-        if (object instanceof ClienteContactos) {
-            ClienteContactos o = (ClienteContactos) object;
+        if (object instanceof Cuentas) {
+            Cuentas o = (Cuentas) object;
             return getStringKey(o.getId());
         } else {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), ClienteContactos.class.getName()});
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Cuentas.class.getName()});
             return null;
         }
     }

@@ -50,12 +50,14 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.idCliente}" filterBy="#{item.idCliente}">
+
+                <p:column sortBy="#{item.idCliente.id}" filterBy="#{item.idCliente.id}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListPedidosTitle_idCliente}"/>
                     </f:facet>
-                    <h:outputText value="#{item.idCliente}"/>
+                    <h:outputText value="#{item.idCliente.nombre1}"/>
                 </p:column>
+
 
 
                 <p:column sortBy="#{item.fechaPedido}" filterBy="#{item.fechaPedido}">
@@ -73,7 +75,7 @@
                         <h:outputText value="#{innventa.ListPedidosTitle_fechaEntrega}"/>
                     </f:facet>
                     <h:outputText value="#{item.fechaEntrega}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                 </p:column>
 
@@ -163,9 +165,9 @@
                 -->
 
             </p:dataTable>
- 
+
             <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update=":PedidosCreateForm" oncomplete="PF('PedidosCreateDialog').show()">
-          
+
             </p:commandButton>
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PedidosViewForm" oncomplete="PF('PedidosViewDialog').show()" disabled="#{empty pedidosController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PedidosEditForm" oncomplete="PF('PedidosEditDialog').show()" disabled="#{empty pedidosController.selected}"/>

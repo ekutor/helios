@@ -26,11 +26,11 @@ public class SecurityAuditorSession implements SecurityAuditor{
     
  
     public void validateSession(){
-        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+       /* ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         Usuarios user = (Usuarios) ctx.getSessionMap().get("user");
         if(user == null){
             controler.logout();
-        }
+        }*/
     }
 
     @Override

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -7,7 +12,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,10 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p"),
+    @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0"),
     @NamedQuery(name = "Pedidos.findById", query = "SELECT p FROM Pedidos p WHERE p.id = :id"),
     @NamedQuery(name = "Pedidos.findByReferencia", query = "SELECT p FROM Pedidos p WHERE p.referencia = :referencia"),
-    @NamedQuery(name = "Pedidos.findByIdCliente", query = "SELECT p FROM Pedidos p WHERE p.idCliente = :idCliente"),
     @NamedQuery(name = "Pedidos.findByFechaPedido", query = "SELECT p FROM Pedidos p WHERE p.fechaPedido = :fechaPedido"),
     @NamedQuery(name = "Pedidos.findByFechaEntrega", query = "SELECT p FROM Pedidos p WHERE p.fechaEntrega = :fechaEntrega"),
     @NamedQuery(name = "Pedidos.findByCantidadTotal", query = "SELECT p FROM Pedidos p WHERE p.cantidadTotal = :cantidadTotal"),
@@ -53,11 +61,6 @@ public class Pedidos implements Serializable {
     @NotNull
     @Size(min = 1, max = 20)
     private String referencia;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "id_cliente")
-    private String idCliente;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_pedido")
@@ -90,7 +93,7 @@ public class Pedidos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
     @Basic(optional = false)
     @NotNull
@@ -100,11 +103,14 @@ public class Pedidos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_modificacion")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
     @Basic(optional = false)
     @NotNull
     private short eliminado;
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Personas idCliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
     private List<Remisiones> remisionesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
@@ -117,10 +123,9 @@ public class Pedidos implements Serializable {
         this.id = id;
     }
 
-    public Pedidos(String id, String referencia, String idCliente, Date fechaPedido, int cantidadTotal, int cantidadPendientes, String estado, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion, short eliminado) {
+    public Pedidos(String id, String referencia, Date fechaPedido, int cantidadTotal, int cantidadPendientes, String estado, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion, short eliminado) {
         this.id = id;
         this.referencia = referencia;
-        this.idCliente = idCliente;
         this.fechaPedido = fechaPedido;
         this.cantidadTotal = cantidadTotal;
         this.cantidadPendientes = cantidadPendientes;
@@ -146,14 +151,6 @@ public class Pedidos implements Serializable {
 
     public void setReferencia(String referencia) {
         this.referencia = referencia;
-    }
-
-    public String getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
     }
 
     public Date getFechaPedido() {
@@ -250,6 +247,14 @@ public class Pedidos implements Serializable {
 
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
+    }
+
+    public Personas getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Personas idCliente) {
+        this.idCliente = idCliente;
     }
 
     @XmlTransient

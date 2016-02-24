@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<h:outputScript name="js/innventa.js" />
+    <h:outputScript name="js/innventa.js" />
     <ui:composition>
 
         <p:dialog id="PedidosCreateDlg" widgetVar="PedidosCreateDialog" modal="true"
@@ -15,12 +15,6 @@
                 <h:panelGroup id="display" rendered="#{pedidosController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_id}" for="id" />
-                        <h:panelGroup>
-                            <p:inputText id="id" value="#{pedidosController.selected.id}" title="#{innventa.CreatePedidosTitle_id}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_id}" size="36" maxlength="36"/>
-                            <p:tooltip for="id" value="#{pedidosController.getComponentMessages('id', innventa.CreatePedidosHelpText_id)}"/>
-                        </h:panelGroup>
-
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
                         <h:panelGroup>
                             <p:inputText id="referencia" value="#{pedidosController.selected.referencia}" title="#{innventa.CreatePedidosTitle_referencia}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_referencia}" size="20" maxlength="20"/>
@@ -28,14 +22,27 @@
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_idCliente}" for="idCliente" />
+
                         <h:panelGroup>
-                            <p:inputText id="idCliente" value="#{pedidosController.selected.idCliente}" title="#{innventa.CreatePedidosTitle_idCliente}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_idCliente}" size="36" maxlength="36"/>
+                            <p:selectOneMenu id="idCliente" value="#{pedidosController.selected.idCliente}" required="true" 
+                                             converter="#{personasConverter}"
+                                             requiredMessage="#{innventa.CreatePedidosRequiredMessage_idCliente}" 
+                                             >
+
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{personasController.items}"
+                                               var="idClienteItem"
+                                               itemValue="#{idClienteItem}"
+                                               itemLabel="#{idClienteItem.nombre1.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
                             <p:tooltip for="idCliente" value="#{pedidosController.getComponentMessages('idCliente', innventa.CreatePedidosHelpText_idCliente)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaPedido}" for="fechaPedido" />
                         <h:panelGroup>
-                            <p:calendar id="fechaPedido" pattern="MM/dd/yyyy" 
+                            <p:calendar id="fechaPedido" pattern="dd/MM/yyyy" 
                                         value="#{pedidosController.selected.fechaPedido}" 
                                         title="#{innventa.CreatePedidosTitle_fechaPedido}" 
                                         required="true" 
@@ -47,8 +54,8 @@
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaEntrega}" for="fechaEntrega" />
                         <h:panelGroup>
-                            <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaEntrega}" title="#{innventa.CreatePedidosTitle_fechaEntrega}">
-                            <span class="glyphicon glyphicon-calendar"></span>         
+                            <p:calendar id="fechaEntrega" pattern="dd/MM/yyyy" value="#{pedidosController.selected.fechaEntrega}" title="#{innventa.CreatePedidosTitle_fechaEntrega}">
+                                <span class="glyphicon glyphicon-calendar"></span>         
                             </p:calendar>
                             <p:tooltip for="fechaEntrega" value="#{pedidosController.getComponentMessages('fechaEntrega', innventa.CreatePedidosHelpText_fechaEntrega)}"/>
                         </h:panelGroup>
@@ -83,52 +90,23 @@
                             <p:tooltip for="estado" value="#{pedidosController.getComponentMessages('estado', innventa.CreatePedidosHelpText_estado)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_creadoPor}" for="creadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="creadoPor" value="#{pedidosController.selected.creadoPor}" title="#{innventa.CreatePedidosTitle_creadoPor}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_creadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="creadoPor" value="#{pedidosController.getComponentMessages('creadoPor', innventa.CreatePedidosHelpText_creadoPor)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaCreacion}" for="fechaCreacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" 
-                                        value="#{pedidosController.selected.fechaCreacion}" 
-                                        title="#{innventa.CreatePedidosTitle_fechaCreacion}" 
-                                        required="true" 
-                                       requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaCreacion}">
-                               <span class="glyphicon glyphicon-calendar"></span>         
-                            </p:calendar>
-                            <p:tooltip for="fechaCreacion" value="#{pedidosController.getComponentMessages('fechaCreacion', innventa.CreatePedidosHelpText_fechaCreacion)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_modificadoPor}" for="modificadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="modificadoPor" value="#{pedidosController.selected.modificadoPor}" title="#{innventa.CreatePedidosTitle_modificadoPor}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="modificadoPor" value="#{pedidosController.getComponentMessages('modificadoPor', innventa.CreatePedidosHelpText_modificadoPor)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaModificacion}" for="fechaModificacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy" value="#{pedidosController.selected.fechaModificacion}" title="#{innventa.CreatePedidosTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaModificacion}">
-                             <span class="glyphicon glyphicon-calendar"></span>         
-                            </p:calendar>
-                            <p:tooltip for="fechaModificacion" value="#{pedidosController.getComponentMessages('fechaModificacion', innventa.CreatePedidosHelpText_fechaModificacion)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_eliminado}" for="eliminado" />
-                        <h:panelGroup>
-                            <p:inputText id="eliminado" value="#{pedidosController.selected.eliminado}" title="#{innventa.CreatePedidosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_eliminado}"/>
-                            <p:tooltip for="eliminado" value="#{pedidosController.getComponentMessages('eliminado', innventa.CreatePedidosHelpText_eliminado)}"/>
-                        </h:panelGroup>
                     </p:panelGrid>
-                     </h:panelGroup>
-                    <p:commandButton class="btn btn-primary" actionListener="#{pedidosController.saveNew}" value="#{innventa.Save}" update="display,:PedidosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PedidosCreateDialog'));">
-                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
-                    </p:commandButton>
-        
 
-                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('PedidosCreateDialog').hide()"/>
-               
+                    <h:panelGroup styleClass="hide">
+                        <p:inputText id="eliminado" value="#{pedidosController.selected.eliminado}" title="#{innventa.CreatePedidosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_eliminado}"/>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+                <p:commandButton class="btn btn-primary" actionListener="#{pedidosController.saveNew}" 
+                                 value="#{innventa.Save}" 
+                                 update="display,:PedidosListForm:datalist,:growl" 
+                                 oncomplete="handleSubmit(xhr,status,args,PF('PedidosCreateDialog'));">
+                    <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
+
+
+                <p:commandButton value="#{innventa.Cancel}" onclick="PF('PedidosCreateDialog').hide()"/>
+
 
             </h:form>
 

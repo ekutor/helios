@@ -2,12 +2,10 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Remisiones;
-import com.co.hsg.innventa.session.RemisionesFacade;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 @Named(value = "remisionesController")
@@ -15,21 +13,9 @@ import javax.inject.Inject;
 public class RemisionesController extends AbstractController<Remisiones> {
 
     @Inject
-    private RemisionesFacade ejbFacade;
-    @Inject
     private PedidosController idPedidoController;
     @Inject
     private MobilePageController mobilePageController;
-
-    /**
-     * Initialize the concrete Remisiones controller bean. The
-     * AbstractController requires the EJB Facade object for most operations.
-     */
-    @PostConstruct
-    @Override
-    public void init() {
-        super.setFacade(ejbFacade);
-    }
 
     public RemisionesController() {
         // Inform the Abstract parent controller of the concrete Remisiones Entity

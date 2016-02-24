@@ -30,17 +30,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Clientes.findAll", query = "SELECT c FROM Clientes c"),
-    @NamedQuery(name = "Clientes.findById", query = "SELECT c FROM Clientes c WHERE c.id = :id"),
-    @NamedQuery(name = "Clientes.findByNombre", query = "SELECT c FROM Clientes c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Clientes.findByTipoCliente", query = "SELECT c FROM Clientes c WHERE c.tipoCliente = :tipoCliente"),
-    @NamedQuery(name = "Clientes.findByEstado", query = "SELECT c FROM Clientes c WHERE c.estado = :estado"),
-    @NamedQuery(name = "Clientes.findByEliminado", query = "SELECT c FROM Clientes c WHERE c.eliminado = :eliminado"),
-    @NamedQuery(name = "Clientes.findByCreadoPor", query = "SELECT c FROM Clientes c WHERE c.creadoPor = :creadoPor"),
-    @NamedQuery(name = "Clientes.findByFechaCreacion", query = "SELECT c FROM Clientes c WHERE c.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Clientes.findByModificadoPor", query = "SELECT c FROM Clientes c WHERE c.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Clientes.findByFechaModificacion", query = "SELECT c FROM Clientes c WHERE c.fechaModificacion = :fechaModificacion")})
-public class Clientes implements Serializable {
+    @NamedQuery(name = "Cuentas.findAll", query = "SELECT c FROM Cuentas c"),
+    @NamedQuery(name = "Cuentas.findById", query = "SELECT c FROM Cuentas c WHERE c.id = :id"),
+    @NamedQuery(name = "Cuentas.findByNombre", query = "SELECT c FROM Cuentas c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Cuentas.findByTipoCliente", query = "SELECT c FROM Cuentas c WHERE c.tipoCliente = :tipoCliente"),
+    @NamedQuery(name = "Cuentas.findByEstado", query = "SELECT c FROM Cuentas c WHERE c.estado = :estado"),
+    @NamedQuery(name = "Cuentas.findByEliminado", query = "SELECT c FROM Cuentas c WHERE c.eliminado = :eliminado"),
+    @NamedQuery(name = "Cuentas.findByCreadoPor", query = "SELECT c FROM Cuentas c WHERE c.creadoPor = :creadoPor"),
+    @NamedQuery(name = "Cuentas.findByFechaCreacion", query = "SELECT c FROM Cuentas c WHERE c.fechaCreacion = :fechaCreacion"),
+    @NamedQuery(name = "Cuentas.findByModificadoPor", query = "SELECT c FROM Cuentas c WHERE c.modificadoPor = :modificadoPor"),
+    @NamedQuery(name = "Cuentas.findByFechaModificacion", query = "SELECT c FROM Cuentas c WHERE c.fechaModificacion = :fechaModificacion")})
+public class Cuentas implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -85,18 +85,18 @@ public class Clientes implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
-    private List<ClientesDireccion> clientesDireccionList;
+    private List<CuentasContactos> cuentasContactosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
-    private List<ClienteContactos> clienteContactosList;
+    private List<CuentasDireccion> cuentasDireccionList;
 
-    public Clientes() {
+    public Cuentas() {
     }
 
-    public Clientes(String id) {
+    public Cuentas(String id) {
         this.id = id;
     }
 
-    public Clientes(String id, String nombre, String tipoCliente, String estado, short eliminado, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion) {
+    public Cuentas(String id, String nombre, String tipoCliente, String estado, short eliminado, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion) {
         this.id = id;
         this.nombre = nombre;
         this.tipoCliente = tipoCliente;
@@ -181,21 +181,21 @@ public class Clientes implements Serializable {
     }
 
     @XmlTransient
-    public List<ClientesDireccion> getClientesDireccionList() {
-        return clientesDireccionList;
+    public List<CuentasContactos> getCuentasContactosList() {
+        return cuentasContactosList;
     }
 
-    public void setClientesDireccionList(List<ClientesDireccion> clientesDireccionList) {
-        this.clientesDireccionList = clientesDireccionList;
+    public void setCuentasContactosList(List<CuentasContactos> cuentasContactosList) {
+        this.cuentasContactosList = cuentasContactosList;
     }
 
     @XmlTransient
-    public List<ClienteContactos> getClienteContactosList() {
-        return clienteContactosList;
+    public List<CuentasDireccion> getCuentasDireccionList() {
+        return cuentasDireccionList;
     }
 
-    public void setClienteContactosList(List<ClienteContactos> clienteContactosList) {
-        this.clienteContactosList = clienteContactosList;
+    public void setCuentasDireccionList(List<CuentasDireccion> cuentasDireccionList) {
+        this.cuentasDireccionList = cuentasDireccionList;
     }
 
     @Override
@@ -208,10 +208,10 @@ public class Clientes implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Clientes)) {
+        if (!(object instanceof Cuentas)) {
             return false;
         }
-        Clientes other = (Clientes) object;
+        Cuentas other = (Cuentas) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -220,7 +220,7 @@ public class Clientes implements Serializable {
 
     @Override
     public String toString() {
-        return "com.co.hsg.innventa.beans.Clientes[ id=" + id + " ]";
+        return "com.co.hsg.innventa.beans.Cuentas[ id=" + id + " ]";
     }
     
 }

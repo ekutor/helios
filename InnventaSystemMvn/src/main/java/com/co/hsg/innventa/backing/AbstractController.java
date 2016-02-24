@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 
 import java.util.ResourceBundle;
 import javax.ejb.EJBException;
@@ -26,6 +27,7 @@ public abstract class AbstractController<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Inject
     private AbstractFacade<T> ejbFacade;
     private Class<T> itemClass;
     private T selected;
@@ -42,40 +44,6 @@ public abstract class AbstractController<T> implements Serializable {
 
     public AbstractController(Class<T> itemClass) {
         this.itemClass = itemClass;
-    }
-
-    /**
-     * Initialize the concrete controller bean. This AbstractController requires
-     * the EJB Facade object for most operations, and that task is performed by
-     * the concrete controller bean.
-     * <p>
-     * In addition, each controller for an entity that has Many-To-One
-     * relationships, needs to establish references to those entities'
-     * controllers in order to display their information from a context menu.
-     */
-    public abstract void init();
-
-    /**
-     * Retrieve the current EJB Facade object so that other beans in this
-     * package can perform additional data layer tasks (e.g. additional queries)
-     *
-     * @return the concrete EJB Facade associated with the concrete controller
-     * bean.
-     */
-    protected AbstractFacade<T> getFacade() {
-        return ejbFacade;
-    }
-
-    /**
-     * Sets the concrete EJB Facade object so that data layer actions can be
-     * performed. This applies to all basic CRUD actions this controller
-     * performs.
-     *
-     * @param ejbFacade the concrete EJB Facade to perform data layer actions
-     * with
-     */
-    protected void setFacade(AbstractFacade<T> ejbFacade) {
-        this.ejbFacade = ejbFacade;
     }
 
     /**
@@ -126,6 +94,16 @@ public abstract class AbstractController<T> implements Serializable {
             items = this.ejbFacade.findAll();
         }
         return items;
+    }
+    
+     public void chargeItem(String namedQuery) {
+        try{
+         if (selected == null) {
+            selected = this.ejbFacade.findByQuery(namedQuery);
+        }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -191,11 +169,18 @@ public abstract class AbstractController<T> implements Serializable {
         if (selected != null) {
             this.setEmbeddableKeys();
             try {
-                if (persistAction != PersistAction.DELETE) {
-                    this.ejbFacade.edit(selected);
-                } else {
-                    this.ejbFacade.remove(selected);
+                switch (persistAction) {
+                    case CREATE:
+                        this.ejbFacade.create(selected);
+                        break;
+                    case UPDATE:
+                        this.ejbFacade.edit(selected);
+                        break;
+                    case DELETE:
+                        this.ejbFacade.remove(selected);
+                        break;
                 }
+              
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 Throwable cause = JsfUtil.getRootCause(ex.getCause());

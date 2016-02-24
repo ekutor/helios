@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CuentasListForm">
+
+        <div class="panel panel-#{navigation.moduleType}">
+            <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
+            <p:contextMenu id="CuentasDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('CuentasListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('CuentasListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('CuentasListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('CuentasListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{innventa.CuentasMenuItem_cuentasContactosList}" icon="ui-icon-search"  action="#{cuentasController.navigateCuentasContactosList}" disabled="#{empty cuentasController.selected.cuentasContactosList}" ajax="false"/>  
+                <p:menuitem value="#{innventa.CuentasMenuItem_cuentasDireccionList}" icon="ui-icon-search"  action="#{cuentasController.navigateCuentasDireccionList}" disabled="#{empty cuentasController.selected.cuentasDireccionList}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{cuentasController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{cuentasController.selected}"
+                         tableStyleClass="table table-striped">
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CuentasDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CuentasDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CuentasListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasTitle_nombre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.tipoCliente}" filterBy="#{item.tipoCliente}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasTitle_tipoCliente}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tipoCliente}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasTitle_estado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasTitle_eliminado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.eliminado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasTitle_creadoPor}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.creadoPor}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{innventa.ListCuentasTitle_fechaCreacion}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaCreacion}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{innventa.ListCuentasTitle_modificadoPor}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.modificadoPor}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{innventa.ListCuentasTitle_fechaModificacion}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaModificacion}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{cuentasController.prepareCreate}" update=":CuentasCreateForm" oncomplete="PF('CuentasCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":CuentasViewForm" oncomplete="PF('CuentasViewDialog').show()" disabled="#{empty cuentasController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":CuentasEditForm" oncomplete="PF('CuentasEditDialog').show()" disabled="#{empty cuentasController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{cuentasController.delete}" update=":growl,datalist" disabled="#{empty cuentasController.selected}">
+                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </div>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

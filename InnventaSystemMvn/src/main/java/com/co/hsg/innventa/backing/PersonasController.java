@@ -2,11 +2,9 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Personas;
-import com.co.hsg.innventa.session.PersonasFacade;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 @Named(value = "personasController")
@@ -14,19 +12,7 @@ import javax.inject.Inject;
 public class PersonasController extends AbstractController<Personas> {
 
     @Inject
-    private PersonasFacade ejbFacade;
-    @Inject
     private MobilePageController mobilePageController;
-
-    /**
-     * Initialize the concrete Personas controller bean. The AbstractController
-     * requires the EJB Facade object for most operations.
-     */
-    @PostConstruct
-    @Override
-    public void init() {
-        super.setFacade(ejbFacade);
-    }
 
     public PersonasController() {
         // Inform the Abstract parent controller of the concrete Personas Entity
@@ -34,17 +20,30 @@ public class PersonasController extends AbstractController<Personas> {
     }
 
     /**
-     * Sets the "items" attribute with a collection of ClienteContactos entities
+     * Sets the "items" attribute with a collection of Pedidos entities that are
+     * retrieved from Personas?cap_first and returns the navigation outcome.
+     *
+     * @return navigation outcome for Pedidos page
+     */
+    public String navigatePedidosList() {
+        if (this.getSelected() != null) {
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Pedidos_items", this.getSelected().getPedidosList());
+        }
+        return this.mobilePageController.getMobilePagesPrefix() + "/pedidos/index";
+    }
+
+    /**
+     * Sets the "items" attribute with a collection of CuentasContactos entities
      * that are retrieved from Personas?cap_first and returns the navigation
      * outcome.
      *
-     * @return navigation outcome for ClienteContactos page
+     * @return navigation outcome for CuentasContactos page
      */
-    public String navigateClienteContactosList() {
+    public String navigateCuentasContactosList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ClienteContactos_items", this.getSelected().getClienteContactosList());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("CuentasContactos_items", this.getSelected().getCuentasContactosList());
         }
-        return this.mobilePageController.getMobilePagesPrefix() + "/clienteContactos/index";
+        return this.mobilePageController.getMobilePagesPrefix() + "/cuentasContactos/index";
     }
 
     /**

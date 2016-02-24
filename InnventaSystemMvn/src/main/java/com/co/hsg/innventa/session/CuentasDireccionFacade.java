@@ -5,7 +5,7 @@
  */
 package com.co.hsg.innventa.session;
 
-import com.co.hsg.innventa.beans.Clientes;
+import com.co.hsg.innventa.beans.CuentasDireccion;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author hectsaga
  */
 @Stateless
-public class ClientesFacade extends AbstractFacade<Clientes> {
+public class CuentasDireccionFacade extends AbstractFacade<CuentasDireccion> {
 
     @PersistenceContext(unitName = "InnventaSystemPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class ClientesFacade extends AbstractFacade<Clientes> {
         return em;
     }
 
-    public ClientesFacade() {
-        super(Clientes.class);
+    public CuentasDireccionFacade() {
+        super(CuentasDireccion.class);
     }
     
 }

@@ -30,17 +30,16 @@ public class AppController extends AbstractController<Usuarios> {
     
     @Inject
     private UsuariosFacade ejbFacade;
-    
-     @PostConstruct
-    @Override
-    public void init() {
-        super.setFacade(ejbFacade);
+   
+    public enum Options{
+        ORDERS
     }
 
     public AppController() {
         // Inform the Abstract parent controller of the concrete Usuarios Entity
         super(Usuarios.class);
     }
+    
     
     public String login() {
         Usuarios user = ejbFacade.find(username);

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentasContactosViewDlg" widgetVar="CuentasContactosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewCuentasContactosTitle}" closeOnEscape="true">
+
+            <h:form id="CuentasContactosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{cuentasContactosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewCuentasContactosLabel_id}"/>
+                        <h:outputText value="#{cuentasContactosController.selected.id}" title="#{innventa.ViewCuentasContactosTitle_id}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasContactosLabel_cargo}"/>
+                        <h:outputText value="#{cuentasContactosController.selected.cargo}" title="#{innventa.ViewCuentasContactosTitle_cargo}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasContactosLabel_eliminado}"/>
+                        <h:outputText value="#{cuentasContactosController.selected.eliminado}" title="#{innventa.ViewCuentasContactosTitle_eliminado}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasContactosLabel_idPersona}"/>
+                        <h:outputText value="#{cuentasContactosController.selected.idPersona.id}"/>
+
+                        <h:outputText value="#{innventa.ViewCuentasContactosLabel_idCliente}"/>
+                        <h:outputText value="#{cuentasContactosController.selected.idCliente.id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{innventa.Close}" onclick="PF('CuentasContactosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

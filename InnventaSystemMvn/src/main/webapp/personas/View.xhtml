@@ -40,6 +40,9 @@
 
                         <h:outputText value="#{innventa.ViewPersonasLabel_tipoDocumento}"/>
                         <h:outputText value="#{personasController.selected.tipoDocumento}" title="#{innventa.ViewPersonasTitle_tipoDocumento}"/>
+
+                        <h:outputText value="#{innventa.ViewPersonasLabel_eliminado}"/>
+                        <h:outputText value="#{personasController.selected.eliminado}" title="#{innventa.ViewPersonasTitle_eliminado}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{innventa.Close}" onclick="PF('PersonasViewDialog').hide()"/>
                 </h:panelGroup>

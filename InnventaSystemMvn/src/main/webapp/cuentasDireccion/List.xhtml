@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CuentasDireccionListForm">
+
+        <p:panel header="#{innventa.ListCuentasDireccionTitle}">
+            <p:contextMenu id="CuentasDireccionDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('CuentasDireccionListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('CuentasDireccionListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('CuentasDireccionListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('CuentasDireccionListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{innventa.CuentasDireccionMenuItem_idCliente}" icon="ui-icon-search"  actionListener="#{cuentasDireccionController.prepareIdCliente}" update=":CuentasViewForm" oncomplete="PF('CuentasViewDialog').show()" disabled="#{empty cuentasDireccionController.selected.idCliente}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{cuentasDireccionController.items}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{cuentasDireccionController.selected}">
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CuentasDireccionDataTableContextMenu" listener="#{cuentasDireccionController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CuentasDireccionDataTableContextMenu" listener="#{cuentasDireccionController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{cuentasDireccionController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CuentasDireccionListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasDireccionTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.direccion}" filterBy="#{item.direccion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasDireccionTitle_direccion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasDireccionTitle_eliminado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.eliminado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.idCliente.id}" filterBy="#{item.idCliente.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListCuentasDireccionTitle_idCliente}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idCliente.id}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{cuentasDireccionController.prepareCreate}" update=":CuentasDireccionCreateForm" oncomplete="PF('CuentasDireccionCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":CuentasDireccionViewForm" oncomplete="PF('CuentasDireccionViewDialog').show()" disabled="#{empty cuentasDireccionController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":CuentasDireccionEditForm" oncomplete="PF('CuentasDireccionEditDialog').show()" disabled="#{empty cuentasDireccionController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{cuentasDireccionController.delete}" update=":growl,datalist" disabled="#{empty cuentasDireccionController.selected}">
+                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

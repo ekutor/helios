@@ -2,12 +2,10 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Categorias;
-import com.co.hsg.innventa.session.CategoriasFacade;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 @Named(value = "categoriasController")
@@ -15,21 +13,9 @@ import javax.inject.Inject;
 public class CategoriasController extends AbstractController<Categorias> {
 
     @Inject
-    private CategoriasFacade ejbFacade;
-    @Inject
     private CategoriasController idpadreController;
     @Inject
     private MobilePageController mobilePageController;
-
-    /**
-     * Initialize the concrete Categorias controller bean. The
-     * AbstractController requires the EJB Facade object for most operations.
-     */
-    @PostConstruct
-    @Override
-    public void init() {
-        super.setFacade(ejbFacade);
-    }
 
     public CategoriasController() {
         // Inform the Abstract parent controller of the concrete Categorias Entity
