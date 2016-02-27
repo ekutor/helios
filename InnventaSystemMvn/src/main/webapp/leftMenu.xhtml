@@ -61,5 +61,26 @@
             
         </ul>
        
+       <ul class="nav  nav-tabs nav-stacked">
+            <li><p:outputLabel id="mnuMaestros"
+                               value="Maestros" 
+                               styleClass="nav-header"
+                               >
+                </p:outputLabel>
+            </li>
+            <li><p:commandLink id="mnuMaestroOC"
+                               update="contentPanel labelModule"
+                               value="Estados Ordenes Compra" 
+                               actionListener='#{navigation.estados("orders")}'>
+                </p:commandLink>
+            </li>
+            <li><p:commandLink id="mnuMaestroRem"
+                               update="contentPanel labelModule"
+                               value="Estados Remisiones" 
+                               actionListener='#{navigation.estados("remissions")}'>
+                </p:commandLink>
+            </li>
+            
+        </ul>
     </ui:composition>
 </html>

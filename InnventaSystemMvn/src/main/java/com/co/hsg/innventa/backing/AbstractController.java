@@ -2,8 +2,10 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.session.AbstractFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
+import com.co.hsg.innventa.session.NamedQuerys;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.event.ActionEvent;
@@ -28,10 +30,11 @@ public abstract class AbstractController<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private AbstractFacade<T> ejbFacade;
+    protected AbstractFacade<T> ejbFacade;
     private Class<T> itemClass;
     private T selected;
-    private Collection<T> items;
+    protected Collection<T> items;
+    private boolean keepList;
 
     private enum PersistAction {
         CREATE,
@@ -83,27 +86,44 @@ public abstract class AbstractController<T> implements Serializable {
     protected void initializeEmbeddableKey() {
         // Nothing to do if entity does not have any embeddable key.
     }
-
+    
+    public void keepLists(boolean value) {
+        this.keepList = value;
+    }
+    
     /**
      * Returns all items as a Collection object.
      *
      * @return a collection of Entity items returned by the data layer
      */
     public Collection<T> getItems() {
-        if (items == null) {
+        if (items == null || !keepList) {
             items = this.ejbFacade.findAll();
         }
+        keepList = false;
         return items;
     }
     
-     public void chargeItem(String namedQuery) {
+    public T chargeItem(NamedQuerys namedQuery) {
         try{
          if (selected == null) {
-            selected = this.ejbFacade.findByQuery(namedQuery);
+            selected = this.ejbFacade.findByQuery(namedQuery.getQuery());
         }
         }catch(Exception e){
             e.printStackTrace();
         }
+        return selected;
+    }
+    
+    public Collection<T> chargeItems(NamedQuerys namedQuery, String param, String value) {
+        try{
+         
+            items = this.ejbFacade.findAllByQuery(namedQuery.getQuery(), param, value );
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return items;
     }
 
     /**
@@ -123,7 +143,7 @@ public abstract class AbstractController<T> implements Serializable {
      */
     public void save(ActionEvent event) {
         String msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Updated");
-        persist(PersistAction.UPDATE, msg);
+        persist(PersistAction.UPDATE, msg, null);
     }
 
     /**
@@ -134,24 +154,36 @@ public abstract class AbstractController<T> implements Serializable {
      */
     public void saveNew(ActionEvent event) {
         String msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Created");
-        persist(PersistAction.CREATE, msg);
+        persist(PersistAction.CREATE, msg, null);
         if (!isValidationFailed()) {
             items = null; // Invalidate list of items to trigger re-query.
+            keepList = false;
         }
     }
 
     /**
      * Remove an existing item from the data layer.
      *
+     * @param id
      * @param event an event from the widget that wants to delete an Entity from
      * the data layer
      */
-    public void delete(ActionEvent event) {
+    /*public void delete(ActionEvent event) {
         String msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Deleted");
-        persist(PersistAction.DELETE, msg);
+        persist(PersistAction.DELETE, msg,null);
         if (!isValidationFailed()) {
             selected = null; // Remove selection
             items = null; // Invalidate list of items to trigger re-query.
+        }
+    }*/
+    public void delete( String id) {
+        System.out.println("com.co.hsg.innventa.backing.AbstractController.delete() "+ id);
+        String msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Deleted");
+        persist(PersistAction.DELETE, msg, id);
+        if (!isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null; // Invalidate list of items to trigger re-query.
+            keepList = false;
         }
     }
 
@@ -165,7 +197,7 @@ public abstract class AbstractController<T> implements Serializable {
      * @param successMessage a message that should be displayed when persisting
      * the item succeeds
      */
-    private void persist(PersistAction persistAction, String successMessage) {
+    private void persist(PersistAction persistAction, String successMessage, String id) {
         if (selected != null) {
             this.setEmbeddableKeys();
             try {
@@ -177,7 +209,7 @@ public abstract class AbstractController<T> implements Serializable {
                         this.ejbFacade.edit(selected);
                         break;
                     case DELETE:
-                        this.ejbFacade.remove(selected);
+                        this.ejbFacade.remove(id);                    
                         break;
                 }
               

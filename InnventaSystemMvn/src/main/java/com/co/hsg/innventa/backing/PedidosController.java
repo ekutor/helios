@@ -13,7 +13,16 @@ import javax.inject.Inject;
 public class PedidosController extends AbstractController<Pedidos> {
 
     @Inject
-    private PersonasController idClienteController;
+    private CuentasController idClienteController;
+    @Inject
+    private EstadosController estadoController;
+    @Inject
+    private SystemManager systemManager;
+    @Inject
+    private RemisionesController remisionController;
+    @Inject
+    private Navigation nav;
+     
     @Inject
     private MobilePageController mobilePageController;
 
@@ -22,11 +31,23 @@ public class PedidosController extends AbstractController<Pedidos> {
         super(Pedidos.class);
     }
 
+    @Override
+    public Pedidos prepareCreate(ActionEvent event) {
+        Pedidos obj = super.prepareCreate(event); 
+        
+        obj.setReferencia(systemManager.getOCSequence());
+        nav.createPedidos();
+        
+        return obj;
+    }
+    
+    
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
      */
     public void resetParents() {
         idClienteController.setSelected(null);
+        estadoController.setSelected(null);
     }
 
     /**
@@ -40,6 +61,20 @@ public class PedidosController extends AbstractController<Pedidos> {
             idClienteController.setSelected(this.getSelected().getIdCliente());
         }
     }
+    
+    public void prepareEstado(ActionEvent event) {
+        if (this.getSelected() != null && estadoController.getSelected() == null) {
+            estadoController.setSelected(this.getSelected().getEstado());
+        }
+    }
+    
+    public boolean hasRemisiones(){
+        if(this.getSelected() != null &&this.getSelected().getRemisionesList() != null){
+            return this.getSelected().getRemisionesList().isEmpty();
+        }
+        return true;
+        
+    }
 
     /**
      * Sets the "items" attribute with a collection of Remisiones entities that
@@ -48,8 +83,13 @@ public class PedidosController extends AbstractController<Pedidos> {
      * @return navigation outcome for Remisiones page
      */
     public String navigateRemisionesList() {
+        System.out.println("com.co.hsg.innventa.backing.PedidosController.navigateRemisionesList() Ingreso");
         if (this.getSelected() != null) {
+            System.out.println("com.co.hsg.innventa.backing.PedidosController.navigateRemisionesList()"+this.getSelected().getRemisionesList().size());
             FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Remisiones_items", this.getSelected().getRemisionesList());
+            remisionController.setItems(this.getSelected().getRemisionesList());
+            remisionController.keepLists(true);
+            nav.remisiones();
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/remisiones/index";
     }
@@ -58,6 +98,7 @@ public class PedidosController extends AbstractController<Pedidos> {
      * Sets the "items" attribute with a collection of PedidosProducto entities
      * that are retrieved from Pedidos?cap_first and returns the navigation
      * outcome.
+     * 
      *
      * @return navigation outcome for PedidosProducto page
      */

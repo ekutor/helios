@@ -7,7 +7,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="PedidosListForm2">
-        <div class="panel panel-#{navigation.moduleType}">
+        <div class='panel panel-#{navigation.moduleType("MAESTROS")}'>
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="PedidosDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('PedidosListForm:createButton').click();" icon="ui-icon-plus"/>

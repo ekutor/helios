@@ -112,7 +112,7 @@
                         <pm:field>
                             <p:outputLabel value="#{innventa.EditRemisionesLabel_idPedido}" for="idPedido" />
                             <h:panelGroup>
-                                <p:selectOneMenu id="idPedido" value="#{remisionesController.selected.idPedido}" required="true" requiredMessage="#{innventa.EditRemisionesRequiredMessage_idPedido}" converter="pedidosConverter">
+                                <p:selectOneMenu id="idPedido" value="#{remisionesController.selected.idPedido}" required="true" requiredMessage="#{innventa.EditRemisionesRequiredMessage_idPedido}" converter="#{pedidosConverter}">
                                     <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                     <f:selectItems value="#{pedidosController.items}"
                                                    var="idPedidoItem"

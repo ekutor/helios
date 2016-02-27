@@ -7,15 +7,15 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="PedidosListForm">
-        <div class="panel panel-#{navigation.moduleType}">
+        <div class='panel panel-#{navigation.moduleType("PEDIDOS")}'>
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="PedidosDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('PedidosListForm:createButton').click();" icon="ui-icon-plus"/>
                 <p:menuitem value="#{innventa.View}" onclick="document.getElementById('PedidosListForm:viewButton').click();" icon="ui-icon-search"/>
                 <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('PedidosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PedidosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PedidosListForm:deleteButton').click();" icon="ui-icon-trash"/> 
                 <p:separator/>
-                <p:menuitem value="#{innventa.PedidosMenuItem_remisionesList}" icon="ui-icon-search"  action="#{pedidosController.navigateRemisionesList}" disabled="#{empty pedidosController.selected.remisionesList}" ajax="false"/>  
+                <p:menuitem value="#{innventa.PedidosMenuItem_remisionesList}" icon="ui-icon-search"  update="contentPanel labelModule" actionListener="#{pedidosController.navigateRemisionesList}" disabled="#{pedidosController.hasRemisiones()}" ajax="false"/>  
                 <p:menuitem value="#{innventa.PedidosMenuItem_pedidosProductoList}" icon="ui-icon-search"  action="#{pedidosController.navigatePedidosProductoList}" disabled="#{empty pedidosController.selected.pedidosProductoList}" ajax="false"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
@@ -34,14 +34,6 @@
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('PedidosListForm:viewButton').click();"/>
 
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListPedidosTitle_id}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
-                </p:column>
-
-
                 <p:column sortBy="#{item.referencia}" filterBy="#{item.referencia}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListPedidosTitle_referencia}"/>
@@ -55,7 +47,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListPedidosTitle_idCliente}"/>
                     </f:facet>
-                    <h:outputText value="#{item.idCliente.nombre1}"/>
+                    <h:outputText value="#{item.idCliente.nombre}"/>
                 </p:column>
 
 
@@ -69,6 +61,14 @@
                     </h:outputText>
                 </p:column>
 
+                <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosTitle_fechaCreacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaCreacion}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
 
                 <p:column sortBy="#{item.fechaEntrega}" filterBy="#{item.fechaEntrega}">
                     <f:facet name="header">
@@ -95,6 +95,14 @@
                     <h:outputText value="#{item.descripcion}"/>
                 </p:column>
 
+                <p:column sortBy="#{item.estado.id}" filterBy="#{item.estado.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosTitle_estado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estado.estado}"/>
+                </p:column>
+
+
                 <!--
                                     <p:column sortBy="#{item.observaciones}" filterBy="#{item.observaciones}">
                                         <f:facet name="header">
@@ -111,14 +119,7 @@
                                         <h:outputText value="#{item.cantidadPendientes}"/>
                                     </p:column>
                 -->
-                <!--
-                                    <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_estado}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.estado}"/>
-                                    </p:column>
-                -->
+
                 <!--
                                     <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
                                         <f:facet name="header">
@@ -127,16 +128,9 @@
                                         <h:outputText value="#{item.creadoPor}"/>
                                     </p:column>
                 -->
-                <!--
-                                    <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_fechaCreacion}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaCreacion}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </h:outputText>
-                                    </p:column>
-                -->
+
+
+
                 <!--
                                     <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
                                         <f:facet name="header">
@@ -166,12 +160,12 @@
 
             </p:dataTable>
 
-            <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update=":PedidosCreateForm" oncomplete="PF('PedidosCreateDialog').show()">
+            <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update="contentPanel" >
 
             </p:commandButton>
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PedidosViewForm" oncomplete="PF('PedidosViewDialog').show()" disabled="#{empty pedidosController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PedidosEditForm" oncomplete="PF('PedidosEditDialog').show()" disabled="#{empty pedidosController.selected}"/>
-            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{pedidosController.delete}" update=":growl,datalist" disabled="#{empty pedidosController.selected}">
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{pedidosController.delete(pedidosController.selected.id)}" update=":growl,datalist" disabled="#{empty pedidosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 

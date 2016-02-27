@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -12,8 +7,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,12 +23,12 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hectsaga
+ * @author Hector Sanchez Garcia
  */
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0"),
+    @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0 ORDER BY p.fechaCreacion DESC"),
     @NamedQuery(name = "Pedidos.findById", query = "SELECT p FROM Pedidos p WHERE p.id = :id"),
     @NamedQuery(name = "Pedidos.findByReferencia", query = "SELECT p FROM Pedidos p WHERE p.referencia = :referencia"),
     @NamedQuery(name = "Pedidos.findByFechaPedido", query = "SELECT p FROM Pedidos p WHERE p.fechaPedido = :fechaPedido"),
@@ -43,12 +37,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pedidos.findByDescripcion", query = "SELECT p FROM Pedidos p WHERE p.descripcion = :descripcion"),
     @NamedQuery(name = "Pedidos.findByObservaciones", query = "SELECT p FROM Pedidos p WHERE p.observaciones = :observaciones"),
     @NamedQuery(name = "Pedidos.findByCantidadPendientes", query = "SELECT p FROM Pedidos p WHERE p.cantidadPendientes = :cantidadPendientes"),
-    @NamedQuery(name = "Pedidos.findByEstado", query = "SELECT p FROM Pedidos p WHERE p.estado = :estado"),
     @NamedQuery(name = "Pedidos.findByCreadoPor", query = "SELECT p FROM Pedidos p WHERE p.creadoPor = :creadoPor"),
     @NamedQuery(name = "Pedidos.findByFechaCreacion", query = "SELECT p FROM Pedidos p WHERE p.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Pedidos.findByModificadoPor", query = "SELECT p FROM Pedidos p WHERE p.modificadoPor = :modificadoPor"),
     @NamedQuery(name = "Pedidos.findByFechaModificacion", query = "SELECT p FROM Pedidos p WHERE p.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "Pedidos.findByEliminado", query = "SELECT p FROM Pedidos p WHERE p.eliminado = :eliminado")})
+    @NamedQuery(name = "Pedidos.findByEliminado", query = "SELECT p FROM Pedidos p WHERE p.eliminado = :eliminado"),
+    @NamedQuery(name = "Pedidos.delete", query = "UPDATE Pedidos p SET p.eliminado =1 WHERE p.id =:id")})
+
 public class Pedidos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,10 +79,6 @@ public class Pedidos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
-    private String estado;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
     @Column(name = "creado_por")
     private String creadoPor;
     @Basic(optional = false)
@@ -110,7 +101,10 @@ public class Pedidos implements Serializable {
     private short eliminado;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Personas idCliente;
+    private Cuentas idCliente;
+    @JoinColumn(name = "estado", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Estados estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
     private List<Remisiones> remisionesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
@@ -123,13 +117,12 @@ public class Pedidos implements Serializable {
         this.id = id;
     }
 
-    public Pedidos(String id, String referencia, Date fechaPedido, int cantidadTotal, int cantidadPendientes, String estado, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion, short eliminado) {
+    public Pedidos(String id, String referencia, Date fechaPedido, int cantidadTotal, int cantidadPendientes, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion, short eliminado) {
         this.id = id;
         this.referencia = referencia;
         this.fechaPedido = fechaPedido;
         this.cantidadTotal = cantidadTotal;
         this.cantidadPendientes = cantidadPendientes;
-        this.estado = estado;
         this.creadoPor = creadoPor;
         this.fechaCreacion = fechaCreacion;
         this.modificadoPor = modificadoPor;
@@ -201,14 +194,6 @@ public class Pedidos implements Serializable {
         this.cantidadPendientes = cantidadPendientes;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     public String getCreadoPor() {
         return creadoPor;
     }
@@ -249,12 +234,20 @@ public class Pedidos implements Serializable {
         this.eliminado = eliminado;
     }
 
-    public Personas getIdCliente() {
+    public Cuentas getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Personas idCliente) {
+    public void setIdCliente(Cuentas idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public Estados getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estados estado) {
+        this.estado = estado;
     }
 
     @XmlTransient

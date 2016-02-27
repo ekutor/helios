@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadosCreateDlgOC" widgetVar="EstadosCreateDialogOC" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateEstadosTitle}" closeOnEscape="true">
+            <h:form id="EstadosCreateFormOC">
+
+                <h:panelGroup id="display" rendered="#{estadosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{innventa.CreateEstadosLabel_estado}" for="estado" />
+                        <h:panelGroup>
+                            <p:inputText id="estado" value="#{estadosController.selected.estado}" title="#{innventa.CreateEstadosTitle_estado}" required="true" requiredMessage="#{innventa.CreateEstadosRequiredMessage_estado}" size="20" maxlength="20"/>
+                            <p:tooltip for="estado" value="#{estadosController.getComponentMessages('estado', innventa.CreateEstadosHelpText_estado)}"/>
+                        </h:panelGroup>
+
+                                         
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estadosController.saveNew}" value="#{innventa.Save}" update="display,:EstadosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstadosCreateDialogOC'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('EstadosCreateDialogOC').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -30,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p"),
+    @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p WHERE p.eliminado=0"),
     @NamedQuery(name = "Personas.findById", query = "SELECT p FROM Personas p WHERE p.id = :id"),
     @NamedQuery(name = "Personas.findByNombre1", query = "SELECT p FROM Personas p WHERE p.nombre1 = :nombre1"),
     @NamedQuery(name = "Personas.findByNombre2", query = "SELECT p FROM Personas p WHERE p.nombre2 = :nombre2"),
@@ -39,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Personas.findBySexo", query = "SELECT p FROM Personas p WHERE p.sexo = :sexo"),
     @NamedQuery(name = "Personas.findByFechaNacim", query = "SELECT p FROM Personas p WHERE p.fechaNacim = :fechaNacim"),
     @NamedQuery(name = "Personas.findByTipoDocumento", query = "SELECT p FROM Personas p WHERE p.tipoDocumento = :tipoDocumento"),
-    @NamedQuery(name = "Personas.findByEliminado", query = "SELECT p FROM Personas p WHERE p.eliminado = :eliminado")})
+    @NamedQuery(name = "Personas.findByEliminado", query = "SELECT p FROM Personas p WHERE p.eliminado = :eliminado"),
+    @NamedQuery(name = "Personas.delete", query = "UPDATE Personas e SET e.eliminado = 1 WHERE e.id =:id")})
 public class Personas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,8 +71,6 @@ public class Personas implements Serializable {
     @Basic(optional = false)
     @NotNull
     private short eliminado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
-    private List<Pedidos> pedidosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<CuentasContactos> cuentasContactosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
@@ -168,15 +162,6 @@ public class Personas implements Serializable {
 
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
-    }
-
-    @XmlTransient
-    public List<Pedidos> getPedidosList() {
-        return pedidosList;
-    }
-
-    public void setPedidosList(List<Pedidos> pedidosList) {
-        this.pedidosList = pedidosList;
     }
 
     @XmlTransient

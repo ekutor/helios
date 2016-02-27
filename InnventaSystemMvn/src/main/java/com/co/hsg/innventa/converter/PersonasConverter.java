@@ -5,7 +5,6 @@ import com.co.hsg.innventa.session.PersonasFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.faces.component.UIComponent;

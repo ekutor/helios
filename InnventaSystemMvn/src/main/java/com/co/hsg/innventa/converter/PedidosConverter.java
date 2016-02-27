@@ -5,13 +5,15 @@ import com.co.hsg.innventa.session.PedidosFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.convert.FacesConverter;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.inject.Named;
 
-@FacesConverter(value = "pedidosConverter")
+@Named(value = "pedidosConverter")
+@RequestScoped
 public class PedidosConverter implements Converter {
 
     @Inject

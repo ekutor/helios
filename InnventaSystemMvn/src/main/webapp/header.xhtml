@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:composition>
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar navbar-inverse navbar-fixed-top #{app.hiddenbyLogging}" role="navigation" >
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right #{app.hiddenbyLogging}" >
-                        <li><p:commandLink id="dash" update="growlHeader contentPanel labelModule" actionListener="#{navigation.inicio}">
+                        <li><p:commandLink id="dash" update=" contentPanel labelModule" actionListener="#{navigation.inicio}">
                                 <p><span class="glyphicon glyphicon-home"/> Dashborad</p>
                             </p:commandLink>                     
                             <p:tooltip for="dash" value="Pagina de Inicio" />
@@ -29,8 +29,13 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><p:commandLink id="confOrdenes" update="growlHeader contentPanel labelModule" 
+                                <li>
+                                    <p:commandLink id="confMaestros" update="confMaestros contentPanel labelModule" 
+                                                   actionListener="#{app.activarMaestros}">
+                                        #{app.maestros}
+                                    </p:commandLink>
+                                </li>
+                                <li><p:commandLink id="confOrdenes" update=" contentPanel labelModule" 
                                                    actionListener="#{navigation.orders}">
                                        Ordenes de Compra
                                     </p:commandLink>
@@ -41,7 +46,7 @@
                         </li>
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span> #{app.username}</a></li>
                         <li><a href="#"></a></li>
-                        <li><p:commandLink id="logout" update="growlHeader" actionListener="#{app.logout}">
+                        <li><p:commandLink id="logout" actionListener="#{app.logout}">
                                 <span class="glyphicon glyphicon-log-out"/>
                             </p:commandLink>
                             <p:tooltip id="toolTipFade" for="logout" value="Salir del Sistema" />
@@ -53,6 +58,6 @@
                 </div>
             </div>
         </div>
-        <p:growl id="growlHeader" showDetail="true" life="3000" />
+       
     </ui:composition>
 </html>

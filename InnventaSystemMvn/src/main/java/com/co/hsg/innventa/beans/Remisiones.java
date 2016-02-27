@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -12,6 +7,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Remisiones.findAll", query = "SELECT r FROM Remisiones r"),
+    @NamedQuery(name = "Remisiones.findAll", query = "SELECT r FROM Remisiones r WHERE r.eliminado=0"),
     @NamedQuery(name = "Remisiones.findById", query = "SELECT r FROM Remisiones r WHERE r.id = :id"),
     @NamedQuery(name = "Remisiones.findByFechaRemision", query = "SELECT r FROM Remisiones r WHERE r.fechaRemision = :fechaRemision"),
     @NamedQuery(name = "Remisiones.findByDetalles", query = "SELECT r FROM Remisiones r WHERE r.detalles = :detalles"),
@@ -43,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Remisiones.findByFechaCreacion", query = "SELECT r FROM Remisiones r WHERE r.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Remisiones.findByModificadoPor", query = "SELECT r FROM Remisiones r WHERE r.modificadoPor = :modificadoPor"),
     @NamedQuery(name = "Remisiones.findByFechaModificacion", query = "SELECT r FROM Remisiones r WHERE r.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "Remisiones.findByEliminado", query = "SELECT r FROM Remisiones r WHERE r.eliminado = :eliminado")})
+    @NamedQuery(name = "Remisiones.findByEliminado", query = "SELECT r FROM Remisiones r WHERE r.eliminado = :eliminado"),
+     @NamedQuery(name = "Remisiones.delete", query = "UPDATE Remisiones e SET e.eliminado = 1 WHERE e.id =:id")})
 public class Remisiones implements Serializable {
 
     private static final long serialVersionUID = 1L;

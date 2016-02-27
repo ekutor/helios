@@ -8,7 +8,7 @@
 
     <h:form id="ProductosListForm">
 
-         <div class="panel panel-#{navigation.moduleType}">
+         <div class='panel panel-#{navigation.moduleType("PRODUCTOS")}'>
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="ProductosDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>

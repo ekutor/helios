@@ -1,14 +1,38 @@
 .nav > li > a:hover, .nav > li > a:active {
-  color: #23527c;
+    color: #23527c;
 }
 
 div[id="loginForm:growl_container"] {
-   position: absolute;
-   top:10px;
+    position: absolute;
+    top:10px;
 }
 
 .row-fluid .span6 {
-  display: table-cell;
-  vertical-align: bottom;
-  float: none;
+    display: table-cell;
+    vertical-align: bottom;
+    float: none;
+}
+
+
+.ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all.ui-sortable-handle{
+
+    border: 1px!important;
+    margin: 0!important;
+    padding: 0!important;
+    padding-left:  10px!important;
+    padding-top:  5px!important;
+    color: #f6f7f6!important;
+    font-weight: normal!important;
+    height: 30px!important;
+    background-color: #f6f7f6!important;
+
+}
+.borderStyle{
+    border: 1px solid #dbdddc!important;
+    margin: 10px!important;
+    padding: 0!important;
+    width: 200px;
+    height: 80px!important;
+    background-color: #f6f7f6;
+    font-size: 18px!important;
 }

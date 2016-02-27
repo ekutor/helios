@@ -2,6 +2,7 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Parametros;
+import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -26,7 +27,7 @@ public class ParametrosController extends AbstractController<Parametros> {
         try{
             switch(param){
                 case "orders":
-                    this.chargeItem("Parametros.orders");
+                    this.chargeItem(NamedQuerys.ORDER_PARAM);
                     break;
             }
         }catch(Exception e){

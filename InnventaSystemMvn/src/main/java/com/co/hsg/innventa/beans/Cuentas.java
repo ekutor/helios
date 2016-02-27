@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cuentas.findAll", query = "SELECT c FROM Cuentas c"),
+    @NamedQuery(name = "Cuentas.findAll", query = "SELECT c FROM Cuentas c WHERE c.eliminado=0"),
     @NamedQuery(name = "Cuentas.findById", query = "SELECT c FROM Cuentas c WHERE c.id = :id"),
     @NamedQuery(name = "Cuentas.findByNombre", query = "SELECT c FROM Cuentas c WHERE c.nombre = :nombre"),
     @NamedQuery(name = "Cuentas.findByTipoCliente", query = "SELECT c FROM Cuentas c WHERE c.tipoCliente = :tipoCliente"),
@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cuentas.findByCreadoPor", query = "SELECT c FROM Cuentas c WHERE c.creadoPor = :creadoPor"),
     @NamedQuery(name = "Cuentas.findByFechaCreacion", query = "SELECT c FROM Cuentas c WHERE c.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Cuentas.findByModificadoPor", query = "SELECT c FROM Cuentas c WHERE c.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Cuentas.findByFechaModificacion", query = "SELECT c FROM Cuentas c WHERE c.fechaModificacion = :fechaModificacion")})
+    @NamedQuery(name = "Cuentas.findByFechaModificacion", query = "SELECT c FROM Cuentas c WHERE c.fechaModificacion = :fechaModificacion"),
+    @NamedQuery(name = "Cuentas.delete", query = "UPDATE Cuentas e SET e.eliminado = 1 WHERE e.id =:id")})
 public class Cuentas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,6 +85,8 @@ public class Cuentas implements Serializable {
     @Column(name = "fecha_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    private List<Pedidos> pedidosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private List<CuentasContactos> cuentasContactosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
@@ -178,6 +181,15 @@ public class Cuentas implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    @XmlTransient
+    public List<Pedidos> getPedidosList() {
+        return pedidosList;
+    }
+
+    public void setPedidosList(List<Pedidos> pedidosList) {
+        this.pedidosList = pedidosList;
     }
 
     @XmlTransient

@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.session;
 
 import com.co.hsg.innventa.backing.AppController;
+import com.co.hsg.innventa.backing.util.Utils;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -36,8 +32,14 @@ public abstract class AbstractFacade<T> {
         getEntityManager().merge(entity);
     }
 
-    public void remove(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+     public void remove(String id) {
+        //getEntityManager().remove(getEntityManager().merge(entity));
+        System.out.println("com.co.hsg.innventa.session.AbstractFacade.remove()"+ id);
+        String className = Utils.getClassName(entityClass);
+         System.out.println("com.co.hsg.innventa.session.AbstractFacade.remove()"+ id+" "+className);
+        TypedQuery<T> q = getEntityManager().createNamedQuery(className+".delete",entityClass);
+        q.setParameter("id", id);
+        q.executeUpdate();
     }
 
     public T find(Object id) {
@@ -48,12 +50,18 @@ public abstract class AbstractFacade<T> {
         TypedQuery<T> q = getEntityManager().createNamedQuery(namedQuery,entityClass);
         return q.getSingleResult();
     }
+    
+    public List<T> findAllByQuery(String namedQuery, String param, String value) {
+        TypedQuery<T> q = getEntityManager().createNamedQuery(namedQuery,entityClass);
+        q.setParameter(param, value);
+        return q.getResultList();
+    }
 
     public List<T> findAll() {
         /*javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();*/
-        String className = entityClass.getName().substring(entityClass.getName().lastIndexOf(".")+1);
+        String className = Utils.getClassName(entityClass);
         TypedQuery<T> q = getEntityManager().createNamedQuery(className+".findAll",entityClass);
         return q.getResultList();
     }

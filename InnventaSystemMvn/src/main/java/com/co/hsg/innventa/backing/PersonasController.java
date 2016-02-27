@@ -20,19 +20,6 @@ public class PersonasController extends AbstractController<Personas> {
     }
 
     /**
-     * Sets the "items" attribute with a collection of Pedidos entities that are
-     * retrieved from Personas?cap_first and returns the navigation outcome.
-     *
-     * @return navigation outcome for Pedidos page
-     */
-    public String navigatePedidosList() {
-        if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Pedidos_items", this.getSelected().getPedidosList());
-        }
-        return this.mobilePageController.getMobilePagesPrefix() + "/pedidos/index";
-    }
-
-    /**
      * Sets the "items" attribute with a collection of CuentasContactos entities
      * that are retrieved from Personas?cap_first and returns the navigation
      * outcome.
@@ -58,5 +45,4 @@ public class PersonasController extends AbstractController<Personas> {
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/usuarios/index";
     }
-
 }

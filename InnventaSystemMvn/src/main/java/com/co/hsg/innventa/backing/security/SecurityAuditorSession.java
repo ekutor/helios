@@ -1,58 +1,56 @@
 package com.co.hsg.innventa.backing.security;
 
 import com.co.hsg.innventa.backing.AppController;
-import com.co.hsg.innventa.beans.Usuarios;
-import javax.faces.application.NavigationHandler;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
-import javax.inject.Inject;
+import java.io.IOException;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author hectsaga
  */
+public class SecurityAuditorSession implements SecurityAuditor {
 
-public class SecurityAuditorSession implements SecurityAuditor{
-    
-    private static SecurityAuditorSession sa;
-    
-    @Inject
-    private AppController controler;
-    public SecurityAuditorSession(){
-        
-    }
-    
- 
-    public void validateSession(){
-       /* ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
-        Usuarios user = (Usuarios) ctx.getSessionMap().get("user");
-        if(user == null){
-            controler.logout();
-        }*/
+    public SecurityAuditorSession() {
+
     }
 
     @Override
-    public void afterPhase(PhaseEvent event) {
-        FacesContext facesContext = event.getFacesContext();
-        String currentPage = facesContext.getViewRoot().getViewId();
-        boolean isLoginPage = (currentPage.lastIndexOf("login.xhtml") > -1) ? true: false;
-        Object usuario = facesContext.getExternalContext().getApplicationMap().get("user");
+    public void init(FilterConfig fc) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         
-        if(!isLoginPage && usuario == null){
-            NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-            nh.handleNavigation(facesContext, null, "/");
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        AppController app = (AppController) req.getSession().getAttribute("appController");
+
+        String strUrl = req.getRequestURL().toString().toLowerCase();
+        if(strUrl.contains("login.xhtml") || strUrl.contains("theme") ||
+                strUrl.contains("bootstrap") || strUrl.contains("jquery") ||
+                strUrl.contains("faces") ){
+          chain.doFilter(request, response);
+          return;
         }
+       
+        if (app != null && app.isLoggedIn()) {
+                chain.doFilter(request, response);
+        }else{
+            String contextPath = req.getContextPath();
+            res.sendRedirect(contextPath + "/login.xhtml");
+        }
+
     }
 
     @Override
-    public void beforePhase(PhaseEvent pe) {
-        
-    }
+    public void destroy() {
 
-    @Override
-    public PhaseId getPhaseId() {
-        return PhaseId.RESTORE_VIEW;
     }
 }

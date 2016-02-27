@@ -55,4 +55,6 @@ public class RemisionesController extends AbstractController<Remisiones> {
         return this.mobilePageController.getMobilePagesPrefix() + "/remisionesProducto/index";
     }
 
+    
+
 }

@@ -7,11 +7,44 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <div class="panel">
-        <div class="hero-unit">
+
+        <h:form>
+            <p:growl id="msgs" showDetail="true" />
+
+            <p:dashboard id="board" model="#{dashboardView.model}">
+                <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
+
+
+                <p:panel id="remisiones" styleClass="borderStyle"  header="Remisiones">
+                    <h:outputText value="Remisiones" />
+                </p:panel>
+
+                <p:panel id="pedidos" styleClass="borderStyle" header="Ordenes de Compra">
+                    &nbsp; &nbsp;<i class="fa fa-#{navigation.icon}"></i>  <h:outputText value="Pedidos" />
+                </p:panel>
+     
+                 <p:panel id="cuentas" styleClass="borderStyle"  header="Cuentas">
+                    <h:outputText value="Cuentas" />
+                </p:panel>
+                 <p:panel id="productos" styleClass="borderStyle"  header="Productos">
+                    <h:outputText value="Productos" />
+                    
+                </p:panel>
+                 <p:panel id="terceros" styleClass="borderStyle"  header="Terceros">
+                    <h:outputText value="Terceros" />
+                </p:panel>
+                
+
+
+            </p:dashboard>
+
+            <div style="clear:both" />
+        </h:form>
+        <div class="hero-unit hide">
             <p></p>
-           
+
             <img src="../resources/images/mettagrup.jpg" alt="Mettagrup" width="100%" class="img-rounded"/>
-    
+
         </div>
     </div>
 

@@ -16,7 +16,20 @@
         <managed-bean-class>com.co.hsg.innventa.converter.PersonasConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-    <lifecycle>
-        <phase-listener>com.co.hsg.innventa.backing.security.SecurityAuditorSession</phase-listener>
-    </lifecycle>
+    <managed-bean>
+        <managed-bean-name>cuentasConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.CuentasConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>estadosConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.EstadosConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>pedidosConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.PedidosConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+   
 </faces-config>

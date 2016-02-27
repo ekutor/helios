@@ -18,55 +18,65 @@ public class Navigation implements Serializable {
 
     private String actualModule = "inicio";
     private String actualModuleCap;
-    private String moduleType = "primary";
     private String icon = "cubes";
     private String actualPage = "/inicio";
     @Inject
     AppController app;
-    
+
     @Inject
     ParametrosController parametrosController;
-    
+
     public void inicio() {
         actualModule = "inicio";
-        moduleType = "primary";
         icon = "cubes";
     }
 
     public void pedidos() {
         actualModule = "pedidos";
-        moduleType = "warning";
         icon = "clipboard";
     }
-    
+
+    public void createPedidos() {
+        this.pedidos();
+        actualModule = "pedidosCreate";
+    }
+
     public void orders() {
         parametrosController.cargarObj("orders");
         actualModule = "configuracion";
-        moduleType = "warning";
         icon = "gears";
+    }
+
+    public void estados(String tipo) {
+        icon = "edit";
+        switch (tipo) {
+            case "orders":
+                actualModule = "estadosOC";
+                break;
+            case "remissions":
+                actualModule = "estadosRM";
+                break;
+        }
+
     }
 
     public void remisiones() {
         actualModule = "remisiones";
-        moduleType = "primary";
         icon = "truck";
     }
 
     public void terceros() {
         actualModule = "terceros";
-        moduleType = "";
         icon = "cubes";
     }
 
     public void productos() {
         actualModule = "productos";
-        moduleType = "success";
         icon = "shopping-cart";
     }
 
     public void cuentas() {
         actualModule = "cuentas";
-        moduleType = "info";
         icon = "users";
     }
 
@@ -87,12 +97,38 @@ public class Navigation implements Serializable {
         this.actualPage = actualPage;
     }
 
-    public String getModuleType() {
+    public String moduleType(String module) {
+ 
+        if( module == null || module.equals("inicio")){
+            return "primary";
+        }
+        Modules m = Modules.getModule(module);
+        String moduleType;
+        switch (m) {
+            case PEDIDOS:
+                moduleType = "warning";
+                break;
+            case REMISIONES:
+                moduleType = "primary";
+                break;
+            case CUENTAS:
+                moduleType = "info";
+                break;
+            case PRODUCTOS:
+                moduleType = "success";
+                break;
+            case TERCEROS:
+                moduleType = "info";
+                break;
+            case MAESTROS:
+                moduleType = "info";
+                break;
+            default:
+                moduleType = "primary";
+                break;
+        }
+        
         return moduleType;
-    }
-
-    public void setModuleType(String moduleType) {
-        this.moduleType = moduleType;
     }
 
     public String getIcon() {
@@ -104,24 +140,26 @@ public class Navigation implements Serializable {
     }
 
     public String getActualModuleCap() {
-        try{
-        if (actualModule.equalsIgnoreCase("inicio")) {
-            SexType st = SexType.getType(app.getUser().getPersona().getSexo());
-            String bnv = "";
-            switch (st) {
-                case MASCULINO:
-                    bnv = "Bienvenido ";
-                    break;
-                case FEMENINO:
-                    bnv = "Bienvenida ";
-                    break;
+        try {
+            if (actualModule.equalsIgnoreCase("inicio")) {
+                SexType st = SexType.getType(app.getUser().getPersona().getSexo());
+                String bnv = "";
+                switch (st) {
+                    case MASCULINO:
+                        bnv = "Bienvenido ";
+                        break;
+                    case FEMENINO:
+                        bnv = "Bienvenida ";
+                        break;
+                }
+                actualModuleCap = bnv + Utils.capitalizes(app.getUser().getPersona().getNombre1());
+            } else if (actualModule.contains("estado")) {
+                actualModuleCap = "Registros Maestros";
+            } else {
+                actualModuleCap = Utils.capitalizes(actualModule);
             }
-            actualModuleCap = bnv + Utils.capitalizes(app.getUser().getPersona().getNombre1());
-        } else {
-            actualModuleCap = Utils.capitalizes(actualModule);
-        }
-        }catch(java.lang.NullPointerException ne){
-            
+        } catch (java.lang.NullPointerException ne) {
+
         }
         return actualModuleCap;
     }

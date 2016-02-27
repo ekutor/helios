@@ -27,6 +27,9 @@ public class AppController extends AbstractController<Usuarios> {
     private Usuarios user;
     private boolean loggedIn;
     private String hiddenbyLogging = "hide";
+    private String verMaestros = "show"; 
+    private String maestros ="Mostrar Maestros";
+    private boolean activarMaestros;
     
     @Inject
     private UsuariosFacade ejbFacade;
@@ -40,7 +43,13 @@ public class AppController extends AbstractController<Usuarios> {
         super(Usuarios.class);
     }
     
-    
+    public String getActualUserId() {
+        if (getUser() != null && getUser().getPersona().getId() != null) {
+            return  getUser().getPersona().getId();
+        }
+        return null;
+    }
+     
     public String login() {
         Usuarios user = ejbFacade.find(username);
         FacesContext context = FacesContext.getCurrentInstance();
@@ -131,4 +140,35 @@ public class AppController extends AbstractController<Usuarios> {
     public boolean isLoggedIn() {
         return loggedIn;
     }
+
+    public String getVerMaestros() {
+        return verMaestros;
+    }
+
+    public void setVerMaestros(String verMaestros) {
+        this.verMaestros = verMaestros;
+    }
+
+    public void activarMaestros() {
+        if(activarMaestros){
+            verMaestros = "show";
+            maestros = "Ocultar Maestros";
+            activarMaestros = false;
+        }else{
+            verMaestros = "hide";
+            maestros = "Mostrar Maestros";
+            activarMaestros = true;
+        }
+    }
+
+    public String getMaestros() {
+        return maestros;
+    }
+
+    public void setMaestros(String maestros) {
+        this.maestros = maestros;
+    }
+    
+    
+    
 }

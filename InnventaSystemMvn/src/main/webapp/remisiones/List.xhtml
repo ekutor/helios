@@ -5,10 +5,9 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
-
     <h:form id="RemisionesListForm">
 
-        <div class="panel panel-#{navigation.moduleType}">
+        <div class='panel panel-#{navigation.moduleType("REMISIONES")}'>
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="RemisionesDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('RemisionesListForm:createButton').click();" icon="ui-icon-plus"/>
@@ -85,13 +84,13 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+      <!--            <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListRemisionesTitle_creadoPor}"/>
                     </f:facet>
                     <h:outputText value="#{item.creadoPor}"/>
                 </p:column>
-
+                -->
                 <!--
                                     <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
                                         <f:facet name="header">
@@ -128,14 +127,14 @@
                                         <h:outputText value="#{item.eliminado}"/>
                                     </p:column>
                 -->
-                <!--
-                                    <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListRemisionesTitle_idPedido}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.idPedido.descripcion}"/>
-                                    </p:column>
-                -->
+
+                <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListRemisionesTitle_idPedido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPedido.referencia}"/>
+                </p:column>
+
 
             </p:dataTable>
 

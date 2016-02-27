@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.session;
 
+import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.beans.Remisiones;
+import java.util.Calendar;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +27,24 @@ public class RemisionesFacade extends AbstractFacade<Remisiones> {
         super(Remisiones.class);
     }
     
+    @Override
+    public void edit(Remisiones entity) {
+        String id = app.getActualUserId();
+        entity.setModificadoPor(id);
+        Date d = Calendar.getInstance().getTime();
+        entity.setFechaModificacion(d);
+        super.edit(entity);
+    }
+
+    @Override
+    public void create(Remisiones entity) {
+        String id = app.getActualUserId();
+        entity.setId(Utils.generateID());
+        entity.setCreadoPor(id);
+        entity.setModificadoPor(id);
+        Date d = Calendar.getInstance().getTime();
+        entity.setFechaModificacion(d);
+        entity.setFechaCreacion(d);
+        super.create(entity);
+    }
 }

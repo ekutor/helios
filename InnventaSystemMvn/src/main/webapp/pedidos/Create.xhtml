@@ -9,37 +9,41 @@
     <ui:composition>
 
         <p:dialog id="PedidosCreateDlg" widgetVar="PedidosCreateDialog" modal="true"
-                  resizable="true" width="490" height="520" position="450,60" appendTo="@parent" header="#{innventa.CreatePedidosTitle}" closeOnEscape="true">
+                  resizable="true" width="490" height="520" position="450,60" appendTo="@parent"
+                  header="#{innventa.CreatePedidosTitle}" closeOnEscape="true">
 
             <h:form id="PedidosCreateForm"> 
                 <h:panelGroup id="display" rendered="#{pedidosController.selected != null}">
-                    <p:panelGrid columns="2" columnClasses="column">
+                    <p:panelGrid columns="4" columnClasses="column">
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
                         <h:panelGroup>
-                            <p:inputText id="referencia" value="#{pedidosController.selected.referencia}" title="#{innventa.CreatePedidosTitle_referencia}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_referencia}" size="20" maxlength="20"/>
+                            <p:inputText id="referencia" value="#{pedidosController.selected.referencia}" disabled="true"
+                                         title="#{innventa.CreatePedidosTitle_referencia}" 
+                                         required="true" 
+                                         requiredMessage="#{innventa.CreatePedidosRequiredMessage_referencia}" size="20" maxlength="20"/>
                             <p:tooltip for="referencia" value="#{pedidosController.getComponentMessages('referencia', innventa.CreatePedidosHelpText_referencia)}"/>
+                            
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_idCliente}" for="idCliente" />
-
                         <h:panelGroup>
                             <p:selectOneMenu id="idCliente" value="#{pedidosController.selected.idCliente}" required="true" 
-                                             converter="#{personasConverter}"
+                                             converter="#{cuentasConverter}"
                                              requiredMessage="#{innventa.CreatePedidosRequiredMessage_idCliente}" 
                                              >
 
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                                <f:selectItems value="#{personasController.items}"
+                                <f:selectItems value="#{cuentasController.items}"
                                                var="idClienteItem"
                                                itemValue="#{idClienteItem}"
-                                               itemLabel="#{idClienteItem.nombre1.toString()}"
+                                               itemLabel="#{idClienteItem.nombre.toString()}"
                                                />
 
                             </p:selectOneMenu>
                             <p:tooltip for="idCliente" value="#{pedidosController.getComponentMessages('idCliente', innventa.CreatePedidosHelpText_idCliente)}"/>
                         </h:panelGroup>
-
+ 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaPedido}" for="fechaPedido" />
                         <h:panelGroup>
                             <p:calendar id="fechaPedido" pattern="dd/MM/yyyy" 
@@ -85,10 +89,21 @@
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_estado}" for="estado" />
-                        <h:panelGroup>
-                            <p:inputText id="estado" value="#{pedidosController.selected.estado}" title="#{innventa.CreatePedidosTitle_estado}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_estado}" size="36" maxlength="36"/>
-                            <p:tooltip for="estado" value="#{pedidosController.getComponentMessages('estado', innventa.CreatePedidosHelpText_estado)}"/>
-                        </h:panelGroup>
+                       <h:panelGroup>
+                        <p:selectOneMenu id="estado" value="#{pedidosController.selected.estado}" 
+                                         required="true" 
+                                         requiredMessage="#{innventa.CreatePedidosRequiredMessage_estado}" 
+                                         converter="#{estadosConverter}">
+                            <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                            <f:selectItems value='#{estadosController.items}'
+                                           var="estadoItem"
+                                           itemValue="#{estadoItem}"
+                                           itemLabel="#{estadoItem.estado.toString()}"
+                            />
+                            
+                        </p:selectOneMenu>
+                        <p:tooltip for="estado" value="#{pedidosController.getComponentMessages('estado', innventa.CreatePedidosHelpText_estado)}"/>
+                      </h:panelGroup>
 
                     </p:panelGrid>
 

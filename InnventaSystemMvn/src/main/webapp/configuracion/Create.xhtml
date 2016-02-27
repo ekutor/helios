@@ -30,7 +30,12 @@
                     </h:panelGroup>
                     <p:outputLabel value="#{innventa.ConfOCSequence}" for="OcSeq" />
                     <h:panelGroup>
-                        <p:inputText id="OcSeq" value="#{parametrosController.selected.clave2}" title="#{innventa.ConfOCSequence}" required="true" requiredMessage="#{innventa.ConfOCRequiredMessage_seq}" size="20" maxlength="20"/>
+                        <p:inputText id="OcSeq" value="#{parametrosController.selected.clave2}" 
+                                     title="#{innventa.ConfOCSequence}" required="true" 
+                                     requiredMessage="#{innventa.ConfOCRequiredMessage_seq}" 
+                                     size="20" maxlength="20">
+                            <f:validateDoubleRange minimum="1" maximum="1000" />
+                        </p:inputText>
                         <p:tooltip for="OcSeq" value="#{parametrosController.getComponentMessages('clave2', innventa.ConfOCHelpText_Secuencia)}"/>
                     </h:panelGroup>
 
@@ -43,7 +48,7 @@
             </p:commandButton>
 
 
-            <p:commandButton value="#{innventa.Cancel}" actionListener="#{navigation.inicio}" update="contentPanel"/>
+            <p:commandButton value="#{innventa.Cancel}" actionListener="#{navigation.inicio}" update="contentPanel labelModule"/>
 
 
         </h:form>

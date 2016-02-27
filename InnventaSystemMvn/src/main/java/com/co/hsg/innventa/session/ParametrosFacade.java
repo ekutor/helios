@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ParametrosFacade extends AbstractFacade<Parametros> {
-
+    
     @PersistenceContext(unitName = "InnventaSystemPU")
     private EntityManager em;
 
