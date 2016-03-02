@@ -31,5 +31,15 @@
         <managed-bean-class>com.co.hsg.innventa.converter.PedidosConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>productosConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.ProductosConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>categoriasConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.CategoriasConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
    
 </faces-config>

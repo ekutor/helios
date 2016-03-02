@@ -1,7 +1,10 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
+import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.beans.Pedidos;
+import com.co.hsg.innventa.beans.PedidosProducto;
+import com.co.hsg.innventa.beans.Productos;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -22,6 +25,8 @@ public class PedidosController extends AbstractController<Pedidos> {
     private RemisionesController remisionController;
     @Inject
     private Navigation nav;
+
+    private PedidosProducto selectedProduct;
      
     @Inject
     private MobilePageController mobilePageController;
@@ -39,6 +44,60 @@ public class PedidosController extends AbstractController<Pedidos> {
         nav.createPedidos();
         
         return obj;
+    }
+    
+    public void addProduct(ActionEvent ae, Productos product) {
+        Pedidos p = this.getSelected();
+        PedidosProducto pp = this.getProductFromList(product);
+        if(pp == null){
+            pp = new PedidosProducto();
+            pp.setId(Utils.generateID());
+            pp.setIdPedido(p);
+            pp.setIdProducto(product);
+            pp.setValorUnitario(product.getPrecioVenta());
+            p.getPedidosProductoList().add(pp);
+        }        
+    }
+    
+    public void onRowEdit(ActionEvent ae){
+       try{
+        if(selectedProduct != null){
+            double val = selectedProduct.getValorUnitario() * selectedProduct.getCantidad();
+            selectedProduct.setValorTotal(val);
+        }
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+    }
+    
+    public void onRowCancel(ActionEvent ae){
+        
+    }
+    
+    public void delProduct(ActionEvent ae) {
+        Pedidos p = this.getSelected();
+        if(p.getPedidosProductoList() != null){
+            if(p.getPedidosProductoList().contains( selectedProduct )){
+                p.getPedidosProductoList().remove(selectedProduct);
+            }
+            
+        }
+    }
+    
+    private PedidosProducto getProductFromList(Productos product){
+        Pedidos p = this.getSelected();
+        for(PedidosProducto prodPed : p.getPedidosProductoList()){
+            if(prodPed.getIdProducto().equals(product)){
+               return prodPed;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void saveNew(ActionEvent event) {
+        super.saveNew(event);
+        nav.pedidos();
     }
     
     
@@ -107,6 +166,14 @@ public class PedidosController extends AbstractController<Pedidos> {
             FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("PedidosProducto_items", this.getSelected().getPedidosProductoList());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/pedidosProducto/index";
+    }
+
+    public PedidosProducto getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(PedidosProducto selectedProduct) {
+        this.selectedProduct = selectedProduct;
     }
     
     

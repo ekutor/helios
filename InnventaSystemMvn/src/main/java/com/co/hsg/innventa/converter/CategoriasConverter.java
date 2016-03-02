@@ -5,13 +5,15 @@ import com.co.hsg.innventa.session.CategoriasFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.convert.FacesConverter;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.inject.Named;
 
-@FacesConverter(value = "categoriasConverter")
+@Named(value = "categoriasConverter")
+@RequestScoped
 public class CategoriasConverter implements Converter {
 
     @Inject
@@ -45,7 +47,7 @@ public class CategoriasConverter implements Converter {
         }
         if (object instanceof Categorias) {
             Categorias o = (Categorias) object;
-            return getStringKey(o.getId());
+            return o.getNombre();
         } else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Categorias.class.getName()});
             return null;

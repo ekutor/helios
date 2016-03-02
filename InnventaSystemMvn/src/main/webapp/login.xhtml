@@ -43,6 +43,7 @@
                         <p:password class="form-control" id="txtPassw" value="#{app.password}"
                                     placeholder="Contraseña">
                             <f:validateLength minimum="4" />
+                            <p:ajax update="growl" event="keyup" />
                         </p:password>
                     </div>
                 </div>

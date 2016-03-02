@@ -8,7 +8,7 @@
 
     <h:form id="CuentasListForm">
 
-        <div class="panel panel-#{navigation.moduleType}">
+        <div class='panel panel-#{navigation.moduleType("CUENTAS")}'>
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="CuentasDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('CuentasListForm:createButton').click();" icon="ui-icon-plus"/>
@@ -117,7 +117,7 @@
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":CuentasViewForm" oncomplete="PF('CuentasViewDialog').show()" disabled="#{empty cuentasController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":CuentasEditForm" oncomplete="PF('CuentasEditDialog').show()" disabled="#{empty cuentasController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{cuentasController.delete}" update=":growl,datalist" disabled="#{empty cuentasController.selected}">
-                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 
         </div>

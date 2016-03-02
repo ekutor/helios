@@ -7,7 +7,8 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="CategoriasEditDlg" widgetVar="CategoriasEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditCategoriasTitle}" closeOnEscape="true">
+        <p:dialog id="CategoriasEditDlg" widgetVar="CategoriasEditDialog" 
+               modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditCategoriasTitle}" closeOnEscape="true">
 
             <h:form id="CategoriasEditForm">
 
@@ -41,7 +42,7 @@
 
                         <p:outputLabel value="#{innventa.EditCategoriasLabel_idpadre}" for="idpadre" />
                         <h:panelGroup>
-                            <p:selectOneMenu id="idpadre" value="#{categoriasController.selected.idpadre}"  converter="categoriasConverter">
+                            <p:selectOneMenu id="idpadre" value="#{categoriasController.selected.idpadre}"  converter="#{categoriasConverter}">
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                 <f:selectItems value="#{categoriasController.items}"
                                                var="idpadreItem"

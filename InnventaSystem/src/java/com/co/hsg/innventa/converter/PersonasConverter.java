@@ -21,9 +21,11 @@ public class PersonasConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+         
         if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
             return null;
         }
+       
         return this.ejbFacade.find(getKey(value));
     }
 

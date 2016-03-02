@@ -26,15 +26,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
-    @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario"),
-    @NamedQuery(name = "Usuarios.findByPassw", query = "SELECT u FROM Usuarios u WHERE u.passw = :passw"),
-    @NamedQuery(name = "Usuarios.findByPersona", query = "SELECT u FROM Usuarios u WHERE u.persona = :persona"),
-    @NamedQuery(name = "Usuarios.findByEliminado", query = "SELECT u FROM Usuarios u WHERE u.eliminado = :eliminado"),
-    @NamedQuery(name = "Usuarios.findByFechaCreacion", query = "SELECT u FROM Usuarios u WHERE u.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Usuarios.findByCreadoPor", query = "SELECT u FROM Usuarios u WHERE u.creadoPor = :creadoPor"),
-    @NamedQuery(name = "Usuarios.findByModificadoPor", query = "SELECT u FROM Usuarios u WHERE u.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Usuarios.findByFechaModificacion", query = "SELECT u FROM Usuarios u WHERE u.fechaModificacion = :fechaModificacion")})
+    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u WHERE u.eliminado = 0 "),
+    @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario AND u.eliminado = 0"),
+    @NamedQuery(name = "Usuarios.findByPassw", query = "SELECT u FROM Usuarios u WHERE u.passw = :passw AND u.eliminado = 0"),
+    @NamedQuery(name = "Usuarios.findByPersona", query = "SELECT u FROM Usuarios u WHERE u.persona = :persona AND u.eliminado = 0"),
+    @NamedQuery(name = "Usuarios.findByEliminado", query = "SELECT u FROM Usuarios u WHERE u.eliminado = :eliminado AND u.eliminado = 0"),
+    @NamedQuery(name = "Usuarios.findByFechaCreacion", query = "SELECT u FROM Usuarios u WHERE u.fechaCreacion = :fechaCreacion AND u.eliminado = 0"),
+    @NamedQuery(name = "Usuarios.findByCreadoPor", query = "SELECT u FROM Usuarios u WHERE u.creadoPor = :creadoPor AND u.eliminado = 0"),
+    @NamedQuery(name = "Usuarios.findByModificadoPor", query = "SELECT u FROM Usuarios u WHERE u.modificadoPor = :modificadoPor AND u.eliminado = 0"),
+    @NamedQuery(name = "Usuarios.findByFechaModificacion", query = "SELECT u FROM Usuarios u WHERE u.fechaModificacion = :fechaModificacion AND u.eliminado = 0")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;

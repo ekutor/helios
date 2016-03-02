@@ -8,7 +8,9 @@
 
     <ui:composition>
 
-        <p:dialog id="EstadosCreateDlgOC" widgetVar="EstadosCreateDialogOC" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateEstadosTitle}" closeOnEscape="true">
+        <p:dialog id="EstadosCreateDlgOC" widgetVar="EstadosCreateDialogOC" 
+                  modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{innventa.CreateEstadosTitle}" closeOnEscape="true">
             <h:form id="EstadosCreateFormOC">
 
                 <h:panelGroup id="display" rendered="#{estadosController.selected != null}">

@@ -40,7 +40,7 @@ public class CuentasContactos implements Serializable {
     private String id;
     @Basic(optional = false)
     @NotNull
-    private int cargo;
+    private String cargo;
     @Basic(optional = false)
     @NotNull
     private short eliminado;
@@ -58,7 +58,7 @@ public class CuentasContactos implements Serializable {
         this.id = id;
     }
 
-    public CuentasContactos(String id, int cargo, short eliminado) {
+    public CuentasContactos(String id, String cargo, short eliminado) {
         this.id = id;
         this.cargo = cargo;
         this.eliminado = eliminado;
@@ -72,11 +72,11 @@ public class CuentasContactos implements Serializable {
         this.id = id;
     }
 
-    public int getCargo() {
+    public String getCargo() {
         return cargo;
     }
 
-    public void setCargo(int cargo) {
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
 

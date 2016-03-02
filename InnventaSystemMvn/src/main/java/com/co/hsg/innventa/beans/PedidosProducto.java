@@ -7,6 +7,7 @@ package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -41,6 +42,14 @@ public class PedidosProducto implements Serializable {
     @Basic(optional = false)
     @NotNull
     private int cantidad;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "valor_unitario")
+    private double valorUnitario;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "valor_total")
+    private double valorTotal;
     @Basic(optional = false)
     @NotNull
     private short eliminado;
@@ -78,6 +87,21 @@ public class PedidosProducto implements Serializable {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public short getEliminado() {

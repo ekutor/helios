@@ -1,6 +1,7 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -261,6 +262,9 @@ public class Pedidos implements Serializable {
 
     @XmlTransient
     public List<PedidosProducto> getPedidosProductoList() {
+        if(pedidosProductoList == null){
+            pedidosProductoList = new ArrayList<PedidosProducto>();
+        }
         return pedidosProductoList;
     }
 

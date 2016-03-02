@@ -6,15 +6,20 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Productos.findAll", query = "SELECT p FROM Productos p"),
+    @NamedQuery(name = "Productos.findAll", query = "SELECT p FROM Productos p WHERE p.eliminado=0"),
     @NamedQuery(name = "Productos.findById", query = "SELECT p FROM Productos p WHERE p.id = :id"),
     @NamedQuery(name = "Productos.findByReferencia", query = "SELECT p FROM Productos p WHERE p.referencia = :referencia"),
     @NamedQuery(name = "Productos.findByCodigo", query = "SELECT p FROM Productos p WHERE p.codigo = :codigo"),
@@ -68,10 +73,9 @@ public class Productos implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "precio_venta")
     private Double precioVenta;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    private String categoria;
+    @JoinColumn(name = "categoria", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Categorias categoria;
     @Size(max = 36)
     @Column(name = "categoria_impuesto")
     private String categoriaImpuesto;
@@ -80,6 +84,8 @@ public class Productos implements Serializable {
     @Basic(optional = false)
     @NotNull
     private double stock;
+    @Size(max = 500)
+    private String observaciones;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
@@ -87,9 +93,19 @@ public class Productos implements Serializable {
     private String creadoPor;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "fecha_creacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 36)
     @Column(name = "modificado_por")
     private String modificadoPor;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha_modificacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaModificacion;
     @Basic(optional = false)
     @NotNull
     private short eliminado;
@@ -103,11 +119,10 @@ public class Productos implements Serializable {
         this.id = id;
     }
 
-    public Productos(String id, String nombre, double precioCompra, String categoria, double stock, String creadoPor, String modificadoPor, short eliminado) {
+    public Productos(String id, String nombre, double precioCompra,double stock, String creadoPor, String modificadoPor, short eliminado) {
         this.id = id;
         this.nombre = nombre;
         this.precioCompra = precioCompra;
-        this.categoria = categoria;
         this.stock = stock;
         this.creadoPor = creadoPor;
         this.modificadoPor = modificadoPor;
@@ -170,11 +185,11 @@ public class Productos implements Serializable {
         this.precioVenta = precioVenta;
     }
 
-    public String getCategoria() {
+    public Categorias getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categorias categoria) {
         this.categoria = categoria;
     }
 
@@ -206,8 +221,24 @@ public class Productos implements Serializable {
         return creadoPor;
     }
 
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
     public void setCreadoPor(String creadoPor) {
         this.creadoPor = creadoPor;
+    }
+
+     public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getModificadoPor() {
@@ -216,6 +247,14 @@ public class Productos implements Serializable {
 
     public void setModificadoPor(String modificadoPor) {
         this.modificadoPor = modificadoPor;
+    }
+
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
 
     public short getEliminado() {

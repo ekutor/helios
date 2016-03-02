@@ -80,6 +80,12 @@
                                actionListener='#{navigation.estados("remissions")}'>
                 </p:commandLink>
             </li>
+           <li><p:commandLink id="mnuCategoriasProd"
+                               update="contentPanel labelModule"
+                               value="Categorias de Productos" 
+                               actionListener='#{navigation.estados("productCategories")}'>
+                </p:commandLink>
+            </li>
             
         </ul>
     </ui:composition>

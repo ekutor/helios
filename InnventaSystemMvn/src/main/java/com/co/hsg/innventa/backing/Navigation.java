@@ -56,6 +56,9 @@ public class Navigation implements Serializable {
             case "remissions":
                 actualModule = "estadosRM";
                 break;
+            case "productCategories":
+                 actualModule = "categoriasProd";
+                break;
         }
 
     }
@@ -98,8 +101,8 @@ public class Navigation implements Serializable {
     }
 
     public String moduleType(String module) {
- 
-        if( module == null || module.equals("inicio")){
+        System.out.println("com.co.hsg.innventa.backing.Navigation.moduleType()"+module);
+        if( module == null ){
             return "primary";
         }
         Modules m = Modules.getModule(module);
@@ -153,7 +156,7 @@ public class Navigation implements Serializable {
                         break;
                 }
                 actualModuleCap = bnv + Utils.capitalizes(app.getUser().getPersona().getNombre1());
-            } else if (actualModule.contains("estado")) {
+            } else if (actualModule.contains("estado") || actualModule.contains("categoria")) {
                 actualModuleCap = "Registros Maestros";
             } else {
                 actualModuleCap = Utils.capitalizes(actualModule);

@@ -5,6 +5,7 @@ import com.co.hsg.innventa.beans.Personas;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 @Named(value = "personasController")
@@ -13,7 +14,8 @@ public class PersonasController extends AbstractController<Personas> {
 
     @Inject
     private MobilePageController mobilePageController;
-
+    private String attrib;
+    
     public PersonasController() {
         // Inform the Abstract parent controller of the concrete Personas Entity
         super(Personas.class);
@@ -45,4 +47,14 @@ public class PersonasController extends AbstractController<Personas> {
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/usuarios/index";
     }
+
+    public String getAttrib() {
+        return attrib;
+    }
+
+    public void setAttrib(String attrib) {
+        this.attrib = attrib;
+    }
+    
+    
 }

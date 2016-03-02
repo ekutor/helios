@@ -13,7 +13,7 @@
             <h:form id="PedidosCreateForm">
 
                 <h:panelGroup id="display" rendered="#{pedidosController.selected != null}">
-                    <p:panelGrid columns="2" columnClasses="column">
+                    <h:panelGrid columns="2" columnClasses="column">
 
                                 <p:outputLabel value="#{innventa.CreatePedidosLabel_id}" for="id" />
                       <h:panelGroup>
@@ -104,10 +104,8 @@
                         <p:inputText id="eliminado" value="#{pedidosController.selected.eliminado}" title="#{innventa.CreatePedidosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_eliminado}"/>
                         <p:tooltip for="eliminado" value="#{pedidosController.getComponentMessages('eliminado', innventa.CreatePedidosHelpText_eliminado)}"/>
                       </h:panelGroup>
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{pedidosController.saveNew}" value="#{innventa.Save}" update="display,:PedidosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PedidosCreateDialog'));">
-                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
-                    </p:commandButton>
+                    </h:panelGrid>
+                 
 
                     <p:commandButton value="#{innventa.Cancel}" onclick="PF('PedidosCreateDialog').hide()"/>
                 </h:panelGroup>

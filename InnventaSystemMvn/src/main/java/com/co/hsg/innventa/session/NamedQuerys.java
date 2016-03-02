@@ -6,7 +6,8 @@ package com.co.hsg.innventa.session;
  */
 public enum NamedQuerys {
     ORDER_PARAM("Parametros.orders"),
-    STATUS("Estados.findByModulo")
+    STATUS("Estados.findByModulo"),
+    CATEGORIES("Categorias.findByModulo")
     ;
     
     private String query;

@@ -4,16 +4,14 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
 
         <h:form id="PedidosListForm">
-
-            <p:panel header="#{innventa.ListPedidosTitle}">
+            <b:panel id="pdata" title="#{innventa.ListPedidosTitle}" collapsible="true" look="primary">
+           
                 <p:contextMenu id="PedidosDataTableContextMenu" for="datalist">  
-                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('PedidosListForm:createButton').click();" icon="ui-icon-plus"/>
-                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('PedidosListForm:viewButton').click();" icon="ui-icon-search"/>
-                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('PedidosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PedidosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                    
                     <p:separator/>
                     <p:menuitem value="#{innventa.PedidosMenuItem_remisionesCollection}" icon="ui-icon-search"  action="#{pedidosController.navigateRemisionesCollection}" disabled="#{empty pedidosController.selected.remisionesCollection}" ajax="false"/>  
                 </p:contextMenu>
@@ -27,10 +25,6 @@
                              selectionMode="single"
                              selection="#{pedidosController.selected}">
 
-                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PedidosDataTableContextMenu"/>
-                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PedidosDataTableContextMenu"/>
-                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
-                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('PedidosListForm:viewButton').click();"/>
 
                     <p:column sortBy="#{item.id}" filterBy="#{item.id}">
                         <f:facet name="header">
@@ -162,14 +156,8 @@
 
                 </p:dataTable>
 
-                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update=":PedidosCreateForm" oncomplete="PF('PedidosCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PedidosViewForm" oncomplete="PF('PedidosViewDialog').show()" disabled="#{empty pedidosController.selected}"/>
-                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PedidosEditForm" oncomplete="PF('PedidosEditDialog').show()" disabled="#{empty pedidosController.selected}"/>
-                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{pedidosController.delete}" update=":growl,datalist" disabled="#{empty pedidosController.selected}">
-                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-                        </p:commandButton>
 
-            </p:panel>
+            </b:panel>
             <ui:include src="/confirmation.xhtml"/>
         </h:form>
 

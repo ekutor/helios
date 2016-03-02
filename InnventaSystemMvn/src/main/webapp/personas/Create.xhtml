@@ -12,7 +12,7 @@
 
             <h:form id="PersonasCreateForm">
 
-                <h:panelGroup id="display" rendered="#{personasController.selected != null}">
+                <h:panelGroup id="displayPersonas" >
                     <p:panelGrid columns="2" columnClasses="column">
 
                         <p:outputLabel value="#{innventa.CreatePersonasLabel_id}" for="id" />
@@ -69,7 +69,7 @@
                             <p:tooltip for="eliminado" value="#{personasController.getComponentMessages('eliminado', innventa.CreatePersonasHelpText_eliminado)}"/>
                         </h:panelGroup>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{personasController.saveNew}" value="#{innventa.Save}" update="display,:PersonasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PersonasCreateDialog'));">
+                    <p:commandButton actionListener="#{personasController.saveNew}" value="#{innventa.Save}" update="displayPersonas,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PersonasCreateDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
 

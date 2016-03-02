@@ -5,8 +5,10 @@
  */
 package com.co.hsg.innventa.session;
 
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -36,6 +38,19 @@ public abstract class AbstractFacade<T> {
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
+    }
+    
+    public T find(Object id, String field  ) {
+        field = field.toLowerCase();
+        String namedQuery = field.substring(0,1).toUpperCase();
+        namedQuery =  entityClass.getSimpleName() +"."+namedQuery + field.substring(1);
+        Query q = getEntityManager().createNamedQuery(namedQuery);
+        q.setParameter(field, id);
+        Collection c = q.getResultList();
+        if(c != null && c.size() > 0){
+            return (T) c.iterator().next();
+        }
+        return null;
     }
 
     public List<T> findAll() {

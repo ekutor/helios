@@ -48,6 +48,8 @@ public class Estados implements Serializable {
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estado")
     private Collection<Pedidos> pedidosCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estado")
+    private Collection<Cuentas> cuentasCollection;
 
     public Estados() {
     }
@@ -102,6 +104,15 @@ public class Estados implements Serializable {
 
     public void setPedidosCollection(Collection<Pedidos> pedidosCollection) {
         this.pedidosCollection = pedidosCollection;
+    }
+    
+    @XmlTransient
+    public Collection<Cuentas> getCuentasCollection() {
+        return cuentasCollection;
+    }
+
+    public void setCuentasCollection(Collection<Cuentas> cuentasCollection) {
+        this.cuentasCollection = cuentasCollection;
     }
 
     @Override

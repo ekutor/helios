@@ -6,8 +6,10 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -28,10 +30,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Categorias.findAll", query = "SELECT c FROM Categorias c"),
+    @NamedQuery(name = "Categorias.findAll", query = "SELECT c FROM Categorias c WHERE c.eliminado=0"),
     @NamedQuery(name = "Categorias.findById", query = "SELECT c FROM Categorias c WHERE c.id = :id"),
     @NamedQuery(name = "Categorias.findByNombre", query = "SELECT c FROM Categorias c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Categorias.findByEliminado", query = "SELECT c FROM Categorias c WHERE c.eliminado = :eliminado")})
+    @NamedQuery(name = "Categorias.findByEliminado", query = "SELECT c FROM Categorias c WHERE c.eliminado = :eliminado"),
+    @NamedQuery(name = "Categorias.findByModulo", query = "SELECT c FROM Categorias c WHERE c.eliminado =0 AND c.modulo = :modulo"),
+    @NamedQuery(name = "Categorias.delete", query = "UPDATE Categorias c SET c.eliminado = 1 WHERE c.id =:id")})
+
 public class Categorias implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,12 +53,18 @@ public class Categorias implements Serializable {
     private byte[] imagen;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 36)
+    private String modulo;
+    @Basic(optional = false)
+    @NotNull
     private short eliminado;
     @OneToMany(mappedBy = "idpadre")
     private List<Categorias> categoriasList;
     @JoinColumn(name = "idpadre", referencedColumnName = "id")
     @ManyToOne
     private Categorias idpadre;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
+    private Collection<Productos> productosCollection;
 
     public Categorias() {
     }
@@ -83,6 +94,14 @@ public class Categorias implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public String getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(String modulo) {
+        this.modulo = modulo;
+    }
 
     public byte[] getImagen() {
         return imagen;
@@ -99,7 +118,16 @@ public class Categorias implements Serializable {
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
     }
+    
+    @XmlTransient
+    public Collection<Productos> getProductosCollection() {
+        return productosCollection;
+    }
 
+    public void setProductosCollection(Collection<Productos> productosCollection) {
+        this.productosCollection = productosCollection;
+    }
+    
     @XmlTransient
     public List<Categorias> getCategoriasList() {
         return categoriasList;

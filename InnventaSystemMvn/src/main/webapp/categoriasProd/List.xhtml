@@ -7,8 +7,10 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="CategoriasListForm">
+        <div class='panel panel-#{navigation.moduleType("MAESTROS")}' style="width:400px;">
+            <div class="panel-heading">Categorias de Productos</div>
 
-        <p:panel header="#{innventa.ListCategoriasTitle}">
+
             <p:contextMenu id="CategoriasDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('CategoriasListForm:createButton').click();" icon="ui-icon-plus"/>
                 <p:menuitem value="#{innventa.View}" onclick="document.getElementById('CategoriasListForm:viewButton').click();" icon="ui-icon-search"/>
@@ -19,10 +21,10 @@
                 <p:menuitem value="#{innventa.CategoriasMenuItem_idpadre}" icon="ui-icon-search"  actionListener="#{categoriasController.prepareIdpadre}" update=":CategoriasViewForm" oncomplete="PF('CategoriasViewDialog').show()" disabled="#{empty categoriasController.selected.idpadre}"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
-                         value="#{categoriasController.items}"
+                         value='#{categoriasController.chargeItems("PRODUCTOS")}'
                          var="item"
                          rowKey="#{item.id}"
-                         paginator="true"
+                         paginator="false"
                          rows="30"
                          rowsPerPageTemplate="10,20,30,40,50,100"
                          selectionMode="single"
@@ -33,12 +35,7 @@
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{categoriasController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('CategoriasListForm:viewButton').click();"/>
 
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListCategoriasTitle_id}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
-                </p:column>
+               
 
 
                 <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
@@ -49,19 +46,11 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.imagen}" filterBy="#{item.imagen}">
+                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="#{innventa.ListCategoriasTitle_imagen}"/>
+                        <h:outputText value="Modulo"/>
                     </f:facet>
-                    <h:outputText value="#{item.imagen}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListCategoriasTitle_eliminado}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.eliminado}"/>
+                    <h:outputText value="#{item.modulo}"/>
                 </p:column>
 
 
@@ -75,14 +64,14 @@
 
             </p:dataTable>
 
-            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{categoriasController.prepareCreate}" update=":CategoriasCreateForm" oncomplete="PF('CategoriasCreateDialog').show()"/>
+            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{categoriasController.prepareCreate}" update=":CategoriasCreateForm" oncomplete="PF('CategoriasCreateDialog').show()"/>
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":CategoriasViewForm" oncomplete="PF('CategoriasViewDialog').show()" disabled="#{empty categoriasController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":CategoriasEditForm" oncomplete="PF('CategoriasEditDialog').show()" disabled="#{empty categoriasController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{categoriasController.delete}" update=":growl,datalist" disabled="#{empty categoriasController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 
-        </p:panel>
+        </div>
         <ui:include src="/confirmation.xhtml"/>
     </h:form>
 

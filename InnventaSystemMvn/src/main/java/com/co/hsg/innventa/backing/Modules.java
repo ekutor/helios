@@ -5,7 +5,7 @@ package com.co.hsg.innventa.backing;
  * @author Hector Sanchez Garcia
  */
 public enum Modules {
-    PEDIDOS,REMISIONES,CUENTAS,PRODUCTOS,TERCEROS,USUARIOS,MAESTROS;
+    PEDIDOS,REMISIONES,CUENTAS,PRODUCTOS,TERCEROS,USUARIOS,MAESTROS,DEFAULT;
     
     public static Modules getModule(String module){
        for (Modules m : Modules.values()){
@@ -13,6 +13,6 @@ public enum Modules {
                return m;
            }
        }
-       return null;
+       return DEFAULT;
     }
 }

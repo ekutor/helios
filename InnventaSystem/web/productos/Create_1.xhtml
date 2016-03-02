@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <b:modal id="amodal" title="Modal Example" styleClass="modalCreateProduct">
+       <h:form>
+           <h:panelGrid
+           <b:panelGrid colSpans="2,10">
+        <!-- <h:outputText value="#{innventa.CreateProductosLabel_id}"/>
+       <b:inputText>
+            <f:facet name="prepend">
+                <h:outputText value="@" />
+            </f:facet>
+        </b:inputText>-->
+       
+            <h:outputLabel value="#{innventa.CreateProductosLabel_id}"/>
+            <b:inputText id="id" value="#{productosController.selected.id}" 
+                         title="#{innventa.CreateProductosTitle_id}" 
+                         required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_id}" 
+
+                         tooltip="#{productosController.getComponentMessages('id', innventa.CreateProductosHelpText_id)}"
+                         />
+            <h:outputLabel value="#{innventa.CreateProductosLabel_id}"/>
+            <b:inputText id="id" value="#{productosController.selected.id}" 
+                         title="#{innventa.CreateProductosTitle_id}" 
+                         required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_id}" 
+
+                         tooltip="#{productosController.getComponentMessages('id', innventa.CreateProductosHelpText_id)}"
+                         />
+
+    </b:panelGrid>
+</h:form>
+        <f:facet name="footer">
+            <b:button value="Cancelar" dismiss="modal" onclick="return false;"/>
+            <b:button value="Crear" look="primary" dismiss="modal" onclick="return false;"/>
+        </f:facet>
+    </b:modal>
+</ui:composition>

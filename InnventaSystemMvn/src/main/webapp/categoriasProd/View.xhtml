@@ -8,12 +8,12 @@
 
     <ui:composition>
 
-        <p:dialog id="CategoriasViewDlg" widgetVar="CategoriasViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewCategoriasTitle}" closeOnEscape="true">
+        <p:dialog id="CategoriasViewDlg" widgetVar="CategoriasViewDialog" modal="true" resizable="true"  appendTo="@(parent)" header="#{innventa.ViewCategoriasTitle}" closeOnEscape="true">
 
             <h:form id="CategoriasViewForm">
 
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" columnClasses="column" rendered="#{categoriasController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column" >
 
                         <h:outputText value="#{innventa.ViewCategoriasLabel_id}"/>
                         <h:outputText value="#{categoriasController.selected.id}" title="#{innventa.ViewCategoriasTitle_id}"/>

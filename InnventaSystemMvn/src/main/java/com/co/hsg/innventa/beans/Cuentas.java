@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -13,6 +9,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -58,10 +56,9 @@ public class Cuentas implements Serializable {
     @Size(min = 1, max = 36)
     @Column(name = "tipo_cliente")
     private String tipoCliente;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    private String estado;
+    @JoinColumn(name = "estado", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Estados estado;
     @Basic(optional = false)
     @NotNull
     private short eliminado;
@@ -70,6 +67,9 @@ public class Cuentas implements Serializable {
     @Size(min = 1, max = 36)
     @Column(name = "creado_por")
     private String creadoPor;
+    @JoinColumn(name = "lista_precios", referencedColumnName = "id")
+    @ManyToOne
+    private ListaPrecios listaPrecios;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -99,11 +99,10 @@ public class Cuentas implements Serializable {
         this.id = id;
     }
 
-    public Cuentas(String id, String nombre, String tipoCliente, String estado, short eliminado, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion) {
+    public Cuentas(String id, String nombre, String tipoCliente,short eliminado, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion) {
         this.id = id;
         this.nombre = nombre;
         this.tipoCliente = tipoCliente;
-        this.estado = estado;
         this.eliminado = eliminado;
         this.creadoPor = creadoPor;
         this.fechaCreacion = fechaCreacion;
@@ -135,18 +134,25 @@ public class Cuentas implements Serializable {
         this.tipoCliente = tipoCliente;
     }
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 
     public short getEliminado() {
         return eliminado;
     }
+    
+    public ListaPrecios getListaPrecios() {
+        return listaPrecios;
+    }
 
+    public void setListaPrecios(ListaPrecios listaPrecios) {
+        this.listaPrecios = listaPrecios;
+    }
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
     }
@@ -194,6 +200,9 @@ public class Cuentas implements Serializable {
 
     @XmlTransient
     public List<CuentasContactos> getCuentasContactosList() {
+        if(cuentasContactosList == null){
+            cuentasContactosList = new ArrayList<CuentasContactos>();
+        }
         return cuentasContactosList;
     }
 

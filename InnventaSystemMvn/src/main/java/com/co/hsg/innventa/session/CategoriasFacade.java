@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.session;
 
+import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.beans.Categorias;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,6 +23,12 @@ public class CategoriasFacade extends AbstractFacade<Categorias> {
 
     public CategoriasFacade() {
         super(Categorias.class);
+    }
+    
+     @Override
+    public void create(Categorias entity) {
+        entity.setId(Utils.generateID());
+        super.create(entity);
     }
     
 }

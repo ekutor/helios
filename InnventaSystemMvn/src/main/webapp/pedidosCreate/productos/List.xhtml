@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div class="panel panel-default">
+        <h:form id="ProductosSearchSmallForm">
+            <h:panelGrid columns="4" style="margin-bottom:10px" 
+                         >
+                <p:outputLabel for="advanced" value="Buscar Producto " />
+                <p:selectOneMenu id="advanced" 
+                                 value="#{productosController.findProduct}" 
+                                 converter="#{productosConverter}" 
+                                 var="t" 
+                                 filter="true" 
+                                 filterMatchMode="contains"
+                                 styleClass="col-md-6"
+
+                                 >
+                    <f:selectItems value="#{productosController.items}" 
+                                   var="selectedItem"
+                                   itemLabel="#{selectedItem.nombre}" 
+                                   itemValue="#{selectedItem}" 
+                                   />
+                    <!--    <p:ajax update="li_version li_files b_download"
+                                               partialSubmit="false"
+                                               listener="#{dialog.docTypeChanged}"
+                                               event="change"/> -->
+                    <p:column>
+                        <h:outputText value="#{t.nombre}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{t.referencia}" />
+                    </p:column>
+                </p:selectOneMenu>
+                <p:column>
+                    <p:commandButton id="addProductButton" icon="ui-icon-plus"
+                                     update="   :ProductosListForm"  
+                                     actionListener="#{pedidosController.addProduct(ActionEvent,productosController.findProduct)}" 
+                                     />
+                    <p:tooltip for="addProductButton" value="Busqueda Avanzada"/>
+
+                </p:column>
+                <p:column>
+                    <p:commandButton id="cleanProductButton" icon="ui-icon-cancel"   
+                                     update=":ProductosListForm"  
+                                     actionListener="{productosController.prepareCreate}" 
+                                     oncomplete="PF('ProductosFinderDialog').show()"/>
+                    <p:tooltip for="cleanProductButton" value="Limpiar Busqueda"/>
+                </p:column>
+            </h:panelGrid>
+        </h:form>
+        <!-- <h:form id="ProductosSearchSmallForm2">
+            <p:row>
+                <p:column class="col-offset-3 ">
+                    <p:outputLabel value="Buscar Producto" for="finderId" />
+                </p:column>
+                <p:column>
+                    <h:panelGroup>
+                        <p:inputText id="finderId" value="" 
+                                     title="{innventa.CreateProductosTitle_id}" 
+                                     size="25"/>
+                        <p:tooltip for="finderId" value="Busqueda por referencia"/>
+                    </h:panelGroup>
+                </p:column>
+                <p:column>
+                    <p:commandButton id="findProductButton" icon="ui-icon-search"
+                                     update=":ProductosListForm"  
+                                     actionListener="{productosController.prepareCreate}" 
+                                     oncomplete="PF('ProductosFinderDialog').show()"/>
+                    <p:tooltip for="findProductButton" value="Busqueda Avanzada"/>
+
+                </p:column>
+                <p:column>
+                    <p:commandButton id="cleanProductButton" icon="ui-icon-cancel"   
+                                     update=":ProductosListForm"  
+                                     actionListener="{productosController.prepareCreate}" 
+                                     oncomplete="PF('ProductosFinderDialog').show()"/>
+                    <p:tooltip for="cleanProductButton" value="Limpiar Busqueda"/>
+                </p:column>
+            </p:row>
+        </h:form>-->
+    </div>
+    <h:form id="ProductosListForm">
+        <div class='panel panel-#{navigation.moduleType("PRODUCTOS")}'>
+            <div class="panel-heading">Productos de la OC</div>
+
+            <p:dataTable id="datalist"
+                         value="#{pedidosController.selected.pedidosProductoList}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="false"
+                         rows="30"
+                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         selectionMode="single"
+                         selection="#{pedidosController.selectedProduct}"
+                         tableStyleClass="table table-striped"
+                         editable="true" editMode="cell"
+                         >
+
+                <p:ajax event="rowSelect"   update="@form:createButton"/>
+                <p:ajax event="rowUnselect" update="@form:createButton"/>
+                <p:ajax event="contextMenu" update="@form:createButton"/>
+                
+                <p:ajax event="rowEdit" listener="#{pedidosController.onRowEdit}" update="@form:createButton growl" />
+                <p:ajax event="rowEditCancel" listener="#{pedidosController.onRowCancel}" update="@form:createButton growl" />
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}" rendered="false">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListProductosTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Producto"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idProducto.nombre}"/>
+                </p:column>
+                
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Vlr Unitario"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idProducto.valorUnitario}"/>
+                </p:column>
+
+                <p:column headerText="Cantidad">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{item.cantidad}" style="width:100%" label="CAnt"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Total"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idProducto.valorTotal}"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:commandButton rendered="false" id="createButton" icon="ui-icon-plus"   
+                             value="Agregar al pedido" 
+                             update=":ProductosFinderForm"  
+                             actionListener="#{productosController.prepareCreate}" 
+                             oncomplete="PF('ProductosFinderDialog').show()"/>
+
+            <p:commandButton id="deleteButton"  icon="ui-icon-trash"  value="#{innventa.Delete}" 
+                             actionListener="#{pedidosController.delProduct(ActionEvent)}" 
+                             update=":ProductosListForm,:growl,datalist" 
+                             disabled="#{empty pedidosController.selectedProduct}"/>
+
+            <p:commandButton id="viewButton"   
+
+                             icon="ui-icon-search" 
+                             value="#{innventa.View}" 
+                             update=":ProductosFinderForm" 
+                             oncomplete="PF('ProductosViewDialog').show()" 
+                             disabled="#{empty pedidosController.selected.pedidosProductoList}"/>
+
+
+
+        </div>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

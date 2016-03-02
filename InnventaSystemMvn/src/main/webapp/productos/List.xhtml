@@ -34,13 +34,19 @@
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('ProductosListForm:viewButton').click();"/>
 
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}" rendered="false">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListProductosTitle_id}"/>
                     </f:facet>
                     <h:outputText value="#{item.id}"/>
                 </p:column>
-
+                
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListProductosTitle_nombre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
 
                 <p:column sortBy="#{item.referencia}" filterBy="#{item.referencia}">
                     <f:facet name="header">
@@ -49,34 +55,9 @@
                     <h:outputText value="#{item.referencia}"/>
                 </p:column>
 
-
-                <p:column sortBy="#{item.codigo}" filterBy="#{item.codigo}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListProductosTitle_codigo}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.codigo}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.tipoCodigo}" filterBy="#{item.tipoCodigo}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListProductosTitle_tipoCodigo}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.tipoCodigo}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListProductosTitle_nombre}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.nombre}"/>
-                </p:column>
-
-
                 <p:column sortBy="#{item.precioCompra}" filterBy="#{item.precioCompra}">
                     <f:facet name="header">
-                        <h:outputText value="#{innventa.ListProductosTitle_precioCompra}"/>
+                        <h:outputText value="#{innventa.CreateProductosTitle_precioCompra}"/>
                     </f:facet>
                     <h:outputText value="#{item.precioCompra}"/>
                 </p:column>

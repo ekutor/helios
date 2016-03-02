@@ -4,155 +4,159 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui">
 
         <h:form id="ProductosListForm">
-
-            <p:panel header="#{innventa.ListProductosTitle}">
+            
+            <b:panel id="pdata" title="#{navigation.actualModule}" collapsible="true" look="success">
+          
                 <p:contextMenu id="ProductosDataTableContextMenu" for="datalist">  
-                    <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>
-                    <p:menuitem value="#{innventa.View}" onclick="document.getElementById('ProductosListForm:viewButton').click();" icon="ui-icon-search"/>
-                    <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('ProductosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                    <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('ProductosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                    <p:menuitem value="#{innventa.Create}" onclick="" icon="ui-icon-plus"/>
+                    <p:menuitem value="#{innventa.View}" onclick="" icon="ui-icon-search"/>
+                    <p:menuitem value="#{innventa.Edit}" onclick="" icon="ui-icon-pencil"/>
+                    <p:menuitem value="#{innventa.Delete}" onclick="" icon="ui-icon-trash"/>
                 </p:contextMenu>
-                <p:dataTable id="datalist"
+                <b:dataTable id="datalist"
                              value="#{productosController.items}"
                              var="item"
-                             rowKey="#{item.id}"
-                             paginator="true"
-                             rows="30"
-                             rowsPerPageTemplate="10,20,30,40,50,100"
-                             selectionMode="single"
-                             selection="#{productosController.selected}">
+                             styleClass="table table-striped table-bordered"
+                             style="width:100%"
+                             >
 
-                    <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ProductosDataTableContextMenu"/>
-                    <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ProductosDataTableContextMenu"/>
-                    <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
-                    <p:ajax event="rowDblselect" onsuccess="document.getElementById('ProductosListForm:viewButton').click();"/>
+            
 
-                    <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_id}"/>
                         </f:facet>
                         <h:outputText value="#{item.id}"/>
-                    </p:column>
+                    </h:column>
 
 
-                    <p:column sortBy="#{item.referencia}" filterBy="#{item.referencia}">
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_referencia}"/>
                         </f:facet>
                         <h:outputText value="#{item.referencia}"/>
-                    </p:column>
+                    </h:column>
 
 
-                    <p:column sortBy="#{item.codigo}" filterBy="#{item.codigo}">
+                    <h:column >
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_codigo}"/>
                         </f:facet>
                         <h:outputText value="#{item.codigo}"/>
-                    </p:column>
+                    </h:column>
 
 
-                    <p:column sortBy="#{item.tipoCodigo}" filterBy="#{item.tipoCodigo}">
+                    <h:column >
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_tipoCodigo}"/>
                         </f:facet>
                         <h:outputText value="#{item.tipoCodigo}"/>
-                    </p:column>
+                    </h:column>
 
 
-                    <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <h:column >
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_nombre}"/>
                         </f:facet>
                         <h:outputText value="#{item.nombre}"/>
-                    </p:column>
+                    </h:column>
 
 
-                    <p:column sortBy="#{item.precioCompra}" filterBy="#{item.precioCompra}">
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_precioCompra}"/>
                         </f:facet>
                         <h:outputText value="#{item.precioCompra}"/>
-                    </p:column>
+                    </h:column>
 
 <!--
-                    <p:column sortBy="#{item.precioVenta}" filterBy="#{item.precioVenta}">
+                    <h:column sortBy="#{item.precioVenta}" filterBy="#{item.precioVenta}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_precioVenta}"/>
                         </f:facet>
                         <h:outputText value="#{item.precioVenta}"/>
-                    </p:column>
+                    </h:column>
 -->
 <!--
-                    <p:column sortBy="#{item.categoria}" filterBy="#{item.categoria}">
+                    <h:column sortBy="#{item.categoria}" filterBy="#{item.categoria}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_categoria}"/>
                         </f:facet>
                         <h:outputText value="#{item.categoria}"/>
-                    </p:column>
+                    </h:column>
 -->
 <!--
-                    <p:column sortBy="#{item.categoriaImpuesto}" filterBy="#{item.categoriaImpuesto}">
+                    <h:column sortBy="#{item.categoriaImpuesto}" filterBy="#{item.categoriaImpuesto}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_categoriaImpuesto}"/>
                         </f:facet>
                         <h:outputText value="#{item.categoriaImpuesto}"/>
-                    </p:column>
+                    </h:column>
 -->
 <!--
-                    <p:column sortBy="#{item.atributo}" filterBy="#{item.atributo}">
+                    <h:column sortBy="#{item.atributo}" filterBy="#{item.atributo}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_atributo}"/>
                         </f:facet>
                         <h:outputText value="#{item.atributo}"/>
-                    </p:column>
+                    </h:column>
 -->
 <!--
-                    <p:column sortBy="#{item.stock}" filterBy="#{item.stock}">
+                    <h:column sortBy="#{item.stock}" filterBy="#{item.stock}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_stock}"/>
                         </f:facet>
                         <h:outputText value="#{item.stock}"/>
-                    </p:column>
+                    </h:column>
 -->
 <!--
-                    <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+                    <h:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_creadoPor}"/>
                         </f:facet>
                         <h:outputText value="#{item.creadoPor}"/>
-                    </p:column>
+                    </h:column>
 -->
 <!--
-                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                    <h:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_modificadoPor}"/>
                         </f:facet>
                         <h:outputText value="#{item.modificadoPor}"/>
-                    </p:column>
+                    </h:column>
 -->
 <!--
-                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
+                    <h:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
                         <f:facet name="header">
                             <h:outputText value="#{innventa.ListProductosTitle_eliminado}"/>
                         </f:facet>
                         <h:outputText value="#{item.eliminado}"/>
-                    </p:column>
+                    </h:column>
 -->
 
-                </p:dataTable>
+                </b:dataTable>
+               
+            <b:button
+            value="Crear"   
+            look="success"
 
-                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm" oncomplete="PF('ProductosCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
-                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
-                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete}" update=":growl,datalist" disabled="#{empty productosController.selected}">
-                            <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            onclick="PF('dlg3').show();" size="lg"
+            ></b:button>
+               <p:commandButton value="Effects" type="button"  /> 
+                        <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" onclick="PF('ProductosCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
+                        <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}"  oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
+                        <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete}"  disabled="#{empty productosController.selected}">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
                         </p:commandButton>
 
-            </p:panel>
+            </b:panel>
             <ui:include src="/confirmation.xhtml"/>
         </h:form>
+    
 
 </ui:composition>

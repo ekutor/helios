@@ -15,17 +15,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="column" rendered="#{productosController.selected != null}">
 
-                        <h:outputText value="#{innventa.ViewProductosLabel_id}"/>
-                        <h:outputText value="#{productosController.selected.id}" title="#{innventa.ViewProductosTitle_id}"/>
-
                         <h:outputText value="#{innventa.ViewProductosLabel_referencia}"/>
                         <h:outputText value="#{productosController.selected.referencia}" title="#{innventa.ViewProductosTitle_referencia}"/>
-
-                        <h:outputText value="#{innventa.ViewProductosLabel_codigo}"/>
-                        <h:outputText value="#{productosController.selected.codigo}" title="#{innventa.ViewProductosTitle_codigo}"/>
-
-                        <h:outputText value="#{innventa.ViewProductosLabel_tipoCodigo}"/>
-                        <h:outputText value="#{productosController.selected.tipoCodigo}" title="#{innventa.ViewProductosTitle_tipoCodigo}"/>
 
                         <h:outputText value="#{innventa.ViewProductosLabel_nombre}"/>
                         <h:outputText value="#{productosController.selected.nombre}" title="#{innventa.ViewProductosTitle_nombre}"/>
@@ -37,14 +28,13 @@
                         <h:outputText value="#{productosController.selected.precioVenta}" title="#{innventa.ViewProductosTitle_precioVenta}"/>
 
                         <h:outputText value="#{innventa.ViewProductosLabel_categoria}"/>
-                        <h:outputText value="#{productosController.selected.categoria}" title="#{innventa.ViewProductosTitle_categoria}"/>
-
-                        <h:outputText value="#{innventa.ViewProductosLabel_categoriaImpuesto}"/>
-                        <h:outputText value="#{productosController.selected.categoriaImpuesto}" title="#{innventa.ViewProductosTitle_categoriaImpuesto}"/>
-
-                        <h:outputText value="#{innventa.ViewProductosLabel_atributo}"/>
-                        <h:outputText value="#{productosController.selected.atributo}" title="#{innventa.ViewProductosTitle_atributo}"/>
-
+                        <h:outputText value="#{productosController.selected.categoria}" 
+                                      converter="#{categoriasConverter}" 
+                                      title="#{innventa.ViewProductosTitle_categoria}"/>
+ 
+                        <h:outputText value="Observaciones"/>
+                        <h:outputText value="#{productosController.selected.observaciones}" title="observaciones"/>
+                      
                         <h:outputText value="#{innventa.ViewProductosLabel_stock}"/>
                         <h:outputText value="#{productosController.selected.stock}" title="#{innventa.ViewProductosTitle_stock}"/>
 
@@ -54,9 +44,7 @@
                         <h:outputText value="#{innventa.ViewProductosLabel_modificadoPor}"/>
                         <h:outputText value="#{productosController.selected.modificadoPor}" title="#{innventa.ViewProductosTitle_modificadoPor}"/>
 
-                        <h:outputText value="#{innventa.ViewProductosLabel_eliminado}"/>
-                        <h:outputText value="#{productosController.selected.eliminado}" title="#{innventa.ViewProductosTitle_eliminado}"/>
-                    </p:panelGrid>
+                       </p:panelGrid>
                     <p:commandButton value="#{innventa.Close}" onclick="PF('ProductosViewDialog').hide()"/>
                 </h:panelGroup>
 

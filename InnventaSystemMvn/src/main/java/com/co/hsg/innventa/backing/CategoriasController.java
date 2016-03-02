@@ -2,6 +2,8 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Categorias;
+import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.Collection;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -16,6 +18,8 @@ public class CategoriasController extends AbstractController<Categorias> {
     private CategoriasController idpadreController;
     @Inject
     private MobilePageController mobilePageController;
+    
+    private Modules actualModule;
 
     public CategoriasController() {
         // Inform the Abstract parent controller of the concrete Categorias Entity
@@ -53,5 +57,19 @@ public class CategoriasController extends AbstractController<Categorias> {
         if (this.getSelected() != null && idpadreController.getSelected() == null) {
             idpadreController.setSelected(this.getSelected().getIdpadre());
         }
+    }
+    
+     public Collection<Categorias> chargeItems(String moduleName) {
+        actualModule = Modules.getModule(moduleName);
+        String param = "modulo";
+        items = this.chargeItems(NamedQuerys.CATEGORIES, param, actualModule.name());
+        return items;
+    }
+
+    @Override
+    public void saveNew(ActionEvent event) {
+        Categorias selected = this.getSelected();
+        selected.setModulo(actualModule.name());
+        super.saveNew(event);
     }
 }
