@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectsaga
  */
 @Entity
+@Table(name = "impuestos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Impuestos.findAll", query = "SELECT i FROM Impuestos i"),
@@ -47,12 +49,15 @@ public class Impuestos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
+    @Column(name = "nombre")
     private String nombre;
     @Size(max = 36)
+    @Column(name = "categoria")
     private String categoria;
     @Basic(optional = false)
     @NotNull
@@ -61,6 +66,7 @@ public class Impuestos implements Serializable {
     private Date validoDesde;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "tarifa")
     private double tarifa;
     @Basic(optional = false)
     @NotNull
@@ -74,6 +80,7 @@ public class Impuestos implements Serializable {
     private String modificadoPor;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @OneToMany(mappedBy = "impuestoPadre")
     private List<Impuestos> impuestosList;

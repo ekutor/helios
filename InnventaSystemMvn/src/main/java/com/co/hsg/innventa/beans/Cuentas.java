@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectsaga
  */
 @Entity
+@Table(name = "cuentas")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cuentas.findAll", query = "SELECT c FROM Cuentas c WHERE c.eliminado=0"),
@@ -46,10 +48,12 @@ public class Cuentas implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
@@ -61,6 +65,7 @@ public class Cuentas implements Serializable {
     private Estados estado;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @Basic(optional = false)
     @NotNull

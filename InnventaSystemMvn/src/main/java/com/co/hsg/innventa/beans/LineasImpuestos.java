@@ -7,6 +7,7 @@ package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -38,23 +39,29 @@ public class LineasImpuestos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "recibo")
     private String recibo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "impuesto")
     private String impuesto;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "base")
     private double base;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "monto")
     private double monto;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
 
     public LineasImpuestos() {

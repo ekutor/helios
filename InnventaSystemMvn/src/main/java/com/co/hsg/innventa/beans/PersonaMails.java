@@ -41,6 +41,7 @@ public class PersonaMails implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
@@ -50,11 +51,14 @@ public class PersonaMails implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
+    @Column(name = "mail")
     private String mail;
+    @Column(name = "principal")
     private Boolean principal;
     @Basic(optional = false)
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "eliminado")
     private Date eliminado;
 
     public PersonaMails() {

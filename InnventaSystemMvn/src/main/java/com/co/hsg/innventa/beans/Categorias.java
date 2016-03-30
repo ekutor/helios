@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectsaga
  */
 @Entity
+@Table(name = "categorias")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Categorias.findAll", query = "SELECT c FROM Categorias c WHERE c.eliminado=0"),
@@ -44,19 +47,24 @@ public class Categorias implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
+    @Column(name = "nombre")
     private String nombre;
     @Lob
+    @Column(name = "imagen")
     private byte[] imagen;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "modulo")
     private String modulo;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @OneToMany(mappedBy = "idpadre")
     private List<Categorias> categoriasList;

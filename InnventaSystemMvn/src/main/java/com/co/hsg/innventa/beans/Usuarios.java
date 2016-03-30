@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hectsaga
  */
 @Entity
+@Table(name = "usuarios")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
@@ -43,13 +45,16 @@ public class Usuarios implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "usuario")
     private String usuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
+    @Column(name = "passw")
     private String passw;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @Basic(optional = false)
     @NotNull

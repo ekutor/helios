@@ -40,6 +40,7 @@ public class PersonasTels implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
@@ -49,16 +50,21 @@ public class PersonasTels implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
+    @Column(name = "telefono")
     private String telefono;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "tipo")
     private String tipo;
     @Size(max = 10)
+    @Column(name = "extension")
     private String extension;
+    @Column(name = "principal")
     private Boolean principal;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
 
     public PersonasTels() {

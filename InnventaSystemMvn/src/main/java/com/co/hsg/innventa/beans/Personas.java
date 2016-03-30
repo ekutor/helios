@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectsaga
  */
 @Entity
+@Table(name = "personas")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Personas.findAll", query = "SELECT p FROM Personas p WHERE p.eliminado=0"),
@@ -43,22 +45,28 @@ public class Personas implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
+    @Column(name = "nombre1")
     private String nombre1;
     @Size(max = 80)
+    @Column(name = "nombre2")
     private String nombre2;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
+    @Column(name = "apellido1")
     private String apellido1;
     @Size(max = 80)
+    @Column(name = "apellido2")
     private String apellido2;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1)
+    @Column(name = "sexo")
     private String sexo;
     @Column(name = "fecha_nacim")
     @Temporal(TemporalType.DATE)
@@ -70,6 +78,7 @@ public class Personas implements Serializable {
     private String tipoDocumento;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private List<CuentasContactos> cuentasContactosList;

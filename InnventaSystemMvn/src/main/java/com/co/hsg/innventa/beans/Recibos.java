@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hectsaga
  */
 @Entity
+@Table(name = "recibos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Recibos.findAll", query = "SELECT r FROM Recibos r"),
@@ -39,6 +41,7 @@ public class Recibos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
@@ -47,9 +50,11 @@ public class Recibos implements Serializable {
     private Date fechaInicio;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "atributos")
     private int atributos;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @Column(name = "fecha_fin")
     @Temporal(TemporalType.TIMESTAMP)

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectsaga
  */
 @Entity
+@Table(name = "remisiones")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Remisiones.findAll", query = "SELECT r FROM Remisiones r WHERE r.eliminado=0"),
@@ -48,6 +50,7 @@ public class Remisiones implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
@@ -55,6 +58,7 @@ public class Remisiones implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaRemision;
     @Size(max = 500)
+    @Column(name = "detalles")
     private String detalles;
     @Basic(optional = false)
     @NotNull
@@ -85,6 +89,7 @@ public class Remisiones implements Serializable {
     private Date fechaModificacion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @JoinColumn(name = "id_pedido", referencedColumnName = "id")
     @ManyToOne(optional = false)

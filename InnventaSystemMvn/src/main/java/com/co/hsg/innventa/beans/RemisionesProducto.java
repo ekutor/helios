@@ -39,6 +39,7 @@ public class RemisionesProducto implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
@@ -47,9 +48,11 @@ public class RemisionesProducto implements Serializable {
     private String idProducto;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "cantidad")
     private short cantidad;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @JoinColumn(name = "id_remision", referencedColumnName = "id")
     @ManyToOne(optional = false)

@@ -7,10 +7,12 @@ package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,6 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hectsaga
  */
 @Entity
+@Table(name = "parametros")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Parametros.findAll", query = "SELECT p FROM Parametros p WHERE p.eliminado = 0"),
@@ -35,15 +38,20 @@ public class Parametros implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Size(max = 20)
+    @Column(name = "clave1")
     private String clave1;
     @Size(max = 20)
+    @Column(name = "clave2")
     private String clave2;
     @Size(max = 20)
+    @Column(name = "parametro")
     private String parametro;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
 
     public Parametros() {

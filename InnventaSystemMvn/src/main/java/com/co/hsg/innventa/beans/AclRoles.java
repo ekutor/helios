@@ -48,14 +48,17 @@ public class AclRoles implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
+    @Column(name = "descripcion")
     private String descripcion;
     @Basic(optional = false)
     @NotNull
@@ -79,6 +82,7 @@ public class AclRoles implements Serializable {
     private String modificadoPor;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
     private List<AclRolesUsuarios> aclRolesUsuariosList;

@@ -3,6 +3,7 @@ package com.co.hsg.innventa.beans;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -34,19 +35,24 @@ public class ListaPrecios implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "porcentaje")
     private boolean porcentaje;
     @Basic(optional = false)
     @NotNull
-    private short valor_porcentaje;
+    @Column(name = "valor_porcentaje")
+    private short valorPorcentaje;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @OneToMany(mappedBy = "listaPrecios")
     private List<Cuentas> cuentasList;
@@ -93,12 +99,12 @@ public class ListaPrecios implements Serializable {
         return eliminado;
     }
 
-    public short getValor_porcentaje() {
-        return valor_porcentaje;
+    public short getValorPorcentaje() {
+        return valorPorcentaje;
     }
 
-    public void setValor_porcentaje(short valor_porcentaje) {
-        this.valor_porcentaje = valor_porcentaje;
+    public void setValorPorcentaje(short valorPorcentaje) {
+        this.valorPorcentaje = valorPorcentaje;
     }
 
     public void setEliminado(short eliminado) {

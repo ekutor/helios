@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hectsaga
  */
 @Entity
+@Table(name = "terceros")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Terceros.findAll", query = "SELECT t FROM Terceros t"),
@@ -45,24 +47,30 @@ public class Terceros implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
+    @Column(name = "nombre")
     private String nombre;
     @Size(max = 500)
+    @Column(name = "observaciones")
     private String observaciones;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
+    @Column(name = "direccion")
     private String direccion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "contacto")
     private String contacto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
+    @Column(name = "telefono")
     private String telefono;
     @Basic(optional = false)
     @NotNull
@@ -86,6 +94,7 @@ public class Terceros implements Serializable {
     private Date fechaModificacion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
 
     public Terceros() {

@@ -7,6 +7,7 @@ package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,13 +38,16 @@ public class CuentasDireccion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
+    @Column(name = "direccion")
     private String direccion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     @ManyToOne(optional = false)

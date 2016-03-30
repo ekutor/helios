@@ -40,6 +40,7 @@ public class PersonaDirs implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
@@ -48,18 +49,23 @@ public class PersonaDirs implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
+    @Column(name = "direccion")
     private String direccion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "tipo")
     private String tipo;
     @Size(max = 255)
+    @Column(name = "observacion")
     private String observacion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "principal")
     private boolean principal;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
 
     public PersonaDirs() {

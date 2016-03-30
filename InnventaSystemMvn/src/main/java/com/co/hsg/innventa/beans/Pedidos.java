@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Hector Sanchez Garcia
  */
 @Entity
+@Table(name = "pedidos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0 ORDER BY p.fechaCreacion DESC"),
@@ -52,10 +54,12 @@ public class Pedidos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
+    @Column(name = "referencia")
     private String referencia;
     @Basic(optional = false)
     @NotNull
@@ -70,8 +74,10 @@ public class Pedidos implements Serializable {
     @Column(name = "cantidad_total")
     private int cantidadTotal;
     @Size(max = 500)
+    @Column(name = "descripcion")
     private String descripcion;
     @Size(max = 500)
+    @Column(name = "observaciones")
     private String observaciones;
     @Basic(optional = false)
     @NotNull
@@ -99,6 +105,7 @@ public class Pedidos implements Serializable {
     private Date fechaModificacion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     @ManyToOne(optional = false)

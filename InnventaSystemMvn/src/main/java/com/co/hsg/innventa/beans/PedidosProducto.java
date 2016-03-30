@@ -38,9 +38,11 @@ public class PedidosProducto implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "cantidad")
     private int cantidad;
     @Basic(optional = false)
     @NotNull
@@ -52,6 +54,7 @@ public class PedidosProducto implements Serializable {
     private double valorTotal;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @JoinColumn(name = "id_producto", referencedColumnName = "id")
     @ManyToOne(optional = false)

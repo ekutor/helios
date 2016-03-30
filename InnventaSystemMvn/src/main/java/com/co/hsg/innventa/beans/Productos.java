@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -30,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author hectsaga
  */
 @Entity
+@Table(name = "productos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Productos.findAll", query = "SELECT p FROM Productos p WHERE p.eliminado=0"),
@@ -54,10 +56,13 @@ public class Productos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Size(max = 255)
+    @Column(name = "referencia")
     private String referencia;
     @Size(max = 255)
+    @Column(name = "codigo")
     private String codigo;
     @Size(max = 36)
     @Column(name = "tipo_codigo")
@@ -65,6 +70,7 @@ public class Productos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
@@ -80,11 +86,14 @@ public class Productos implements Serializable {
     @Column(name = "categoria_impuesto")
     private String categoriaImpuesto;
     @Size(max = 36)
+    @Column(name = "atributo")
     private String atributo;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "stock")
     private double stock;
     @Size(max = 500)
+    @Column(name = "observaciones")
     private String observaciones;
     @Basic(optional = false)
     @NotNull
@@ -108,6 +117,7 @@ public class Productos implements Serializable {
     private Date fechaModificacion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
     private List<PedidosProducto> pedidosProductoList;

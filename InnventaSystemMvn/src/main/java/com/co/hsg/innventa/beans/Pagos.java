@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,6 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hectsaga
  */
 @Entity
+@Table(name = "pagos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pagos.findAll", query = "SELECT p FROM Pagos p"),
@@ -37,17 +39,21 @@ public class Pagos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "id")
     private String id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
+    @Column(name = "recibo")
     private String recibo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
+    @Column(name = "pago")
     private String pago;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "total")
     private double total;
     @Basic(optional = false)
     @NotNull
@@ -56,6 +62,7 @@ public class Pagos implements Serializable {
     private String idTrans;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "eliminado")
     private short eliminado;
 
     public Pagos() {
