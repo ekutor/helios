@@ -5,6 +5,7 @@ import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Map;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -34,5 +35,13 @@ public class ParametrosController extends AbstractController<Parametros> {
             e.printStackTrace();
         }
     }
+
+    
+    public void save(ActionEvent event, String param) {
+        this.selected.setParametro(param);
+        super.save(event);
+    }
+    
+    
 
 }

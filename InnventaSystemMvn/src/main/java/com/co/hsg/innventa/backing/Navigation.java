@@ -47,6 +47,10 @@ public class Navigation implements Serializable {
         icon = "gears";
     }
 
+    /**
+     * Define el modulo de configuracion de maestros selecccionado
+     * @param tipo 
+     */
     public void estados(String tipo) {
         icon = "edit";
         switch (tipo) {
@@ -99,9 +103,13 @@ public class Navigation implements Serializable {
     public void setActualPage(String actualPage) {
         this.actualPage = actualPage;
     }
-
+    /**
+     * Obtiene el tipo de presentacion de un modulo especifico
+     * @param module
+     * @return 
+     */
     public String moduleType(String module) {
-        System.out.println("com.co.hsg.innventa.backing.Navigation.moduleType()"+module);
+        System.out.println("Navigation - Module Type ()"+module);
         if( module == null ){
             return "primary";
         }

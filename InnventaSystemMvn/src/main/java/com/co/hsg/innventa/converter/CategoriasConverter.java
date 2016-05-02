@@ -21,6 +21,7 @@ public class CategoriasConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+        System.out.println("com.co.hsg.innventa.converter.CategoriasConverter.getAsObject()"+value);
         if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
             return null;
         }
@@ -28,12 +29,14 @@ public class CategoriasConverter implements Converter {
     }
 
     java.lang.String getKey(String value) {
+        System.out.println("com.co.hsg.innventa.converter.CategoriasConverter.getKey()"+value);
         java.lang.String key;
         key = value;
         return key;
     }
 
     String getStringKey(java.lang.String value) {
+        System.out.println("com.co.hsg.innventa.converter.CategoriasConverter.getStringKey()");
         StringBuffer sb = new StringBuffer();
         sb.append(value);
         return sb.toString();
@@ -41,6 +44,7 @@ public class CategoriasConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+        System.out.println("com.co.hsg.innventa.converter.CategoriasConverter.getAsString()");
         if (object == null
                 || (object instanceof String && ((String) object).length() == 0)) {
             return null;

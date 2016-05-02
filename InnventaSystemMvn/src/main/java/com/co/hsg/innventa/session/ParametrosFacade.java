@@ -5,7 +5,10 @@
  */
 package com.co.hsg.innventa.session;
 
+import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.beans.Parametros;
+import java.util.Calendar;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +30,13 @@ public class ParametrosFacade extends AbstractFacade<Parametros> {
 
     public ParametrosFacade() {
         super(Parametros.class);
+    }
+    
+    @Override
+    public void edit(Parametros entity) {
+        if(entity.getId() == null)
+        entity.setId(Utils.generateID());
+        super.edit(entity);
     }
     
 }

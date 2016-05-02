@@ -38,10 +38,10 @@
                         </p:inputText>
                         <p:tooltip for="OcSeq" value="#{parametrosController.getComponentMessages('clave2', innventa.ConfOCHelpText_Secuencia)}"/>
                     </h:panelGroup>
-
+              
                 </p:panelGrid>
             </h:panelGroup>
-            <p:commandButton class="btn btn-primary" actionListener="#{parametrosController.save}" value="#{innventa.Save}" 
+            <p:commandButton class="btn btn-primary" actionListener='#{parametrosController.save(ActionEvent, "CONF_ORDERS")}' value="#{innventa.Save}" 
                              update="display,contentPanel,labelModule,growl" 
                           >
 

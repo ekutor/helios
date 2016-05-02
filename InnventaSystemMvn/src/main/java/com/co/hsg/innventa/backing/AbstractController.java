@@ -5,7 +5,6 @@ import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.event.ActionEvent;
@@ -32,7 +31,7 @@ public abstract class AbstractController<T> implements Serializable {
     @Inject
     protected AbstractFacade<T> ejbFacade;
     private Class<T> itemClass;
-    private T selected;
+    protected T selected;
     protected Collection<T> items;
     private boolean keepList;
 
@@ -108,10 +107,14 @@ public abstract class AbstractController<T> implements Serializable {
         try{
          if (selected == null) {
             selected = this.ejbFacade.findByQuery(namedQuery.getQuery());
-        }
+            if(selected == null){
+                this.prepareCreate(null);
+            }
+         }
         }catch(Exception e){
             e.printStackTrace();
         }
+           
         return selected;
     }
     

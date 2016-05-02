@@ -28,11 +28,12 @@
                          rows="30"
                          rowsPerPageTemplate="10,20,30,40,50,100"
                          selectionMode="single"
-                         selection="#{categoriasController.selected}">
+                         selection="#{categoriasController.selected}"
+                         tableStyleClass="table table-striped">
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CategoriasDataTableContextMenu" listener="#{categoriasController.resetParents}"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CategoriasDataTableContextMenu" listener="#{categoriasController.resetParents}"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{categoriasController.resetParents}"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CategoriasDataTableContextMenu" />
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CategoriasDataTableContextMenu" />
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" />
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('CategoriasListForm:viewButton').click();"/>
 
                
@@ -66,7 +67,7 @@
 
             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{categoriasController.prepareCreate}" update=":CategoriasCreateForm" oncomplete="PF('CategoriasCreateDialog').show()"/>
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":CategoriasViewForm" oncomplete="PF('CategoriasViewDialog').show()" disabled="#{empty categoriasController.selected}"/>
-            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":CategoriasEditForm" oncomplete="PF('CategoriasEditDialog').show()" disabled="#{empty categoriasController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: block;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":CategoriasEditForm" oncomplete="PF('CategoriasEditDialog').show()" disabled="#{empty categoriasController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{categoriasController.delete}" update=":growl,datalist" disabled="#{empty categoriasController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>

@@ -7,13 +7,16 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="CategoriasEditDlg" widgetVar="CategoriasEditDialog" 
-               modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditCategoriasTitle}" closeOnEscape="true">
+        <p:dialog id="CategoriasEditDlg" 
+                  widgetVar="CategoriasEditDialog" 
+                  modal="true" resizable="false"  
+                  appendTo="@(parent)" header="#{innventa.EditCategoriasTitle}" 
+                  closeOnEscape="true">
 
             <h:form id="CategoriasEditForm">
 
                 <h:panelGroup id="display">
-                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{categoriasController.selected != null}">
+                    <p:panelGrid  columns="2" columnClasses="column" >
 
 
                         <h:outputLabel value="#{innventa.EditCategoriasLabel_id}" for="id" />
