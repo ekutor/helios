@@ -25,7 +25,8 @@ public class CategoriasConverter implements Converter {
         if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
             return null;
         }
-        return this.ejbFacade.find(getKey(value));
+        Object p = this.ejbFacade.find(getKey(value));
+        return p;
     }
 
     java.lang.String getKey(String value) {
@@ -51,7 +52,7 @@ public class CategoriasConverter implements Converter {
         }
         if (object instanceof Categorias) {
             Categorias o = (Categorias) object;
-            return o.getNombre();
+            return o.getId();
         } else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Categorias.class.getName()});
             return null;

@@ -32,14 +32,15 @@
 
                        <p:outputLabel value="#{innventa.CreateCategoriasLabel_idpadre}" for="idpadre" />
                         <h:panelGroup>
-                            <p:selectOneMenu id="idpadre" value="#{categoriasController.selected.idpadre}"  converter="#{categoriasConverter}">
+                            <p:selectOneMenu id="idpadre" value="#{categoriasController.selected.idpadre}">
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                 <f:selectItems value="#{categoriasController.items}"
                                                var="idpadreItem"
                                                itemValue="#{idpadreItem}"
-                                               itemLabel="#{idpadreItem.nombre.toString()}"
-                                               />
-
+                                               itemLabel="#{idpadreItem.nombre}"
+                                               
+                                                />
+                                <f:converter converterId="#{categoriasConverter}"/>
                             </p:selectOneMenu>
                             <p:tooltip for="idpadre" value="#{categoriasController.getComponentMessages('idpadre', innventa.CreateCategoriasHelpText_idpadre)}"/>
                         </h:panelGroup>

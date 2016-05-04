@@ -7,7 +7,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="CategoriasListForm">
-        <div class='panel panel-#{navigation.moduleType("MAESTROS")}' style="width:400px;">
+        <div class='panel panel-#{navigation.moduleType()}' style="width:400px;">
             <div class="panel-heading">Categorias de Productos</div>
 
 
@@ -55,11 +55,11 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.idpadre.id}" filterBy="#{item.idpadre.id}">
+                <p:column sortBy="#{item.idpadre.id}" filterBy="#{item.idpadre.nombre}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListCategoriasTitle_idpadre}"/>
                     </f:facet>
-                    <h:outputText value="#{item.idpadre.id}"/>
+                    <h:outputText value="#{item.idpadre.nombre}"/>
                 </p:column>
 
 

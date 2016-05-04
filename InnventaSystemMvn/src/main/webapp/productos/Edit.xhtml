@@ -14,13 +14,6 @@
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{productosController.selected != null}">
 
-
-                        <h:outputLabel value="#{innventa.EditProductosLabel_id}" for="id" />
-                        <h:panelGroup>
-                            <h:outputText id="id" value="#{productosController.selected.id}" />
-                            <p:tooltip for="id" value="#{productosController.getComponentMessages('id', innventa.EditProductosHelpText_id)}"/>
-                        </h:panelGroup>
-
                         <p:outputLabel value="#{innventa.EditProductosLabel_referencia}" for="referencia" />
                         <h:panelGroup>
                             <p:inputText id="referencia" value="#{productosController.selected.referencia}" title="#{innventa.EditProductosTitle_referencia}" size="255" maxlength="255"/>
@@ -44,7 +37,14 @@
                             <p:inputText id="nombre" value="#{productosController.selected.nombre}" title="#{innventa.EditProductosTitle_nombre}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_nombre}" size="255" maxlength="255"/>
                             <p:tooltip for="nombre" value="#{productosController.getComponentMessages('nombre', innventa.EditProductosHelpText_nombre)}"/>
                         </h:panelGroup>
-
+                        
+                           <p:outputLabel value="Unidad de Medida" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{productosController.selected.unidadMedida}" title="Unidad de Medida" required="true" size="36" maxlength="255"/>
+                            <p:tooltip for="nombre" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
+                        </h:panelGroup>
+                         
+                           
                         <p:outputLabel value="#{innventa.EditProductosLabel_precioCompra}" for="precioCompra" />
                         <h:panelGroup>
                             <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.EditProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_precioCompra}"/>

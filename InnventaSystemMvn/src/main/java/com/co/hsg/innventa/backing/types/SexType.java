@@ -5,7 +5,7 @@ package com.co.hsg.innventa.backing.types;
  * @author hectsaga
  */
 public enum SexType {
-    MASCULINO("M"),FEMENINO("F");
+    MALE("M"),FEMALE("F");
     
     private String value;
     

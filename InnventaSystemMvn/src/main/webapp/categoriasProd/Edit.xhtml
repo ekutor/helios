@@ -9,7 +9,7 @@
     <ui:composition>
         <p:dialog id="CategoriasEditDlg" 
                   widgetVar="CategoriasEditDialog" 
-                  modal="true" resizable="false"  
+                  modal="true" resizable="true"  
                   appendTo="@(parent)" header="#{innventa.EditCategoriasTitle}" 
                   closeOnEscape="true">
 
@@ -17,13 +17,6 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" >
-
-
-                        <h:outputLabel value="#{innventa.EditCategoriasLabel_id}" for="id" />
-                        <h:panelGroup>
-                            <h:outputText id="id" value="#{categoriasController.selected.id}" />
-                            <p:tooltip for="id" value="#{categoriasController.getComponentMessages('id', innventa.EditCategoriasHelpText_id)}"/>
-                        </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.EditCategoriasLabel_nombre}" for="nombre" />
                         <h:panelGroup>
@@ -37,11 +30,6 @@
                             <p:tooltip for="imagen" value="#{categoriasController.getComponentMessages('imagen', innventa.EditCategoriasHelpText_imagen)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditCategoriasLabel_eliminado}" for="eliminado" />
-                        <h:panelGroup>
-                            <p:inputText id="eliminado" value="#{categoriasController.selected.eliminado}" title="#{innventa.EditCategoriasTitle_eliminado}" required="true" requiredMessage="#{innventa.EditCategoriasRequiredMessage_eliminado}"/>
-                            <p:tooltip for="eliminado" value="#{categoriasController.getComponentMessages('eliminado', innventa.EditCategoriasHelpText_eliminado)}"/>
-                        </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.EditCategoriasLabel_idpadre}" for="idpadre" />
                         <h:panelGroup>

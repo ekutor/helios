@@ -97,7 +97,7 @@ public class PedidosController extends AbstractController<Pedidos> {
     @Override
     public void saveNew(ActionEvent event) {
         super.saveNew(event);
-        nav.pedidos();
+        nav.orders();
     }
     
     
@@ -148,7 +148,7 @@ public class PedidosController extends AbstractController<Pedidos> {
             FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Remisiones_items", this.getSelected().getRemisionesList());
             remisionController.setItems(this.getSelected().getRemisionesList());
             remisionController.keepLists(true);
-            nav.remisiones();
+            nav.purchaseOrders();
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/remisiones/index";
     }

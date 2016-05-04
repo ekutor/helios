@@ -12,7 +12,7 @@
                   widgetVar="ProductosCreateDialog" 
                   modal="true" 
                   resizable="true" 
-                  width="550" height="520" position="450,60"
+                  width="580" height="400" position="450,60"
                   appendTo="@parent" 
                   header="#{innventa.CreateProductosTitle}" 
                   closeOnEscape="true">
@@ -34,7 +34,13 @@
                             <p:inputText id="nombre" value="#{productosController.selected.nombre}" title="#{innventa.CreateProductosTitle_nombre}" required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_nombre}" size="50" maxlength="255"/>
                             <p:tooltip for="nombre" value="#{productosController.getComponentMessages('nombre', innventa.CreateProductosHelpText_nombre)}"/>
                         </h:panelGroup>
-
+                        
+                        <p:outputLabel value="Unidad de Medida" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{productosController.selected.unidadMedida}" title="Unidad de Medida" required="true" size="36" maxlength="255"/>
+                            <p:tooltip for="nombre" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
+                        </h:panelGroup>
+                         
                         <p:outputLabel value="#{innventa.CreateProductosLabel_precioCompra}" for="precioCompra" />
                         <h:panelGroup>
                             <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.CreateProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_precioCompra}"/>

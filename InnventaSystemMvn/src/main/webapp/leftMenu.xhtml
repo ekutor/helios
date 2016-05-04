@@ -18,30 +18,30 @@
             <li><p:commandLink id="mnuProductos"
                                update="contentPanel labelModule"
                                value="Productos" 
-                               actionListener="#{navigation.productos}">
+                               actionListener="#{navigation.products}">
                 </p:commandLink>
             </li>
              <li><p:commandLink id="mnuPedidos" update="contentPanel labelModule" 
-                               value="Pedidos" actionListener="#{navigation.pedidos}">
+                                value="Pedidos" actionListener="#{navigation.orders}">
                                
                 </p:commandLink>
             </li>
             <li><p:commandLink id="mnuRemisiones"
                                update="contentPanel labelModule"
                                value="Remisiones" 
-                               actionListener="#{navigation.remisiones}">
+                               actionListener="#{navigation.purchaseOrders}">
                 </p:commandLink>
             </li>     
             <li><p:commandLink id="mnuClientes"
                                update="contentPanel labelModule"
                                value="Cuentas" 
-                               actionListener="#{navigation.cuentas}">
+                               actionListener="#{navigation.accounts}">
                 </p:commandLink>
             </li>
              <li><p:commandLink id="mnuTerceros"
                                update="contentPanel labelModule"
                                value="Terceros" 
-                               actionListener="#{navigation.productos}">
+                               actionListener="#{navigation.products}">
                 </p:commandLink>
             </li>
         </ul>
@@ -71,19 +71,19 @@
             <li><p:commandLink id="mnuMaestroOC"
                                update="contentPanel labelModule"
                                value="Estados Ordenes Compra" 
-                               actionListener='#{navigation.estados("orders")}'>
+                               actionListener='#{navigation.states("orders")}'>
                 </p:commandLink>
             </li>
             <li><p:commandLink id="mnuMaestroRem"
                                update="contentPanel labelModule"
                                value="Estados Remisiones" 
-                               actionListener='#{navigation.estados("remissions")}'>
+                               actionListener='#{navigation.states("purchaseOrders")}'>
                 </p:commandLink>
             </li>
            <li><p:commandLink id="mnuCategoriasProd"
                                update="contentPanel labelModule"
                                value="Categorias de Productos" 
-                               actionListener='#{navigation.estados("productCategories")}'>
+                               actionListener='#{navigation.states("productCategories")}'>
                 </p:commandLink>
             </li>
             
