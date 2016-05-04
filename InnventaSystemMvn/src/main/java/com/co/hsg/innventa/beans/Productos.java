@@ -95,6 +95,9 @@ public class Productos implements Serializable {
     @Size(max = 500)
     @Column(name = "observaciones")
     private String observaciones;
+    @Size(max = 36)
+    @Column(name = "unidad_medida")
+    private String unidadMedida;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
@@ -233,6 +236,14 @@ public class Productos implements Serializable {
 
     public String getObservaciones() {
         return observaciones;
+    }
+
+    public String getUnidadMedida() {
+        return unidadMedida;
+    }
+
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
     }
 
     public void setObservaciones(String observaciones) {

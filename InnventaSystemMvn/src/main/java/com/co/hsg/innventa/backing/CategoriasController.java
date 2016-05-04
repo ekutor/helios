@@ -62,14 +62,14 @@ public class CategoriasController extends AbstractController<Categorias> {
      public Collection<Categorias> chargeItems(String moduleName) {
         actualModule = Modules.getModule(moduleName);
         String param = "modulo";
-        items = this.chargeItems(NamedQuerys.CATEGORIES, param, actualModule.name());
+        items = this.chargeItems(NamedQuerys.CATEGORIES, param, actualModule.name().toUpperCase());
         return items;
     }
 
     @Override
     public void saveNew(ActionEvent event) {
         Categorias selected = this.getSelected();
-        selected.setModulo(actualModule.name());
+        selected.setModulo(actualModule.name().toUpperCase());
         super.saveNew(event);
     }
 }

@@ -35,10 +35,10 @@
                             <p:tooltip for="nombre" value="#{productosController.getComponentMessages('nombre', innventa.CreateProductosHelpText_nombre)}"/>
                         </h:panelGroup>
                         
-                        <p:outputLabel value="Unidad de Medida" for="nombre" />
+                        <p:outputLabel value="Unidad de Medida" for="und" />
                         <h:panelGroup>
-                            <p:inputText id="nombre" value="#{productosController.selected.unidadMedida}" title="Unidad de Medida" required="true" size="36" maxlength="255"/>
-                            <p:tooltip for="nombre" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
+                            <p:inputText id="und" value="#{productosController.selected.unidadMedida}" title="Unidad de Medida" required="true" size="36" maxlength="255"/>
+                            <p:tooltip for="und" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
                         </h:panelGroup>
                          
                         <p:outputLabel value="#{innventa.CreateProductosLabel_precioCompra}" for="precioCompra" />
