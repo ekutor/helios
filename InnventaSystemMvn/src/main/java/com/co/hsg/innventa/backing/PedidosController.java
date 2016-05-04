@@ -41,8 +41,7 @@ public class PedidosController extends AbstractController<Pedidos> {
         Pedidos obj = super.prepareCreate(event); 
         
         obj.setReferencia(systemManager.getOCSequence());
-        nav.createPedidos();
-        
+        nav.createOrder();
         return obj;
     }
     
