@@ -9,7 +9,7 @@ public enum Modules {
     ACCOUNTS("cuentas","info"), PRODUCTS("productos","success"),
     THIRDS("terceros","info"),USERS("usuarios","info"),MASTERS("maestros","info"),
     STATES_OC("estadosOC","info"),STATES_RM("estadosRM","info"),
-    CATEGORIES_PROD("categoriasProd","info"),CONFIGURATION("configuration","info"),
+    CATEGORIES_PROD("categoriasProd","info"),CONFIGURATION("configuracion","info"),
     INIT("inicio","primary"), CREATE_ORDER("pedidosCreate","primary");
    
     private String moduleName;

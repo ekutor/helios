@@ -19,7 +19,7 @@ public class CategoriasController extends AbstractController<Categorias> {
     @Inject
     private MobilePageController mobilePageController;
     
-    private Modules actualModule;
+    private Modules selectedModule;
 
     public CategoriasController() {
         // Inform the Abstract parent controller of the concrete Categorias Entity
@@ -60,16 +60,16 @@ public class CategoriasController extends AbstractController<Categorias> {
     }
     
      public Collection<Categorias> chargeItems(String moduleName) {
-        actualModule = Modules.getModule(moduleName);
+        selectedModule = Modules.getModule(moduleName);
         String param = "modulo";
-        items = this.chargeItems(NamedQuerys.CATEGORIES, param, actualModule.name().toUpperCase());
+        items = this.chargeItems(NamedQuerys.CATEGORIES, param, selectedModule.getModuleName().toUpperCase());
         return items;
     }
 
     @Override
     public void saveNew(ActionEvent event) {
         Categorias selected = this.getSelected();
-        selected.setModulo(actualModule.name().toUpperCase());
+        selected.setModulo(selectedModule.getModuleName().toUpperCase());
         super.saveNew(event);
     }
 }

@@ -27,7 +27,7 @@ public class ParametrosController extends AbstractController<Parametros> {
         System.out.println("parametro : "+param);
         try{
             switch(param){
-                case "orders":
+                case "purchaseOrder":
                     this.chargeItem(NamedQuerys.ORDER_PARAM);
                     break;
             }
