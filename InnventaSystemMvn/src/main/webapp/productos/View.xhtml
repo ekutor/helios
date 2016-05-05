@@ -28,8 +28,8 @@
                         <h:outputText value="#{productosController.selected.precioVenta}" title="#{innventa.ViewProductosTitle_precioVenta}"/>
 
                         <h:outputText value="#{innventa.ViewProductosLabel_categoria}"/>
-                        <h:outputText value="#{productosController.selected.categoria}" 
-                                      converter="#{categoriasConverter}" 
+                        <h:outputText value="#{productosController.selected.categoria.nombre}" 
+                                   
                                       title="#{innventa.ViewProductosTitle_categoria}"/>
  
                         <h:outputText value="Observaciones"/>
@@ -37,7 +37,10 @@
                       
                         <h:outputText value="#{innventa.ViewProductosLabel_stock}"/>
                         <h:outputText value="#{productosController.selected.stock}" title="#{innventa.ViewProductosTitle_stock}"/>
-
+                        
+                        <h:outputText value="#{innventa.ViewProductosLabel_tipoCodigo}"/>
+                        <h:outputText value="#{productosController.transformTipoProducto()}" />
+                        
                         <h:outputText value="#{innventa.ViewProductosLabel_creadoPor}"/>
                         <h:outputText value="#{productosController.selected.creadoPor}" title="#{innventa.ViewProductosTitle_creadoPor}"/>
 

@@ -82,7 +82,23 @@
                             <p:inputText id="stock" value="#{productosController.selected.stock}" title="#{innventa.CreateProductosTitle_stock}" required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_stock}"/>
                             <p:tooltip for="stock" value="#{productosController.getComponentMessages('stock', innventa.CreateProductosHelpText_stock)}"/>
                         </h:panelGroup>
+                        
+                        <p:outputLabel value="#{innventa.CreateProductosLabel_tipoCodigo}" for="tipoCodigo" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="tipoCodigo" value="#{productosController.selected.tipoCodigo}" 
+                                             required="true" 
+                                             requiredMessage="#{innventa.CreateProductosRequiredMessage_tipoCodigo}"
+                                             converter="#{parametrosConverter}">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value='#{parametrosController.chargeListObject("productTypes")}'
+                                               var="tipoItem"
+                                               itemValue="#{tipoItem.id}"
+                                               itemLabel="#{tipoItem.clave1}"
+                                               />
 
+                            </p:selectOneMenu>
+                            <p:tooltip for="tipoCodigo" value="#{productosController.getComponentMessages('tipoCodigo', innventa.CreateProductosHelpText_tipoCodigo)}"/>
+                        </h:panelGroup>
                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{productosController.saveNew}" value="#{innventa.Save}" update="display,:ProductosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProductosCreateDialog'));">

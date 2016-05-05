@@ -26,12 +26,6 @@
                             <p:tooltip for="codigo" value="#{productosController.getComponentMessages('codigo', innventa.EditProductosHelpText_codigo)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditProductosLabel_tipoCodigo}" for="tipoCodigo" />
-                        <h:panelGroup>
-                            <p:inputText id="tipoCodigo" value="#{productosController.selected.tipoCodigo}" title="#{innventa.EditProductosTitle_tipoCodigo}" size="36" maxlength="36"/>
-                            <p:tooltip for="tipoCodigo" value="#{productosController.getComponentMessages('tipoCodigo', innventa.EditProductosHelpText_tipoCodigo)}"/>
-                        </h:panelGroup>
-
                         <p:outputLabel value="#{innventa.EditProductosLabel_nombre}" for="nombre" />
                         <h:panelGroup>
                             <p:inputText id="nombre" value="#{productosController.selected.nombre}" title="#{innventa.EditProductosTitle_nombre}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_nombre}" size="255" maxlength="255"/>
@@ -57,10 +51,22 @@
                             <p:tooltip for="precioVenta" value="#{productosController.getComponentMessages('precioVenta', innventa.EditProductosHelpText_precioVenta)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditProductosLabel_categoria}" for="categoria" />
-                        <h:panelGroup>
-                            <p:inputText id="categoria" value="#{productosController.selected.categoria}" title="#{innventa.EditProductosTitle_categoria}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_categoria}" size="36" maxlength="36"/>
-                            <p:tooltip for="categoria" value="#{productosController.getComponentMessages('categoria', innventa.EditProductosHelpText_categoria)}"/>
+                         <p:outputLabel value="#{innventa.CreateProductosLabel_categoria}" for="categoria" />
+                                 
+                         <h:panelGroup>
+                            <p:selectOneMenu id="categoria" value="#{productosController.selected.categoria}" 
+                                             required="true" 
+                                             requiredMessage="#{innventa.CreateProductosRequiredMessage_categoria}"
+                                             converter="#{categoriasConverter}">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value='#{categoriasController.chargeItems("PRODUCTOS")}'
+                                               var="catItem"
+                                               itemValue="#{catItem}"
+                                               itemLabel="#{catItem.nombre.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="categoria" value="#{productosController.getComponentMessages('categoria', innventa.CreateProductosHelpText_categoria)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.EditProductosLabel_categoriaImpuesto}" for="categoriaImpuesto" />
@@ -80,6 +86,23 @@
                             <p:inputText id="stock" value="#{productosController.selected.stock}" title="#{innventa.EditProductosTitle_stock}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_stock}"/>
                             <p:tooltip for="stock" value="#{productosController.getComponentMessages('stock', innventa.EditProductosHelpText_stock)}"/>
                         </h:panelGroup>
+                        
+                         <p:outputLabel value="#{innventa.CreateProductosLabel_tipoCodigo}" for="tipoCodigo" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="tipoCodigo" value="#{productosController.selected.tipoCodigo}" 
+                                             required="true" 
+                                             requiredMessage="#{innventa.CreateProductosRequiredMessage_tipoCodigo}"
+                                             converter="#{parametrosConverter}">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value='#{parametrosController.chargeListObject("productTypes")}'
+                                               var="tipoItem"
+                                               itemValue="#{tipoItem.id}"
+                                               itemLabel="#{tipoItem.clave1}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="tipoCodigo" value="#{productosController.getComponentMessages('tipoCodigo', innventa.CreateProductosHelpText_tipoCodigo)}"/>
+                        </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.EditProductosLabel_creadoPor}" for="creadoPor" />
                         <h:panelGroup>
@@ -93,11 +116,7 @@
                             <p:tooltip for="modificadoPor" value="#{productosController.getComponentMessages('modificadoPor', innventa.EditProductosHelpText_modificadoPor)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditProductosLabel_eliminado}" for="eliminado" />
-                        <h:panelGroup>
-                            <p:inputText id="eliminado" value="#{productosController.selected.eliminado}" title="#{innventa.EditProductosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_eliminado}"/>
-                            <p:tooltip for="eliminado" value="#{productosController.getComponentMessages('eliminado', innventa.EditProductosHelpText_eliminado)}"/>
-                        </h:panelGroup>
+                    
                     </p:panelGrid>
                     <p:commandButton actionListener="#{productosController.save}" value="#{innventa.Save}" update="display,:ProductosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProductosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

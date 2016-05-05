@@ -37,8 +37,9 @@
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                 <f:selectItems value="#{categoriasController.items}"
                                                var="idpadreItem"
+                                                itemLabel="#{idpadreItem.nombre}"
                                                itemValue="#{idpadreItem}"
-                                               itemLabel="#{idpadreItem.id.toString()}"
+                                              
                                                />
 
                             </p:selectOneMenu>

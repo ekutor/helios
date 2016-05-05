@@ -6,6 +6,7 @@ package com.co.hsg.innventa.session;
  */
 public enum NamedQuerys {
     ORDER_PARAM("Parametros.orders"),
+    PRODUCT_TYPES_PARAM("Parametros.productTypes"),
     STATUS("Estados.findByModulo"),
     CATEGORIES("Categorias.findByModulo")
     ;

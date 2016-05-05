@@ -62,6 +62,11 @@ public abstract class AbstractFacade<T> {
         q.setParameter(param, value);
         return q.getResultList();
     }
+    
+    public List<T> findAllByQuery(String namedQuery) {
+        TypedQuery<T> q = getEntityManager().createNamedQuery(namedQuery,entityClass);
+        return q.getResultList();
+    }
 
     public List<T> findAll() {
         /*javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();

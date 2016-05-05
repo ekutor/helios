@@ -3,6 +3,7 @@ package com.co.hsg.innventa.backing;
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.Collection;
 import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -34,6 +35,19 @@ public class ParametrosController extends AbstractController<Parametros> {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public Collection<Parametros> chargeListObject(String param) {
+  
+        try{
+            switch(param){
+                case "productTypes":
+                    return this.chargeItems(NamedQuerys.PRODUCT_TYPES_PARAM);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     
