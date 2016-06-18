@@ -12,7 +12,7 @@
                   widgetVar="ProductosCreateDialog" 
                   modal="true" 
                   resizable="true" 
-                  width="580" height="400" position="450,60"
+                  width="650" height="500" position="450,60"
                   appendTo="@parent" 
                   header="#{innventa.CreateProductosTitle}" 
                   closeOnEscape="true">
@@ -37,10 +37,21 @@
                         
                         <p:outputLabel value="Unidad de Medida" for="und" />
                         <h:panelGroup>
-                            <p:inputText id="und" value="#{productosController.selected.unidadMedida}" title="Unidad de Medida" required="true" size="36" maxlength="255"/>
+                             <p:selectOneMenu id="und" value="#{productosController.selected.unidadMedida}" 
+                                             required="true" 
+                                             requiredMessage="La unidad de medida es requerida"
+                                             converter="#{unidadesMedidaConverter}">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value='#{unidadMedidaController.items}'
+                                               var="undItem"
+                                               itemValue="#{undItem}"
+                                               itemLabel="#{undItem.nombre.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
                             <p:tooltip for="und" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
                         </h:panelGroup>
-                         
+                        
                         <p:outputLabel value="#{innventa.CreateProductosLabel_precioCompra}" for="precioCompra" />
                         <h:panelGroup>
                             <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.CreateProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_precioCompra}"/>

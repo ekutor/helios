@@ -75,9 +75,6 @@ public class Productos implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "precio_venta")
     private Double precioVenta;
-    @JoinColumn(name = "categoria", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Categorias categoria;
     @Size(max = 36)
     @Column(name = "categoria_impuesto")
     private String categoriaImpuesto;
@@ -91,9 +88,14 @@ public class Productos implements Serializable {
     @Size(max = 500)
     @Column(name = "observaciones")
     private String observaciones;
-    @Size(max = 36)
-    @Column(name = "unidad_medida")
-    private String unidadMedida;
+    
+    @JoinColumn(name = "categoria", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Categorias categoria;
+    @JoinColumn(name = "unidad_medida", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private UnidadesMedida unidadMedida;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
@@ -234,11 +236,11 @@ public class Productos implements Serializable {
         return observaciones;
     }
 
-    public String getUnidadMedida() {
+    public UnidadesMedida getUnidadMedida() {
         return unidadMedida;
     }
 
-    public void setUnidadMedida(String unidadMedida) {
+    public void setUnidadMedida(UnidadesMedida unidadMedida) {
         this.unidadMedida = unidadMedida;
     }
 

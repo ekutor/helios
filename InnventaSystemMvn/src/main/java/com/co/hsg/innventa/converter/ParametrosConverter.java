@@ -1,14 +1,11 @@
 package com.co.hsg.innventa.converter;
 
 import com.co.hsg.innventa.backing.ParametrosController;
-import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.beans.Parametros;
-import com.co.hsg.innventa.session.ParametrosFacade;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.RequestScoped;
-import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -24,13 +21,13 @@ public class ParametrosConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-        if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
+        if (value == null || value.length() == 0 ) {
             return null;
         }
         String finded = "";
         for(Parametros p : this.ejbController.getItems()){
-            if(p.getId().equals(value)){
-                finded = p.getClave1();
+            if(p.getClave1().equals(value)){
+                finded = p.getId();
                 break;
             }
         }
@@ -50,6 +47,17 @@ public class ParametrosConverter implements Converter {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Parametros.class.getName()});
             return null;
         }
+    }
+    
+    public String getParamName(String id) {
+        String finded = "";
+        for(Parametros p : this.ejbController.getItems()){
+            if(p.getId().equals("")){
+                finded = p.getClave1();
+                break;
+            }
+        }
+        return finded;
     }
 
 }

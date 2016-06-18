@@ -7,7 +7,14 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="ProductosEditDlg" widgetVar="ProductosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditProductosTitle}" closeOnEscape="true">
+        <p:dialog id="ProductosEditDlg" 
+                  widgetVar="ProductosEditDialog" 
+                  modal="true" 
+                  resizable="true"  
+                  appendTo="@(body)" 
+                  width="650" height="500" position="450,60"
+                  header="#{innventa.EditProductosTitle}" 
+                  closeOnEscape="true">
 
             <h:form id="ProductosEditForm">
 
@@ -16,29 +23,33 @@
 
                         <p:outputLabel value="#{innventa.EditProductosLabel_referencia}" for="referencia" />
                         <h:panelGroup>
-                            <p:inputText id="referencia" value="#{productosController.selected.referencia}" title="#{innventa.EditProductosTitle_referencia}" size="255" maxlength="255"/>
+                            <p:inputText id="referencia" value="#{productosController.selected.referencia}" title="#{innventa.EditProductosTitle_referencia}" size="50" maxlength="255"/>
                             <p:tooltip for="referencia" value="#{productosController.getComponentMessages('referencia', innventa.EditProductosHelpText_referencia)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditProductosLabel_codigo}" for="codigo" />
-                        <h:panelGroup>
-                            <p:inputText id="codigo" value="#{productosController.selected.codigo}" title="#{innventa.EditProductosTitle_codigo}" size="255" maxlength="255"/>
-                            <p:tooltip for="codigo" value="#{productosController.getComponentMessages('codigo', innventa.EditProductosHelpText_codigo)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.EditProductosLabel_nombre}" for="nombre" />
                         <h:panelGroup>
-                            <p:inputText id="nombre" value="#{productosController.selected.nombre}" title="#{innventa.EditProductosTitle_nombre}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_nombre}" size="255" maxlength="255"/>
+                            <p:inputText id="nombre" value="#{productosController.selected.nombre}" title="#{innventa.EditProductosTitle_nombre}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_nombre}" size="36" maxlength="255"/>
                             <p:tooltip for="nombre" value="#{productosController.getComponentMessages('nombre', innventa.EditProductosHelpText_nombre)}"/>
                         </h:panelGroup>
                         
-                           <p:outputLabel value="Unidad de Medida" for="und" />
+                         <p:outputLabel value="Unidad de Medida" for="und" />
                         <h:panelGroup>
-                            <p:inputText id="und" value="#{productosController.selected.unidadMedida}" title="Unidad de Medida" required="true" size="36" maxlength="255"/>
+                             <p:selectOneMenu id="und" value="#{productosController.selected.unidadMedida}" 
+                                             required="true" 
+                                             requiredMessage="La unidad de medida es requerida"
+                                             converter="#{unidadesMedidaConverter}">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value='#{unidadMedidaController.items}'
+                                               var="undItem"
+                                               itemValue="#{undItem}"
+                                               itemLabel="#{undItem.nombre.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
                             <p:tooltip for="und" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
                         </h:panelGroup>
-                         
-                           
+
                         <p:outputLabel value="#{innventa.EditProductosLabel_precioCompra}" for="precioCompra" />
                         <h:panelGroup>
                             <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.EditProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_precioCompra}"/>
@@ -69,17 +80,6 @@
                             <p:tooltip for="categoria" value="#{productosController.getComponentMessages('categoria', innventa.CreateProductosHelpText_categoria)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditProductosLabel_categoriaImpuesto}" for="categoriaImpuesto" />
-                        <h:panelGroup>
-                            <p:inputText id="categoriaImpuesto" value="#{productosController.selected.categoriaImpuesto}" title="#{innventa.EditProductosTitle_categoriaImpuesto}" size="36" maxlength="36"/>
-                            <p:tooltip for="categoriaImpuesto" value="#{productosController.getComponentMessages('categoriaImpuesto', innventa.EditProductosHelpText_categoriaImpuesto)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditProductosLabel_atributo}" for="atributo" />
-                        <h:panelGroup>
-                            <p:inputText id="atributo" value="#{productosController.selected.atributo}" title="#{innventa.EditProductosTitle_atributo}" size="36" maxlength="36"/>
-                            <p:tooltip for="atributo" value="#{productosController.getComponentMessages('atributo', innventa.EditProductosHelpText_atributo)}"/>
-                        </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.EditProductosLabel_stock}" for="stock" />
                         <h:panelGroup>
@@ -102,18 +102,6 @@
 
                             </p:selectOneMenu>
                             <p:tooltip for="tipoCodigo" value="#{productosController.getComponentMessages('tipoCodigo', innventa.CreateProductosHelpText_tipoCodigo)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditProductosLabel_creadoPor}" for="creadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="creadoPor" value="#{productosController.selected.creadoPor}" title="#{innventa.EditProductosTitle_creadoPor}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_creadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="creadoPor" value="#{productosController.getComponentMessages('creadoPor', innventa.EditProductosHelpText_creadoPor)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditProductosLabel_modificadoPor}" for="modificadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="modificadoPor" value="#{productosController.selected.modificadoPor}" title="#{innventa.EditProductosTitle_modificadoPor}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="modificadoPor" value="#{productosController.getComponentMessages('modificadoPor', innventa.EditProductosHelpText_modificadoPor)}"/>
                         </h:panelGroup>
 
                     

@@ -5,7 +5,7 @@ import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Collection;
-import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -57,31 +57,41 @@ public class ProductosController extends AbstractController<Productos> {
     }
     
     public String transformTipoProducto(){
+       return this.transformTipoProducto(this.selected.getTipoCodigo());
+    }
+    
+     public String transformTipoProducto(String idTipoCodigo){
         String finded = "";
         if(info == null){
             info = params.chargeItems(NamedQuerys.PRODUCT_TYPES_PARAM);
         }
         for(Parametros p : info){
-            if(p.getId().equals(this.selected.getTipoCodigo())){
+            if(p.getId().equals(idTipoCodigo)){
                 finded = p.getClave1();
                 break;
             }
         }
         return finded;
-    }
-    
+     }
  
     public TreeNode getProductsTree() {
-        productsTree = this.createDocuments();
         return productsTree;
     }
     
-    public TreeNode createDocuments() {
-        TreeNode root = new DefaultTreeNode(new Document("Files", "-", "Folder"), null);
-         
-        TreeNode documents = new DefaultTreeNode(new Document("Documents", "-", "Folder"), root);
-        TreeNode pictures = new DefaultTreeNode(new Document("Pictures", "-", "Folder"), root);
-        TreeNode movies = new DefaultTreeNode(new Document("Movies", "-", "Folder"), root);
+     public void setProductsTree(TreeNode root) {
+        this.productsTree = root;
+    }
+    @PostConstruct
+    public void init() {
+        productsTree = new DefaultTreeNode(new Document("Files", "-", "Folder"), null);
+ 
+    }
+    
+    public void addChildNode(){
+       
+        TreeNode documents = new DefaultTreeNode(new Document("Documents", "-", "Folder"), productsTree);
+        TreeNode pictures = new DefaultTreeNode(new Document("Pictures", "-", "Folder"), productsTree);
+        TreeNode movies = new DefaultTreeNode(new Document("Movies", "-", "Folder"), productsTree);
          
         TreeNode work = new DefaultTreeNode(new Document("Work", "-", "Folder"), documents);
         TreeNode primefaces = new DefaultTreeNode(new Document("PrimeFaces", "-", "Folder"), documents);
@@ -105,8 +115,6 @@ public class ProductosController extends AbstractController<Productos> {
          
         TreeNode goodfellas = new DefaultTreeNode("mp3", new Document("Goodfellas", "23 GB", "Movie File"), deniro);
         TreeNode untouchables = new DefaultTreeNode("mp3", new Document("Untouchables", "17 GB", "Movie File"), deniro);
-         
-        return root;
     }
 
 }

@@ -1,30 +1,33 @@
-
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author hectsaga
  */
 @Entity
-@Table(name = "tipos_tel")
+@Table(name = "unidades_medida")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TiposTel.findAll", query = "SELECT t FROM TiposTel t"),
-    @NamedQuery(name = "TiposTel.findById", query = "SELECT t FROM TiposTel t WHERE t.id = :id"),
-    @NamedQuery(name = "TiposTel.findByNombre", query = "SELECT t FROM TiposTel t WHERE t.nombre = :nombre")})
-public class TiposTel implements Serializable {
+    @NamedQuery(name = "UnidadesMedida.findAll", query = "SELECT t FROM UnidadesMedida t"),
+    @NamedQuery(name = "UnidadesMedida.findById", query = "SELECT t FROM UnidadesMedida t WHERE t.id = :id"),
+    @NamedQuery(name = "UnidadesMedida.findByNombre", query = "SELECT t FROM UnidadesMedida t WHERE t.nombre = :nombre")})
+public class UnidadesMedida implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,15 +41,17 @@ public class TiposTel implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "nombre")
     private String nombre;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "unidadMedida")
+    private Collection<Productos> productosCollection;
 
-    public TiposTel() {
+    public UnidadesMedida() {
     }
 
-    public TiposTel(String id) {
+    public UnidadesMedida(String id) {
         this.id = id;
     }
 
-    public TiposTel(String id, String nombre) {
+    public UnidadesMedida(String id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
@@ -66,7 +71,16 @@ public class TiposTel implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    @XmlTransient
+    public Collection<Productos> getProductosCollection() {
+        return productosCollection;
+    }
 
+    public void setProductosCollection(Collection<Productos> productosCollection) {
+        this.productosCollection = productosCollection;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -77,10 +91,10 @@ public class TiposTel implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TiposTel)) {
+        if (!(object instanceof UnidadesMedida)) {
             return false;
         }
-        TiposTel other = (TiposTel) object;
+        UnidadesMedida other = (UnidadesMedida) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +103,7 @@ public class TiposTel implements Serializable {
 
     @Override
     public String toString() {
-        return "com.co.hsg.innventa.beans.TiposTel[ id=" + id + " ]";
+        return "com.co.hsg.innventa.beans.UnidadesMedida[ id=" + id + " ]";
     }
     
 }
