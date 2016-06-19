@@ -37,11 +37,11 @@ public class CuentasContactosController extends AbstractController<CuentasContac
      *
      * @param event Event object for the widget that triggered an action
      */
-    public void prepareIdPersona(ActionEvent event) {
+    /*public void prepareIdPersona(ActionEvent event) {
         if (this.getSelected() != null && idPersonaController.getSelected() == null) {
-            idPersonaController.setSelected(this.getSelected().getIdPersona());
+            idPersonaController.setSelected(this.getSelected().get);
         }
-    }
+    }*/
 
     /**
      * Sets the "selected" attribute of the Cuentas controller in order to
@@ -50,8 +50,8 @@ public class CuentasContactosController extends AbstractController<CuentasContac
      * @param event Event object for the widget that triggered an action
      */
     public void prepareIdCliente(ActionEvent event) {
-        if (this.getSelected() != null && idClienteController.getSelected() == null) {
+      /*  if (this.getSelected() != null && idClienteController.getSelected() == null) {
             idClienteController.setSelected(this.getSelected().getIdCliente());
-        }
+        }*/
     }
 }

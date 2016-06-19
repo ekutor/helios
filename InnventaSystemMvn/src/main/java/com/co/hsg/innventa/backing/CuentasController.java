@@ -1,15 +1,12 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
-import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.beans.Cuentas;
-import com.co.hsg.innventa.beans.CuentasContactos;
 import com.co.hsg.innventa.beans.ListaPrecios;
 import com.co.hsg.innventa.session.CuentasFacade;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import org.primefaces.event.FlowEvent;
@@ -47,13 +44,14 @@ public class CuentasController extends AbstractController<Cuentas> {
         //    c.setListaPrecios(lpController.getSelected());
         }
         if(personasController.getSelected() != null){
-            CuentasContactos cc = new CuentasContactos();
+           /* CuentasContactos cc = new CuentasContactos();
             cc.setId(Utils.generateID());
             cc.setEliminado((short)0);
             cc.setCargo(personasController.getAttrib());
             cc.setIdCliente(c);
             cc.setIdPersona(personasController.getSelected());
-            c.getCuentasContactosList().add(cc);
+            c.getCuentasContactosList().add(cc);*/
+           c.addContact(personasController.getSelected(), "cargooo");
         }
         super.saveNew(event);
     }
@@ -81,7 +79,7 @@ public class CuentasController extends AbstractController<Cuentas> {
      */
     public String navigateCuentasContactosList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("CuentasContactos_items", this.getSelected().getCuentasContactosList());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("CuentasContactos_items", this.getSelected().getPersona());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/cuentasContactos/index";
     }

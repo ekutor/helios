@@ -1,6 +1,7 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -80,8 +81,10 @@ public class Personas implements Serializable {
     @NotNull
     @Column(name = "eliminado")
     private short eliminado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
-    private List<CuentasContactos> cuentasContactosList;
+    
+    @OneToMany( cascade = CascadeType.PERSIST, mappedBy = "persona")
+    private List<CuentasContactos> cuenta;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
     private List<Usuarios> usuariosList;
 
@@ -174,12 +177,15 @@ public class Personas implements Serializable {
     }
 
     @XmlTransient
-    public List<CuentasContactos> getCuentasContactosList() {
-        return cuentasContactosList;
+    public List<CuentasContactos> getCuenta() {
+         if(cuenta == null){
+            cuenta = new ArrayList<CuentasContactos>();
+        }
+        return cuenta;
     }
 
-    public void setCuentasContactosList(List<CuentasContactos> cuentasContactosList) {
-        this.cuentasContactosList = cuentasContactosList;
+    public void setCuenta(List<CuentasContactos> cuenta) {
+        this.cuenta = cuenta;
     }
 
     @XmlTransient

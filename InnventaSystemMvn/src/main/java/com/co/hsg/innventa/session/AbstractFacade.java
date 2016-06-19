@@ -1,11 +1,19 @@
 package com.co.hsg.innventa.session;
 
 import com.co.hsg.innventa.backing.AppController;
+import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.backing.util.Utils;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import javax.validation.Validator;
+
 
 /**
  *
@@ -25,11 +33,13 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        if (!constraintValidationsDetected(entity))
+            getEntityManager().persist(entity);
     }
 
     public void edit(T entity) {
-        getEntityManager().merge(entity);
+        if (!constraintValidationsDetected(entity))
+            getEntityManager().merge(entity);
     }
 
      public void remove(String id) {
@@ -94,4 +104,22 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
     
+    private boolean constraintValidationsDetected(T entity) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
+        if (constraintViolations.size() > 0) {
+          Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
+          while (iterator.hasNext()) {
+            ConstraintViolation<T> cv = iterator.next();
+            System.err.println(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+
+            JsfUtil.addErrorMessage(cv.getRootBeanClass().getSimpleName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+          }
+          return true;
+    }
+    else {
+      return false;
+    }
+  }
 }

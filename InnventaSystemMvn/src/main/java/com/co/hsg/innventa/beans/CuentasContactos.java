@@ -7,13 +7,17 @@ package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,21 +29,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "cuentas_contactos")
-@XmlRootElement
+@IdClass(CuentasContactosId.class)
+@XmlRootElement 
 @NamedQueries({
     @NamedQuery(name = "CuentasContactos.findAll", query = "SELECT c FROM CuentasContactos c"),
-    @NamedQuery(name = "CuentasContactos.findById", query = "SELECT c FROM CuentasContactos c WHERE c.id = :id"),
     @NamedQuery(name = "CuentasContactos.findByCargo", query = "SELECT c FROM CuentasContactos c WHERE c.cargo = :cargo"),
     @NamedQuery(name = "CuentasContactos.findByEliminado", query = "SELECT c FROM CuentasContactos c WHERE c.eliminado = :eliminado")})
 public class CuentasContactos implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "id")
-    private String id;
+
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "cargo")
@@ -48,32 +48,39 @@ public class CuentasContactos implements Serializable {
     @NotNull
     @Column(name = "eliminado")
     private short eliminado;
-    @JoinColumn(name = "id_persona", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Personas idPersona;
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Cuentas idCliente;
+   // @JoinColumn(name = "id_persona", referencedColumnName = "id")
+    @Id
+    @ManyToOne(cascade = CascadeType.PERSIST,optional = false)
+    @JoinColumn(name="id_persona")
+    private Personas persona;
+  //  @JoinColumn(name = "id_cliente", referencedColumnName = "id")cascade = CascadeType.ALL,
+    @Id
+    @ManyToOne(cascade = CascadeType.PERSIST,optional = false)
+    @JoinColumn(name="id_cuenta")
+    private Cuentas cuenta;
 
     public CuentasContactos() {
     }
 
-    public CuentasContactos(String id) {
-        this.id = id;
-    }
-
-    public CuentasContactos(String id, String cargo, short eliminado) {
-        this.id = id;
+    public CuentasContactos(String cargo, short eliminado) {
         this.cargo = cargo;
         this.eliminado = eliminado;
     }
 
-    public String getId() {
-        return id;
+    public Personas getPersona() {
+        return persona;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPersona(Personas persona) {
+        this.persona = persona;
+    }
+
+    public Cuentas getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuentas cuenta) {
+        this.cuenta = cuenta;
     }
 
     public String getCargo() {
@@ -92,27 +99,10 @@ public class CuentasContactos implements Serializable {
         this.eliminado = eliminado;
     }
 
-    public Personas getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Personas idPersona) {
-        this.idPersona = idPersona;
-    }
-
-    public Cuentas getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Cuentas idCliente) {
-        this.idCliente = idCliente;
-    }
-
+    
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return (persona.getId()!= null )? persona.getId().hashCode() + cuenta.getId().hashCode() : 0;
     }
 
     @Override
@@ -122,15 +112,12 @@ public class CuentasContactos implements Serializable {
             return false;
         }
         CuentasContactos other = (CuentasContactos) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (other.persona.getId() == this.persona.getId()) && (other.cuenta.getId() == this.cuenta.getId());
     }
 
     @Override
     public String toString() {
-        return "com.co.hsg.innventa.beans.CuentasContactos[ id=" + id + " ]";
+        return "com.co.hsg.innventa.beans.CuentasContactos[ id=" + cuenta.getId() + " ]";
     }
     
 }

@@ -45,7 +45,7 @@ public class CuentasContactosConverter implements Converter {
         }
         if (object instanceof CuentasContactos) {
             CuentasContactos o = (CuentasContactos) object;
-            return getStringKey(o.getId());
+            return getStringKey(o.getCargo());
         } else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), CuentasContactos.class.getName()});
             return null;

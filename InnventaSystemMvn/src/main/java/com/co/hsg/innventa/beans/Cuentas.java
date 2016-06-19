@@ -56,7 +56,6 @@ public class Cuentas implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 36)
     @Column(name = "tipo_cliente")
     private String tipoCliente;
@@ -90,10 +89,13 @@ public class Cuentas implements Serializable {
     @Column(name = "fecha_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaModificacion;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private List<Pedidos> pedidosList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
-    private List<CuentasContactos> cuentasContactosList;
+    
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="cuenta")
+    private List<CuentasContactos> persona;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private List<CuentasDireccion> cuentasDireccionList;
 
@@ -204,15 +206,26 @@ public class Cuentas implements Serializable {
     }
 
     @XmlTransient
-    public List<CuentasContactos> getCuentasContactosList() {
-        if(cuentasContactosList == null){
-            cuentasContactosList = new ArrayList<CuentasContactos>();
+    public List<CuentasContactos> getPersona() {
+        if(persona == null){
+            persona = new ArrayList<CuentasContactos>();
         }
-        return cuentasContactosList;
+        return persona;
     }
 
-    public void setCuentasContactosList(List<CuentasContactos> cuentasContactosList) {
-        this.cuentasContactosList = cuentasContactosList;
+    public void setPersona(List<CuentasContactos> persona) {
+        this.persona = persona;
+    }
+    
+     public void addContact( Personas persona, String cargo ) {
+       CuentasContactos asociation = new CuentasContactos();
+       asociation.setCargo(cargo);
+       asociation.setPersona(persona);
+       asociation.setEliminado((short)0);
+       asociation.setCuenta(this);
+       
+       this.getPersona().add(asociation);
+       persona.getCuenta().add(asociation);
     }
 
     @XmlTransient

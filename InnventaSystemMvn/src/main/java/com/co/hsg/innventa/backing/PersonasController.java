@@ -30,7 +30,7 @@ public class PersonasController extends AbstractController<Personas> {
      */
     public String navigateCuentasContactosList() {
         if (this.getSelected() != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("CuentasContactos_items", this.getSelected().getCuentasContactosList());
+            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("CuentasContactos_items", this.getSelected().getCuenta());
         }
         return this.mobilePageController.getMobilePagesPrefix() + "/cuentasContactos/index";
     }

@@ -161,10 +161,10 @@
                         </h:panelGroup>
                         <p:commandButton value="Submit" actionListener="#{cuentasController.saveNew}" update="growl" process="@this"/>
 
-                        <p:commandButton rendered="false" actionListener="#{cuentasController.saveNew}" value="#{innventa.Save}" update="display,:CuentasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CuentasCreateDialog'));">
+                        <p:commandButton actionListener="#{cuentasController.saveNew}" value="#{innventa.Save}" update="display,:CuentasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CuentasCreateDialog'));">
                             <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                         </p:commandButton>
-
+                       
                         <p:commandButton value="#{innventa.Cancel}" onclick="PF('CuentasCreateDialog').hide()"/>
 
                     </p:tab>

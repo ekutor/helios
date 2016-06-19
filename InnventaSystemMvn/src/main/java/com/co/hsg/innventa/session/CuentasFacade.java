@@ -39,7 +39,6 @@ public class CuentasFacade extends AbstractFacade<Cuentas> {
     @Override
     public void create(Cuentas entity) {
         String id = app.getActualUserId();
-        entity.setId(Utils.generateID());
         entity.setCreadoPor(id);
         entity.setModificadoPor(id);
         Date d = Calendar.getInstance().getTime();
