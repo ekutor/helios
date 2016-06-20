@@ -13,9 +13,11 @@ import javax.inject.Inject;
 import java.util.ResourceBundle;
 import javax.ejb.EJBException;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.primefaces.context.RequestContext;
 
 /**
  * Represents an abstract shell of to be used as JSF Controller to be used in
@@ -190,6 +192,8 @@ public abstract class AbstractController<T> implements Serializable {
             items = null; // Invalidate list of items to trigger re-query.
         }
     }*/
+    
+
     public void delete( String id) {
         System.out.println("com.co.hsg.innventa.backing.AbstractController.delete() "+ id);
         String msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Deleted");
@@ -303,6 +307,25 @@ public abstract class AbstractController<T> implements Serializable {
         if (paramItems != null) {
             this.items = (Collection<T>) paramItems;
         }
+    }
+    
+    protected void updateUI(String panelToUpdate){
+        RequestContext context = RequestContext.getCurrentInstance();
+      //  context.addCallbackParam("saved", true);    //basic parameter
+       // context.addCallbackParam("user", user);     //pojo as json
+         
+        //execute javascript oncomplete
+    //    context.execute("PrimeFaces.info('Hello from the Backing Bean');");
+         
+        //update panel
+        //context.update("form:panel");
+        context.update(panelToUpdate);
+         
+        //scroll to panel
+        context.scrollTo(panelToUpdate);
+         
+        //add facesmessage
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Success", panelToUpdate));
     }
 
 }

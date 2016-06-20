@@ -4,9 +4,7 @@
 
     <ui:composition>
         <div class="container-fluid">
-            <div class="row">
-             <p:growl id="growl" life="3000" showDetail="true" globalOnly="true"/>
-             </div>
+           
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ui:include src="leftMenu.xhtml" />
@@ -25,6 +23,9 @@
                 </div>
 
             </div>
+             <div class="row">
+                 <p:growl id="growl" life="3000" showDetail="true" globalOnly="true"/>
+             </div>
         </div>
     </ui:composition>
 </html>

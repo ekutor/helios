@@ -44,13 +44,6 @@ public class CuentasController extends AbstractController<Cuentas> {
         //    c.setListaPrecios(lpController.getSelected());
         }
         if(personasController.getSelected() != null){
-           /* CuentasContactos cc = new CuentasContactos();
-            cc.setId(Utils.generateID());
-            cc.setEliminado((short)0);
-            cc.setCargo(personasController.getAttrib());
-            cc.setIdCliente(c);
-            cc.setIdPersona(personasController.getSelected());
-            c.getCuentasContactosList().add(cc);*/
            c.addContact(personasController.getSelected(), "cargooo");
         }
         super.saveNew(event);

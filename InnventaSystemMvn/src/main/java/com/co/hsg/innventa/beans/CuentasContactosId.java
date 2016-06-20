@@ -1,4 +1,3 @@
-
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;

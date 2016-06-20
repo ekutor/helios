@@ -117,8 +117,14 @@
                                 </h:panelGroup>
 
                                 <p:outputLabel value="#{innventa.CreatePersonasLabel_fechaNacim}" for="fechaNacim" />
-                                <h:panelGroup>
-                                    <p:calendar id="fechaNacim" pattern="dd/MM/yyyy" value="#{personasController.selected.fechaNacim}" title="#{innventa.CreatePersonasTitle_fechaNacim}"  showOn="button"/>
+                                <h:panelGroup>                                
+                                    <p:calendar id="fechaNacim" pattern="dd/MM/yyyy" 
+                                                value="#{personasController.selected.fechaNacim}" 
+                                                title="#{innventa.CreatePersonasTitle_fechaNacim}" 
+                                                required="true" 
+                                                requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaPedido}">
+                                        <span class="glyphicon glyphicon-calendar"></span>         
+                                    </p:calendar>
                                     <p:tooltip for="fechaNacim" value="#{personasController.getComponentMessages('fechaNacim', innventa.CreatePersonasHelpText_fechaNacim)}"/>
                                 </h:panelGroup>
                                 

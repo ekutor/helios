@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -17,10 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,7 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CuentasContactos.findAll", query = "SELECT c FROM CuentasContactos c"),
     @NamedQuery(name = "CuentasContactos.findByCargo", query = "SELECT c FROM CuentasContactos c WHERE c.cargo = :cargo"),
-    @NamedQuery(name = "CuentasContactos.findByEliminado", query = "SELECT c FROM CuentasContactos c WHERE c.eliminado = :eliminado")})
+    @NamedQuery(name = "CuentasContactos.findByEliminado", query = "SELECT c FROM CuentasContactos c WHERE c.eliminado = :eliminado"),
+    @NamedQuery(name = "CuentasContactos.findByCuenta", query = "SELECT c FROM CuentasContactos c WHERE c.eliminado = 0 AND c.cuenta.id = :cuenta")
+
+})
 public class CuentasContactos implements Serializable {
 
     private static final long serialVersionUID = 1L;

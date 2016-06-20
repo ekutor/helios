@@ -36,3 +36,6 @@ div[id="loginForm:growl_container"] {
     background-color: #f6f7f6;
     font-size: 18px!important;
 }
+.ui-growl ui-widget{
+   top:70px;  
+}

@@ -9,36 +9,18 @@
     <h:form id="CuentasContactosListForm">
 
         <p:panel header="#{innventa.ListCuentasContactosTitle}">
-            <p:contextMenu id="CuentasContactosDataTableContextMenu" for="datalist">  
-                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('CuentasContactosListForm:createButton').click();" icon="ui-icon-plus"/>
-                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('CuentasContactosListForm:viewButton').click();" icon="ui-icon-search"/>
-                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('CuentasContactosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('CuentasContactosListForm:deleteButton').click();" icon="ui-icon-trash"/>
-                <p:separator/>
-                <p:menuitem value="#{innventa.CuentasContactosMenuItem_idPersona}" icon="ui-icon-search"  actionListener="#{cuentasContactosController.prepareIdPersona}" update=":PersonasViewForm" oncomplete="PF('PersonasViewDialog').show()" disabled="#{empty cuentasContactosController.selected.idPersona}"/>  
-                <p:menuitem value="#{innventa.CuentasContactosMenuItem_idCliente}" icon="ui-icon-search"  actionListener="#{cuentasContactosController.prepareIdCliente}" update=":CuentasViewForm" oncomplete="PF('CuentasViewDialog').show()" disabled="#{empty cuentasContactosController.selected.idCliente}"/>  
-            </p:contextMenu>
+           
             <p:dataTable id="datalist"
                          value="#{cuentasContactosController.items}"
                          var="item"
-                         rowKey="#{item.id}"
+                        
                          paginator="true"
                          rows="10"
                          rowsPerPageTemplate="10,20,30,40,50"
                          selectionMode="single"
                          selection="#{cuentasContactosController.selected}">
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CuentasContactosDataTableContextMenu" listener="#{cuentasContactosController.resetParents}"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:CuentasContactosDataTableContextMenu" listener="#{cuentasContactosController.resetParents}"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{cuentasContactosController.resetParents}"/>
-                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CuentasContactosListForm:viewButton').click();"/>
-
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListCuentasContactosTitle_id}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
-                </p:column>
+               
 
 
                 <p:column sortBy="#{item.cargo}" filterBy="#{item.cargo}">
@@ -57,33 +39,27 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.idPersona.id}" filterBy="#{item.idPersona.id}">
+                <p:column sortBy="#{item.persona.id}" filterBy="#{item.persona.id}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListCuentasContactosTitle_idPersona}"/>
                     </f:facet>
-                    <h:outputText value="#{item.idPersona.id}"/>
+                    <h:outputText value="#{item.persona.id}"/>
                 </p:column>
 
 
-                <p:column sortBy="#{item.idCliente.id}" filterBy="#{item.idCliente.id}">
+                <p:column sortBy="#{item.cuenta.id}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListCuentasContactosTitle_idCliente}"/>
                     </f:facet>
-                    <h:outputText value="#{item.idCliente.id}"/>
+                    <h:outputText value="#{item.cuenta.id}"/>
                 </p:column>
 
 
             </p:dataTable>
 
-            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{cuentasContactosController.prepareCreate}" update=":CuentasContactosCreateForm" oncomplete="PF('CuentasContactosCreateDialog').show()"/>
-            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":CuentasContactosViewForm" oncomplete="PF('CuentasContactosViewDialog').show()" disabled="#{empty cuentasContactosController.selected}"/>
-            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":CuentasContactosEditForm" oncomplete="PF('CuentasContactosEditDialog').show()" disabled="#{empty cuentasContactosController.selected}"/>
-            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{cuentasContactosController.delete}" update=":growl,datalist" disabled="#{empty cuentasContactosController.selected}">
-                <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-            </p:commandButton>
 
         </p:panel>
-        <ui:include src="/confirmation.xhtml"/>
+      
     </h:form>
 
 </ui:composition>

@@ -8,7 +8,8 @@ public enum NamedQuerys {
     ORDER_PARAM("Parametros.orders"),
     PRODUCT_TYPES_PARAM("Parametros.productTypes"),
     STATUS("Estados.findByModulo"),
-    CATEGORIES("Categorias.findByModulo")
+    CATEGORIES("Categorias.findByModulo"),
+    ACCOUNT_CONTACTS("CuentasContactos.findByCuenta")
     ;
     
     private String query;
