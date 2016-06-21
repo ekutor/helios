@@ -36,13 +36,17 @@ public class ParametrosController extends AbstractController<Parametros> {
             e.printStackTrace();
         }
     }
-    
-    public Collection<Parametros> chargeListObject(String param) {
+    public Collection<Parametros> chargeListObject(String paramId) {
+        return chargeListObject(paramId, null);
+    }
+    public Collection<Parametros> chargeListObject(String paramId, String param) {
   
         try{
-            switch(param){
+             switch(paramId){
                 case "productTypes":
                     return this.chargeItems(NamedQuerys.PRODUCT_TYPES_PARAM);
+                case "PARAMS":
+                    return this.chargeItems(NamedQuerys.PARAMS, "parametro" , param );
             }
         }catch(Exception e){
             e.printStackTrace();

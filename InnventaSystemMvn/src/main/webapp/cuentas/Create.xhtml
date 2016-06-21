@@ -70,11 +70,23 @@
                                     <p:tooltip for="idPersona" value="#{personasController.getComponentMessages('id', innventa.CreatePersonasHelpText_id)}"/>
                                 </h:panelGroup>
 
-                                <p:outputLabel value="#{innventa.CreatePersonasLabel_tipoDocumento}" for="tipoDocumento" />
-                                <h:panelGroup>
-                                    <p:inputText id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" title="#{innventa.CreatePersonasTitle_tipoDocumento}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_tipoDocumento}" size="36" maxlength="36"/>
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_tipoDocumento}" for="tipoDocumento" />                               
+                                 <h:panelGroup>
+                                    <p:selectOneMenu id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" 
+                                                     required="true" 
+                                                     requiredMessage="#{innventa.CreatePersonasRequiredMessage_tipoDocumento}"
+                                                      converter="#{parametrosConverter}">
+                                        <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                        <f:selectItems value='#{parametrosController.chargeListObject("PARAMS", "IDENTIFICATION")}'
+                                                       var="params"
+                                                       itemValue="#{params.id}"
+                                                       itemLabel="#{params.clave1}"
+                                                       />
+
+                                    </p:selectOneMenu>
                                     <p:tooltip for="tipoDocumento" value="#{personasController.getComponentMessages('tipoDocumento', innventa.CreatePersonasHelpText_tipoDocumento)}"/>
                                 </h:panelGroup>
+                                
 
                                 <p:outputLabel value="#{innventa.CreatePersonasLabel_nombre1}" for="nombre1" />
                                 <h:panelGroup>
@@ -128,11 +140,25 @@
                                     <p:tooltip for="fechaNacim" value="#{personasController.getComponentMessages('fechaNacim', innventa.CreatePersonasHelpText_fechaNacim)}"/>
                                 </h:panelGroup>
                                 
-                                 <p:outputLabel value="Cargo" for="cargo" />
+                                                             
+                                <p:outputLabel value="Cargo" for="cargo" />
                                 <h:panelGroup>
-                                    <p:inputText id="cargo" value="#{personasController.attrib}" title="cargo" required="true" requiredMessage="El Cargo es Requerido" size="12" maxlength="36"/>
-                                    <p:tooltip for="cargo" value="#{personasController.getComponentMessages('id', 'Por favor provea informacion para el cargo')}"/>
+                                    <p:selectOneMenu id="cargo" value="#{cuentasController.selectedPosition}" 
+                                                     required="true" 
+                                                     requiredMessage="El cargo es requerido"
+                                                      converter="#{parametrosConverter}">
+                                        <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                        <f:selectItems value='#{parametrosController.chargeListObject("PARAMS", "ACCOUNTS_POSITION")}'
+                                                       var="params"
+                                                       itemValue="#{params.id}"
+                                                       itemLabel="#{params.clave1}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="estado" value="#{cuentasController.getComponentMessages('estado', innventa.CreateCuentasHelpText_estado)}"/>
                                 </h:panelGroup>
+                             
+                                                         
                             </p:panelGrid>
 
                         </h:panelGroup>
@@ -165,8 +191,7 @@
 
                             </p:panelGrid>
                         </h:panelGroup>
-                        <p:commandButton value="Submit" actionListener="#{cuentasController.saveNew}" update="growl" process="@this"/>
-
+                        
                         <p:commandButton actionListener="#{cuentasController.saveNew}" value="#{innventa.Save}" update="display,:CuentasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CuentasCreateDialog'));">
                             <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                         </p:commandButton>

@@ -15,7 +15,7 @@
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{cuentasController.selected != null}">
 
 
-                        <h:outputLabel value="#{innventa.EditCuentasLabel_id}" for="id" />
+                        <h:outputLabel value="NIT" for="id" />
                         <h:panelGroup>
                             <h:outputText id="id" value="#{cuentasController.selected.id}" />
                             <p:tooltip for="id" value="#{cuentasController.getComponentMessages('id', innventa.EditCuentasHelpText_id)}"/>
@@ -27,47 +27,25 @@
                             <p:tooltip for="nombre" value="#{cuentasController.getComponentMessages('nombre', innventa.EditCuentasHelpText_nombre)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditCuentasLabel_tipoCliente}" for="tipoCliente" />
-                        <h:panelGroup>
-                            <p:inputText id="tipoCliente" value="#{cuentasController.selected.tipoCliente}" title="#{innventa.EditCuentasTitle_tipoCliente}" required="true" requiredMessage="#{innventa.EditCuentasRequiredMessage_tipoCliente}" size="36" maxlength="36"/>
-                            <p:tooltip for="tipoCliente" value="#{cuentasController.getComponentMessages('tipoCliente', innventa.EditCuentasHelpText_tipoCliente)}"/>
-                        </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditCuentasLabel_estado}" for="estado" />
-                        <h:panelGroup>
-                            <p:inputText id="estado" value="#{cuentasController.selected.estado}" title="#{innventa.EditCuentasTitle_estado}" required="true" requiredMessage="#{innventa.EditCuentasRequiredMessage_estado}" size="36" maxlength="36"/>
-                            <p:tooltip for="estado" value="#{cuentasController.getComponentMessages('estado', innventa.EditCuentasHelpText_estado)}"/>
-                        </h:panelGroup>
+                        <p:outputLabel value="#{innventa.CreateCuentasLabel_estado}" for="estado" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="estado" value="#{cuentasController.selected.estado}" 
+                                                     required="true" 
+                                                     requiredMessage="#{innventa.CreateCuentasRequiredMessage_estado}"
+                                                     converter="#{estadosConverter}">
+                                        <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                        <f:selectItems value='#{estadosController.chargeItems("CUENTAS")}'
+                                                       var="estadoItem"
+                                                       itemValue="#{estadoItem}"
+                                                       itemLabel="#{estadoItem.estado.toString()}"
+                                                       />
 
-                        <p:outputLabel value="#{innventa.EditCuentasLabel_eliminado}" for="eliminado" />
-                        <h:panelGroup>
-                            <p:inputText id="eliminado" value="#{cuentasController.selected.eliminado}" title="#{innventa.EditCuentasTitle_eliminado}" required="true" requiredMessage="#{innventa.EditCuentasRequiredMessage_eliminado}"/>
-                            <p:tooltip for="eliminado" value="#{cuentasController.getComponentMessages('eliminado', innventa.EditCuentasHelpText_eliminado)}"/>
-                        </h:panelGroup>
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="estado" value="#{cuentasController.getComponentMessages('estado', innventa.CreateCuentasHelpText_estado)}"/>
+                                </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditCuentasLabel_creadoPor}" for="creadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="creadoPor" value="#{cuentasController.selected.creadoPor}" title="#{innventa.EditCuentasTitle_creadoPor}" required="true" requiredMessage="#{innventa.EditCuentasRequiredMessage_creadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="creadoPor" value="#{cuentasController.getComponentMessages('creadoPor', innventa.EditCuentasHelpText_creadoPor)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditCuentasLabel_fechaCreacion}" for="fechaCreacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{cuentasController.selected.fechaCreacion}" title="#{innventa.EditCuentasTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.EditCuentasRequiredMessage_fechaCreacion}" showOn="button"/>
-                            <p:tooltip for="fechaCreacion" value="#{cuentasController.getComponentMessages('fechaCreacion', innventa.EditCuentasHelpText_fechaCreacion)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditCuentasLabel_modificadoPor}" for="modificadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="modificadoPor" value="#{cuentasController.selected.modificadoPor}" title="#{innventa.EditCuentasTitle_modificadoPor}" required="true" requiredMessage="#{innventa.EditCuentasRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="modificadoPor" value="#{cuentasController.getComponentMessages('modificadoPor', innventa.EditCuentasHelpText_modificadoPor)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditCuentasLabel_fechaModificacion}" for="fechaModificacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{cuentasController.selected.fechaModificacion}" title="#{innventa.EditCuentasTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.EditCuentasRequiredMessage_fechaModificacion}" showOn="button"/>
-                            <p:tooltip for="fechaModificacion" value="#{cuentasController.getComponentMessages('fechaModificacion', innventa.EditCuentasHelpText_fechaModificacion)}"/>
-                        </h:panelGroup>
+                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{cuentasController.save}" value="#{innventa.Save}" update="display,:CuentasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('CuentasEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>

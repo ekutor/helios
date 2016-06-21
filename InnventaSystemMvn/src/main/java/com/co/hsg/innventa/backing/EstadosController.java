@@ -40,13 +40,12 @@ public class EstadosController extends AbstractController<Estados> {
     public Collection<Estados> chargeItems(String moduleName) {
         actualModule = Modules.getModule(moduleName);
         String param = "modulo";
-        items = this.chargeItems(NamedQuerys.STATUS, param, actualModule.getModuleName().toUpperCase());
+        items = this.chargeItems(NamedQuerys.STATUS, param, actualModule.name().toUpperCase());
         return items;
     }
 
     @Override
     public void saveNew(ActionEvent event) {
-        Estados selected = this.getSelected();
         selected.setModulo(actualModule.name());
         super.saveNew(event);
     }

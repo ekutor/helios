@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Parametros.findById", query = "SELECT p FROM Parametros p WHERE p.id = :id"),
     @NamedQuery(name = "Parametros.findByClave1", query = "SELECT p FROM Parametros p WHERE p.clave1 = :clave1"),
     @NamedQuery(name = "Parametros.findByClave2", query = "SELECT p FROM Parametros p WHERE p.clave2 = :clave2"),
-    @NamedQuery(name = "Parametros.findByParametro", query = "SELECT p FROM Parametros p WHERE p.parametro = :parametro"),
+    @NamedQuery(name = "Parametros.findByParametro", query = "SELECT p FROM Parametros p WHERE p.parametro = :parametro AND p.eliminado=0"),
     @NamedQuery(name = "Parametros.orders", query = "SELECT p FROM Parametros p WHERE p.parametro = 'CONF_ORDERS' AND p.eliminado=0"),
     @NamedQuery(name = "Parametros.productTypes", query = "SELECT p FROM Parametros p WHERE p.parametro = 'PRODUCT_TYPE' AND p.eliminado=0")
 })

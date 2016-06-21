@@ -23,6 +23,8 @@ public class CuentasController extends AbstractController<Cuentas> {
     @Inject 
     private ListaPreciosController lpController;
     private boolean skip;
+    
+    private String selectedPosition;
 
     public CuentasController() {
         // Inform the Abstract parent controller of the concrete Cuentas Entity
@@ -44,9 +46,17 @@ public class CuentasController extends AbstractController<Cuentas> {
         //    c.setListaPrecios(lpController.getSelected());
         }
         if(personasController.getSelected() != null){
-           c.addContact(personasController.getSelected(), "cargooo");
+           c.addContact(personasController.getSelected(), selectedPosition);
         }
         super.saveNew(event);
+    }
+
+    public String getSelectedPosition() {
+        return selectedPosition;
+    }
+
+    public void setSelectedPosition(String selectedPosition) {
+        this.selectedPosition = selectedPosition;
     }
     
     

@@ -9,7 +9,8 @@ public enum NamedQuerys {
     PRODUCT_TYPES_PARAM("Parametros.productTypes"),
     STATUS("Estados.findByModulo"),
     CATEGORIES("Categorias.findByModulo"),
-    ACCOUNT_CONTACTS("CuentasContactos.findByCuenta")
+    ACCOUNT_CONTACTS("CuentasContactos.findByCuenta"),
+    PARAMS("Parametros.findByParametro")
     ;
     
     private String query;

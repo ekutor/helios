@@ -28,7 +28,7 @@
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
 
-                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('EstadosCreateDialogOC').hide()"/>
+                    <p:commandButton value="#{innventa.Cancel}"  actionListener="#{navigation.orders}"/>
                 </h:panelGroup>
 
             </h:form>
