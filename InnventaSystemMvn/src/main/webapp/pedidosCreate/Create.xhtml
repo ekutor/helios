@@ -69,9 +69,17 @@
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_cantidadTotal}" for="cantidadTotal" />
                         <h:panelGroup>
-                            <p:inputText id="cantidadTotal" value="#{pedidosController.selected.cantidadTotal}" title="#{innventa.CreatePedidosTitle_cantidadTotal}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_cantidadTotal}"/>
-                            <p:tooltip for="cantidadTotal" value="#{pedidosController.getComponentMessages('cantidadTotal', innventa.CreatePedidosHelpText_cantidadTotal)}"/>
+                            <p:inputText id="cantidadTotal" value="#{pedidosController.cantTotal}" readonly="true" title="#{innventa.CreatePedidosTitle_cantidadTotal}" required="true" />
+                           
                         </h:panelGroup>
+                        
+                        <p:outputLabel value="Total OC" for="totalOC" />
+                        <h:panelGroup id="panelTotalOC">
+                            <p:inputText id="totalOC" readonly="true" value="#{pedidosController.totalOC}">
+                                 <f:convertNumber pattern="###,###"/>
+                            </p:inputText>
+                        </h:panelGroup>
+                        
                         <h:outputText value="&#160;" />
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_descripcion}" for="descripcion" />
                         <h:panelGroup>
@@ -85,11 +93,7 @@
                             <p:tooltip for="observaciones" value="#{pedidosController.getComponentMessages('observaciones', innventa.CreatePedidosHelpText_observaciones)}"/>
                         </h:panelGroup>
                         <h:outputText value="&#160;" />
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_cantidadPendientes}" for="cantidadPendientes" />
-                        <h:panelGroup>
-                            <p:inputText id="cantidadPendientes" value="#{pedidosController.selected.cantidadPendientes}" title="#{innventa.CreatePedidosTitle_cantidadPendientes}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_cantidadPendientes}"/>
-                            <p:tooltip for="cantidadPendientes" value="#{pedidosController.getComponentMessages('cantidadPendientes', innventa.CreatePedidosHelpText_cantidadPendientes)}"/>
-                        </h:panelGroup>
+                       
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_estado}" for="estado" />
                         <h:panelGroup>

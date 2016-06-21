@@ -125,13 +125,18 @@
                     <f:facet name="header">
                         <h:outputText value="Vlr Unitario"/>
                     </f:facet>
-                    <h:outputText value="#{item.valorUnitario}"/>
+                    
+                    <h:outputText value="#{item.valorUnitario}">
+                        <f:convertNumber pattern="###,###"/>
+                    </h:outputText>
+                    
                 </p:column>
 
                 <p:column headerText="Cantidad">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{item.cantidad}" style="width:100%" label="CAnt"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{item.cantidad}" style="width:100%" label="CAnt">
+                                <p:ajax listener="#{pedidosController.onRowEdit(item.cantidad)}" update=":ProductosListForm, :PedidosCreateForm" /> </p:inputText></f:facet>
                     </p:cellEditor>
                 </p:column>
                 
@@ -139,7 +144,9 @@
                     <f:facet name="header">
                         <h:outputText value="Total"/>
                     </f:facet>
-                    <h:outputText value="#{item.valorTotal}"/>
+                    <h:outputText value="#{item.valorTotal}">
+                         <f:convertNumber pattern="###,###"/>
+                    </h:outputText>
                 </p:column>
             </p:dataTable>
 

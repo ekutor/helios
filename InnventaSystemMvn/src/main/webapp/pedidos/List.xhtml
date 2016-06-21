@@ -29,7 +29,8 @@
                          selection="#{pedidosController.selected}"
                          tableStyleClass="table table-striped" >
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PedidosDataTableContextMenu"/>
+                <p:ajax event="rowSelect"  
+                        update=":dataDetailListForm,@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PedidosDataTableContextMenu"/>
                 <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PedidosDataTableContextMenu"/>
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('PedidosListForm:viewButton').click();"/>
@@ -102,61 +103,13 @@
                     <h:outputText value="#{item.estado.estado}"/>
                 </p:column>
 
+                    <p:column sortBy="#{item.cantidadPendientes}" filterBy="#{item.cantidadPendientes}">
+                        <f:facet name="header">
+                            <h:outputText value="#{innventa.ListPedidosTitle_cantidadPendientes}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidadPendientes}"/>
+                    </p:column>
 
-                <!--
-                                    <p:column sortBy="#{item.observaciones}" filterBy="#{item.observaciones}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_observaciones}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.observaciones}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.cantidadPendientes}" filterBy="#{item.cantidadPendientes}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_cantidadPendientes}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.cantidadPendientes}"/>
-                                    </p:column>
-                -->
-
-                <!--
-                                    <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_creadoPor}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.creadoPor}"/>
-                                    </p:column>
-                -->
-
-
-
-                <!--
-                                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_modificadoPor}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.modificadoPor}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_fechaModificacion}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaModificacion}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </h:outputText>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListPedidosTitle_eliminado}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.eliminado}"/>
-                                    </p:column>
-                -->
 
             </p:dataTable>
 
@@ -172,5 +125,64 @@
         </div>
         <ui:include src="/confirmation.xhtml"/>
     </h:form>
+    
+    <div class='panel panel-#{navigation.moduleType("PRODUCTOS")}'>
+            <div class="panel-heading"></div>
+            <h:form id="dataDetailListForm">
+                
+                <p:panel header="Productos de la O.C." rendered="true">
+           
+                    <p:dataTable id="dataDetailList" rendered="true"
+                                 value="#{pedidosController.selected.pedidosProductoList}"
+                         var="itemDetail"
+                         rowKey="#{itemDetail.id}"
+                         paginator="false"
+                         selectionMode="single"
+                        >
+
+               
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Referencia"/>
+                    </f:facet>
+                    <h:outputText value="#{itemDetail.idProducto.referencia}"/>
+                </p:column>
+                
+                           <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Descripcion"/>
+                    </f:facet>
+                    <h:outputText value="#{itemDetail.idProducto.nombre}"/>
+                </p:column>
+
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad"/>
+                    </f:facet>
+                    <h:outputText value="#{itemDetail.cantidad}"/>
+                </p:column>
+                        
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Valor Unitario"/>
+                    </f:facet>
+                    <h:outputText value="#{itemDetail.valorUnitario}"/>
+                </p:column>
+                        
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Total"/>
+                    </f:facet>
+                    <h:outputText value="#{itemDetail.valorTotal}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+
+        </p:panel>
+        </h:form>
+        </div>
 
 </ui:composition>

@@ -25,6 +25,9 @@ public class PedidosController extends AbstractController<Pedidos> {
     private RemisionesController remisionController;
     @Inject
     private Navigation nav;
+    
+    private double totalOC;
+    private int cantTotal;
 
     private PedidosProducto selectedProduct;
      
@@ -55,10 +58,11 @@ public class PedidosController extends AbstractController<Pedidos> {
             pp.setIdProducto(product);
             pp.setValorUnitario(product.getPrecioVenta());
             p.getPedidosProductoList().add(pp);
+            selectedProduct = pp;
         }        
     }
     
-    public void onRowEdit(ActionEvent ae){
+    public void onRowEdit(String value){
        try{
         if(selectedProduct != null){
             double val = selectedProduct.getValorUnitario() * selectedProduct.getCantidad();
@@ -71,6 +75,33 @@ public class PedidosController extends AbstractController<Pedidos> {
     
     public void onRowCancel(ActionEvent ae){
         
+    }
+
+    public double getTotalOC() {
+        Pedidos p = this.getSelected();
+        totalOC = 0;
+        if(p!= null && !p.getPedidosProductoList().isEmpty()){
+            for( PedidosProducto pedido : p.getPedidosProductoList()){
+                totalOC += pedido.getValorTotal();
+            }
+        }
+        return totalOC;
+    }
+    
+    public double getCantTotal() {
+        Pedidos p = this.getSelected();
+        cantTotal = 0;
+        if(p!= null && !p.getPedidosProductoList().isEmpty()){
+            for( PedidosProducto pedido : p.getPedidosProductoList()){
+                cantTotal += pedido.getCantidad();
+            }
+            p.setCantidadTotal(cantTotal);
+        }
+        return cantTotal;
+    }
+
+    public void setTotalOC(double totalOC) {
+        this.totalOC = totalOC;
     }
     
     public void delProduct(ActionEvent ae) {

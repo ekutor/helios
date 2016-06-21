@@ -9,10 +9,10 @@
     <div class="panel">
 
         <h:form>
-            <p:growl id="msgs" showDetail="true" />
+            <p:growl id="mssgsGrowl" showDetail="true" />
 
             <p:dashboard id="board" model="#{dashboardView.model}">
-                <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="msgs" />
+                <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="mssgsGrowl" />
 
 
                 <p:panel id="remisiones" styleClass="borderStyle"  header="Remisiones">
