@@ -13,7 +13,11 @@
                     <div class="row">
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                <p:messages id="msgs" showDetail="true" closable="true"/>
                                 <ui:insert name="content" />  
+                            </div>
+                            <div class="row">
+                                <p:growl id="growl" life="3000" showDetail="true" globalOnly="true"/>
                             </div>
                             <div class="panel-footer">
                                 <ui:insert name="footer" />  
@@ -23,9 +27,7 @@
                 </div>
 
             </div>
-             <div class="row">
-                 <p:growl id="growl" life="3000" showDetail="true" globalOnly="true"/>
-             </div>
+             
         </div>
     </ui:composition>
 </html>

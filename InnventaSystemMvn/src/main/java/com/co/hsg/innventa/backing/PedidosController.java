@@ -2,6 +2,8 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.backing.util.Utils;
+import com.co.hsg.innventa.backing.validations.IValidation;
+import com.co.hsg.innventa.backing.validations.OrdersValidation;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Productos;
@@ -126,8 +128,12 @@ public class PedidosController extends AbstractController<Pedidos> {
 
     @Override
     public void saveNew(ActionEvent event) {
-        super.saveNew(event);
-        nav.orders();
+        IValidation validator = new OrdersValidation(selected);
+        validator.doValidate();
+        if(!isValidationFailed()){
+            super.saveNew(event);
+            nav.orders();
+        }
     }
     
     

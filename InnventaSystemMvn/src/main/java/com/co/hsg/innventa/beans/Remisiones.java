@@ -1,6 +1,7 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -64,10 +65,9 @@ public class Remisiones implements Serializable {
     @NotNull
     @Column(name = "total_productos")
     private int totalProductos;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    private String estado;
+    @JoinColumn(name = "estado", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Estados estado;
     @Size(max = 36)
     @Column(name = "entregado_a")
     private String entregadoA;
@@ -104,11 +104,10 @@ public class Remisiones implements Serializable {
         this.id = id;
     }
 
-    public Remisiones(String id, Date fechaRemision, int totalProductos, String estado, String creadoPor, Date fechaCreacion, short eliminado) {
+    public Remisiones(String id, Date fechaRemision, int totalProductos, String creadoPor, Date fechaCreacion, short eliminado) {
         this.id = id;
         this.fechaRemision = fechaRemision;
         this.totalProductos = totalProductos;
-        this.estado = estado;
         this.creadoPor = creadoPor;
         this.fechaCreacion = fechaCreacion;
         this.eliminado = eliminado;
@@ -146,11 +145,11 @@ public class Remisiones implements Serializable {
         this.totalProductos = totalProductos;
     }
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 
@@ -212,6 +211,9 @@ public class Remisiones implements Serializable {
 
     @XmlTransient
     public List<RemisionesProducto> getRemisionesProductoList() {
+        if(remisionesProductoList == null){
+            remisionesProductoList = new ArrayList<RemisionesProducto>();
+        }
         return remisionesProductoList;
     }
 

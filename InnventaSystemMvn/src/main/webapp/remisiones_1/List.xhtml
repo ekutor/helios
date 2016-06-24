@@ -33,21 +33,15 @@
                 <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('RemisionesListForm:viewButton').click();"/>
-                
-                  <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
                     <f:facet name="header">
-                        <h:outputText value="#{innventa.ListRemisionesTitle_idPedido}"/>
+                        <h:outputText value="#{innventa.ListRemisionesTitle_id}"/>
                     </f:facet>
-                    <h:outputText value="#{item.idPedido.referencia}"/>
+                    <h:outputText value="#{item.id}"/>
                 </p:column>
-                
-                <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
-                    <f:facet name="header">
-                        <h:outputText value="Cuenta"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idPedido.idCliente.nombre}"/>
-                </p:column>
-                
+
+
                 <p:column sortBy="#{item.fechaRemision}" filterBy="#{item.fechaRemision}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListRemisionesTitle_fechaRemision}"/>
@@ -78,10 +72,11 @@
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListRemisionesTitle_estado}"/>
                     </f:facet>
-                    <h:outputText value="#{item.estado.estado}"/>
+                    <h:outputText value="#{item.estado}"/>
                 </p:column>
-                
-               <p:column sortBy="#{item.entregadoA}" filterBy="#{item.entregadoA}">
+
+
+                <p:column sortBy="#{item.entregadoA}" filterBy="#{item.entregadoA}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListRemisionesTitle_entregadoA}"/>
                     </f:facet>
@@ -133,14 +128,17 @@
                                     </p:column>
                 -->
 
-              
+                <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListRemisionesTitle_idPedido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPedido.referencia}"/>
+                </p:column>
 
 
             </p:dataTable>
 
-            <p:commandButton id="createButton" rendered="false" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
-            <p:commandButton id="createReportButton" icon="ui-icon-document" value="Generar Documento" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
-            
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update=":RemisionesCreateForm" oncomplete="PF('RemisionesCreateDialog').show()"/>
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":RemisionesViewForm" oncomplete="PF('RemisionesViewDialog').show()" disabled="#{empty remisionesController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":RemisionesEditForm" oncomplete="PF('RemisionesEditDialog').show()" disabled="#{empty remisionesController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{remisionesController.delete}" update=":growl,datalist" disabled="#{empty remisionesController.selected}">

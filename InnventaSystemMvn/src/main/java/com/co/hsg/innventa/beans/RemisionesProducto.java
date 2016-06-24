@@ -49,7 +49,7 @@ public class RemisionesProducto implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
-    private short cantidad;
+    private int cantidad;
     @Basic(optional = false)
     @NotNull
     @Column(name = "eliminado")
@@ -88,11 +88,11 @@ public class RemisionesProducto implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public short getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(short cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 

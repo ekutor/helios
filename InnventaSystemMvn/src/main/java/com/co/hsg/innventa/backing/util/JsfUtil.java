@@ -10,23 +10,23 @@ import javax.faces.context.FacesContext;
 
 public class JsfUtil {
 
-    public static void addErrorMessage(Exception ex, String defaultMsg) {
+    public static void addErrorMessage(Exception ex, String title,String defaultMsg) {
         String msg = ex.getLocalizedMessage();
         if (msg != null && msg.length() > 0) {
-            addErrorMessage(msg);
+            addErrorMessage(title, msg);
         } else {
-            addErrorMessage(defaultMsg);
+            addErrorMessage(title, defaultMsg);
         }
     }
 
-    public static void addErrorMessages(List<String> messages) {
+    public static void addErrorMessages(String title, List<String> messages) {
         for (String message : messages) {
-            addErrorMessage(message);
+            addErrorMessage(title, message);
         }
     }
 
-    public static void addErrorMessage(String msg) {
-        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+    public static void addErrorMessage(String title, String msg) {
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, title, msg);
         FacesContext.getCurrentInstance().addMessage(null, facesMsg);
         FacesContext.getCurrentInstance().validationFailed(); // Invalidate JSF page if we raise an error message
 

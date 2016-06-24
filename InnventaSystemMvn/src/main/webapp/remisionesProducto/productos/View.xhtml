@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductosViewDlg" widgetVar="ProductosViewDialog" 
+                  modal="true" resizable="false"  
+                  appendTo="@(parent)" 
+                  header="#{innventa.ViewProductosTitle}" 
+                  closeOnEscape="true">
+
+            <h:form id="ProductosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{pedidosController.selectedProduct != null}">
+
+                 
+                        <h:outputText value="#{innventa.ViewProductosLabel_referencia}"/>
+                        <h:outputText value="#{pedidosController.selected.pedidosProductoList.referencia}" title="#{innventa.ViewProductosTitle_referencia}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_codigo}"/>
+                        <h:outputText value="#{productosController.selected.codigo}" title="#{innventa.ViewProductosTitle_codigo}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_tipoCodigo}"/>
+                        <h:outputText value="#{productosController.selected.tipoCodigo}" title="#{innventa.ViewProductosTitle_tipoCodigo}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_nombre}"/>
+                        <h:outputText value="#{productosController.selected.nombre}" title="#{innventa.ViewProductosTitle_nombre}"/>
+
+          
+                        <h:outputText value="#{innventa.ViewProductosLabel_precioVenta}"/>
+                        <h:outputText value="#{productosController.selected.precioVenta}" title="#{innventa.ViewProductosTitle_precioVenta}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_categoria}"/>
+                        <h:outputText value="#{productosController.selected.categoria}" title="#{innventa.ViewProductosTitle_categoria}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_categoriaImpuesto}"/>
+                        <h:outputText value="#{productosController.selected.categoriaImpuesto}" title="#{innventa.ViewProductosTitle_categoriaImpuesto}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_atributo}"/>
+                        <h:outputText value="#{productosController.selected.atributo}" title="#{innventa.ViewProductosTitle_atributo}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_stock}"/>
+                        <h:outputText value="#{productosController.selected.stock}" title="#{innventa.ViewProductosTitle_stock}"/>
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{innventa.Close}" onclick="PF('ProductosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

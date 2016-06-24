@@ -27,7 +27,8 @@ public class EstadosConverter implements Converter {
         if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
             return null;
         }
-        return this.ejbFacade.find(getKey(value));
+        Object obj = this.ejbFacade.find(getKey(value));
+        return obj;
     }
 
     java.lang.String getKey(String value) {

@@ -10,7 +10,10 @@ public enum Modules {
     THIRDS("terceros","info"),USERS("usuarios","info"),MASTERS("maestros","info"),
     STATES_OC("estadosOC","info"),STATES_RM("estadosRM","info"),
     CATEGORIES_PROD("categoriasProd","info"),CONFIGURATION("configuracion","info"),
-    INIT("inicio","primary"), CREATE_ORDER("pedidosCreate","primary");
+    INIT("inicio","primary"), 
+    CREATE_ORDER("pedidosCreate","primary"),
+    CREATE_PURCHASE_ORDERS("remisionesProducto","primary")
+    ;
    
     private String moduleName;
     private String moduleType;

@@ -147,6 +147,8 @@ public class Pedidos implements Serializable {
     }
 
     public String getReferencia() {
+        if(referencia == null)
+            referencia = "0";
         return referencia;
     }
 

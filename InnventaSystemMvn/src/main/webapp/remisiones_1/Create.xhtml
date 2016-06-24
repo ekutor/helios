@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RemisionesCreateDlg" widgetVar="RemisionesCreateDialog" 
+                  modal="true"
+                 resizable="true"  
+                 appendTo="@parent" 
+                 header="#{innventa.CreateRemisionesTitle}" 
+                 closeOnEscape="true">
+
+            <h:form id="RemisionesCreateForm">
+
+                <h:panelGroup id="display" rendered="#{remisionesController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <p:inputText id="id" value="#{remisionesController.selected.id}" title="#{innventa.CreateRemisionesTitle_id}" required="true" requiredMessage="#{innventa.CreateRemisionesRequiredMessage_id}" size="36" maxlength="36"/>
+                            <p:tooltip for="id" value="#{remisionesController.getComponentMessages('id', innventa.CreateRemisionesHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_fechaRemision}" for="fechaRemision" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaRemision" pattern="dd/MM/yyyy" 
+                                        value="#{remisionesController.selected.fechaRemision}" 
+                                        title="#{innventa.CreateRemisionesTitle_fechaRemision}" 
+                                        required="true" 
+                                        requiredMessage="#{innventa.CreateRemisionesRequiredMessage_fechaRemision}">
+                                    <span class="glyphicon glyphicon-calendar"></span> 
+                            </p:calendar>
+                            <p:tooltip for="fechaRemision" value="#{remisionesController.getComponentMessages('fechaRemision', innventa.CreateRemisionesHelpText_fechaRemision)}"/>
+                        </h:panelGroup>
+                        
+                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_detalles}" for="detalles" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="detalles" value="#{remisionesController.selected.detalles}" title="#{innventa.CreateRemisionesTitle_detalles}" />
+                            <p:tooltip for="detalles" value="#{remisionesController.getComponentMessages('detalles', innventa.CreateRemisionesHelpText_detalles)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_totalProductos}" for="totalProductos" />
+                        <h:panelGroup>
+                            <p:inputText id="totalProductos" value="#{remisionesController.selected.totalProductos}" title="#{innventa.CreateRemisionesTitle_totalProductos}" required="true" requiredMessage="#{innventa.CreateRemisionesRequiredMessage_totalProductos}"/>
+                            <p:tooltip for="totalProductos" value="#{remisionesController.getComponentMessages('totalProductos', innventa.CreateRemisionesHelpText_totalProductos)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_estado}" for="estado" />
+                        <h:panelGroup>
+                            <p:inputText id="estado" value="#{remisionesController.selected.estado}" title="#{innventa.CreateRemisionesTitle_estado}" required="true" requiredMessage="#{innventa.CreateRemisionesRequiredMessage_estado}" size="36" maxlength="36"/>
+                            <p:tooltip for="estado" value="#{remisionesController.getComponentMessages('estado', innventa.CreateRemisionesHelpText_estado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_entregadoA}" for="entregadoA" />
+                        <h:panelGroup>
+                            <p:inputText id="entregadoA" value="#{remisionesController.selected.entregadoA}" title="#{innventa.CreateRemisionesTitle_entregadoA}" size="36" maxlength="36"/>
+                            <p:tooltip for="entregadoA" value="#{remisionesController.getComponentMessages('entregadoA', innventa.CreateRemisionesHelpText_entregadoA)}"/>
+                        </h:panelGroup>
+
+                                             <p:outputLabel value="#{innventa.CreateRemisionesLabel_idPedido}" for="idPedido" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idPedido" value="#{remisionesController.selected.idPedido}" required="true" requiredMessage="#{innventa.CreateRemisionesRequiredMessage_idPedido}" 
+                                             converter="#{pedidosConverter}">
+                                           
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{pedidosController.items}"
+                                               var="idPedidoItem"
+                                               itemValue="#{idPedidoItem}"
+                                               itemLabel="#{idPedidoItem.referencia.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idPedido" value="#{remisionesController.getComponentMessages('idPedido', innventa.CreateRemisionesHelpText_idPedido)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{remisionesController.saveNew}" value="#{innventa.Save}" update="display,:RemisionesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('RemisionesCreateDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('RemisionesCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

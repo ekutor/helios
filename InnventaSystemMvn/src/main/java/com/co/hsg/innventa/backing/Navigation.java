@@ -64,7 +64,10 @@ public class Navigation implements Serializable {
         actualModule = Modules.PURCHASE_ORDERS;
         icon = "truck";
     }
-    
+   public void createPurchaseOrder() {
+        this.purchaseOrders();
+        actualModule = Modules.CREATE_PURCHASE_ORDERS;
+    }
     
     public void purchaseOrdersConfig() {
         parametrosController.cargarObj("purchaseOrder");

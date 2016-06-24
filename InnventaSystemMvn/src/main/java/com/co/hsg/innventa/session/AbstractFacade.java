@@ -114,7 +114,7 @@ public abstract class AbstractFacade<T> {
             ConstraintViolation<T> cv = iterator.next();
             System.err.println(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
 
-            JsfUtil.addErrorMessage(cv.getRootBeanClass().getSimpleName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+            JsfUtil.addErrorMessage("",cv.getRootBeanClass().getSimpleName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
           }
           return true;
     }

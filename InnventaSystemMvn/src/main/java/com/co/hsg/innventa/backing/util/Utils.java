@@ -18,7 +18,12 @@ public class Utils {
     }
 
     public static String getRefOC(String pref, String sequence) {
-        int seq = Integer.parseInt( sequence );
+        int seq  = 0;
+        try{
+            seq = Integer.parseInt( sequence );
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         String formatted = String.format("%05d", ++seq );
         return  pref + formatted;
     }

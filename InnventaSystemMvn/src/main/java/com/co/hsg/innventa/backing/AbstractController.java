@@ -168,13 +168,13 @@ public abstract class AbstractController<T> implements Serializable {
      * @param event an event from the widget that wants to save a new Entity to
      * the data layer
      */
-    public void saveNew(ActionEvent event) {
+    public void saveNew(ActionEvent event) { 
         String msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Created");
         persist(PersistAction.CREATE, msg, null);
-        if (!isValidationFailed()) {
+         if(!isValidationFailed()){
             items = null; // Invalidate list of items to trigger re-query.
             keepList = false;
-        }
+         }
     }
 
     /**
@@ -238,20 +238,20 @@ public abstract class AbstractController<T> implements Serializable {
                     if (cause instanceof ConstraintViolationException) {
                         ConstraintViolationException excp = (ConstraintViolationException) cause;
                         for (ConstraintViolation s : excp.getConstraintViolations()) {
-                            JsfUtil.addErrorMessage(s.getMessage());
+                            JsfUtil.addErrorMessage("Validacion Fallida " ,s.getMessage());
                         }
                     } else {
                         String msg = cause.getLocalizedMessage();
                         if (msg.length() > 0) {
-                            JsfUtil.addErrorMessage(msg);
+                            JsfUtil.addErrorMessage("Validacion Fallida ",msg);
                         } else {
-                            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                            JsfUtil.addErrorMessage(ex, "Validacion Fallida ",ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
                         }
                     }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Innventa").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, "Error Grave " ,ResourceBundle.getBundle("/Innventa").getString("PersistenceErrorOccured"));
             }
         }
     }

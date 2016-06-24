@@ -51,5 +51,10 @@
         <managed-bean-class>com.co.hsg.innventa.converter.UnidadesMedidaConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+     <managed-bean>
+        <managed-bean-name>pedidosProductoConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.PedidosProductoConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
    
 </faces-config>

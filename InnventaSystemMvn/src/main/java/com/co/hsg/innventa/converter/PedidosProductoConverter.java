@@ -5,13 +5,16 @@ import com.co.hsg.innventa.session.PedidosProductoFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.convert.FacesConverter;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.inject.Named;
 
-@FacesConverter(value = "pedidosProductoConverter")
+
+@Named(value = "pedidosProductoConverter")
+@RequestScoped
 public class PedidosProductoConverter implements Converter {
 
     @Inject
@@ -45,7 +48,7 @@ public class PedidosProductoConverter implements Converter {
         }
         if (object instanceof PedidosProducto) {
             PedidosProducto o = (PedidosProducto) object;
-            return getStringKey(o.getId());
+            return o.getId();
         } else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), PedidosProducto.class.getName()});
             return null;
