@@ -41,11 +41,9 @@ public class RemisionesProducto implements Serializable {
     @Size(min = 1, max = 36)
     @Column(name = "id")
     private String id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "id_producto")
-    private String idProducto;
+    @JoinColumn(name = "id_producto", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Productos idProducto;
     @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
@@ -65,9 +63,8 @@ public class RemisionesProducto implements Serializable {
         this.id = id;
     }
 
-    public RemisionesProducto(String id, String idProducto, short cantidad, short eliminado) {
+    public RemisionesProducto(String id, short cantidad, short eliminado) {
         this.id = id;
-        this.idProducto = idProducto;
         this.cantidad = cantidad;
         this.eliminado = eliminado;
     }
@@ -80,11 +77,11 @@ public class RemisionesProducto implements Serializable {
         this.id = id;
     }
 
-    public String getIdProducto() {
+    public Productos getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(String idProducto) {
+    public void setIdProducto(Productos idProducto) {
         this.idProducto = idProducto;
     }
 

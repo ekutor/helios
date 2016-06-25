@@ -24,7 +24,7 @@ public class PurchasesValidation implements IValidation {
        validatehasProducts();
 
        if(!errors.isEmpty()){
-           JsfUtil.addErrorMessages("Validacion al Guardar Orden",new ArrayList(errors));
+           JsfUtil.addErrorMessages("Validacion al Guardar Remision",new ArrayList(errors));
        }
     }
     

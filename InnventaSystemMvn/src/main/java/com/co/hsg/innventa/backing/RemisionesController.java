@@ -108,11 +108,21 @@ public class RemisionesController extends AbstractController<Remisiones> {
             rp.setId(Utils.generateID());
             rp.setCantidad(selectedProduct.getCantidad());
             rp.setEliminado((short)0);
-            rp.setIdProducto(selectedProduct.getIdProducto().getId());
+            rp.setIdProducto(selectedProduct.getIdProducto());
             rp.setIdRemision(this.selected);
             selected.getRemisionesProductoList().add(rp);
         }        
     }
+    public void onRowEdit(RemisionesProducto value){
+       try{
+        if(selectedProduct != null){
+            int missingQt = selectedProduct.getCantidad() - selectedProduct.getCantidadEntregada();
+           
+        }
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+    }
     
-
+   
 }

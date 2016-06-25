@@ -75,13 +75,13 @@
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListProductosTitle_id}"/>
                     </f:facet>
-                    <h:outputText value="#{remisionesController.selectedProduct.idProducto.nombre}"/>
+                    <h:outputText value="#{item.id}"/>
                 </p:column>
                 <p:column >
                     <f:facet name="header">
                         <h:outputText value="Producto"/>
                     </f:facet>
-                    <h:outputText value="#{remisionesController.selectedProduct.idProducto.nombre}"/>
+                    <h:outputText value="#{item.idProducto.nombre}"/>
                 </p:column>
                 
                 
@@ -89,7 +89,11 @@
                 <p:column headerText="Cantidad">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{item.cantidad}" style="width:100%"/></f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{item.cantidad}" style="width:100%">
+                                <p:ajax listener="#{remisionesController.onRowEdit(item)}" update=":ProductosListForm, :RemisionesCreateForm" />
+                            </p:inputText>
+                        </f:facet>
                     </p:cellEditor>
                     
                 </p:column>

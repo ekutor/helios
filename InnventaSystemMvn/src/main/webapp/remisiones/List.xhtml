@@ -139,7 +139,10 @@
             </p:dataTable>
 
             <p:commandButton id="createButton" rendered="false" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
-            <p:commandButton id="createReportButton" icon="ui-icon-document" value="Generar Documento" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
+            <p:commandButton id="createReportButton" ajax="false" icon="ui-icon-document" value="Generar Documento" action="#{reportController.print(remisionesController.selected)}" update=":growl, :RemisionesListForm">
+                  
+            </p:commandButton>
+        
             
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":RemisionesViewForm" oncomplete="PF('RemisionesViewDialog').show()" disabled="#{empty remisionesController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":RemisionesEditForm" oncomplete="PF('RemisionesEditDialog').show()" disabled="#{empty remisionesController.selected}"/>
