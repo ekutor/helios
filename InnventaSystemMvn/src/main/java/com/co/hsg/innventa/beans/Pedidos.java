@@ -262,6 +262,9 @@ public class Pedidos implements Serializable {
 
     @XmlTransient
     public List<Remisiones> getRemisionesList() {
+        if(remisionesList == null){
+            remisionesList = new ArrayList<>();
+        }
         return remisionesList;
     }
 

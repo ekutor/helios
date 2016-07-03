@@ -30,11 +30,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "remisiones")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Remisiones.findAll", query = "SELECT r FROM Remisiones r WHERE r.eliminado=0"),
-    @NamedQuery(name = "Remisiones.findById", query = "SELECT r FROM Remisiones r WHERE r.id = :id"),
+    @NamedQuery(name = "Remisiones.findAll", query = "SELECT r FROM Remisiones r WHERE r.eliminado=0 ORDER BY r.fechaRemision DESC"),
+    @NamedQuery(name = "Remisiones.findById", query = "SELECT r FROM Remisiones r WHERE r.id = :id AND r.eliminado=0"),
     @NamedQuery(name = "Remisiones.findByFechaRemision", query = "SELECT r FROM Remisiones r WHERE r.fechaRemision = :fechaRemision"),
     @NamedQuery(name = "Remisiones.findByTotalProductos", query = "SELECT r FROM Remisiones r WHERE r.totalProductos = :totalProductos"),
-    @NamedQuery(name = "Remisiones.findByEstado", query = "SELECT r FROM Remisiones r WHERE r.estado = :estado"),
+    @NamedQuery(name = "Remisiones.findByEstado", query = "SELECT r FROM Remisiones r WHERE r.estado = :estado AND r.eliminado=0"),
     @NamedQuery(name = "Remisiones.findByEntregadoA", query = "SELECT r FROM Remisiones r WHERE r.entregadoA = :entregadoA"),
     @NamedQuery(name = "Remisiones.findByCreadoPor", query = "SELECT r FROM Remisiones r WHERE r.creadoPor = :creadoPor"),
     @NamedQuery(name = "Remisiones.findByFechaCreacion", query = "SELECT r FROM Remisiones r WHERE r.fechaCreacion = :fechaCreacion"),

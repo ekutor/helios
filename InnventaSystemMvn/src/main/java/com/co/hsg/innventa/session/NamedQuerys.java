@@ -8,6 +8,7 @@ public enum NamedQuerys {
     ORDER_PARAM("Parametros.orders", "CONF_ORDERS"),
     REMISSION_PARAM("Parametros.remissions","CONF_REMISSIONS"),
     PRODUCT_TYPES_PARAM("Parametros.productTypes", "PRODUCT_TYPE"),
+    PRODUCT_STATES("Productos.findByState", ""),
     STATUS("Estados.findByModulo",""),
     CATEGORIES("Categorias.findByModulo",""),
     ACCOUNT_CONTACTS("CuentasContactos.findByCuenta",""),

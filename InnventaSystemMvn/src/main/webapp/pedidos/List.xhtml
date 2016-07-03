@@ -23,7 +23,7 @@
                          var="item"
                          rowKey="#{item.id}"
                          paginator="true"
-                         rows="30"
+                         rows="10"
                          rowsPerPageTemplate="10,20,30,40,50,100"
                          selectionMode="single"
                          selection="#{pedidosController.selected}"
@@ -35,14 +35,13 @@
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('PedidosListForm:viewButton').click();"/>
 
-        
-                 <p:column sortBy="#{item.referencia}" filterBy="#{item.referencia}">
-                    <f:facet name="header">
-                        <h:outputText value="Orden de compra"/>
-                    </f:facet>
-                    <h:outputText value="#{item.referencia}"/>
+                <p:column sortBy="#{item.referencia}" filterBy="#{item.referencia}">
+                   <f:facet name="header">
+                         <h:outputText value="Orden de compra"/>
+                     </f:facet>
+                     <h:outputText value="#{item.referencia}"/>
                 </p:column>
-                
+        
                 <p:column sortBy="#{item.idCliente.id}" filterBy="#{item.idCliente.id}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListPedidosTitle_idCliente}"/>
@@ -112,7 +111,7 @@
 
             </p:dataTable>
 
-            <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update="contentPanel" >
+            <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update=":contentPanel" >
 
             </p:commandButton>
             <p:commandButton id="createPurchaseButton" icon="ui-icon-document" value="Crear Remision" actionListener="#{remisionesController.prepareCreate}" update="contentPanel" />
@@ -139,14 +138,10 @@
                          rowKey="#{itemDetail.id}"
                          paginator="false"
                          selectionMode="single"
-                        >
-
-               
-                
-                
+                        >                
                            <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Descripcion"/>
+                        <h:outputText value="Producto"/>
                     </f:facet>
                     <h:outputText value="#{itemDetail.idProducto.nombre}"/>
                 </p:column>

@@ -36,14 +36,15 @@ public class ParametrosConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-        if (object == null
-                || (object instanceof String && ((String) object).length() == 0)) {
+        if (object == null) {
             return null;
         }
         if (object instanceof Parametros) {
             Parametros o = (Parametros) object;
             return o.getId();
-        } else {
+        } else if(object instanceof String){
+         return (String) object;
+        }else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Parametros.class.getName()});
             return null;
         }

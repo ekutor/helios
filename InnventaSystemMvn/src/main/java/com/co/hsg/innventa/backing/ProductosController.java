@@ -3,6 +3,7 @@ package com.co.hsg.innventa.backing;
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.beans.Productos;
+import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
@@ -27,6 +28,8 @@ public class ProductosController extends AbstractController<Productos> {
     
     private Collection<Parametros> info;
     
+    private Collection<Productos> itemsForSale;
+    
     private TreeNode productsTree;
     
     public ProductosController() {
@@ -41,7 +44,13 @@ public class ProductosController extends AbstractController<Productos> {
         this.findProduct = findProduct;
     }
     
-    
+    public Collection<Productos> getItemsForSale() {
+        if (itemsForSale == null || !keepList) {
+            itemsForSale = this.chargeItems(NamedQuerys.PRODUCT_STATES, "state", ProcessStates.SALES_PRODUCT.getPermanentID());
+            items = null;
+        }
+        return itemsForSale;
+    }
     /**
      * Sets the "items" attribute with a collection of PedidosProducto entities
      * that are retrieved from Productos?cap_first and returns the navigation

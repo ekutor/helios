@@ -2,6 +2,8 @@ package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Estados;
+import com.co.hsg.innventa.beans.enums.ProcessStates;
+import com.co.hsg.innventa.converter.EstadosConverter;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Collection;
 import javax.inject.Named;
@@ -13,7 +15,7 @@ import javax.inject.Inject;
 @Named(value = "estadosController")
 @ViewScoped
 public class EstadosController extends AbstractController<Estados> {
-
+    
     private Modules actualModule;
 
     @Inject
@@ -49,5 +51,6 @@ public class EstadosController extends AbstractController<Estados> {
         selected.setModulo(actualModule.name());
         super.saveNew(event);
     }
+
 
 }

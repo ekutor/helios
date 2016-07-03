@@ -24,18 +24,13 @@ public class EstadosConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-        if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
+        if (value == null || value.length() == 0 ) {
             return null;
         }
-        Object obj = this.ejbFacade.find(getKey(value));
+        Object obj = this.ejbFacade.find(value);
         return obj;
     }
 
-    java.lang.String getKey(String value) {
-        java.lang.String key;
-            key = value;
-        return key;
-    }
 
     String getStringKey(java.lang.String value) {
         StringBuffer sb = new StringBuffer();

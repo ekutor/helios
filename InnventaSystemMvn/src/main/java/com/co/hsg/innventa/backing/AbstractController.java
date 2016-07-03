@@ -35,7 +35,7 @@ public abstract class AbstractController<T> implements Serializable {
     private Class<T> itemClass;
     protected T selected;
     protected Collection<T> items;
-    private boolean keepList;
+    protected boolean keepList;
 
     private enum PersistAction {
         CREATE,
@@ -161,7 +161,8 @@ public abstract class AbstractController<T> implements Serializable {
         String msg = "";
         if(event != null){
          msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Updated");
-        }
+        }   
+        keepList = false;
         persist(PersistAction.UPDATE, msg, null);
     }
 
