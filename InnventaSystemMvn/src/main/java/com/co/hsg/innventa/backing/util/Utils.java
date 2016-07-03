@@ -1,5 +1,7 @@
 package com.co.hsg.innventa.backing.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -17,18 +19,32 @@ public class Utils {
        return ""+uuid; 
     }
 
-    public static String getRefOC(String pref, String sequence) {
+    public static String getReference(String pref, String sequence) {
         int seq  = 0;
+        String formatted = "0";
         try{
             seq = Integer.parseInt( sequence );
+            formatted = String.format("%05d", ++seq );
+            formatted = pref + formatted;
         }catch(Exception e){
             e.printStackTrace();
         }
-        String formatted = String.format("%05d", ++seq );
-        return  pref + formatted;
+       
+        return  formatted;
     }
     
     public static String getClassName(Class entityClass ){
         return entityClass.getName().substring(entityClass.getName().lastIndexOf(".")+1);
+    }
+
+    public static String getFormattedDate(Date fechaRemision) {
+       try{
+           SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY");
+       
+        return sdf.format(fechaRemision);
+       }catch(Exception e ){
+           return "";
+       }
+        
     }
 }

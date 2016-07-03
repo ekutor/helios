@@ -9,8 +9,8 @@
     <ui:composition>
         <h:form id="configurationForm"> 
             <h:panelGroup id="display" >
-                <h2>#{innventa.ConfOCTitle}</h2>
-                <p>#{innventa.ConfOCMessage}</p>
+                <h2>#{parametrosController.confTitle}</h2>
+                <p>#{parametrosController.confMessage}</p>
                 <p:panelGrid columns="2" columnClasses="column">
 
 
@@ -41,7 +41,7 @@
               
                 </p:panelGrid>
             </h:panelGroup>
-            <p:commandButton class="btn btn-primary" actionListener='#{parametrosController.save(ActionEvent, "CONF_ORDERS")}' value="#{innventa.Save}" 
+            <p:commandButton class="btn btn-primary" actionListener='#{parametrosController.save(ActionEvent)}' value="#{innventa.Save}" 
                              update="display,contentPanel,labelModule,growl" 
                           >
 

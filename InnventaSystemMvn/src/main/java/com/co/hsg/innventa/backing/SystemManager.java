@@ -16,34 +16,36 @@ import javax.inject.Named;
 @ApplicationScoped
 public class SystemManager implements Serializable {
 
-    private String OCSequence;
+    private String sequence;
     @Inject
     private ParametrosController param;
 
-    public String getOCSequence() {
-            Parametros p = param.chargeItem(NamedQuerys.ORDER_PARAM);
-            OCSequence = Utils.getRefOC(p.getClave1(), p.getClave2());
+    public String getSequence(NamedQuerys query) {
+            Parametros p = param.chargeItem(query,true);
+            sequence = Utils.getReference(p.getClave1(), p.getClave2());
         
-        return OCSequence;
+        return sequence;
     }
 
-    public void setOCSequence(String OCSequence) {
-        this.OCSequence = OCSequence;
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
     }
     
-    public void saveOCSequence(){
-        Parametros p = param.chargeItem(NamedQuerys.ORDER_PARAM);
+    public void saveSequence(NamedQuerys query){
+        Parametros p = param.chargeItem(query,true);
         try{
         int key = Integer.parseInt(p.getClave2());
         key++;
         p.setClave2(String.valueOf(key));
         param.setSelected(p);
-        param.save(null);
+        param.save(query);
         
         }catch(Exception e){
             e.printStackTrace();
         }
     }
+    
+    
     
 
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author hectsaga
  */
-public class PurchasesValidation implements IValidation {
+public class PurchasesValidation extends AbstractValidation {
 
     private final Remisiones purchase;
     
@@ -20,7 +20,6 @@ public class PurchasesValidation implements IValidation {
     }
     @Override
     public void doValidate() {
-       errors.clear();
        validatehasProducts();
 
        if(!errors.isEmpty()){

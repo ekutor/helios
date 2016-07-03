@@ -136,7 +136,7 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
                         <f:facet name="input"><p:inputText value="#{item.cantidad}" style="width:100%" label="CAnt">
-                           <p:ajax listener="#{pedidosController.onRowEdit(item.cantidad)}" update=":ProductosListForm, :PedidosCreateForm" />
+                           <p:ajax listener="#{pedidosController.onRowEdit(item.cantidad)}" update=":ProductosListForm " />
                         </p:inputText></f:facet>
                     </p:cellEditor>
                 </p:column>

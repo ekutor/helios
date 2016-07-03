@@ -29,7 +29,7 @@
 
                         <p:outputLabel value="#{innventa.EditRemisionesLabel_detalles}" for="detalles" />
                         <h:panelGroup>
-                            <p:inputTextarea rows="4" cols="30" id="detalles" value="#{remisionesController.selected.detalles}" title="#{innventa.EditRemisionesTitle_detalles}" />
+                            <p:inputTextarea rows="4" cols="30" id="detalles" value="#{remisionesController.selected.observaciones}" title="#{innventa.EditRemisionesTitle_detalles}" />
                             <p:tooltip for="detalles" value="#{remisionesController.getComponentMessages('detalles', innventa.EditRemisionesHelpText_detalles)}"/>
                         </h:panelGroup>
 

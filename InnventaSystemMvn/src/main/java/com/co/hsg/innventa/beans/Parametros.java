@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -31,6 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Parametros.findByClave2", query = "SELECT p FROM Parametros p WHERE p.clave2 = :clave2"),
     @NamedQuery(name = "Parametros.findByParametro", query = "SELECT p FROM Parametros p WHERE p.parametro = :parametro AND p.eliminado=0"),
     @NamedQuery(name = "Parametros.orders", query = "SELECT p FROM Parametros p WHERE p.parametro = 'CONF_ORDERS' AND p.eliminado=0"),
+    @NamedQuery(name = "Parametros.remissions", query = "SELECT p FROM Parametros p WHERE p.parametro = 'CONF_REMISSIONS' AND p.eliminado=0"),
     @NamedQuery(name = "Parametros.productTypes", query = "SELECT p FROM Parametros p WHERE p.parametro = 'PRODUCT_TYPE' AND p.eliminado=0")
 })
 public class Parametros implements Serializable {

@@ -62,7 +62,7 @@ public class PedidosFacade extends AbstractFacade<Pedidos> {
         Date d = Calendar.getInstance().getTime();
         entity.setFechaModificacion(d);
         entity.setFechaCreacion(d);
-        manager.saveOCSequence();
+        manager.saveSequence(NamedQuerys.ORDER_PARAM);
         
         super.create(entity);
     }

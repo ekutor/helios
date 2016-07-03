@@ -8,7 +8,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,7 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Remisiones.findAll", query = "SELECT r FROM Remisiones r WHERE r.eliminado=0"),
     @NamedQuery(name = "Remisiones.findById", query = "SELECT r FROM Remisiones r WHERE r.id = :id"),
     @NamedQuery(name = "Remisiones.findByFechaRemision", query = "SELECT r FROM Remisiones r WHERE r.fechaRemision = :fechaRemision"),
-    @NamedQuery(name = "Remisiones.findByDetalles", query = "SELECT r FROM Remisiones r WHERE r.detalles = :detalles"),
     @NamedQuery(name = "Remisiones.findByTotalProductos", query = "SELECT r FROM Remisiones r WHERE r.totalProductos = :totalProductos"),
     @NamedQuery(name = "Remisiones.findByEstado", query = "SELECT r FROM Remisiones r WHERE r.estado = :estado"),
     @NamedQuery(name = "Remisiones.findByEntregadoA", query = "SELECT r FROM Remisiones r WHERE r.entregadoA = :entregadoA"),
@@ -55,12 +53,16 @@ public class Remisiones implements Serializable {
     private String id;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "referencia")
+    private String referencia;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "fecha_remision")
     @Temporal(TemporalType.DATE)
     private Date fechaRemision;
-    @Size(max = 500)
-    @Column(name = "detalles")
-    private String detalles;
+    @Size(max = 255)
+    @Column(name = "observaciones")
+    private String observaciones;
     @Basic(optional = false)
     @NotNull
     @Column(name = "total_productos")
@@ -129,12 +131,12 @@ public class Remisiones implements Serializable {
         this.fechaRemision = fechaRemision;
     }
 
-    public String getDetalles() {
-        return detalles;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
     public int getTotalProductos() {
@@ -191,6 +193,14 @@ public class Remisiones implements Serializable {
 
     public void setFechaModificacion(Date fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 
     public short getEliminado() {

@@ -7,6 +7,10 @@ import com.co.hsg.innventa.backing.validations.OrdersValidation;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Productos;
+import com.co.hsg.innventa.beans.Remisiones;
+import com.co.hsg.innventa.beans.RemisionesProducto;
+import com.co.hsg.innventa.session.NamedQuerys;
+import com.co.hsg.innventa.session.RemisionesFacade;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -25,6 +29,9 @@ public class PedidosController extends AbstractController<Pedidos> {
     private SystemManager systemManager;
     @Inject
     private RemisionesController remisionController;
+    
+    @Inject
+    private RemisionesFacade remisionFacade;
     @Inject
     private Navigation nav;
     
@@ -45,7 +52,7 @@ public class PedidosController extends AbstractController<Pedidos> {
     public Pedidos prepareCreate(ActionEvent event) {
         Pedidos obj = super.prepareCreate(event); 
         
-        obj.setReferencia(systemManager.getOCSequence());
+        obj.setReferencia(systemManager.getSequence(NamedQuerys.ORDER_PARAM));
         nav.createOrder();
         return obj;
     }
@@ -136,6 +143,18 @@ public class PedidosController extends AbstractController<Pedidos> {
         }
     }
     
+     public void createRemission(ActionEvent event) {
+        IValidation validator = new OrdersValidation(selected);
+        validator.doValidate();
+        if(!isValidationFailed()){
+            Remisiones rem = new Remisiones();
+            chargeInfotoRemission(rem);  
+            super.saveNew(event);
+            remisionFacade.create(rem);
+            nav.purchaseOrders();
+        }
+    }
+    
     
     /**
      * Resets the "selected" attribute of any parent Entity controllers.
@@ -210,6 +229,25 @@ public class PedidosController extends AbstractController<Pedidos> {
 
     public void setSelectedProduct(PedidosProducto selectedProduct) {
         this.selectedProduct = selectedProduct;
+    }
+
+    private void chargeInfotoRemission(Remisiones rem) {
+        rem.setIdPedido(selected);
+        rem.setReferencia(systemManager.getSequence(NamedQuerys.REMISSION_PARAM));
+        rem.setObservaciones(selected.getObservaciones());
+        rem.setFechaRemision(selected.getFechaPedido());
+        rem.setEstado(selected.getEstado());
+        
+        for(PedidosProducto pprod:selected.getPedidosProductoList()){
+            RemisionesProducto rp = new RemisionesProducto();
+            rp.setIdProducto(pprod.getIdProducto());
+            rp.setIdRemision(rem);
+            rp.setCantidad(pprod.getCantidad());
+            rp.setEliminado((short)0);
+            rp.setId(Utils.generateID());
+            pprod.setCantidadEntregada(pprod.getCantidad());
+        }
+        //selected.getRemisionesList().add(rem);
     }
     
     

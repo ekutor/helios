@@ -1,5 +1,6 @@
 package com.co.hsg.innventa.backing;
 
+import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.ReportInfo;
@@ -62,13 +63,20 @@ public class ReportController implements Serializable{
 
 
     private List<ReportInfo> generateInfo(Remisiones selected) {
-        List<ReportInfo> list = new ArrayList<ReportInfo>();
+        List<ReportInfo> list = new ArrayList<>();
         if (selected != null) {
             for (RemisionesProducto rem : selected.getRemisionesProductoList()) {
                 ReportInfo ri = new ReportInfo();
+                
                 ri.setCantidad(rem.getCantidad());
                 ri.setNombre(rem.getIdProducto().getNombre());
-                ri.setObservaciones(selected.getDetalles());
+                
+                ri.setNombreCliente(selected.getIdPedido().getIdCliente().getNombre());
+                ri.setNitCliente("Nit: "+selected.getIdPedido().getIdCliente().getId());
+                ri.setNumOrden(selected.getIdPedido().getReferencia());
+                ri.setFechaEntrega(Utils.getFormattedDate(selected.getFechaRemision()));
+                ri.setReferencia(selected.getReferencia());
+                ri.setObservaciones(selected.getObservaciones());
                 list.add(ri);
             }
         }

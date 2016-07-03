@@ -8,6 +8,7 @@ import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
+import com.co.hsg.innventa.session.NamedQuerys;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -22,7 +23,8 @@ public class RemisionesController extends AbstractController<Remisiones> {
     private PedidosController pedidoController;
     @Inject
     private MobilePageController mobilePageController;
-    
+    @Inject
+    private SystemManager systemManager;
     @Inject
     private Navigation nav;
     private PedidosProducto selectedProduct;
@@ -68,6 +70,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
     @Override
     public Remisiones prepareCreate(ActionEvent event) {
         Remisiones obj = super.prepareCreate(event);
+        obj.setReferencia(systemManager.getSequence(NamedQuerys.REMISSION_PARAM));
          if(pedidoController.getSelected() != null){
             obj.setIdPedido(pedidoController.getSelected() );
          }

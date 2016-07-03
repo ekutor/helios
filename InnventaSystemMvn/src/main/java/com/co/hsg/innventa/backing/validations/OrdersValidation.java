@@ -4,16 +4,18 @@ import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
  * @author hectsaga
  */
-public class OrdersValidation implements IValidation {
+public class OrdersValidation extends AbstractValidation {
 
     private final Pedidos pedido;
     
     public OrdersValidation(Pedidos pedido){
+        super();
         this.pedido = pedido;
     }
     @Override

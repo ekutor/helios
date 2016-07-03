@@ -74,6 +74,11 @@ public class Navigation implements Serializable {
         actualModule = Modules.CONFIGURATION;
         icon = "gears";
     }
+     public void remissionsConfig() {
+        parametrosController.cargarObj("remissions");
+        actualModule = Modules.CONFIGURATION;
+        icon = "gears";
+    }
     
     public void thirds() {
         actualModule = Modules.THIRDS;

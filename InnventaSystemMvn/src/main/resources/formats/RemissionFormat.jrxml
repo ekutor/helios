@@ -1,97 +1,279 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemissionFormatsss" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b44f99e3-fd17-45ce-b171-eae2ed08f7f2">
-	<property name="ireport.zoom" value="1.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemissionFormatsss" pageWidth="595" pageHeight="842" columnWidth="475" leftMargin="60" rightMargin="60" topMargin="40" bottomMargin="40" uuid="b44f99e3-fd17-45ce-b171-eae2ed08f7f2">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT
-     remisiones.`detalles` AS remisiones_detalles,
-     remisiones.`entregado_a` AS remisiones_entregado_a,
-     remisiones.`ESTADO` AS remisiones_ESTADO,
-     remisiones.`fecha_remision` AS remisiones_fecha_remision,
-     remisiones.`total_productos` AS remisiones_total_productos,
-     remisiones_producto.`cantidad` AS remisiones_producto_cantidad,
-     estados.`ESTADO` AS estados_ESTADO,
-     cuentas.`nombre` AS cuentas_nombre,
-     pedidos.`cantidad_pendientes` AS pedidos_cantidad_pendientes,
-     pedidos.`cantidad_total` AS pedidos_cantidad_total,
-     pedidos.`creado_por` AS pedidos_creado_por,
-     pedidos.`eliminado` AS pedidos_eliminado,
-     pedidos.`fecha_creacion` AS pedidos_fecha_creacion,
-     pedidos.`fecha_entrega` AS pedidos_fecha_entrega,
-     pedidos.`fecha_modificacion` AS pedidos_fecha_modificacion,
-     pedidos.`fecha_pedido` AS pedidos_fecha_pedido,
-     pedidos.`modificado_por` AS pedidos_modificado_por,
-     pedidos.`observaciones` AS pedidos_observaciones,
-     pedidos.`referencia` AS pedidos_referencia,
-     pedidos.`estado` AS pedidos_estado,
-     pedidos.`descripcion` AS pedidos_descripcion,
-     remisiones.`modificado_por` AS remisiones_modificado_por
-FROM
-     `remisiones` remisiones INNER JOIN `remisiones_producto` remisiones_producto ON remisiones.`id` = remisiones_producto.`id_remision`
-     INNER JOIN `pedidos` pedidos ON remisiones.`id_pedido` = pedidos.`id`
-     INNER JOIN `estados` estados ON pedidos.`estado` = estados.`ID`
-     INNER JOIN `cuentas` cuentas ON pedidos.`id_cliente` = cuentas.`id`]]>
+		<![CDATA[]]>
 	</queryString>
+	<field name="referencia" class="java.lang.String"/>
 	<field name="cantidad" class="java.lang.Integer"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="observaciones" class="java.lang.String"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+	<field name="nombreCliente" class="java.lang.String"/>
+	<field name="nitCliente" class="java.lang.String"/>
+	<field name="dirCliente" class="java.lang.String"/>
+	<field name="telCliente" class="java.lang.String"/>
+	<field name="fechaEntrega" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="contacto" class="java.lang.String"/>
+	<field name="numOrden" class="java.lang.String"/>
 	<pageHeader>
-		<band height="70" splitType="Stretch">
+		<band height="156" splitType="Stretch">
 			<rectangle>
-				<reportElement x="379" y="0" width="162" height="70" uuid="8f7f3cf9-e2cb-40c1-82ce-4b746925775c"/>
+				<reportElement mode="Transparent" x="0" y="93" width="219" height="51" uuid="bf6094ad-d128-4cc4-ac95-fa2883d75aee"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="313" y="0" width="162" height="70" uuid="8f7f3cf9-e2cb-40c1-82ce-4b746925775c"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="441" y="33" width="100" height="20" uuid="d8cc209d-d54d-4f7b-b82d-d9417bc74d3d"/>
+				<reportElement x="313" y="33" width="162" height="20" uuid="d8cc209d-d54d-4f7b-b82d-d9417bc74d3d"/>
+				<textElement textAlignment="Center">
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No. "+$F{referencia}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="441" y="13" width="100" height="20" uuid="66696bda-e02e-4766-9521-a0fdc4a230dc"/>
+				<reportElement x="313" y="13" width="162" height="20" uuid="66696bda-e02e-4766-9521-a0fdc4a230dc"/>
+				<textElement textAlignment="Center">
+					<font fontName="VerdanaNegrilla" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
 				<text><![CDATA[REMISION]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="88" y="33" width="100" height="20" uuid="d5625cf1-52e4-4870-9b5c-a52c49590ffe"/>
-				<text><![CDATA[observaciones]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="201" y="33" width="100" height="20" uuid="76424b13-48f8-405f-b01d-cb2784bcc0f4"/>
-				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+				<reportElement x="0" y="13" width="162" height="13" uuid="33e4f6e0-a88f-4803-a834-72419c1b1e7a"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mettagrup S.A.S."]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="0" y="26" width="162" height="13" uuid="260be919-b5be-4dff-8f35-4469531ddad5"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NIT: 900507876-7"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="38" width="162" height="13" uuid="7891a123-2cb7-446a-8a6d-930663eb9f49"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CR 49 # 63a -44"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="50" width="162" height="13" uuid="7fa3693d-633d-49d4-90a0-bcefbe5dbca6"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tel: 444 52 57 - 310 403 56 92"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="93" width="219" height="13" uuid="7e30ed65-a0bb-43bf-9b1b-bf495a5f867f"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Señores:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="106" width="219" height="13" uuid="b129c85b-c357-4f8f-8f43-3658f1a86d11"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="119" width="219" height="13" uuid="5762b9be-dc3c-441d-9837-980b52c5a64d"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dirCliente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="131" width="219" height="13" uuid="695f560f-4ed4-4d14-9ca9-66ced7045192"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="93" width="116" height="13" uuid="d60b7afd-b5c9-4ff5-aab8-e1c994ffe8e4"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fecha Entrega"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="106" width="116" height="13" uuid="35a989b6-0033-4bec-b889-da4e975c00c9"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vendedor"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="119" width="116" height="13" uuid="740f2f0d-6ebb-4045-8b2d-9d030c09415b"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Numero Orden"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="132" width="116" height="13" uuid="b27d363b-9a45-4b51-8dff-2d21816ee69a"/>
+				<textElement>
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Contacto"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="219" y="93" width="256" height="51" uuid="1f6c8a4b-70ba-4908-a8fb-a69930f92d29"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="335" y="93" width="140" height="51" uuid="0392757f-23c1-45d3-a6a4-9ab035c97124"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="93" width="140" height="13" uuid="be17949d-2705-4147-a153-5abf7c3b08d7"/>
+				<textElement>
+					<font fontName="VerdanaNormal" isStrikeThrough="false"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEntrega}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="105" width="140" height="13" uuid="3cc5c55e-abf7-49b2-8f15-e5e36191e9ed"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="119" width="140" height="13" uuid="18e73d81-62aa-4fa7-bd6f-d14d33b81e1e"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numOrden}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="131" width="140" height="13" uuid="23c0362c-e669-4079-8974-a5de78cd1ee2"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contacto}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="219" y="93" width="256" height="13" uuid="651807ec-9985-4e38-af83-80abeddc9274"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="219" y="106" width="256" height="13" uuid="76f010d8-0467-43e3-91c8-ff100076b192"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="219" y="119" width="256" height="13" uuid="9715b586-804c-4423-aa4d-c4afb3016e3b"/>
+			</rectangle>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="281" height="20" uuid="9e7c365a-516a-4b58-b7c7-b51cb59c23f3"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
 			<staticText>
-				<reportElement x="70" y="2" width="100" height="20" uuid="8f786356-c206-4354-80aa-8109dabe08d0"/>
-				<text><![CDATA[cantidad]]></text>
+				<reportElement x="0" y="0" width="281" height="20" uuid="8f786356-c206-4354-80aa-8109dabe08d0"/>
+				<textElement textAlignment="Center">
+					<font fontName="VerdanaNegrilla"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="281" y="2" width="100" height="20" uuid="94c994d2-578e-4915-8d47-d38ce51b3800"/>
-				<text><![CDATA[nombre]]></text>
+				<reportElement x="281" y="0" width="194" height="20" uuid="aee5a1ea-c992-4bcf-8fd4-c20d0b54d3df"/>
+				<textElement textAlignment="Center">
+					<font fontName="VerdanaNegrilla"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="281" y="0" width="194" height="20" uuid="6e2f1245-0cc2-4501-a11e-f8a979264ab4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement x="70" y="17" width="100" height="20" uuid="e062e0fc-cd19-49ed-90cb-19466eaea773"/>
-				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="281" y="17" width="100" height="20" uuid="75759dc1-8a3d-4caf-bd8a-c5afffce5a42"/>
+				<reportElement x="0" y="0" width="281" height="15" uuid="e062e0fc-cd19-49ed-90cb-19466eaea773"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="281" height="15" uuid="74d061a3-a9c8-4469-8fe8-5c9b01970460"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="281" y="0" width="194" height="15" uuid="04dc9570-f36b-4b28-a72c-28799e312f0d"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="281" y="0" width="194" height="15" uuid="c72c1325-0fe7-44fc-bc9b-dcd1a4f9b44d"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="475" height="30" uuid="d27d42de-80f1-4efd-9f6d-3eaadebcad87"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="475" height="30" isPrintWhenDetailOverflows="true" uuid="ef66a9f2-1456-4abd-b2f3-84564a41fb91"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["OBSERVACIONES: "+$F{observaciones}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

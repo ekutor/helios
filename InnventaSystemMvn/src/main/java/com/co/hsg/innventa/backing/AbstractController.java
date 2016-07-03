@@ -105,9 +105,9 @@ public abstract class AbstractController<T> implements Serializable {
         return items;
     }
     
-    public T chargeItem(NamedQuerys namedQuery) {
+    public T chargeItem(NamedQuerys namedQuery ,boolean recharge) {
         try{
-         if (selected == null) {
+         if (selected == null || recharge) {
             selected = this.ejbFacade.findByQuery(namedQuery.getQuery());
             if(selected == null){
                 this.prepareCreate(null);
@@ -158,7 +158,10 @@ public abstract class AbstractController<T> implements Serializable {
      * data layer
      */
     public void save(ActionEvent event) {
-        String msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Updated");
+        String msg = "";
+        if(event != null){
+         msg = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Updated");
+        }
         persist(PersistAction.UPDATE, msg, null);
     }
 

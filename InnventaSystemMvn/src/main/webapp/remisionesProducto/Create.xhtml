@@ -41,10 +41,10 @@
                             <p:tooltip for="fechaRemision" value="#{remisionesController.getComponentMessages('fechaRemision', innventa.CreateRemisionesHelpText_fechaRemision)}"/>
                         </h:panelGroup>
                         
-                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_detalles}" for="detalles" />
+                        <p:outputLabel value="Observaciones" for="detalles" />
                         <h:panelGroup>
-                            <p:inputTextarea rows="4" cols="30" id="detalles" value="#{remisionesController.selected.detalles}" title="#{innventa.CreateRemisionesTitle_detalles}" />
-                            <p:tooltip for="detalles" value="#{remisionesController.getComponentMessages('detalles', innventa.CreateRemisionesHelpText_detalles)}"/>
+                            <p:inputTextarea rows="4" cols="30" id="detalles" value="#{remisionesController.selected.observaciones}" />
+                            <p:tooltip for="detalles" value="#{remisionesController.getComponentMessages('observaciones', innventa.CreateRemisionesHelpText_detalles)}"/>
                         </h:panelGroup>
                         
                         <p:outputLabel value="#{innventa.CreateRemisionesLabel_totalProductos}" for="totalProductos" />

@@ -48,6 +48,13 @@
                     <h:outputText value="#{item.idPedido.idCliente.nombre}"/>
                 </p:column>
                 
+                <p:column sortBy="#{item.remision}" filterBy="#{item.remision}">
+                    <f:facet name="header">
+                        <h:outputText value="Remision"/>
+                    </f:facet>
+                    <h:outputText value="#{item.referencia}"/>
+                </p:column>
+                
                 <p:column sortBy="#{item.fechaRemision}" filterBy="#{item.fechaRemision}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListRemisionesTitle_fechaRemision}"/>
@@ -58,11 +65,11 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.detalles}" filterBy="#{item.detalles}">
+                <p:column sortBy="#{item.observaciones}" filterBy="#{item.observaciones}">
                     <f:facet name="header">
-                        <h:outputText value="#{innventa.ListRemisionesTitle_detalles}"/>
+                        <h:outputText value="Observaciones"/>
                     </f:facet>
-                    <h:outputText value="#{item.detalles}"/>
+                    <h:outputText value="#{item.observaciones}"/>
                 </p:column>
 
 
