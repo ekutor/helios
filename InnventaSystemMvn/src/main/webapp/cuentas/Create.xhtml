@@ -59,9 +59,7 @@
                                  <p:outputLabel value="Telefono Secundario" for="telefono2" />
                                  <h:panelGroup>
                                      <p:inputText id="telefono2" value="#{cuentasController.selected.telefonoSec}" 
-                                                 title="Telefono" required="false" 
-                                                 
-                                                 size="10" maxlength="10"/>
+                                                required="false"/>
                                     <p:tooltip for="telefono2" value="Ingrese el Telefono Secundario de la cuenta"/>
                                 </h:panelGroup>
 
@@ -102,7 +100,7 @@
                                     <p:selectOneMenu id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" 
                                                      required="true" 
                                                      requiredMessage="#{innventa.CreatePersonasRequiredMessage_tipoDocumento}"
-                                                      converter="#{parametrosConverter}">
+                                                      >
                                         <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                         <f:selectItems value='#{parametrosController.chargeListObject("PARAMS", "IDENTIFICATION")}'
                                                        var="params"
@@ -173,7 +171,7 @@
                                     <p:selectOneMenu id="cargo" value="#{cuentasController.selectedPosition}" 
                                                      required="true" 
                                                      requiredMessage="El cargo es requerido"
-                                                      converter="#{parametrosConverter}">
+                                                      >
                                         <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                         <f:selectItems value='#{parametrosController.chargeListObject("PARAMS", "ACCOUNTS_POSITION")}'
                                                        var="params"

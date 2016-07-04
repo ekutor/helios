@@ -67,7 +67,7 @@ public class Cuentas implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "telefono")
     private String telefonoPpal;
-    @Size(min = 1, max = 10)
+
     @Column(name = "telefono_sec")
     private String telefonoSec;
     @JoinColumn(name = "estado", referencedColumnName = "id")
@@ -141,6 +141,9 @@ public class Cuentas implements Serializable {
     }
 
     public void setNombre(String nombre) {
+        if(nombre != null){
+            nombre = nombre.toUpperCase();
+        }
         this.nombre = nombre;
     }
 
@@ -212,6 +215,9 @@ public class Cuentas implements Serializable {
     }
 
     public void setDireccionPpal(String direccionPpal) {
+        if(direccionPpal != null){
+            direccionPpal = direccionPpal.toUpperCase();
+        }
         this.direccionPpal = direccionPpal;
     }
 
