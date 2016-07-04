@@ -1,7 +1,9 @@
 package com.co.hsg.innventa.converter;
 
 import com.co.hsg.innventa.backing.ParametrosController;
+import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.beans.Parametros;
+import com.co.hsg.innventa.session.ParametrosFacade;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,48 +19,51 @@ import javax.inject.Named;
 public class ParametrosConverter implements Converter {
 
     @Inject
-    private ParametrosController ejbController;
+    private ParametrosFacade ejbFacade;
+    
+    @Inject
+    private ParametrosController controller;
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-        if (value == null || value.length() == 0 ) {
+        if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
             return null;
         }
-        String finded = "";
-        for(Parametros p : this.ejbController.getItems()){
+        //this.ejbFacade.find(getKey(value));
+        for(Parametros p :controller.getItems()){
             if(p.getClave1().equals(value)){
-                finded = p.getId();
-                break;
+                return p;
             }
         }
-        return finded;
+        return null;
+    }
+
+    java.lang.String getKey(String value) {
+        java.lang.String key;
+        key = value;
+        return key;
+    }
+
+    String getStringKey(java.lang.String value) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(value);
+        return sb.toString();
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-        if (object == null) {
+        if (object == null){
             return null;
         }
-        if (object instanceof Parametros) {
+        if(object instanceof String) {
+            return object.toString();
+        }else if (object instanceof Parametros) {
             Parametros o = (Parametros) object;
-            return o.getId();
-        } else if(object instanceof String){
-         return (String) object;
-        }else {
+            return getStringKey(o.getId());
+        } else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Parametros.class.getName()});
             return null;
         }
-    }
-    
-    public String getParamName(String id) {
-        String finded = "";
-        for(Parametros p : this.ejbController.getItems()){
-            if(p.getId().equals("")){
-                finded = p.getClave1();
-                break;
-            }
-        }
-        return finded;
     }
 
 }

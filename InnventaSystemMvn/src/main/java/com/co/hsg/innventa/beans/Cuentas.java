@@ -59,6 +59,17 @@ public class Cuentas implements Serializable {
     @Size(min = 1, max = 36)
     @Column(name = "tipo_cliente")
     private String tipoCliente;
+    @Basic(optional = false)
+    @Size(min = 1, max = 100)
+    @Column(name = "direccion")
+    private String direccionPpal;
+    @Basic(optional = false)
+    @Size(min = 1, max = 10)
+    @Column(name = "telefono")
+    private String telefonoPpal;
+    @Size(min = 1, max = 10)
+    @Column(name = "telefono_sec")
+    private String telefonoSec;
     @JoinColumn(name = "estado", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Estados estado;
@@ -196,6 +207,30 @@ public class Cuentas implements Serializable {
         this.fechaModificacion = fechaModificacion;
     }
 
+    public String getDireccionPpal() {
+        return direccionPpal;
+    }
+
+    public void setDireccionPpal(String direccionPpal) {
+        this.direccionPpal = direccionPpal;
+    }
+
+    public String getTelefonoPpal() {
+        return telefonoPpal;
+    }
+
+    public void setTelefonoPpal(String telefonoPpal) {
+        this.telefonoPpal = telefonoPpal;
+    }
+
+    public String getTelefonoSec() {
+        return telefonoSec;
+    }
+
+    public void setTelefonoSec(String telefonoSec) {
+        this.telefonoSec = telefonoSec;
+    }
+    
     @XmlTransient
     public List<Pedidos> getPedidosList() {
         return pedidosList;

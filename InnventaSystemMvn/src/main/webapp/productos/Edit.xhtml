@@ -92,7 +92,7 @@
                             <p:selectOneMenu id="tipoCodigo" value="#{productosController.selected.tipoCodigo}" 
                                              required="true" 
                                              requiredMessage="#{innventa.CreateProductosRequiredMessage_tipoCodigo}"
-                                             converter="#{parametrosConverter}">
+                                            >
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                 <f:selectItems value='#{parametrosController.chargeListObject("productTypes")}'
                                                var="tipoItem"

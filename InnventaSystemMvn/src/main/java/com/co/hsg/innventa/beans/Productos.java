@@ -62,7 +62,7 @@ public class Productos implements Serializable {
     @Size(max = 255)
     @Column(name = "codigo")
     private String codigo;
-    @Size(max = 36)
+ 
     @Column(name = "tipo_codigo")
     private String tipoCodigo;
     @Basic(optional = false)

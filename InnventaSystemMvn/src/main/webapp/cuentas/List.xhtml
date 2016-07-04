@@ -52,7 +52,28 @@
                     </f:facet>
                     <h:outputText value="#{item.nombre}"/>
                 </p:column>
-
+                
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Direccion Principal"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccionPpal}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Telefono Principal"/>
+                    </f:facet>
+                    <h:outputText value="#{item.telefonoPpal}"/>
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Direccion Principal"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccionPpal}"/>
+                </p:column>
 
                 <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
                     <f:facet name="header">
@@ -115,7 +136,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListCuentasContactosTitle_cargo}"/>
                     </f:facet>
-                    <h:outputText value="#{itemDetail.cargo}"/>
+                    <h:outputText value="#{cuentasController.transformPostions(itemDetail.cargo)}"/>
                 </p:column>
 
 

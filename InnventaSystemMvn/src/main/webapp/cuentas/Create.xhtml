@@ -37,6 +37,33 @@
                                                  size="40" maxlength="80"/>
                                     <p:tooltip for="nombre" value="#{cuentasController.getComponentMessages('nombre', innventa.CreateCuentasHelpText_nombre)}"/>
                                 </h:panelGroup>
+                                
+                                 <p:outputLabel value="Direccion Principal" for="direccion" />
+                                <h:panelGroup>
+                                    <p:inputText id="direccion" value="#{cuentasController.selected.direccionPpal}" 
+                                                 title="Direccion" required="true" 
+                                                 requiredMessage="La Direccion es Requerida" 
+                                                 size="40" maxlength="100"/>
+                                    <p:tooltip for="direccion" value="Ingrese la direccion de la cuenta"/>
+                                </h:panelGroup>
+                                 
+                                 <p:outputLabel value="Telefono Principal" for="telefono" />
+                                <h:panelGroup>
+                                    <p:inputText id="telefono" value="#{cuentasController.selected.telefonoPpal}" 
+                                                 title="Telefono" required="true" 
+                                                 requiredMessage="el Telefono Principal es Requerido" 
+                                                 size="10" maxlength="10"/>
+                                    <p:tooltip for="telefono" value="Ingrese el Telefono Principal de la cuenta"/>
+                                </h:panelGroup>
+                                 
+                                 <p:outputLabel value="Telefono Secundario" for="telefono2" />
+                                 <h:panelGroup>
+                                     <p:inputText id="telefono2" value="#{cuentasController.selected.telefonoSec}" 
+                                                 title="Telefono" required="false" 
+                                                 
+                                                 size="10" maxlength="10"/>
+                                    <p:tooltip for="telefono2" value="Ingrese el Telefono Secundario de la cuenta"/>
+                                </h:panelGroup>
 
                                 <p:outputLabel value="#{innventa.CreateCuentasLabel_estado}" for="estado" />
                                 <h:panelGroup>
@@ -133,7 +160,7 @@
                                     <p:calendar id="fechaNacim" pattern="dd/MM/yyyy" 
                                                 value="#{personasController.selected.fechaNacim}" 
                                                 title="#{innventa.CreatePersonasTitle_fechaNacim}" 
-                                                required="true" 
+                                                required="false" 
                                                 requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaPedido}">
                                         <span class="glyphicon glyphicon-calendar"></span>         
                                     </p:calendar>
