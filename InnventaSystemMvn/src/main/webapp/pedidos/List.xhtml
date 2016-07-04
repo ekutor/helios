@@ -111,12 +111,10 @@
 
             </p:dataTable>
 
-            <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update=":contentPanel" >
-
-            </p:commandButton>
+            <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update=":contentPanel" />
             <p:commandButton id="createPurchaseButton" icon="ui-icon-document" value="Crear Remision" actionListener="#{remisionesController.prepareCreate}" update="contentPanel" />
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PedidosViewForm" oncomplete="PF('PedidosViewDialog').show()" disabled="#{empty pedidosController.selected}"/>
-            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":PedidosEditForm" oncomplete="PF('PedidosEditDialog').show()" disabled="#{empty pedidosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" actionListener="#{navigation.createOrder()}" update=":contentPanel" disabled="#{empty pedidosController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{pedidosController.delete(pedidosController.selected.id)}" update=":growl,datalist" disabled="#{empty pedidosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
@@ -138,8 +136,9 @@
                          rowKey="#{itemDetail.id}"
                          paginator="false"
                          selectionMode="single"
+                         style="text-align: right"
                         >                
-                           <p:column>
+                <p:column style="text-align: center">
                     <f:facet name="header">
                         <h:outputText value="Producto"/>
                     </f:facet>
@@ -165,14 +164,18 @@
                     <f:facet name="header">
                         <h:outputText value="Valor Unitario"/>
                     </f:facet>
-                    <h:outputText value="#{itemDetail.valorUnitario}"/>
+                    <h:outputText value="#{itemDetail.valorUnitario}">
+                         <f:convertNumber pattern="###,###"/>
+                    </h:outputText>
                 </p:column>
                         
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Total"/>
                     </f:facet>
-                    <h:outputText value="#{itemDetail.valorTotal}"/>
+                    <h:outputText value="#{itemDetail.valorTotal}">
+                         <f:convertNumber pattern="###,###"/>
+                    </h:outputText>
                 </p:column>
 
 

@@ -8,26 +8,20 @@
     <h:outputScript name="js/innventa.js" />
     <ui:composition>
 
-        <div class='panel panel-#{navigation.moduleType("PEDIDOS")} col-md-7' >
+        <div class='panel panel-#{navigation.moduleType("PEDIDOS")} col-md-6' >
             <div class="panel-heading">Crear Nuevo Pedido</div>
 
             <h:form id="PedidosCreateForm"> 
 
                 <h:panelGroup id="display"  rendered="#{pedidosController.selected != null}">
-                    <p:panelGrid columns="5">
+                    <p:panelGrid columns="4">
 
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
+                        <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="ref" />
                         <h:panelGroup>
-                            <p:inputText id="referencia" value="#{pedidosController.selected.referencia}" disabled="true"
-                                         title="#{innventa.CreatePedidosTitle_referencia}" 
-                                         required="true" 
-                                         requiredMessage="#{innventa.CreatePedidosRequiredMessage_referencia}" size="20" maxlength="20"/>
-                            <p:tooltip for="referencia" value="#{pedidosController.getComponentMessages('referencia', innventa.CreatePedidosHelpText_referencia)}"/>
+                            <p:inputText id="ref" value="#{pedidosController.selected.referencia}" disabled="true" />
+                           
                         </h:panelGroup>
 
-                        <p:column colspan="3">  
-
-                        </p:column> 
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_idCliente}" for="idCliente" />
                         <h:panelGroup>
@@ -58,7 +52,7 @@
                             </p:calendar>
                             <p:tooltip for="fechaPedido" value="#{pedidosController.getComponentMessages('fechaPedido', innventa.CreatePedidosHelpText_fechaPedido)}"/>
                         </h:panelGroup>
-                        <h:outputText value="&#160;" />
+                      
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_fechaEntrega}" for="fechaEntrega" />
                         <h:panelGroup>
                             <p:calendar id="fechaEntrega" pattern="dd/MM/yyyy" value="#{pedidosController.selected.fechaEntrega}" title="#{innventa.CreatePedidosTitle_fechaEntrega}">
@@ -68,19 +62,19 @@
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_cantidadTotal}" for="cantidadTotal" />
-                        <h:panelGroup>
-                            <p:inputText id="cantidadTotal" value="#{pedidosController.cantTotal}" readonly="true" title="#{innventa.CreatePedidosTitle_cantidadTotal}" required="true" />
+                        <h:panelGroup id="panelCantidadOC">
+                            <h:outputText id="cantidadTotal" value="#{pedidosController.cantTotal}"/>
                            
                         </h:panelGroup>
                         
                         <p:outputLabel value="Total OC" for="totalOC" />
                         <h:panelGroup id="panelTotalOC">
-                            <p:inputText id="totalOC" readonly="true" value="#{pedidosController.totalOC}">
+                             <h:outputText id="totalOC" value="#{pedidosController.totalOC}">
                                  <f:convertNumber pattern="###,###"/>
-                            </p:inputText>
+                            </h:outputText>
                         </h:panelGroup>
                         
-                        <h:outputText value="&#160;" />
+                  
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_descripcion}" for="descripcion" />
                         <h:panelGroup>
                             <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{pedidosController.selected.descripcion}" title="#{innventa.CreatePedidosTitle_descripcion}" />
@@ -92,7 +86,7 @@
                             <p:inputTextarea rows="4" cols="30" id="observaciones" value="#{pedidosController.selected.observaciones}" title="#{innventa.CreatePedidosTitle_observaciones}" />
                             <p:tooltip for="observaciones" value="#{pedidosController.getComponentMessages('observaciones', innventa.CreatePedidosHelpText_observaciones)}"/>
                         </h:panelGroup>
-                        <h:outputText value="&#160;" />
+                   
                        
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_estado}" for="estado" />
@@ -111,7 +105,10 @@
                             </p:selectOneMenu>
                             <p:tooltip for="estado" value="#{pedidosController.getComponentMessages('estado', innventa.CreatePedidosHelpText_estado)}"/>
                         </h:panelGroup>
-
+                        
+                        
+                        <p:outputLabel value="" />
+                        <p:outputLabel value="" />
                     </p:panelGrid>
 
                     <h:panelGroup styleClass="hide">
@@ -120,13 +117,20 @@
 
                 </h:panelGroup>
                 <p:commandButton class="btn btn-success" actionListener="#{pedidosController.saveNew}" 
-                                 value="#{innventa.Save}" 
+                                 value="Crear OC" 
                                  update="display contentPanel growl msgs" 
                                  >
                     <p:confirm header="#{innventa.ConfirmationHeader}" 
                                message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                 </p:commandButton>
-
+                
+                <p:commandButton class="btn btn-success" actionListener="#{pedidosController.createRemission}" 
+                                 value="Crear OC y Generar Remision" 
+                                 update="display contentPanel growl msgs" 
+                                 >
+                    <p:confirm header="#{innventa.ConfirmationHeader}" 
+                               message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                </p:commandButton>
 
                 <p:commandButton value="#{innventa.Cancel}" 
                                  update="contentPanel growl" 

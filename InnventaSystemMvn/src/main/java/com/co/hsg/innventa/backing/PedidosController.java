@@ -245,6 +245,7 @@ public class PedidosController extends AbstractController<Pedidos> {
             rp.setCantidad(pprod.getCantidad());
             rp.setEliminado((short)0);
             rp.setId(Utils.generateID());
+            rem.getRemisionesProductoList().add(rp);
             pprod.setCantidadEntregada(pprod.getCantidad());
         }
         //selected.getRemisionesList().add(rem);

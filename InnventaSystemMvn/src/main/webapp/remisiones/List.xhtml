@@ -29,7 +29,7 @@
                          selection="#{remisionesController.selected}"
                          tableStyleClass="table table-striped">
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
+                <p:ajax event="rowSelect"   update=":dataDetailListForm,@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('RemisionesListForm:viewButton').click();"/>
@@ -96,53 +96,6 @@
                 </p:column>
 
 
-      <!--            <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListRemisionesTitle_creadoPor}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.creadoPor}"/>
-                </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListRemisionesTitle_fechaCreacion}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaCreacion}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </h:outputText>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListRemisionesTitle_modificadoPor}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.modificadoPor}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListRemisionesTitle_fechaModificacion}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaModificacion}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </h:outputText>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListRemisionesTitle_eliminado}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.eliminado}"/>
-                                    </p:column>
-                -->
-
-              
-
-
             </p:dataTable>
 
             <p:commandButton id="createButton" rendered="false" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
@@ -160,5 +113,39 @@
         </div>
         <ui:include src="/confirmation.xhtml"/>
     </h:form>
+    
+    <div class='panel panel-#{navigation.moduleType("PRODUCTOS")} '>
+            <div class="panel-heading"></div>
+            <h:form id="dataDetailListForm">
+                
+                <p:panel header="Productos de la Remision" rendered="true">
+           
+                    <p:dataTable id="dataDetailList" rendered="true"
+                                 value="#{remisionesController.selected.remisionesProductoList}"
+                         var="itemDetail"
+                         rowKey="#{itemDetail.id}"
+                         paginator="false"
+                         selectionMode="single"
+                         style="text-align: center; max-width: 600px; "
+                        >                
+                <p:column style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="Producto"/>
+                    </f:facet>
+                    <h:outputText value="#{itemDetail.idProducto.nombre}"/>
+                </p:column>
 
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad"/>
+                    </f:facet>
+                    <h:outputText value="#{itemDetail.cantidad}"/>
+                </p:column>
+            </p:dataTable>
+
+
+        </p:panel>
+        </h:form>
+        </div>
 </ui:composition>

@@ -12,6 +12,7 @@ public enum NamedQuerys {
     STATUS("Estados.findByModulo",""),
     CATEGORIES("Categorias.findByModulo",""),
     ACCOUNT_CONTACTS("CuentasContactos.findByCuenta",""),
+    ACCOUNTS_POSITIONS_PARAM("Parametros.accountPositions", "ACCOUNTS_POSITION"),
     PARAMS("Parametros.findByParametro","")
     ;
     

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemissionFormatsss" pageWidth="595" pageHeight="842" columnWidth="475" leftMargin="60" rightMargin="60" topMargin="40" bottomMargin="40" uuid="b44f99e3-fd17-45ce-b171-eae2ed08f7f2">
 	<property name="ireport.zoom" value="1.7715610000000013"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="18"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
@@ -86,7 +86,7 @@
 					<font fontName="VerdanaNegrilla"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Señores:"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Señor:"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="106" width="219" height="13" uuid="b129c85b-c357-4f8f-8f43-3658f1a86d11"/>
@@ -199,31 +199,31 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<rectangle>
+				<reportElement mode="Transparent" x="281" y="0" width="194" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="6e2f1245-0cc2-4501-a11e-f8a979264ab4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
 				<reportElement mode="Transparent" x="0" y="0" width="281" height="20" uuid="9e7c365a-516a-4b58-b7c7-b51cb59c23f3"/>
 				<graphicElement>
 					<pen lineWidth="1.5"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="281" height="20" uuid="8f786356-c206-4354-80aa-8109dabe08d0"/>
+				<reportElement mode="Opaque" x="0" y="0" width="281" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="8f786356-c206-4354-80aa-8109dabe08d0"/>
 				<textElement textAlignment="Center">
 					<font fontName="VerdanaNegrilla"/>
 				</textElement>
 				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="281" y="0" width="194" height="20" uuid="aee5a1ea-c992-4bcf-8fd4-c20d0b54d3df"/>
+				<reportElement mode="Opaque" x="281" y="0" width="194" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="aee5a1ea-c992-4bcf-8fd4-c20d0b54d3df"/>
 				<textElement textAlignment="Center">
 					<font fontName="VerdanaNegrilla"/>
 				</textElement>
 				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
-			<rectangle>
-				<reportElement mode="Transparent" x="281" y="0" width="194" height="20" uuid="6e2f1245-0cc2-4501-a11e-f8a979264ab4"/>
-				<graphicElement>
-					<pen lineWidth="1.5"/>
-				</graphicElement>
-			</rectangle>
 		</band>
 	</columnHeader>
 	<detail>

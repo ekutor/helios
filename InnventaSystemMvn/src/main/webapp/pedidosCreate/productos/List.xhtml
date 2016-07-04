@@ -8,9 +8,10 @@
 
     <div class="panel panel-default">
         <h:form id="ProductosSearchSmallForm">
-            <h:panelGrid columns="4" style="margin-bottom:10px" 
+            <h:panelGrid columns="5" style="margin-bottom:10px" 
                          >
                 <p:outputLabel for="advanced" value="Buscar Producto " />
+                <p:column><p:outputLabel value="&#160;" /></p:column>
                 <p:selectOneMenu id="advanced" 
                                  value="#{productosController.findProduct}" 
                                  converter="#{productosConverter}" 
@@ -20,7 +21,7 @@
                                  styleClass="col-md-6"
 
                                  >
-                    <f:selectItems value="#{productosController.items}" 
+                    <f:selectItems value="#{productosController.itemsForSale}" 
                                    var="selectedItem"
                                    itemLabel="#{selectedItem.nombre}" 
                                    itemValue="#{selectedItem}" 
@@ -34,55 +35,22 @@
                     </p:column>
                     <p:column>
                         <h:outputText value="#{t.referencia}" />
-                    </p:column>
+                    </p:column> 
                 </p:selectOneMenu>
+                <p:column><p:outputLabel value="&#160;" /></p:column>
+                 
                 <p:column>
                     <p:commandButton id="addProductButton" icon="ui-icon-plus"
                                      update="   :ProductosListForm"  
                                      actionListener="#{pedidosController.addProduct(ActionEvent,productosController.findProduct)}" 
                                      />
-                    <p:tooltip for="addProductButton" value="Busqueda Avanzada"/>
+                    <p:tooltip for="addProductButton" value="Agregar a la Orden de Compra"/>
 
                 </p:column>
-                <p:column>
-                    <p:commandButton id="cleanProductButton" icon="ui-icon-cancel"   
-                                     update=":ProductosListForm"  
-                                     actionListener="{productosController.prepareCreate}" 
-                                     oncomplete="PF('ProductosFinderDialog').show()"/>
-                    <p:tooltip for="cleanProductButton" value="Limpiar Busqueda"/>
-                </p:column>
+                
             </h:panelGrid>
         </h:form>
-        <!-- <h:form id="ProductosSearchSmallForm2">
-            <p:row>
-                <p:column class="col-offset-3 ">
-                    <p:outputLabel value="Buscar Producto" for="finderId" />
-                </p:column>
-                <p:column>
-                    <h:panelGroup>
-                        <p:inputText id="finderId" value="" 
-                                     title="{innventa.CreateProductosTitle_id}" 
-                                     size="25"/>
-                        <p:tooltip for="finderId" value="Busqueda por referencia"/>
-                    </h:panelGroup>
-                </p:column>
-                <p:column>
-                    <p:commandButton id="findProductButton" icon="ui-icon-search"
-                                     update=":ProductosListForm"  
-                                     actionListener="{productosController.prepareCreate}" 
-                                     oncomplete="PF('ProductosFinderDialog').show()"/>
-                    <p:tooltip for="findProductButton" value="Busqueda Avanzada"/>
-
-                </p:column>
-                <p:column>
-                    <p:commandButton id="cleanProductButton" icon="ui-icon-cancel"   
-                                     update=":ProductosListForm"  
-                                     actionListener="{productosController.prepareCreate}" 
-                                     oncomplete="PF('ProductosFinderDialog').show()"/>
-                    <p:tooltip for="cleanProductButton" value="Limpiar Busqueda"/>
-                </p:column>
-            </p:row>
-        </h:form>-->
+       
     </div>
     <h:form id="ProductosListForm">
         <div class='panel panel-#{navigation.moduleType("PRODUCTOS")}'>
@@ -97,7 +65,8 @@
                          rowsPerPageTemplate="10,20,30,40,50,100"
                          selectionMode="single"
                          selection="#{pedidosController.selectedProduct}"
-                         tableStyleClass="table table-striped"
+                         tableStyleClass="table table-striped "
+                         style="text-align: right"
                          editable="true" editMode="cell"
                          >
 
@@ -114,7 +83,7 @@
                     </f:facet>
                     <h:outputText value="#{item.id}"/>
                 </p:column>
-                <p:column >
+                <p:column style="text-align: left">
                     <f:facet name="header">
                         <h:outputText value="Producto"/>
                     </f:facet>
@@ -136,7 +105,7 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
                         <f:facet name="input"><p:inputText value="#{item.cantidad}" style="width:100%" label="CAnt">
-                           <p:ajax listener="#{pedidosController.onRowEdit(item.cantidad)}" update=":ProductosListForm " />
+                           <p:ajax listener="#{pedidosController.onRowEdit(item.cantidad)}" update=":PedidosCreateForm:panelTotalOC, :PedidosCreateForm:panelCantidadOC, :ProductosListForm" />
                         </p:inputText></f:facet>
                     </p:cellEditor>
                 </p:column>
@@ -153,27 +122,18 @@
 
             <p:commandButton rendered="false" id="createButton" icon="ui-icon-plus"   
                              value="Agregar al pedido" 
-                             update=":ProductosFinderForm"  
+                             update=":datalist"
                              actionListener="#{productosController.prepareCreate}" 
                              oncomplete="PF('ProductosFinderDialog').show()"/>
 
             <p:commandButton id="deleteButton"  icon="ui-icon-trash"  value="#{innventa.Delete}" 
                              actionListener="#{pedidosController.delProduct(ActionEvent)}" 
-                             update=":ProductosListForm,:growl,datalist" 
+                             update=":ProductosListForm,:growl,datalist, :PedidosCreateForm:panelTotalOC, :PedidosCreateForm:panelCantidadOC " 
                              disabled="#{empty pedidosController.selectedProduct}"/>
-
-            <p:commandButton id="viewButton"   
-
-                             icon="ui-icon-search" 
-                             value="#{innventa.View}" 
-                             update=":ProductosFinderForm" 
-                             oncomplete="PF('ProductosViewDialog').show()" 
-                             disabled="#{empty pedidosController.selected.pedidosProductoList}"/>
-
 
 
         </div>
-        <ui:include src="/confirmation.xhtml"/>
+     
     </h:form>
 
 </ui:composition>

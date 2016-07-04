@@ -1,15 +1,21 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
+import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.beans.Cuentas;
+import com.co.hsg.innventa.beans.CuentasDireccion;
 import com.co.hsg.innventa.beans.ListaPrecios;
+import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.session.CuentasFacade;
+import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.Collection;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import org.primefaces.event.FlowEvent;
+
 @Named(value="cuentasController")
 @ViewScoped
 public class CuentasController extends AbstractController<Cuentas> {
@@ -22,6 +28,12 @@ public class CuentasController extends AbstractController<Cuentas> {
     private PersonasController personasController;
     @Inject 
     private ListaPreciosController lpController;
+    
+    @Inject
+    private ParametrosController params;
+    
+    private Collection<Parametros> info;
+    
     private boolean skip;
     
     private String selectedPosition;
@@ -117,5 +129,19 @@ public class CuentasController extends AbstractController<Cuentas> {
             return event.getNewStep();
         }
     }
+    
+     public String transformPostions(String position){
+        String finded = "";
+        if(info == null){
+            info = params.chargeItems(NamedQuerys.ACCOUNTS_POSITIONS_PARAM);
+        }
+        for(Parametros p : info){
+            if(p.getId().equals(position)){
+                finded = p.getClave1();
+                break;
+            }
+        }
+        return finded;
+     }
 
 }

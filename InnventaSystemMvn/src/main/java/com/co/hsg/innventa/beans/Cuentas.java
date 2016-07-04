@@ -230,6 +230,9 @@ public class Cuentas implements Serializable {
 
     @XmlTransient
     public List<CuentasDireccion> getCuentasDireccionList() {
+        if(cuentasDireccionList == null){
+           cuentasDireccionList = new ArrayList<>(); 
+        }
         return cuentasDireccionList;
     }
 

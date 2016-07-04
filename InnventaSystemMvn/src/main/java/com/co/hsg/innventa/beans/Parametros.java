@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Parametros.findByParametro", query = "SELECT p FROM Parametros p WHERE p.parametro = :parametro AND p.eliminado=0"),
     @NamedQuery(name = "Parametros.orders", query = "SELECT p FROM Parametros p WHERE p.parametro = 'CONF_ORDERS' AND p.eliminado=0"),
     @NamedQuery(name = "Parametros.remissions", query = "SELECT p FROM Parametros p WHERE p.parametro = 'CONF_REMISSIONS' AND p.eliminado=0"),
-    @NamedQuery(name = "Parametros.productTypes", query = "SELECT p FROM Parametros p WHERE p.parametro = 'PRODUCT_TYPE' AND p.eliminado=0")
+    @NamedQuery(name = "Parametros.productTypes", query = "SELECT p FROM Parametros p WHERE p.parametro = 'PRODUCT_TYPE' AND p.eliminado=0"),
+    @NamedQuery(name = "Parametros.accountPositions", query = "SELECT p FROM Parametros p WHERE p.parametro = 'ACCOUNTS_POSITION' AND p.eliminado=0")
 })
 public class Parametros implements Serializable {
 
