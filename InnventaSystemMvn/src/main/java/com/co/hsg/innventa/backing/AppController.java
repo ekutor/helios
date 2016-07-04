@@ -49,6 +49,13 @@ public class AppController extends AbstractController<Usuarios> {
         }
         return null;
     }
+    
+     public Personas getActualUser() {
+        if (getUser() != null) {
+            return  getUser().getPersona();
+        }
+        return null;
+    }
      
     public String login() {
         Usuarios user = ejbFacade.find(username);

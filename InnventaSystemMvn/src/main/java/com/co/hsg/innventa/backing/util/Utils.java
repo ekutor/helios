@@ -39,7 +39,7 @@ public class Utils {
 
     public static String getFormattedDate(Date fechaRemision) {
        try{
-           SimpleDateFormat sdf = new SimpleDateFormat("dd / MMM / YYYY");
+           SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-YYYY");
        
         return sdf.format(fechaRemision);
        }catch(Exception e ){

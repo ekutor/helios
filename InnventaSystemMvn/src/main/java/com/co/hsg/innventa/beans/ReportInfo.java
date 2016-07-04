@@ -18,6 +18,9 @@ public class ReportInfo {
     private String vendedor;
     private String contacto;
     private String numOrden;
+    private String tercero;
+    private String despachador;
+    private String cantTotal;
     
 
     public Integer getCantidad() {
@@ -114,6 +117,30 @@ public class ReportInfo {
 
     public void setNumOrden(String numOrden) {
         this.numOrden = numOrden;
+    }
+
+    public String getTercero() {
+        return tercero;
+    }
+
+    public void setTercero(String tercero) {
+        this.tercero = tercero;
+    }
+
+    public String getDespachador() {
+        return despachador;
+    }
+
+    public void setDespachador(String despachador) {
+        this.despachador = despachador;
+    }
+
+    public String getCantTotal() {
+        return cantTotal;
+    }
+
+    public void setCantTotal(String cantTotal) {
+        this.cantTotal = cantTotal;
     }
     
 }

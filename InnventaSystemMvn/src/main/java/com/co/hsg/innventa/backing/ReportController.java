@@ -1,20 +1,24 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.Utils;
+import com.co.hsg.innventa.beans.Personas;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.ReportInfo;
 import java.io.BufferedOutputStream;
-import java.io.File;
+
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletContext;
+
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -29,7 +33,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @Named(value = "reportController")
 @ViewScoped
 public class ReportController implements Serializable{
-
+    
     public void print(Remisiones selected) throws JRException {
         try {
             JasperPrint jasperPrint;
@@ -37,14 +41,14 @@ public class ReportController implements Serializable{
             
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
-            
-            String relativeWebPath = "/resources/formats/RemissionFormat.jasper" ;
-                ServletContext servletContext = (ServletContext) ec.getContext();
-                String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
-                File file = new File(".");
-                String f = file.getAbsolutePath();
+            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("/formats/RemissionFormat.jasper");
+            Map<String, Object> params = new HashMap<>();
+            String  pathLogo = Thread.currentThread().getContextClassLoader().getResource("/formats/logo.jpg").getFile();
+     
+            params.put("LOGO", pathLogo);
+           
             JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(info);
-            jasperPrint = JasperFillManager.fillReport("C:\\GitRepos\\helios\\InnventaSystemMvn\\src\\main\\resources\\formats\\RemissionFormat.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(is, params, beanCollectionDataSource);
             
             
             HttpServletResponse response = (HttpServletResponse) ec.getResponse();
@@ -72,11 +76,25 @@ public class ReportController implements Serializable{
                 ri.setNombre(rem.getIdProducto().getNombre());
                 
                 ri.setNombreCliente(selected.getIdPedido().getIdCliente().getNombre());
+                ri.setDirCliente(selected.getIdPedido().getIdCliente().getDireccionPpal());
+                ri.setTelCliente(selected.getIdPedido().getIdCliente().getTelefonoPpal());
+                try{
+                    Personas contact = selected.getIdPedido().getIdCliente().getPersona().get(0).getPersona();
+                    String pre = ("F".equals(contact.getSexo()))?"Sra. ":"Sr.  ";
+                    ri.setContacto(pre + contact.getNombre1()+" "+contact.getApellido1());
+                    ri.setDespachador(selected.getCreadoPor().getNombre1()+" "+selected.getCreadoPor().getApellido1());
+                    
+                }catch(Exception e){
+                    
+                }
+                ri.setCantTotal(ri.getCantTotal());
                 ri.setNitCliente("Nit: "+selected.getIdPedido().getIdCliente().getId());
                 ri.setNumOrden(selected.getIdPedido().getReferencia());
                 ri.setFechaEntrega(Utils.getFormattedDate(selected.getFechaRemision()));
                 ri.setReferencia(selected.getReferencia());
                 ri.setObservaciones(selected.getObservaciones());
+               
+                
                 list.add(ri);
             }
         }

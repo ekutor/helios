@@ -73,11 +73,11 @@ public class Remisiones implements Serializable {
     @Size(max = 36)
     @Column(name = "entregado_a")
     private String entregadoA;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "creado_por")
-    private String creadoPor;
+
+    @JoinColumn(name = "creado_por", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Personas creadoPor;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_creacion")
@@ -106,11 +106,11 @@ public class Remisiones implements Serializable {
         this.id = id;
     }
 
-    public Remisiones(String id, Date fechaRemision, int totalProductos, String creadoPor, Date fechaCreacion, short eliminado) {
+    public Remisiones(String id, Date fechaRemision, int totalProductos,Date fechaCreacion, short eliminado) {
         this.id = id;
         this.fechaRemision = fechaRemision;
         this.totalProductos = totalProductos;
-        this.creadoPor = creadoPor;
+ 
         this.fechaCreacion = fechaCreacion;
         this.eliminado = eliminado;
     }
@@ -163,11 +163,11 @@ public class Remisiones implements Serializable {
         this.entregadoA = entregadoA;
     }
 
-    public String getCreadoPor() {
+    public Personas getCreadoPor() {
         return creadoPor;
     }
 
-    public void setCreadoPor(String creadoPor) {
+    public void setCreadoPor(Personas creadoPor) {
         this.creadoPor = creadoPor;
     }
 
