@@ -81,7 +81,7 @@ public class ReportController implements Serializable{
                 try{
                     Personas contact = selected.getIdPedido().getIdCliente().getPersona().get(0).getPersona();
                     String pre = ("F".equals(contact.getSexo()))?"Sra. ":"Sr.  ";
-                    ri.setContacto(pre + contact.getNombre1()+" "+contact.getApellido1());
+                    ri.setContacto(contact.getNombre1()+" "+contact.getApellido1());
                     ri.setDespachador(selected.getCreadoPor().getNombre1()+" "+selected.getCreadoPor().getApellido1());
                      ri.setCantTotal(String.valueOf(selected.getTotalProductos()));
                 }catch(Exception e){

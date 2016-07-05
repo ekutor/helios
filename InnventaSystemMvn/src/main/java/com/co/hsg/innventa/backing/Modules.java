@@ -6,7 +6,7 @@ package com.co.hsg.innventa.backing;
  */
 public enum Modules {
     ORDERS("pedidos", "warning"),PURCHASE_ORDERS("remisiones", "primary"),
-    ACCOUNTS("cuentas","info"), PRODUCTS("productos","success"),
+    ACCOUNTS("clientes","info"), PRODUCTS("productos","success"),
     THIRDS("terceros","danger"),USERS("usuarios","info"),MASTERS("maestros","info"),
     STATES_OC("estadosOC","info"),STATES_RM("estadosRM","info"),
     CATEGORIES_PROD("categoriasProd","info"),CONFIGURATION("configuracion","info"),

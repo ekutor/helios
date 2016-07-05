@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemissionFormatsss" pageWidth="595" pageHeight="842" columnWidth="475" leftMargin="60" rightMargin="60" topMargin="40" bottomMargin="40" uuid="b44f99e3-fd17-45ce-b171-eae2ed08f7f2">
 	<property name="ireport.zoom" value="1.6105100000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="321"/>
+	<property name="ireport.y" value="447"/>
 	<parameter name="LOGO" class="java.lang.String">
 		<defaultValueExpression><![CDATA["C:\\GitRepos\\helios\\InnventaSystemMvn\\src\\main\\resources\\formats\\logo.jpg"]]></defaultValueExpression>
 	</parameter>
@@ -230,9 +230,9 @@
 		<band height="15" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="281" height="15" uuid="e062e0fc-cd19-49ed-90cb-19466eaea773"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="VerdanaNormal"/>
-					<paragraph leftIndent="10"/>
+					<paragraph leftIndent="10" rightIndent="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
@@ -250,7 +250,7 @@
 			</rectangle>
 			<textField>
 				<reportElement x="281" y="0" width="194" height="15" uuid="c72c1325-0fe7-44fc-bc9b-dcd1a4f9b44d"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="VerdanaNormal"/>
 					<paragraph leftIndent="10" rightIndent="10"/>
 				</textElement>
@@ -332,7 +332,7 @@
 			</elementGroup>
 			<textField>
 				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="281" y="46" width="194" height="21" isPrintWhenDetailOverflows="true" uuid="3e23f70f-9cd1-4075-8074-7085d8adb2fb"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="VerdanaNegrilla"/>
 					<paragraph leftIndent="10" rightIndent="10"/>
 				</textElement>

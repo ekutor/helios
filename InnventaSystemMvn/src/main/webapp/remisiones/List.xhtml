@@ -29,7 +29,7 @@
                          selection="#{remisionesController.selected}"
                          tableStyleClass="table table-striped">
 
-                <p:ajax event="rowSelect"   update=":dataDetailListForm,@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
+                <p:ajax event="rowSelect"   update=":dataDetailListForm,@form:createButton,@form:createReportButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('RemisionesListForm:viewButton').click();"/>
@@ -99,7 +99,7 @@
             </p:dataTable>
 
             <p:commandButton id="createButton" rendered="false" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
-            <p:commandButton id="createReportButton" ajax="false" icon="ui-icon-document" value="Generar Documento" action="#{reportController.print(remisionesController.selected)}" update=":growl, :RemisionesListForm">
+            <p:commandButton id="createReportButton" disabled="#{empty remisionesController.selected.idPedido}" ajax="false" icon="ui-icon-document" value="Generar Documento" action="#{reportController.print(remisionesController.selected)}" update=":growl, :RemisionesListForm">
                   
             </p:commandButton>
         
