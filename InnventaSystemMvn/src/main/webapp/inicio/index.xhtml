@@ -16,22 +16,46 @@
 
 
                 <p:panel id="remisiones" styleClass="borderStyle"  header="Remisiones">
-                    <h:outputText value="Remisiones" />
+                    <i class="fa fa-truck"></i>
+                    <p:commandLink id="btnRemisiones"
+                               update="contentPanel labelModule"
+                               value="Remisiones" 
+                               actionListener="#{navigation.purchaseOrders}">
+                    </p:commandLink>
                 </p:panel>
 
                 <p:panel id="pedidos" styleClass="borderStyle" header="Ordenes de Compra">
-                    &nbsp; &nbsp;<i class="fa fa-#{navigation.icon}"></i>  <h:outputText value="Pedidos" />
+                    <i class="fa fa-clipboard"></i>  
+                    <p:commandLink id="mnuRemisiones"
+                               update="contentPanel labelModule"
+                               value="O. Compra" 
+                               actionListener="#{navigation.orders}">
+                    </p:commandLink>
                 </p:panel>
      
                  <p:panel id="cuentas" styleClass="borderStyle"  header="Cuentas">
-                    <h:outputText value="Cuentas" />
+                      <i class="fa fa-users"></i>  
+                    <p:commandLink id="mnuClientes"
+                               update="contentPanel labelModule"
+                               value="Cuentas" 
+                               actionListener="#{navigation.accounts}">
+                    </p:commandLink>
                 </p:panel>
                  <p:panel id="productos" styleClass="borderStyle"  header="Productos">
-                    <h:outputText value="Productos" />
-                    
+                     <i class="fa fa-shopping-cart"></i> 
+                   <p:commandLink id="mnuProductos"
+                               update="contentPanel labelModule"
+                               value="Productos" 
+                               actionListener="#{navigation.products}">
+                    </p:commandLink>
                 </p:panel>
                  <p:panel id="terceros" styleClass="borderStyle"  header="Terceros">
-                    <h:outputText value="Terceros" />
+                      <i class="fa fa-cubes"></i> 
+                    <p:commandLink id="mnuTerceros"
+                               update="contentPanel labelModule"
+                               value="Terceros" 
+                               actionListener="#{navigation.thirds}">
+                    </p:commandLink>
                 </p:panel>
                 
 

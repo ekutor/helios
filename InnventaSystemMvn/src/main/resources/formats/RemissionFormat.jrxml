@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemissionFormatsss" pageWidth="595" pageHeight="842" columnWidth="475" leftMargin="60" rightMargin="60" topMargin="40" bottomMargin="40" uuid="b44f99e3-fd17-45ce-b171-eae2ed08f7f2">
 	<property name="ireport.zoom" value="1.6105100000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="321"/>
 	<parameter name="LOGO" class="java.lang.String">
 		<defaultValueExpression><![CDATA["C:\\GitRepos\\helios\\InnventaSystemMvn\\src\\main\\resources\\formats\\logo.jpg"]]></defaultValueExpression>
 	</parameter>
@@ -276,19 +276,19 @@
 			</textField>
 			<elementGroup>
 				<rectangle>
-					<reportElement mode="Transparent" x="0" y="93" width="219" height="49" uuid="d937b82b-6d74-48bb-bb50-6262accb8959"/>
+					<reportElement mode="Transparent" x="0" y="93" width="219" height="37" uuid="d937b82b-6d74-48bb-bb50-6262accb8959"/>
 					<graphicElement>
 						<pen lineWidth="1.0"/>
 					</graphicElement>
 				</rectangle>
 				<rectangle>
-					<reportElement mode="Transparent" x="219" y="93" width="256" height="49" uuid="5dc4533c-5827-4a86-8320-c7bc1ed638ee"/>
+					<reportElement mode="Transparent" x="219" y="93" width="256" height="37" uuid="5dc4533c-5827-4a86-8320-c7bc1ed638ee"/>
 					<graphicElement>
 						<pen lineWidth="1.0"/>
 					</graphicElement>
 				</rectangle>
 				<textField isBlankWhenNull="true">
-					<reportElement mode="Transparent" x="219" y="93" width="256" height="49" uuid="78493a73-e260-45ae-947b-883603dfa013"/>
+					<reportElement mode="Transparent" x="219" y="93" width="256" height="37" uuid="78493a73-e260-45ae-947b-883603dfa013"/>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="10" rightIndent="10"/>
@@ -322,7 +322,7 @@
 					<text><![CDATA[RECIBIDO POR]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="0" y="93" width="219" height="49" uuid="59503163-f38e-49f1-93d5-133ddfac2d16"/>
+					<reportElement x="0" y="93" width="219" height="37" uuid="59503163-f38e-49f1-93d5-133ddfac2d16"/>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="10"/>
@@ -361,7 +361,7 @@
 			<textField>
 				<reportElement x="0" y="4" width="475" height="10" uuid="07f231b2-a21c-40c5-9bca-b33ca056f66a"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font fontName="VerdanaNormal" size="8"/>
+					<font fontName="VerdanaNegrilla" size="8"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Mettagrup S.A.S."]]></textFieldExpression>
@@ -369,7 +369,7 @@
 			<textField>
 				<reportElement x="0" y="14" width="475" height="10" uuid="2b4e907d-64bb-4886-b1ad-34df66150003"/>
 				<textElement textAlignment="Center">
-					<font fontName="VerdanaNormal" size="8"/>
+					<font fontName="VerdanaCursiva" size="8"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["CR 49 # 63a -44"]]></textFieldExpression>
@@ -377,7 +377,7 @@
 			<textField>
 				<reportElement x="0" y="24" width="475" height="10" uuid="2eec7616-2491-4306-8bec-db0a7b763665"/>
 				<textElement textAlignment="Center">
-					<font fontName="VerdanaNormal" size="7"/>
+					<font fontName="VerdanaCursiva" size="7"/>
 					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Tel: 444 52 57 - 310 403 56 92"]]></textFieldExpression>

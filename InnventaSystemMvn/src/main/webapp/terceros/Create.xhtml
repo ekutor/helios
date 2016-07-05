@@ -8,41 +8,28 @@
 
     <ui:composition>
 
-        <p:dialog id="TercerosCreateDlg" widgetVar="TercerosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{innventa.CreateTercerosTitle}" closeOnEscape="true">
+        <p:dialog id="TercerosCreateDlg" widgetVar="TercerosCreateDialog" 
+                  modal="true" 
+                  resizable="false" 
+                  appendTo="@(parent)" 
+                  header="#{innventa.CreateTercerosTitle}" 
+                  closeOnEscape="true">
 
             <h:form id="TercerosCreateForm">
 
                 <h:panelGroup id="display" rendered="#{tercerosController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
 
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_id}" for="id" />
+                        <p:outputLabel value="Nombre Empresa" for="nombre" />
                         <h:panelGroup>
-                            <p:inputText id="id" value="#{tercerosController.selected.id}" title="#{innventa.CreateTercerosTitle_id}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_id}" size="36" maxlength="36"/>
-                            <p:tooltip for="id" value="#{tercerosController.getComponentMessages('id', innventa.CreateTercerosHelpText_id)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_nombre}" for="nombre" />
-                        <h:panelGroup>
-                            <p:inputText id="nombre" value="#{tercerosController.selected.nombre}" title="#{innventa.CreateTercerosTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_nombre}" size="80" maxlength="80"/>
+                            <p:inputText id="nombre" value="#{tercerosController.selected.nombre}" title="#{innventa.CreateTercerosTitle_nombre}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_nombre}" size="40" maxlength="80"/>
                             <p:tooltip for="nombre" value="#{tercerosController.getComponentMessages('nombre', innventa.CreateTercerosHelpText_nombre)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_observaciones}" for="observaciones" />
-                        <h:panelGroup>
-                            <p:inputTextarea rows="4" cols="30" id="observaciones" value="#{tercerosController.selected.observaciones}" title="#{innventa.CreateTercerosTitle_observaciones}" />
-                            <p:tooltip for="observaciones" value="#{tercerosController.getComponentMessages('observaciones', innventa.CreateTercerosHelpText_observaciones)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreateTercerosLabel_direccion}" for="direccion" />
                         <h:panelGroup>
-                            <p:inputText id="direccion" value="#{tercerosController.selected.direccion}" title="#{innventa.CreateTercerosTitle_direccion}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_direccion}" size="150" maxlength="150"/>
+                            <p:inputText id="direccion" value="#{tercerosController.selected.direccion}" title="#{innventa.CreateTercerosTitle_direccion}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_direccion}" size="40" maxlength="150"/>
                             <p:tooltip for="direccion" value="#{tercerosController.getComponentMessages('direccion', innventa.CreateTercerosHelpText_direccion)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_contacto}" for="contacto" />
-                        <h:panelGroup>
-                            <p:inputText id="contacto" value="#{tercerosController.selected.contacto}" title="#{innventa.CreateTercerosTitle_contacto}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_contacto}" size="36" maxlength="36"/>
-                            <p:tooltip for="contacto" value="#{tercerosController.getComponentMessages('contacto', innventa.CreateTercerosHelpText_contacto)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.CreateTercerosLabel_telefono}" for="telefono" />
@@ -50,38 +37,109 @@
                             <p:inputText id="telefono" value="#{tercerosController.selected.telefono}" title="#{innventa.CreateTercerosTitle_telefono}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_telefono}" size="20" maxlength="20"/>
                             <p:tooltip for="telefono" value="#{tercerosController.getComponentMessages('telefono', innventa.CreateTercerosHelpText_telefono)}"/>
                         </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_creadoPor}" for="creadoPor" />
+                        
+                        
+                        <p:outputLabel value="#{innventa.CreateTercerosLabel_observaciones}" for="observaciones" />
                         <h:panelGroup>
-                            <p:inputText id="creadoPor" value="#{tercerosController.selected.creadoPor}" title="#{innventa.CreateTercerosTitle_creadoPor}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_creadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="creadoPor" value="#{tercerosController.getComponentMessages('creadoPor', innventa.CreateTercerosHelpText_creadoPor)}"/>
+                            <p:inputTextarea rows="4" cols="30" id="observaciones" value="#{tercerosController.selected.observaciones}" title="#{innventa.CreateTercerosTitle_observaciones}" />
+                            <p:tooltip for="observaciones" value="#{tercerosController.getComponentMessages('observaciones', innventa.CreateTercerosHelpText_observaciones)}"/>
                         </h:panelGroup>
+                        
+                         <p:outputLabel value="#{innventa.CreatePersonasLabel_id}" for="idPersona" />
+                                <h:panelGroup>
+                                    <p:inputText id="idPersona" value="#{personasController.selected.id}" title="#{innventa.CreatePersonasTitle_id}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_id}" size="12" maxlength="36"/>
+                                    <p:tooltip for="idPersona" value="#{personasController.getComponentMessages('id', innventa.CreatePersonasHelpText_id)}"/>
+                                </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_fechaCreacion}" for="fechaCreacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{tercerosController.selected.fechaCreacion}" title="#{innventa.CreateTercerosTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_fechaCreacion}" showOn="button"/>
-                            <p:tooltip for="fechaCreacion" value="#{tercerosController.getComponentMessages('fechaCreacion', innventa.CreateTercerosHelpText_fechaCreacion)}"/>
-                        </h:panelGroup>
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_tipoDocumento}" for="tipoDocumento" />                               
+                                 <h:panelGroup>
+                                    <p:selectOneMenu id="tipoDocumento" value="#{personasController.selected.tipoDocumento}" 
+                                                     required="true" 
+                                                     requiredMessage="#{innventa.CreatePersonasRequiredMessage_tipoDocumento}"
+                                                      >
+                                        <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                        <f:selectItems value='#{parametrosController.chargeListObject("PARAMS", "IDENTIFICATION")}'
+                                                       var="params"
+                                                       itemValue="#{params.id}"
+                                                       itemLabel="#{params.clave1}"
+                                                       />
 
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_modificadoPor}" for="modificadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="modificadoPor" value="#{tercerosController.selected.modificadoPor}" title="#{innventa.CreateTercerosTitle_modificadoPor}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_modificadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="modificadoPor" value="#{tercerosController.getComponentMessages('modificadoPor', innventa.CreateTercerosHelpText_modificadoPor)}"/>
-                        </h:panelGroup>
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="tipoDocumento" value="#{personasController.getComponentMessages('tipoDocumento', innventa.CreatePersonasHelpText_tipoDocumento)}"/>
+                                </h:panelGroup>
+                                
 
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_fechaModificacion}" for="fechaModificacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{tercerosController.selected.fechaModificacion}" title="#{innventa.CreateTercerosTitle_fechaModificacion}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_fechaModificacion}" showOn="button"/>
-                            <p:tooltip for="fechaModificacion" value="#{tercerosController.getComponentMessages('fechaModificacion', innventa.CreateTercerosHelpText_fechaModificacion)}"/>
-                        </h:panelGroup>
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_nombre1}" for="nombre1" />
+                                <h:panelGroup>
+                                    <p:inputText id="nombre1" value="#{personasController.selected.nombre1}" title="#{innventa.CreatePersonasTitle_nombre1}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_nombre1}" size="40" maxlength="80"/>
+                                    <p:tooltip for="nombre1" value="#{personasController.getComponentMessages('nombre1', innventa.CreatePersonasHelpText_nombre1)}"/>
+                                </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.CreateTercerosLabel_eliminado}" for="eliminado" />
-                        <h:panelGroup>
-                            <p:inputText id="eliminado" value="#{tercerosController.selected.eliminado}" title="#{innventa.CreateTercerosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateTercerosRequiredMessage_eliminado}"/>
-                            <p:tooltip for="eliminado" value="#{tercerosController.getComponentMessages('eliminado', innventa.CreateTercerosHelpText_eliminado)}"/>
-                        </h:panelGroup>
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{tercerosController.saveNew}" value="#{innventa.Save}" update="display,:TercerosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TercerosCreateDialog'));">
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_nombre2}" for="nombre2" />
+                                <h:panelGroup>
+                                    <p:inputText id="nombre2" value="#{personasController.selected.nombre2}" title="#{innventa.CreatePersonasTitle_nombre2}" size="40" maxlength="80"/>
+                                    <p:tooltip for="nombre2" value="#{personasController.getComponentMessages('nombre2', innventa.CreatePersonasHelpText_nombre2)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_apellido1}" for="apellido1" />
+                                <h:panelGroup>
+                                    <p:inputText id="apellido1" value="#{personasController.selected.apellido1}" title="#{innventa.CreatePersonasTitle_apellido1}" required="true" requiredMessage="#{innventa.CreatePersonasRequiredMessage_apellido1}" size="40" maxlength="80"/>
+                                    <p:tooltip for="apellido1" value="#{personasController.getComponentMessages('apellido1', innventa.CreatePersonasHelpText_apellido1)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_apellido2}" for="apellido2" />
+                                <h:panelGroup>
+                                    <p:inputText id="apellido2" value="#{personasController.selected.apellido2}" title="#{innventa.CreatePersonasTitle_apellido2}" size="40" maxlength="80"/>
+                                    <p:tooltip for="apellido2" value="#{personasController.getComponentMessages('apellido2', innventa.CreatePersonasHelpText_apellido2)}"/>
+                                </h:panelGroup>
+
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_sexo}" for="sexo" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="sexo" value="#{personasController.selected.sexo}" 
+                                                     required="true" 
+                                                     requiredMessage="#{innventa.CreatePersonasRequiredMessage_sexo}"
+                                                     >
+                                        <f:selectItem itemLabel="#{innventa.SelectOneMessage}" itemValue="" noSelectionOption="true"/>
+
+                                        <f:selectItem itemLabel="FEMENINO" itemValue="M" />
+                                        <f:selectItem itemLabel="MASCULINO" itemValue="F" />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="sexo" value="#{cuentasController.getComponentMessages('estado', innventa.CreateCuentasHelpText_estado)}"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.CreatePersonasLabel_fechaNacim}" for="fechaNacim" />
+                                <h:panelGroup>                                
+                                    <p:calendar id="fechaNacim" pattern="dd/MM/yyyy" 
+                                                value="#{personasController.selected.fechaNacim}" 
+                                                title="#{innventa.CreatePersonasTitle_fechaNacim}" 
+                                                required="false" 
+                                                requiredMessage="#{innventa.CreatePedidosRequiredMessage_fechaPedido}">
+                                        <span class="glyphicon glyphicon-calendar"></span>         
+                                    </p:calendar>
+                                    <p:tooltip for="fechaNacim" value="#{personasController.getComponentMessages('fechaNacim', innventa.CreatePersonasHelpText_fechaNacim)}"/>
+                                </h:panelGroup>
+                                
+                                                             
+                                <p:outputLabel value="Cargo" for="cargo" />
+                                <h:panelGroup>
+                                    <p:selectOneMenu id="cargo" value="#{cuentasController.selectedPosition}" 
+                                                     required="true" 
+                                                     requiredMessage="El cargo es requerido"
+                                                      >
+                                        <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                        <f:selectItems value='#{parametrosController.chargeListObject("PARAMS", "ACCOUNTS_POSITION")}'
+                                                       var="params"
+                                                       itemValue="#{params.id}"
+                                                       itemLabel="#{params.clave1}"
+                                                       />
+
+                                    </p:selectOneMenu>
+                                    <p:tooltip for="cargo" value="Seleccione el cargo de la persona"/>
+                                </h:panelGroup>
+            </p:panelGrid>
+                        <p:commandButton actionListener="#{tercerosController.saveNew}" value="#{innventa.Save}" update="display,:TercerosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TercerosCreateDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
 

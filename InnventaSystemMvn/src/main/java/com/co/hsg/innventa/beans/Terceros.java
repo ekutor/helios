@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -11,6 +6,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "terceros")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Terceros.findAll", query = "SELECT t FROM Terceros t"),
+    @NamedQuery(name = "Terceros.findAll", query = "SELECT t FROM Terceros t WHERE t.eliminado=0"),
     @NamedQuery(name = "Terceros.findById", query = "SELECT t FROM Terceros t WHERE t.id = :id"),
     @NamedQuery(name = "Terceros.findByNombre", query = "SELECT t FROM Terceros t WHERE t.nombre = :nombre"),
     @NamedQuery(name = "Terceros.findByObservaciones", query = "SELECT t FROM Terceros t WHERE t.observaciones = :observaciones"),
@@ -39,7 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Terceros.findByFechaCreacion", query = "SELECT t FROM Terceros t WHERE t.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "Terceros.findByModificadoPor", query = "SELECT t FROM Terceros t WHERE t.modificadoPor = :modificadoPor"),
     @NamedQuery(name = "Terceros.findByFechaModificacion", query = "SELECT t FROM Terceros t WHERE t.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "Terceros.findByEliminado", query = "SELECT t FROM Terceros t WHERE t.eliminado = :eliminado")})
+    @NamedQuery(name = "Terceros.findByEliminado", query = "SELECT t FROM Terceros t WHERE t.eliminado = :eliminado"),
+    @NamedQuery(name = "Terceros.delete", query = "UPDATE Terceros t SET t.eliminado = 1 WHERE t.id =:id")
+})
 public class Terceros implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,11 +61,11 @@ public class Terceros implements Serializable {
     @Size(min = 1, max = 150)
     @Column(name = "direccion")
     private String direccion;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "contacto")
-    private String contacto;
+    
+    @JoinColumn(name = "contacto", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Personas contacto;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -104,11 +103,11 @@ public class Terceros implements Serializable {
         this.id = id;
     }
 
-    public Terceros(String id, String nombre, String direccion, String contacto, String telefono, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion, short eliminado) {
+    public Terceros(String id, String nombre, String direccion,String telefono, String creadoPor, Date fechaCreacion, String modificadoPor, Date fechaModificacion, short eliminado) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.contacto = contacto;
+ 
         this.telefono = telefono;
         this.creadoPor = creadoPor;
         this.fechaCreacion = fechaCreacion;
@@ -130,6 +129,9 @@ public class Terceros implements Serializable {
     }
 
     public void setNombre(String nombre) {
+        if(nombre != null){
+            nombre = nombre.toUpperCase();
+        }
         this.nombre = nombre;
     }
 
@@ -146,14 +148,17 @@ public class Terceros implements Serializable {
     }
 
     public void setDireccion(String direccion) {
+        if(direccion != null){
+            direccion = direccion.toUpperCase();
+        }
         this.direccion = direccion;
     }
 
-    public String getContacto() {
+    public Personas getContacto() {
         return contacto;
     }
 
-    public void setContacto(String contacto) {
+    public void setContacto(Personas contacto) {
         this.contacto = contacto;
     }
 

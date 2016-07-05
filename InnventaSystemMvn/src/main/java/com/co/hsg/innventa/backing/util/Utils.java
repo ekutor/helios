@@ -2,6 +2,7 @@ package com.co.hsg.innventa.backing.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -39,7 +40,7 @@ public class Utils {
 
     public static String getFormattedDate(Date fechaRemision) {
        try{
-           SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-YYYY");
+           SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-YYYY", new Locale("es","ES"));
        
         return sdf.format(fechaRemision);
        }catch(Exception e ){

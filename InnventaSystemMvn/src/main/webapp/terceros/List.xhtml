@@ -8,7 +8,7 @@
 
     <h:form id="TercerosListForm">
 
-        <div class="panel panel-#{navigation.moduleType}">
+        <div class='panel panel-#{navigation.moduleType("TERCEROS")}'>
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="TercerosDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('TercerosListForm:createButton').click();" icon="ui-icon-plus"/>
@@ -16,6 +16,7 @@
                 <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('TercerosListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('TercerosListForm:deleteButton').click();" icon="ui-icon-trash"/>
             </p:contextMenu>
+             <p:messages  id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable id="datalist"
                          value="#{tercerosController.items}"
                          var="item"
@@ -32,29 +33,13 @@
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('TercerosListForm:viewButton').click();"/>
 
-                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListTercerosTitle_id}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
-                </p:column>
-
-
+      
                 <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
                     <f:facet name="header">
-                        <h:outputText value="#{innventa.ListTercerosTitle_nombre}"/>
+                        <h:outputText value="Empresa"/>
                     </f:facet>
                     <h:outputText value="#{item.nombre}"/>
                 </p:column>
-
-
-                <p:column sortBy="#{item.observaciones}" filterBy="#{item.observaciones}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListTercerosTitle_observaciones}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.observaciones}"/>
-                </p:column>
-
 
                 <p:column sortBy="#{item.direccion}" filterBy="#{item.direccion}">
                     <f:facet name="header">
@@ -68,7 +53,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListTercerosTitle_contacto}"/>
                     </f:facet>
-                    <h:outputText value="#{item.contacto}"/>
+                    <h:outputText value="#{item.contacto.nombre1} #{item.contacto.apellido1}"/>
                 </p:column>
 
 
@@ -78,58 +63,20 @@
                     </f:facet>
                     <h:outputText value="#{item.telefono}"/>
                 </p:column>
-
-
-                <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+              
+                <p:column sortBy="#{item.observaciones}" filterBy="#{item.observaciones}">
                     <f:facet name="header">
-                        <h:outputText value="#{innventa.ListTercerosTitle_creadoPor}"/>
+                        <h:outputText value="#{innventa.ListTercerosTitle_observaciones}"/>
                     </f:facet>
-                    <h:outputText value="#{item.creadoPor}"/>
+                    <h:outputText value="#{item.observaciones}"/>
                 </p:column>
-
-                <!--
-                                    <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListTercerosTitle_fechaCreacion}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaCreacion}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </h:outputText>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListTercerosTitle_modificadoPor}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.modificadoPor}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListTercerosTitle_fechaModificacion}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaModificacion}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </h:outputText>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListTercerosTitle_eliminado}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.eliminado}"/>
-                                    </p:column>
-                -->
 
             </p:dataTable>
 
             <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{tercerosController.prepareCreate}" update=":TercerosCreateForm" oncomplete="PF('TercerosCreateDialog').show()"/>
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":TercerosViewForm" oncomplete="PF('TercerosViewDialog').show()" disabled="#{empty tercerosController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":TercerosEditForm" oncomplete="PF('TercerosEditDialog').show()" disabled="#{empty tercerosController.selected}"/>
-            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{tercerosController.delete}" update=":growl,datalist" disabled="#{empty tercerosController.selected}">
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{tercerosController.delete(tercerosController.selected.id)}" update=":growl,datalist" disabled="#{empty tercerosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 
