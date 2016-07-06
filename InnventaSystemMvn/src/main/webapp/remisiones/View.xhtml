@@ -14,11 +14,11 @@
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="column" rendered="#{remisionesController.selected != null}">
-
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_id}"/>
-                        <h:outputText value="#{remisionesController.selected.id}" title="#{innventa.ViewRemisionesTitle_id}"/>
-
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_fechaRemision}"/>
+                        
+                        <h:outputText value="Orden de Compra"/>
+                        <h:outputText value="#{remisionesController.selected.idPedido.referencia}"/>
+                        
+                          <h:outputText value="#{innventa.ViewRemisionesLabel_fechaRemision}"/>
                         <h:outputText value="#{remisionesController.selected.fechaRemision}" title="#{innventa.ViewRemisionesTitle_fechaRemision}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
@@ -29,33 +29,12 @@
                         <h:outputText value="#{innventa.ViewRemisionesLabel_totalProductos}"/>
                         <h:outputText value="#{remisionesController.selected.totalProductos}" title="#{innventa.ViewRemisionesTitle_totalProductos}"/>
 
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_estado}"/>
-                        <h:outputText value="#{remisionesController.selected.estado}" title="#{innventa.ViewRemisionesTitle_estado}"/>
-
+                   
                         <h:outputText value="#{innventa.ViewRemisionesLabel_entregadoA}"/>
                         <h:outputText value="#{remisionesController.selected.entregadoA}" title="#{innventa.ViewRemisionesTitle_entregadoA}"/>
 
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_creadoPor}"/>
-                        <h:outputText value="#{remisionesController.selected.creadoPor}" title="#{innventa.ViewRemisionesTitle_creadoPor}"/>
-
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_fechaCreacion}"/>
-                        <h:outputText value="#{remisionesController.selected.fechaCreacion}" title="#{innventa.ViewRemisionesTitle_fechaCreacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_modificadoPor}"/>
-                        <h:outputText value="#{remisionesController.selected.modificadoPor}" title="#{innventa.ViewRemisionesTitle_modificadoPor}"/>
-
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_fechaModificacion}"/>
-                        <h:outputText value="#{remisionesController.selected.fechaModificacion}" title="#{innventa.ViewRemisionesTitle_fechaModificacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_eliminado}"/>
-                        <h:outputText value="#{remisionesController.selected.eliminado}" title="#{innventa.ViewRemisionesTitle_eliminado}"/>
-
-                        <h:outputText value="#{innventa.ViewRemisionesLabel_idPedido}"/>
-                        <h:outputText value="#{remisionesController.selected.idPedido.descripcion}"/>
+                 
+                        
                     </p:panelGrid>
                     <p:commandButton value="#{innventa.Close}" onclick="PF('RemisionesViewDialog').hide()"/>
                 </h:panelGroup>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemissionFormatsss" pageWidth="595" pageHeight="842" columnWidth="475" leftMargin="60" rightMargin="60" topMargin="40" bottomMargin="40" uuid="b44f99e3-fd17-45ce-b171-eae2ed08f7f2">
 	<property name="ireport.zoom" value="1.6105100000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="447"/>
+	<property name="ireport.y" value="63"/>
 	<parameter name="LOGO" class="java.lang.String">
 		<defaultValueExpression><![CDATA["C:\\GitRepos\\helios\\InnventaSystemMvn\\src\\main\\resources\\formats\\logo.jpg"]]></defaultValueExpression>
 	</parameter>
@@ -56,124 +56,121 @@
 			</image>
 			<elementGroup>
 				<rectangle>
-					<reportElement mode="Transparent" x="0" y="143" width="219" height="51" uuid="bf6094ad-d128-4cc4-ac95-fa2883d75aee"/>
+					<reportElement mode="Transparent" x="219" y="140" width="256" height="60" uuid="1f6c8a4b-70ba-4908-a8fb-a69930f92d29"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="140" width="219" height="60" uuid="bf6094ad-d128-4cc4-ac95-fa2883d75aee"/>
 					<graphicElement>
 						<pen lineWidth="1.5"/>
 					</graphicElement>
 				</rectangle>
 				<textField>
-					<reportElement x="0" y="143" width="219" height="13" uuid="7e30ed65-a0bb-43bf-9b1b-bf495a5f867f"/>
-					<textElement>
+					<reportElement x="0" y="140" width="219" height="15" uuid="7e30ed65-a0bb-43bf-9b1b-bf495a5f867f"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNegrilla"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Señor:"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="219" y="169" width="116" height="13" uuid="740f2f0d-6ebb-4045-8b2d-9d030c09415b"/>
-					<textElement>
+					<reportElement x="219" y="170" width="116" height="15" uuid="740f2f0d-6ebb-4045-8b2d-9d030c09415b"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNegrilla"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Numero Orden"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="219" y="182" width="116" height="13" uuid="b27d363b-9a45-4b51-8dff-2d21816ee69a"/>
-					<textElement>
+					<reportElement x="219" y="185" width="116" height="15" uuid="b27d363b-9a45-4b51-8dff-2d21816ee69a"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNegrilla"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Contacto"]]></textFieldExpression>
 				</textField>
 				<rectangle>
-					<reportElement mode="Transparent" x="219" y="169" width="256" height="13" uuid="9715b586-804c-4423-aa4d-c4afb3016e3b"/>
+					<reportElement mode="Transparent" x="219" y="170" width="256" height="15" uuid="9715b586-804c-4423-aa4d-c4afb3016e3b"/>
 				</rectangle>
 				<textField isBlankWhenNull="true">
-					<reportElement x="0" y="169" width="219" height="13" uuid="5762b9be-dc3c-441d-9837-980b52c5a64d"/>
-					<textElement>
+					<reportElement x="0" y="170" width="219" height="15" uuid="5762b9be-dc3c-441d-9837-980b52c5a64d"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{dirCliente}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="335" y="181" width="140" height="13" uuid="23c0362c-e669-4079-8974-a5de78cd1ee2"/>
-					<textElement>
+					<reportElement x="335" y="185" width="140" height="15" uuid="23c0362c-e669-4079-8974-a5de78cd1ee2"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{contacto}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="335" y="155" width="140" height="13" uuid="3cc5c55e-abf7-49b2-8f15-e5e36191e9ed"/>
-					<textElement>
+					<reportElement x="335" y="155" width="140" height="15" uuid="3cc5c55e-abf7-49b2-8f15-e5e36191e9ed"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="335" y="169" width="140" height="13" uuid="18e73d81-62aa-4fa7-bd6f-d14d33b81e1e"/>
-					<textElement>
+					<reportElement x="335" y="170" width="140" height="15" uuid="18e73d81-62aa-4fa7-bd6f-d14d33b81e1e"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{numOrden}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="335" y="143" width="140" height="13" uuid="be17949d-2705-4147-a153-5abf7c3b08d7"/>
-					<textElement>
+					<reportElement x="335" y="140" width="140" height="15" uuid="be17949d-2705-4147-a153-5abf7c3b08d7"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal" isStrikeThrough="false"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaEntrega}]]></textFieldExpression>
 				</textField>
-				<rectangle>
-					<reportElement mode="Transparent" x="219" y="143" width="256" height="51" uuid="1f6c8a4b-70ba-4908-a8fb-a69930f92d29"/>
-					<graphicElement>
-						<pen lineWidth="1.5"/>
-					</graphicElement>
-				</rectangle>
 				<textField>
-					<reportElement x="219" y="143" width="116" height="13" uuid="d60b7afd-b5c9-4ff5-aab8-e1c994ffe8e4"/>
-					<textElement>
+					<reportElement x="219" y="140" width="116" height="15" uuid="d60b7afd-b5c9-4ff5-aab8-e1c994ffe8e4"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNegrilla"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Fecha Entrega"]]></textFieldExpression>
 				</textField>
-				<rectangle>
-					<reportElement mode="Transparent" x="335" y="143" width="140" height="51" uuid="0392757f-23c1-45d3-a6a4-9ab035c97124"/>
-				</rectangle>
 				<textField>
-					<reportElement x="219" y="156" width="116" height="13" uuid="35a989b6-0033-4bec-b889-da4e975c00c9"/>
-					<textElement>
+					<reportElement x="219" y="155" width="116" height="15" uuid="35a989b6-0033-4bec-b889-da4e975c00c9"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNegrilla"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Vendedor"]]></textFieldExpression>
 				</textField>
 				<rectangle>
-					<reportElement mode="Transparent" x="219" y="156" width="256" height="13" uuid="76f010d8-0467-43e3-91c8-ff100076b192"/>
+					<reportElement mode="Transparent" x="219" y="140" width="256" height="15" uuid="76f010d8-0467-43e3-91c8-ff100076b192"/>
 				</rectangle>
 				<textField>
-					<reportElement x="0" y="156" width="219" height="13" uuid="b129c85b-c357-4f8f-8f43-3658f1a86d11"/>
-					<textElement>
+					<reportElement x="0" y="155" width="219" height="15" uuid="b129c85b-c357-4f8f-8f43-3658f1a86d11"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="0" y="181" width="219" height="13" uuid="695f560f-4ed4-4d14-9ca9-66ced7045192"/>
-					<textElement>
+					<reportElement x="0" y="185" width="219" height="15" uuid="695f560f-4ed4-4d14-9ca9-66ced7045192"/>
+					<textElement verticalAlignment="Bottom">
 						<font fontName="VerdanaNormal"/>
 						<paragraph leftIndent="5"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{telCliente}]]></textFieldExpression>
 				</textField>
 				<rectangle>
-					<reportElement mode="Transparent" x="219" y="143" width="256" height="13" uuid="651807ec-9985-4e38-af83-80abeddc9274"/>
+					<reportElement mode="Transparent" x="219" y="155" width="256" height="15" uuid="651807ec-9985-4e38-af83-80abeddc9274"/>
 				</rectangle>
 			</elementGroup>
 			<elementGroup>
@@ -194,6 +191,9 @@
 					<textFieldExpression><![CDATA["NIT: 900507876-7"]]></textFieldExpression>
 				</textField>
 			</elementGroup>
+			<line>
+				<reportElement x="335" y="140" width="1" height="60" uuid="e07999e7-2192-4f1d-ba19-34cb2b9cd7a3"/>
+			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>

@@ -45,6 +45,20 @@ public class SystemManager implements Serializable {
         }
     }
     
+    public void decreaseSequence(NamedQuerys query){
+        Parametros p = param.chargeItem(query,true);
+        try{
+        int key = Integer.parseInt(p.getClave2());
+        key--;
+        p.setClave2(String.valueOf(key));
+        param.setSelected(p);
+        param.save(query);
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     
     
 

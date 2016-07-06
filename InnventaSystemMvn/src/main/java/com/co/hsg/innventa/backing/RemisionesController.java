@@ -86,10 +86,17 @@ public class RemisionesController extends AbstractController<Remisiones> {
             nav.purchaseOrders();
         }
     }
+    
+    @Override
+    public void delete( String id){
+        systemManager.decreaseSequence(NamedQuerys.REMISSION_PARAM);
+        super.delete(id);
+    }
+    
      private RemisionesProducto getProductFromList(Productos product){
         Remisiones r = this.getSelected();
         for(RemisionesProducto prod : r.getRemisionesProductoList()){
-            if(prod.getIdProducto().equals(product.getId())){
+            if(prod.getIdProducto().equals(product)){
                return prod;
             }
         }
@@ -113,18 +120,43 @@ public class RemisionesController extends AbstractController<Remisiones> {
             rp.setEliminado((short)0);
             rp.setIdProducto(selectedProduct.getIdProducto());
             rp.setIdRemision(this.selected);
+            
+            selectedProduct.setCantidadEntregada(selectedProduct.getCantidad());
             selected.getRemisionesProductoList().add(rp);
+            selected.setTotalProductos(getCantTotal());
         }        
     }
-    public void onRowEdit(RemisionesProducto value){
+    public void onRowEdit(String value){
        try{
         if(selectedProduct != null){
-            int missingQt = selectedProduct.getCantidad() - selectedProduct.getCantidadEntregada();
+            selectedProduct.setCantidadEntregada(Integer.parseInt(value));
+            selected.setTotalProductos(this.getCantTotal());
            
         }
        }catch(Exception e){
            e.printStackTrace();
        }
+    }
+    
+    public int getCantTotal() {
+        
+        int cantTotal = 0;
+        if(selected!= null && !selected.getRemisionesProductoList().isEmpty()){
+            for( RemisionesProducto remProd : selected.getRemisionesProductoList()){
+                cantTotal += remProd.getCantidad();
+            }
+        }
+        return cantTotal;
+    }
+    
+    public void delProduct(ActionEvent ae) {
+      
+        if(selected.getRemisionesProductoList() != null){
+            if(selected.getRemisionesProductoList().contains( selectedProduct )){
+                selected.getRemisionesProductoList().remove(selectedProduct);
+            }
+            
+        }
     }
     
    

@@ -56,6 +56,11 @@ public class PedidosController extends AbstractController<Pedidos> {
         nav.createOrder();
         return obj;
     }
+    @Override
+    public void delete( String id){
+        systemManager.decreaseSequence(NamedQuerys.ORDER_PARAM);
+        super.delete(id);
+    }
     
     public void addProduct(ActionEvent ae, Productos product) {
         Pedidos p = this.getSelected();

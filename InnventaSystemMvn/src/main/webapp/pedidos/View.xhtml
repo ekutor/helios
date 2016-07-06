@@ -15,14 +15,12 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="column" rendered="#{pedidosController.selected != null}">
 
-                        <h:outputText value="#{innventa.ViewPedidosLabel_id}"/>
-                        <h:outputText value="#{pedidosController.selected.id}" title="#{innventa.ViewPedidosTitle_id}"/>
-
+                      
                         <h:outputText value="#{innventa.ViewPedidosLabel_referencia}"/>
                         <h:outputText value="#{pedidosController.selected.referencia}" title="#{innventa.ViewPedidosTitle_referencia}"/>
 
                         <h:outputText value="#{innventa.ViewPedidosLabel_idCliente}"/>
-                        <h:outputText value="#{pedidosController.selected.idCliente}" title="#{innventa.ViewPedidosTitle_idCliente}"/>
+                        <h:outputText value="#{pedidosController.selected.idCliente.nombre}" title="#{innventa.ViewPedidosTitle_idCliente}"/>
 
                         <h:outputText value="#{innventa.ViewPedidosLabel_fechaPedido}"/>
                         <h:outputText value="#{pedidosController.selected.fechaPedido}" title="#{innventa.ViewPedidosTitle_fechaPedido}">
@@ -47,7 +45,7 @@
                         <h:outputText value="#{pedidosController.selected.cantidadPendientes}" title="#{innventa.ViewPedidosTitle_cantidadPendientes}"/>
 
                         <h:outputText value="#{innventa.ViewPedidosLabel_estado}"/>
-                        <h:outputText value="#{pedidosController.selected.estado}" title="#{innventa.ViewPedidosTitle_estado}"/>
+                        <h:outputText value="#{pedidosController.selected.estado.estado}" title="#{innventa.ViewPedidosTitle_estado}"/>
 
                         <h:outputText value="#{innventa.ViewPedidosLabel_creadoPor}"/>
                         <h:outputText value="#{pedidosController.selected.creadoPor}" title="#{innventa.ViewPedidosTitle_creadoPor}"/>
@@ -64,10 +62,7 @@
                         <h:outputText value="#{pedidosController.selected.fechaModificacion}" title="#{innventa.ViewPedidosTitle_fechaModificacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-
-                        <h:outputText value="#{innventa.ViewPedidosLabel_eliminado}"/>
-                        <h:outputText value="#{pedidosController.selected.eliminado}" title="#{innventa.ViewPedidosTitle_eliminado}"/>
-                    </p:panelGrid>
+                     </p:panelGrid>
                     <p:commandButton value="#{innventa.Close}" onclick="PF('PedidosViewDialog').hide()"/>
                 </h:panelGroup>
 

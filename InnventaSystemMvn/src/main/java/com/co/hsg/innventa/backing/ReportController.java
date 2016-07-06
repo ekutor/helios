@@ -83,7 +83,8 @@ public class ReportController implements Serializable{
                     String pre = ("F".equals(contact.getSexo()))?"Sra. ":"Sr.  ";
                     ri.setContacto(contact.getNombre1()+" "+contact.getApellido1());
                     ri.setDespachador(selected.getCreadoPor().getNombre1()+" "+selected.getCreadoPor().getApellido1());
-                     ri.setCantTotal(String.valueOf(selected.getTotalProductos()));
+                    ri.setCantTotal(String.valueOf(selected.getTotalProductos()));
+                    ri.setTercero(selected.getEntregadoA());
                 }catch(Exception e){
                     
                 }
@@ -93,7 +94,7 @@ public class ReportController implements Serializable{
                 ri.setFechaEntrega(Utils.getFormattedDate(selected.getFechaRemision()));
                 ri.setReferencia(selected.getReferencia());
                 ri.setObservaciones(selected.getObservaciones());
-               
+                
                 
                 list.add(ri);
             }

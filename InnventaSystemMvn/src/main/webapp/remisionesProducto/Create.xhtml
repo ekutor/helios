@@ -29,6 +29,12 @@
                             <p:inputText id="cliente" value="#{pedidosController.selected.idCliente.nombre}" disabled="true"/>
                         </h:panelGroup>
                        
+                         <p:outputLabel value="Numero Remision" for="referenciaRem" />
+                         <h:panelGroup>
+                            <h:outputText id="referenciaRem" value="#{remisionesController.selected.referencia}"
+                                         title="Numero Remision" />                                      
+                                 
+                        </h:panelGroup>
                         <p:outputLabel value="#{innventa.CreateRemisionesLabel_fechaRemision}" for="fechaRemision" />
                         <h:panelGroup>
                             <p:calendar id="fechaRemision" pattern="dd/MM/yyyy" 
@@ -48,9 +54,9 @@
                         </h:panelGroup>
                         
                         <p:outputLabel value="#{innventa.CreateRemisionesLabel_totalProductos}" for="totalProductos" />
-                        <h:panelGroup>
-                            <p:inputText id="totalProductos" value="#{remisionesController.selected.totalProductos}" title="#{innventa.CreateRemisionesTitle_totalProductos}" required="true" requiredMessage="#{innventa.CreateRemisionesRequiredMessage_totalProductos}"/>
-                            <p:tooltip for="totalProductos" value="#{remisionesController.getComponentMessages('totalProductos', innventa.CreateRemisionesHelpText_totalProductos)}"/>
+                        <h:panelGroup id="panelCantidadProductos">
+                            <h:outputText id="totalProductos" value="#{remisionesController.selected.totalProductos}" title="#{innventa.CreateRemisionesTitle_totalProductos}" />
+                   
                         </h:panelGroup>
                         
                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_entregadoA}" for="entregadoA" />

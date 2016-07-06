@@ -40,7 +40,7 @@
                 </p:selectOneMenu>
                 <p:column>
                     <p:commandButton id="addProductButton" icon="ui-icon-plus"
-                                     update="   :ProductosListForm"  
+                                     update="   :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos"  
                                      actionListener="#{remisionesController.addProduct(ActionEvent)}" 
                                      />
                     <p:tooltip for="addProductButton" value="Busqueda Avanzada"/>
@@ -91,7 +91,7 @@
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
                         <f:facet name="input">
                             <p:inputText value="#{item.cantidad}" style="width:100%">
-                                <p:ajax listener="#{remisionesController.onRowEdit(item)}" update=":ProductosListForm" />
+                                <p:ajax listener="#{remisionesController.onRowEdit(item.cantidad)}" update=":RemisionesCreateForm:panelCantidadProductos" />
                             </p:inputText>
                         </f:facet>
                     </p:cellEditor>
@@ -102,9 +102,9 @@
 
       
             <p:commandButton id="deleteButton"  icon="ui-icon-trash"  value="#{innventa.Delete}" 
-                             actionListener="#{pedidosController.delProduct(ActionEvent)}" 
-                             update=":ProductosListForm,:growl,datalist" 
-                             disabled="#{empty pedidosController.selectedProduct}"/>
+                             actionListener="#{remisionesController.delProduct(ActionEvent)}" 
+                             update=":ProductosListForm,:growl,datalist, :RemisionesCreateForm:panelCantidadProductos" 
+                             disabled="#{empty remisionesController.selectedProduct}"/>
 
         
 
