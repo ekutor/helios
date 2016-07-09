@@ -108,7 +108,7 @@
             
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":RemisionesViewForm" oncomplete="PF('RemisionesViewDialog').show()" disabled="#{empty remisionesController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":RemisionesEditForm" oncomplete="PF('RemisionesEditDialog').show()" disabled="#{empty remisionesController.selected}"/>
-            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{remisionesController.delete}" update=":growl,datalist" disabled="#{empty remisionesController.selected}">
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{remisionesController.delete(remisionesController.selected.id)}" update=":growl,datalist" disabled="#{empty remisionesController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 

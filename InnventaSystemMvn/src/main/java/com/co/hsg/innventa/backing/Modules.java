@@ -12,7 +12,8 @@ public enum Modules {
     CATEGORIES_PROD("categoriasProd","info","shopping-cart"),CONFIGURATION("configuracion","info","gears"),
     INIT("inicio","primary","cubes"), 
     CREATE_ORDER("pedidosCreate","primary","clipboard"),
-    CREATE_REMISSION("remisionesProducto","primary","truck")
+    CREATE_REMISSION("remisionesProducto","primary","truck"),
+    ACL("aclRolesAccion","info","edit"),
     ;
    
     private String moduleName;

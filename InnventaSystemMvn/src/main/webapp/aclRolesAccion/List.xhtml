@@ -7,7 +7,10 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="AclRolesAccionListForm">
-
+        
+        <div class='panel panel-#{navigation.moduleType("ACL")}'>
+            <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
+            
         <p:panel header="#{innventa.ListAclRolesAccionTitle}">
             <p:contextMenu id="AclRolesAccionDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('AclRolesAccionListForm:createButton').click();" icon="ui-icon-plus"/>
@@ -15,6 +18,7 @@
                 <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('AclRolesAccionListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('AclRolesAccionListForm:deleteButton').click();" icon="ui-icon-trash"/>
             </p:contextMenu>
+             <p:messages  id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:dataTable id="datalist"
                          value="#{aclRolesAccionController.items}"
                          var="item"
@@ -23,7 +27,8 @@
                          rows="30"
                          rowsPerPageTemplate="10,20,30,40,50,100"
                          selectionMode="single"
-                         selection="#{aclRolesAccionController.selected}">
+                         selection="#{aclRolesAccionController.selected}"
+                         tableStyleClass="table table-striped">
 
                 <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesAccionDataTableContextMenu"/>
                 <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesAccionDataTableContextMenu"/>
@@ -72,6 +77,7 @@
             </p:commandButton>
 
         </p:panel>
+      </div>
         <ui:include src="/confirmation.xhtml"/>
     </h:form>
 

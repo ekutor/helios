@@ -48,6 +48,10 @@ public class Navigation implements Serializable {
         actualModule = Modules.INIT;
     }
     
+    public void access() {
+        actualModule = Modules.ACL;
+    }
+    
     public void orders() {
         actualModule = Modules.ORDERS;
     }
