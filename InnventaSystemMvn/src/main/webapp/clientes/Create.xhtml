@@ -136,7 +136,12 @@
                                     <p:inputText id="apellido2" value="#{personasController.selected.apellido2}" title="#{innventa.CreatePersonasTitle_apellido2}" size="80" maxlength="80"/>
                                     <p:tooltip for="apellido2" value="#{personasController.getComponentMessages('apellido2', innventa.CreatePersonasHelpText_apellido2)}"/>
                                 </h:panelGroup>
-
+                                
+                                <p:outputLabel value="e-mail" for="mail" />
+                                <h:panelGroup>
+                                    <p:inputText id="mail" value="#{personasController.selected.mail}" size="80"/>
+                                    <p:tooltip for="mail" value="Correo electronico del contacto"/>
+                                </h:panelGroup>
 
                                 <p:outputLabel value="#{innventa.CreatePersonasLabel_sexo}" for="sexo" />
                                 <h:panelGroup>

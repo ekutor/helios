@@ -26,13 +26,12 @@ public class ParametrosController extends AbstractController<Parametros> {
         super(Parametros.class);
     }
     
-    public void cargarObj(String param) {
+    public void cargarObj(Modules param) {
        
-        System.out.println("parametro : "+param);
         selected = null;
         try{
             switch(param){
-                case "purchaseOrder":
+                case ORDERS:
                     
                     confTitle = "Parametrizacion de Ordenes de Compra";
                     this.confMessage = "Defina el Consecutivo actual de sus Ordenes de Compra, el formato es: OC0001";
@@ -40,7 +39,7 @@ public class ParametrosController extends AbstractController<Parametros> {
                     this.chargeItem(NamedQuerys.ORDER_PARAM, true);
                     
                     break;
-                 case "remissions":
+                 case REMISSIONS:
                      confTitle = "Parametrizacion de Remisiones";
                      this.confMessage = "Defina el Consecutivo actual de sus Remisiones, el formato es: RM0001";
                      this.actualParam = NamedQuerys.REMISSION_PARAM;

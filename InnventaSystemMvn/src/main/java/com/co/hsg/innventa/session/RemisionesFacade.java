@@ -6,6 +6,8 @@ import com.co.hsg.innventa.beans.Personas;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -37,6 +39,7 @@ public class RemisionesFacade extends AbstractFacade<Remisiones> {
     public void edit(Remisiones entity) {
         String id = app.getActualUserId();
         entity.setModificadoPor(id);
+        sortRemission(entity);
         Date d = Calendar.getInstance().getTime();
         entity.setFechaModificacion(d);
         updateTotals(entity);
@@ -46,6 +49,7 @@ public class RemisionesFacade extends AbstractFacade<Remisiones> {
     @Override
     public void create(Remisiones entity) {
         Personas creadoPor = app.getActualUser();
+        sortRemission(entity);
         entity.setId(Utils.generateID());
         entity.setCreadoPor(creadoPor);
         entity.setModificadoPor(creadoPor.getId());
@@ -64,6 +68,21 @@ public class RemisionesFacade extends AbstractFacade<Remisiones> {
                 sum += prods.getCantidad();
             }
             rm.setTotalProductos(sum);
+        }
+    }
+
+    private void sortRemission(Remisiones entity) {
+        try{
+            Collections.sort(entity.getRemisionesProductoList(), new Comparator<RemisionesProducto>() {
+                    @Override
+                    public int compare(RemisionesProducto r1, RemisionesProducto r2)
+                    {
+
+                        return  r1.getIdProducto().getNombre().compareTo(r2.getIdProducto().getNombre());
+                    }
+                });
+        }catch(Exception e){
+            
         }
     }
 }

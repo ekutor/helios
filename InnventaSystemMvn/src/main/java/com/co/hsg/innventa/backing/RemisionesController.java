@@ -83,7 +83,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
         validator.doValidate();
         if(!isValidationFailed()){
             super.saveNew(event);
-            nav.purchaseOrders();
+            nav.remissions();
         }
     }
     

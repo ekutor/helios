@@ -9,7 +9,9 @@
 
     
     <ui:composition id="leftMenu">
-        
+        <h:form id="MenuForm">
+            <p:menu model="#{app.menu}" />
+        </h:form>
         <ul id="listMenu" class="nav nav-tabs nav-stacked">
             <li class="nav-header"><p:outputLabel id="mnuModulos"
                                value="Modulos Activos" 
@@ -18,7 +20,7 @@
             <li><p:commandLink id="mnuProductos"
                                update="contentPanel labelModule"
                                value="Productos" 
-                               actionListener="#{navigation.products}">
+                               actionListener="#{navigation.products()}">
                 </p:commandLink>
             </li>
              <li><p:commandLink id="mnuPedidos" update="contentPanel labelModule" 
@@ -29,7 +31,7 @@
             <li><p:commandLink id="mnuRemisiones"
                                update="contentPanel labelModule"
                                value="Remisiones" 
-                               actionListener="#{navigation.purchaseOrders}">
+                               actionListener="#{navigation.remissions()}">
                 </p:commandLink>
             </li>     
             <li><p:commandLink id="mnuClientes"

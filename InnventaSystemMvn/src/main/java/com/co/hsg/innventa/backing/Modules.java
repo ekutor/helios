@@ -5,22 +5,24 @@ package com.co.hsg.innventa.backing;
  * @author Hector Sanchez Garcia
  */
 public enum Modules {
-    ORDERS("pedidos", "warning"),PURCHASE_ORDERS("remisiones", "primary"),
-    ACCOUNTS("clientes","info"), PRODUCTS("productos","success"),
-    THIRDS("terceros","danger"),USERS("usuarios","info"),MASTERS("maestros","info"),
-    STATES_OC("estadosOC","info"),STATES_RM("estadosRM","info"),
-    CATEGORIES_PROD("categoriasProd","info"),CONFIGURATION("configuracion","info"),
-    INIT("inicio","primary"), 
-    CREATE_ORDER("pedidosCreate","primary"),
-    CREATE_PURCHASE_ORDERS("remisionesProducto","primary")
+    ORDERS("pedidos", "warning","clipboard"),REMISSIONS("remisiones", "primary","truck"),
+    ACCOUNTS("clientes","info","users"), PRODUCTS("productos","success","shopping-cart"),
+    THIRDS("terceros","danger","cubes"),USERS("usuarios","info","users"),MASTERS("maestros","info","edit"),
+    STATES_OC("estadosOC","info","edit"),STATES_RM("estadosRM","info","edit"),
+    CATEGORIES_PROD("categoriasProd","info","shopping-cart"),CONFIGURATION("configuracion","info","gears"),
+    INIT("inicio","primary","cubes"), 
+    CREATE_ORDER("pedidosCreate","primary","clipboard"),
+    CREATE_REMISSION("remisionesProducto","primary","truck")
     ;
    
     private String moduleName;
     private String moduleType;
+    private String icon;
     
-    Modules(String moduleName, String moduleType){
+    Modules(String moduleName, String moduleType, String icon){
         this.moduleName = moduleName;
         this.moduleType = moduleType;
+        this.icon = icon;
     }
 
     public String getModuleName() {
@@ -29,6 +31,10 @@ public enum Modules {
 
     public String getModuleType() {
         return moduleType;
+    }
+
+    public String getIcon() {
+        return icon;
     }
     
     

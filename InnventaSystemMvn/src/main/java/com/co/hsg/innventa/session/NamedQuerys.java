@@ -13,7 +13,8 @@ public enum NamedQuerys {
     CATEGORIES("Categorias.findByModulo",""),
     ACCOUNT_CONTACTS("CuentasContactos.findByCuenta",""),
     ACCOUNTS_POSITIONS_PARAM("Parametros.accountPositions", "ACCOUNTS_POSITION"),
-    PARAMS("Parametros.findByParametro","")
+    PARAMS("Parametros.findByParametro",""),
+    PARAM_MODULES("Parametros.modules",""),
     ;
     
     private String query;

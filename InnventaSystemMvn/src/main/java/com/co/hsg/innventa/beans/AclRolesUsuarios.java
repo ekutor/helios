@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -29,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "acl_roles_usuarios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "AclRolesUsuarios.findAll", query = "SELECT a FROM AclRolesUsuarios a"),
+    @NamedQuery(name = "AclRolesUsuarios.findAll", query = "SELECT a FROM AclRolesUsuarios a WHERE a.eliminado=0"),
     @NamedQuery(name = "AclRolesUsuarios.findById", query = "SELECT a FROM AclRolesUsuarios a WHERE a.id = :id"),
     @NamedQuery(name = "AclRolesUsuarios.findByUsuario", query = "SELECT a FROM AclRolesUsuarios a WHERE a.usuario = :usuario"),
     @NamedQuery(name = "AclRolesUsuarios.findByEliminado", query = "SELECT a FROM AclRolesUsuarios a WHERE a.eliminado = :eliminado")})
@@ -41,11 +37,9 @@ public class AclRolesUsuarios implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "usuario")
-    private String usuario;
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Usuarios usuario;
     @Basic(optional = false)
     @NotNull
     @Column(name = "eliminado")
@@ -61,9 +55,8 @@ public class AclRolesUsuarios implements Serializable {
         this.id = id;
     }
 
-    public AclRolesUsuarios(Integer id, String usuario, short eliminado) {
+    public AclRolesUsuarios(Integer id, short eliminado) {
         this.id = id;
-        this.usuario = usuario;
         this.eliminado = eliminado;
     }
 
@@ -75,11 +68,11 @@ public class AclRolesUsuarios implements Serializable {
         this.id = id;
     }
 
-    public String getUsuario() {
+    public Usuarios getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
 

@@ -69,6 +69,8 @@ public class Personas implements Serializable {
     @Size(min = 1, max = 1)
     @Column(name = "sexo")
     private String sexo;
+    @Column(name = "mail")
+    private String mail;
     @Column(name = "fecha_nacim")
     @Temporal(TemporalType.DATE)
     private Date fechaNacim;
@@ -174,6 +176,17 @@ public class Personas implements Serializable {
 
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        if(mail!=null){
+           mail = mail.toLowerCase();
+        }
+        this.mail = mail;
     }
 
     @XmlTransient

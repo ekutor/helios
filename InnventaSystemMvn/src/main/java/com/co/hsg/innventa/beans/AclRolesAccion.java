@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -12,11 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "acl_roles_accion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "AclRolesAccion.findAll", query = "SELECT a FROM AclRolesAccion a"),
+    @NamedQuery(name = "AclRolesAccion.findAll", query = "SELECT a FROM AclRolesAccion a WHERE a.eliminado=0"),
     @NamedQuery(name = "AclRolesAccion.findById", query = "SELECT a FROM AclRolesAccion a WHERE a.id = :id"),
     @NamedQuery(name = "AclRolesAccion.findByRol", query = "SELECT a FROM AclRolesAccion a WHERE a.rol = :rol"),
     @NamedQuery(name = "AclRolesAccion.findByAccion", query = "SELECT a FROM AclRolesAccion a WHERE a.accion = :accion"),
@@ -40,16 +37,15 @@ public class AclRolesAccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "rol")
-    private String rol;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 36)
-    @Column(name = "accion")
-    private String accion;
+    @JoinColumn(name = "rol", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private AclRoles rol;
+    @JoinColumn(name = "accion", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private AclAcciones accion;
+    @JoinColumn(name = "modulo", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Parametros modulo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "eliminado")
@@ -62,10 +58,8 @@ public class AclRolesAccion implements Serializable {
         this.id = id;
     }
 
-    public AclRolesAccion(Integer id, String rol, String accion, short eliminado) {
+    public AclRolesAccion(Integer id,short eliminado) {
         this.id = id;
-        this.rol = rol;
-        this.accion = accion;
         this.eliminado = eliminado;
     }
 
@@ -77,19 +71,19 @@ public class AclRolesAccion implements Serializable {
         this.id = id;
     }
 
-    public String getRol() {
+    public AclRoles getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(AclRoles rol) {
         this.rol = rol;
     }
 
-    public String getAccion() {
+    public AclAcciones getAccion() {
         return accion;
     }
 
-    public void setAccion(String accion) {
+    public void setAccion(AclAcciones accion) {
         this.accion = accion;
     }
 

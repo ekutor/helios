@@ -100,7 +100,10 @@
                          rowKey="#{itemDetail.hashCode()}"
                          paginator="false"
                          selectionMode="single"
-                         selection="#{cuentasContactosController.selected}">
+                         selection="#{cuentasContactosController.selected}"
+                        
+                         editable="true" editMode="cell"
+                         >
 
                
                  <p:column sortBy="#{itemDetail.persona.id}" >
@@ -137,7 +140,18 @@
                     </f:facet>
                     <h:outputText value="#{itemDetail.persona.apellido2}"/>
                 </p:column>
-                        
+                
+                <p:column headerText="e-mail">
+                  <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{itemDetail.persona.mail}" /></f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{itemDetail.persona.mail}" style="width:100%">
+                            <p:ajax listener='#{personasController.save(itemDetail.persona, "")}' /> 
+                        </p:inputText>
+                    </f:facet>
+                  </p:cellEditor>
+                </p:column>
+                         
                 <p:column sortBy="#{itemDetail.cargo}" >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListCuentasContactosTitle_cargo}"/>

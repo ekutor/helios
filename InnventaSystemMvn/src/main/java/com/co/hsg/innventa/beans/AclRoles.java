@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -32,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "acl_roles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "AclRoles.findAll", query = "SELECT a FROM AclRoles a"),
+    @NamedQuery(name = "AclRoles.findAll", query = "SELECT a FROM AclRoles a WHERE a.eliminado=0"),
     @NamedQuery(name = "AclRoles.findById", query = "SELECT a FROM AclRoles a WHERE a.id = :id"),
     @NamedQuery(name = "AclRoles.findByNombre", query = "SELECT a FROM AclRoles a WHERE a.nombre = :nombre"),
     @NamedQuery(name = "AclRoles.findByDescripcion", query = "SELECT a FROM AclRoles a WHERE a.descripcion = :descripcion"),
@@ -86,6 +82,9 @@ public class AclRoles implements Serializable {
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
     private List<AclRolesUsuarios> aclRolesUsuariosList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
+    private List<AclRolesAccion> accionesList;
 
     public AclRoles() {
     }
@@ -171,11 +170,26 @@ public class AclRoles implements Serializable {
 
     @XmlTransient
     public List<AclRolesUsuarios> getAclRolesUsuariosList() {
+        if(aclRolesUsuariosList == null){
+            aclRolesUsuariosList = new ArrayList<>();
+        }
         return aclRolesUsuariosList;
     }
 
     public void setAclRolesUsuariosList(List<AclRolesUsuarios> aclRolesUsuariosList) {
         this.aclRolesUsuariosList = aclRolesUsuariosList;
+    }
+    
+    @XmlTransient
+    public List<AclRolesAccion> getAccionesList() {
+        if(accionesList == null){
+            accionesList = new ArrayList<>();
+        }
+        return accionesList;
+    }
+
+    public void setAccionesList(List<AclRolesAccion> accionesList) {
+        this.accionesList = accionesList;
     }
 
     @Override

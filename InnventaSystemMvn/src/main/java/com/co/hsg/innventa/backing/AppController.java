@@ -1,18 +1,24 @@
 package com.co.hsg.innventa.backing;
 
 
+import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.beans.Personas;
 import com.co.hsg.innventa.beans.Usuarios;
+import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.UsuariosFacade;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
+import org.primefaces.model.menu.DefaultMenuItem;
+import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuModel;
 
 /**
  *
@@ -31,17 +37,82 @@ public class AppController extends AbstractController<Usuarios> {
     private String maestros ="Mostrar Maestros";
     private boolean activarMaestros;
     
+    private MenuModel menu;
+    
     @Inject
     private UsuariosFacade ejbFacade;
-   
+    @Inject
+    private ParametrosController params;
+
     public enum Options{
         ORDERS
     }
 
     public AppController() {
-        // Inform the Abstract parent controller of the concrete Usuarios Entity
         super(Usuarios.class);
     }
+    
+    private void chargeUserMenu(){
+        menu = new DefaultMenuModel();
+        
+        Collection<Parametros> listModulesBD = params.chargeItems(NamedQuerys.PARAM_MODULES);
+        
+        //First submenu
+        DefaultSubMenu modMenu = new DefaultSubMenu("Modulos Activos");
+        
+        for(Parametros modBD :listModulesBD){
+            if(modBD.getClave2()== null || "".equals(modBD.getClave2())){
+                   continue;
+               }
+            for(Modules dinaMod : Modules.values()){
+               
+                if(dinaMod.name().equals(modBD.getId())){
+                    DefaultMenuItem item = new DefaultMenuItem(modBD.getClave1());
+                    //item.setIcon("ui-icon-"+dinaMod.getIcon());
+                    item.setCommand("#{navigation."+dinaMod.name().toLowerCase()+"}");
+                    item.setUpdate("contentPanel labelModule");
+                    modMenu.addElement(item);
+                    break;
+                }
+            }
+        }
+        
+        menu.addElement(modMenu);
+        /*
+        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Informes");
+        item = new DefaultMenuItem("Save");
+        item.setIcon("ui-icon-disk");
+        im.setCommand("#{menuBean.save}");
+        item.setUpdatete(":contentPanel");
+        secondSubmenu.addElement(item);
+ 
+        item = new DefaultMenuItem("Delete");
+        item.setIcon("ui-icon-close");
+        item.setCommand("#{menuBean.delete}");
+        item.setAjax(false);
+        secondSubmenu.addElement(item);
+ 
+        item = new DefaultMenuItem("Redirect");
+        item.setIcon("ui-icon-search");
+        item.setCommand("#{menuBean.redirect}");
+        secondSubmenu.addElement(item);
+ 
+        menu.addElement(secondSubmenu);*/
+        
+        DefaultSubMenu MastersSubmenu = new DefaultSubMenu("Maestros");
+    }
+
+    public MenuModel getMenu() {
+        if(menu == null){
+           chargeUserMenu(); 
+        }
+        return menu;
+    }
+
+    public void setMenu(MenuModel menu) {
+        this.menu = menu;
+    }
+    
     
     public String getActualUserId() {
         if (getUser() != null && getUser().getPersona().getId() != null) {

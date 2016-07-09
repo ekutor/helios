@@ -165,6 +165,16 @@ public abstract class AbstractController<T> implements Serializable {
         keepList = false;
         persist(PersistAction.UPDATE, msg, null);
     }
+    
+    public void save(T instance, String message) {
+        if(instance != null){
+            if(message!= null && !"".equals(message)){
+                message = ResourceBundle.getBundle("/Innventa").getString(itemClass.getSimpleName() + "Updated"); 
+            }
+         selected = instance;  
+         persist(PersistAction.UPDATE, message, null);
+        }
+    }
 
     /**
      * Store a new item in the data layer.

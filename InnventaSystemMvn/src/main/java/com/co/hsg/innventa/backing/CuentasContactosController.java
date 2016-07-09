@@ -4,13 +4,10 @@ import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.CuentasContactos;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Collection;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
-import org.primefaces.context.RequestContext;
 
 @Named(value = "cuentasContactosController")
 @ViewScoped
@@ -92,4 +89,6 @@ public class CuentasContactosController extends AbstractController<CuentasContac
             idClienteController.setSelected(this.getSelected().getIdCliente());
         }*/
     }
+    
+    
 }

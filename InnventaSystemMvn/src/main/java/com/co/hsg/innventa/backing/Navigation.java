@@ -17,7 +17,7 @@ public class Navigation implements Serializable {
 
     private Modules actualModule = Modules.INIT;
     private String actualModuleCap;
-    private String icon = "cubes";
+   
     private String actualPage = "/inicio";
     @Inject
     AppController app;
@@ -30,7 +30,6 @@ public class Navigation implements Serializable {
      * @param type 
      */
     public void states(String type) {
-        icon = "edit";
         switch (type) {
             case "orders":
                 actualModule = Modules.STATES_OC;
@@ -47,12 +46,10 @@ public class Navigation implements Serializable {
     
     public void init() {
         actualModule = Modules.INIT;
-        icon = "cubes";
     }
     
     public void orders() {
         actualModule = Modules.ORDERS;
-        icon = "clipboard";
     }
 
     public void createOrder() {
@@ -60,39 +57,33 @@ public class Navigation implements Serializable {
         actualModule = Modules.CREATE_ORDER;
     }
     
-    public void purchaseOrders() {
-        actualModule = Modules.PURCHASE_ORDERS;
-        icon = "truck";
+    public void remissions() {
+        actualModule = Modules.REMISSIONS;
     }
    public void createPurchaseOrder() {
-        this.purchaseOrders();
-        actualModule = Modules.CREATE_PURCHASE_ORDERS;
+        this.remissions();
+        actualModule = Modules.CREATE_REMISSION;
     }
     
-    public void purchaseOrdersConfig() {
-        parametrosController.cargarObj("purchaseOrder");
+    public void ordersConfig() {
+        parametrosController.cargarObj(Modules.ORDERS);
         actualModule = Modules.CONFIGURATION;
-        icon = "gears";
     }
      public void remissionsConfig() {
-        parametrosController.cargarObj("remissions");
+        parametrosController.cargarObj(Modules.REMISSIONS);
         actualModule = Modules.CONFIGURATION;
-        icon = "gears";
     }
     
     public void thirds() {
         actualModule = Modules.THIRDS;
-        icon = "cubes";
     }
 
     public void products() {
         actualModule = Modules.PRODUCTS;
-        icon = "shopping-cart";
     }
 
     public void accounts() {
         actualModule = Modules.ACCOUNTS;
-        icon = "users";
     }
 
     public String getActualPage() {
@@ -130,11 +121,7 @@ public class Navigation implements Serializable {
     }
 
     public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+        return actualModule.getIcon();
     }
 
     public String getActualModuleCap() {

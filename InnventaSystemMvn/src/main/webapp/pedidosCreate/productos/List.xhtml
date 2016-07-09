@@ -48,6 +48,17 @@
 
                 </p:column>
                 
+                 <p:column><p:outputLabel value="&#160;" /></p:column>
+                 
+                 <p:column>
+                 <p:commandButton id="createButtonProduct" icon="ui-icon-truck"   
+                                  value="#{innventa.Create}" 
+                                  actionListener="#{productosController.prepareCreate}" 
+                                  update=":ProductosListForm" 
+                                  oncomplete="PF('ProductosCreateDialog').show()"/>
+                  <p:tooltip for="createButtonProduct" value="Crear Producto"/>
+          
+                </p:column>
             </h:panelGrid>
         </h:form>
        

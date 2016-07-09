@@ -1,21 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "acl_acciones")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "AclAcciones.findAll", query = "SELECT a FROM AclAcciones a"),
+    @NamedQuery(name = "AclAcciones.findAll", query = "SELECT a FROM AclAcciones a WHERE a.eliminado=0"),
     @NamedQuery(name = "AclAcciones.findById", query = "SELECT a FROM AclAcciones a WHERE a.id = :id"),
     @NamedQuery(name = "AclAcciones.findByNombre", query = "SELECT a FROM AclAcciones a WHERE a.nombre = :nombre"),
     @NamedQuery(name = "AclAcciones.findByEliminado", query = "SELECT a FROM AclAcciones a WHERE a.eliminado = :eliminado")})
@@ -47,7 +47,10 @@ public class AclAcciones implements Serializable {
     @NotNull
     @Column(name = "eliminado")
     private short eliminado;
-
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accion")
+    private List<AclRolesAccion> rolesList;
+    
     public AclAcciones() {
     }
 
@@ -83,6 +86,18 @@ public class AclAcciones implements Serializable {
 
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
+    }
+    
+    @XmlTransient
+    public List<AclRolesAccion> getRolesList() {
+        if(rolesList == null){
+           rolesList = new ArrayList<>(); 
+        }
+        return rolesList;
+    }
+
+    public void setRolesList(List<AclRolesAccion> rolesList) {
+        this.rolesList = rolesList;
     }
 
     @Override
