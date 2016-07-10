@@ -8,6 +8,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
 
 @Named(value = "usuariosController")
 @ViewScoped
@@ -17,7 +18,8 @@ public class UsuariosController extends AbstractController<Usuarios> {
     private PersonasController personaController;
     @Inject
     private MobilePageController mobilePageController;
-    
+    @Inject
+    private AppController app;
     private CryptoConverter crypto;
     
     private String confirmationPass;
@@ -85,6 +87,12 @@ public class UsuariosController extends AbstractController<Usuarios> {
             JsfUtil.addErrorMessage("Datos Invalidos" ,"La contraseña y su confirmación no coinciden");
             return false;
        } 
+    }
+    
+    public void changeUserPassw(){
+        this.selected = app.getUser();
+       /* RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('UsuariosEditDialog').show();");*/
     }
     
 }

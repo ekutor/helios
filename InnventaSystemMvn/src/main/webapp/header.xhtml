@@ -65,9 +65,10 @@
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                    <p:commandLink id="changePassw" update="confMaestros contentPanel labelModule" 
-                                                   actionListener="#{usuariosController.setSelected(app.user)}"
-                                                   oncomplete="PF('UsuariosEditDialog').show()">
+                                  <p:commandLink id="changePassw" update="confMaestros contentPanel labelModule, :UsuariosEditForm" 
+                                                 actionListener="#{usuariosController.changeUserPassw()}"
+                                                 oncomplete="PF('UsuariosEditDialog').show();" >
+                             
                                         Cambiar Contraseña
                                     </p:commandLink>
                                 </li>
