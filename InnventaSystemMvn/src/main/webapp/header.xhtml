@@ -23,18 +23,13 @@
                             </p:commandLink>                     
                             <p:tooltip for="dash" value="Pagina de Inicio" />
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown #{app.showConfig}" >
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                                 <span class="glyphicon glyphicon-cog"></span> Configuracion
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <p:commandLink id="confMaestros" update="confMaestros contentPanel labelModule" 
-                                                   actionListener="#{app.activarMaestros}">
-                                        #{app.maestros}
-                                    </p:commandLink>
-                                </li>
+                                
                                 <li><p:commandLink id="confOrdenes" update=" contentPanel labelModule" 
                                                    actionListener="#{navigation.ordersConfig()}">
                                        Ordenes de Compra

@@ -12,44 +12,5 @@
         <h:form id="MenuForm">
             <p:menu model="#{app.menu}" styleClass="innMenu" />
         </h:form>
-                
-        <ul class="nav  nav-tabs nav-stacked">
-            <li><p:outputLabel id="mnuUtil"
-                               value="Utilidades" 
-                               styleClass="nav-header"
-                               >
-                </p:outputLabel>
-            </li>
-            <li><p:commandLink id="mnuReportes"
-                               update="contentPanel labelModule"
-                               value="Reportes" 
-                               >
-                </p:commandLink>
-            </li>
-            
-        </ul>
-       
-       <ul class="nav  nav-tabs nav-stacked">
-            <li><p:outputLabel id="mnuMaestros"
-                               value="" 
-                               styleClass="nav-header"
-                               >
-                </p:outputLabel>
-            </li>
-            <li><p:commandLink id="mnuMaestroOC"
-                               update="contentPanel labelModule"
-                               value="Estados Ordenes Compra" 
-                               actionListener='#{navigation.states("orders")}'>
-                </p:commandLink>
-            </li>
-           
-           <li><p:commandLink id="mnuCategoriasProd"
-                               update="contentPanel labelModule"
-                               value="Categorias de Productos" 
-                               actionListener='#{navigation.states("productCategories")}'>
-                </p:commandLink>
-            </li>
-            
-        </ul>
     </ui:composition>
 </html>

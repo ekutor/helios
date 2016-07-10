@@ -2,8 +2,6 @@ package com.co.hsg.innventa.backing;
 
 
 import com.co.hsg.innventa.backing.util.Actions;
-import static com.co.hsg.innventa.backing.util.Actions.OWNER;
-import static com.co.hsg.innventa.backing.util.Actions.PERMITTED;
 import com.co.hsg.innventa.beans.AclAcciones;
 import com.co.hsg.innventa.beans.AclRolesAccion;
 import com.co.hsg.innventa.beans.Parametros;
@@ -23,8 +21,10 @@ import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSeparator;
 import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuModel;
+import org.primefaces.model.menu.Separator;
 
 /**
  *
@@ -68,49 +68,66 @@ public class AppController extends AbstractController<Usuarios> {
         
         Collection<Parametros> listModulesBD = params.chargeItems(NamedQuerys.PARAM_MODULES);
         
-        //First submenu
         DefaultSubMenu modMenu = new DefaultSubMenu("Modulos Activos");
+        DefaultSubMenu repMenu = new DefaultSubMenu("Reportes");
+        DefaultSubMenu rhumMenu = new DefaultSubMenu("Recurso Humano");
+        DefaultSubMenu admMenu = new DefaultSubMenu("Administracion");
         
         for(Parametros modBD :listModulesBD){
+            //No mostrar menu
             if(modBD.getClave2()== null || "".equals(modBD.getClave2())){
                    continue;
                }
-            for(Modules dinaMod : Modules.values()){
-               
-                if(dinaMod.name().equals(modBD.getId())){
-                    DefaultMenuItem item = new DefaultMenuItem(modBD.getClave1());
-                    //item.setIcon("ui-icon-"+dinaMod.getIcon());
-                    item.setCommand("#{navigation."+dinaMod.name().toLowerCase()+"}");
-                    item.setUpdate("contentPanel labelModule");
-                    modMenu.addElement(item);
-                    break;
-                }
+            int modPos = Integer.parseInt(modBD.getClave2());
+            DefaultMenuItem item = new DefaultMenuItem(modBD.getClave1());
+            //item.setIcon("ui-icon-"+dinaMod.getIcon());
+            item.setCommand("#{navigation."+modBD.getId().toLowerCase()+"}");
+            item.setUpdate("contentPanel labelModule");
+         
+            if(modPos >= 10  && modPos < 20){
+                //Mostrar Menu por Modulos
+                modMenu.addElement(item);    
+            }else if(modPos >= 20  && modPos < 30){
+                repMenu.addElement(item);  
+            }else if(modPos >= 30  && modPos < 40){
+                rhumMenu.addElement(item);  
             }
         }
         
         menu.addElement(modMenu);
-        /*
-        DefaultSubMenu secondSubmenu = new DefaultSubMenu("Informes");
-        item = new DefaultMenuItem("Save");
-        item.setIcon("ui-icon-disk");
-        im.setCommand("#{menuBean.save}");
-        item.setUpdatete(":contentPanel");
-        secondSubmenu.addElement(item);
- 
-        item = new DefaultMenuItem("Delete");
-        item.setIcon("ui-icon-close");
-        item.setCommand("#{menuBean.delete}");
-        item.setAjax(false);
-        secondSubmenu.addElement(item);
- 
-        item = new DefaultMenuItem("Redirect");
-        item.setIcon("ui-icon-search");
-        item.setCommand("#{menuBean.redirect}");
-        secondSubmenu.addElement(item);
- 
-        menu.addElement(secondSubmenu);*/
-        
-        DefaultSubMenu MastersSubmenu = new DefaultSubMenu("Maestros");
+        if(repMenu.getElementsCount() > 0){
+            menu.addElement(new DefaultSeparator());
+            menu.addElement(repMenu); 
+        }
+         if(rhumMenu.getElementsCount() > 0){
+            menu.addElement(new DefaultSeparator());
+            menu.addElement(rhumMenu); 
+        }
+        if(isAdmin()){
+            menu.addElement(new DefaultSeparator());
+            DefaultMenuItem item = new DefaultMenuItem("Estados O. C.");
+            item.setCommand("#{navigation.states(\"orders\")}");
+            item.setUpdate("contentPanel labelModule");
+            admMenu.addElement(item); 
+            
+            item = new DefaultMenuItem("Categorias");
+            item.setCommand("#{navigation.states(\"productCategories\")}");
+            item.setUpdate("contentPanel labelModule");
+            admMenu.addElement(item); 
+            
+            item = new DefaultMenuItem("Adm. de Roles");
+            item.setCommand("#{navigation.access()}");
+            item.setUpdate("contentPanel labelModule");
+            admMenu.addElement(item); 
+            
+            item = new DefaultMenuItem("Adm. de Usuarios");
+            item.setCommand("#{navigation.users()}");
+            item.setUpdate("contentPanel labelModule");
+            admMenu.addElement(item); 
+            
+            menu.addElement(admMenu);
+            
+        }
     }
 
     public MenuModel getMenu() {
@@ -208,6 +225,15 @@ public class AppController extends AbstractController<Usuarios> {
 
     public String getHiddenbyLogging() {
         if(loggedIn){
+            hiddenbyLogging = "show";
+        }else{
+            hiddenbyLogging = "hide";
+        }
+        return hiddenbyLogging;
+    }
+    
+     public String getShowConfig() {
+        if(admin){
             hiddenbyLogging = "show";
         }else{
             hiddenbyLogging = "hide";
