@@ -18,7 +18,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right #{app.hiddenbyLogging}" >
-                        <li><p:commandLink id="dash" update=" contentPanel labelModule" actionListener="#{navigation.init}">
+                        <li><p:commandLink id="dash" update="contentPanel labelModule" actionListener="#{navigation.init}">
                                 <p><span class="glyphicon glyphicon-home"/> Inicio</p>
                             </p:commandLink>                     
                             <p:tooltip for="dash" value="Pagina de Inicio" />
@@ -30,23 +30,23 @@
                             </a>
                             <ul class="dropdown-menu">
                                 
-                                <li><p:commandLink id="confOrdenes" update=" contentPanel labelModule" 
+                                <li><p:commandLink id="confOrdenes" update="contentPanel labelModule" 
                                                    actionListener="#{navigation.ordersConfig()}">
                                        Ordenes de Compra
                                     </p:commandLink>
                                 </li>
-                                <li><p:commandLink id="confRemisiones" update=" contentPanel labelModule" 
+                                <li><p:commandLink id="confRemisiones" update="contentPanel labelModule" 
                                                    actionListener="#{navigation.remissionsConfig()}">
                                        Remisiones
                                     </p:commandLink>
                                 </li>
                                 <li class="divider"></li>
-                                <li><p:commandLink id="confAccess" update=" contentPanel labelModule" 
+                                <li><p:commandLink id="confAccess" update="contentPanel labelModule" 
                                                    actionListener="#{navigation.access()}">
                                        Administracion de Roles
                                     </p:commandLink>
                                 </li>
-                                <li><p:commandLink id="confUsers" update=" contentPanel labelModule" 
+                                <li><p:commandLink id="confUsers" update="contentPanel labelModule" 
                                                    actionListener="#{navigation.users()}">
                                        Administracion de Usuarios
                                     </p:commandLink>
@@ -60,7 +60,7 @@
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                  <p:commandLink id="changePassw" update="confMaestros contentPanel labelModule, :UsuariosEditForm" 
+                                  <p:commandLink id="changePassw" update="contentPanel labelModule, :UsuariosEditForm" 
                                                  actionListener="#{usuariosController.changeUserPassw()}"
                                                  oncomplete="PF('UsuariosEditDialog').show();" >
                              
