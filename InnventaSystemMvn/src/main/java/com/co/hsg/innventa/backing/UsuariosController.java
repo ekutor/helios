@@ -1,9 +1,13 @@
 package com.co.hsg.innventa.backing;
 
+import com.co.hsg.innventa.backing.util.Actions;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.backing.util.MobilePageController;
+import com.co.hsg.innventa.backing.util.Permissions;
 import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.converter.CryptoConverter;
+import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.Collection;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -74,6 +78,24 @@ public class UsuariosController extends AbstractController<Usuarios> {
             }
     }
     
+    @Override
+    public Collection<Usuarios> getItems() {
+        if (items == null || !keepList) {
+            Permissions permission = app.getAccessType(Modules.USERS, Actions.ACCESS);
+            switch(permission){
+                case PERMITTED:
+                    items = this.ejbFacade.findAll();
+                    break;
+                case OWNER:
+                    items = this.ejbFacade.findAllByQuery("Usuarios.findByUsuario", "usuario", app.getUser().getUsuario());
+                    break;
+            }
+
+        }
+        keepList = false;
+        return items;
+    }
+    
     public boolean validatePassword(){
        if(confirmationPass != null && confirmationPass.equals(selected.getPassw())){
            if(confirmationPass.length() < 8){ 
@@ -89,10 +111,18 @@ public class UsuariosController extends AbstractController<Usuarios> {
        } 
     }
     
+    public boolean validConfirmation(){
+       if(confirmationPass != null && confirmationPass.equals(selected.getPassw())){
+           return confirmationPass.length() < 8;
+       }else{
+            return false;
+       } 
+    }
+    
     public void changeUserPassw(){
         this.selected = app.getUser();
-       /* RequestContext context = RequestContext.getCurrentInstance();
-        context.execute("PF('UsuariosEditDialog').show();");*/
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.execute("PF('UsuariosEditGenDialog').show();");
     }
     
 }

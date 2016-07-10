@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div class="panel">
+
+        <h:form id="dashboardFrm">
+            <p:growl id="mssgsGrowl" showDetail="true" />
+
+            <p:dashboard id="board" model="#{dashboardView.model}">
+                <p:ajax event="reorder" listener="#{dashboardView.handleReorder}" update="mssgsGrowl" />
+
+
+                <p:panel id="remisiones"  rendered='#{app.hasAccess("REMISSIONS")}' styleClass="borderStyle"  header="Remisiones">
+                    <i class="fa fa-truck"></i>
+                    <p:commandLink id="btnRemisiones"
+                               update="contentPanel labelModule"
+                               value="Remisiones" 
+                               actionListener="#{navigation.remissions}">
+                    </p:commandLink>
+                </p:panel>
+
+                <p:panel id="pedidos" rendered='#{app.hasAccess("ORDERS")}' styleClass="borderStyle" header="Ordenes de Compra">
+                    <i class="fa fa-clipboard"></i>  
+                    <p:commandLink id="mnuRemisiones"
+                               update="contentPanel labelModule"
+                               value="O. Compra" 
+                               actionListener="#{navigation.orders}">
+                    </p:commandLink>
+                </p:panel>
+     
+                 <p:panel id="cuentas" rendered='#{app.hasAccess("ACCOUNTS")}' styleClass="borderStyle"  header="Cuentas">
+                      <i class="fa fa-users"></i>  
+                    <p:commandLink id="mnuClientes"
+                               update="contentPanel labelModule"
+                               value="Clientes" 
+                               actionListener="#{navigation.accounts}">
+                    </p:commandLink>
+                </p:panel>
+                 <p:panel id="productos" rendered='#{app.hasAccess("PRODUCTS")}' styleClass="borderStyle"  header="Productos">
+                     <i class="fa fa-shopping-cart"></i> 
+                   <p:commandLink id="mnuProductos"
+                               update="contentPanel labelModule"
+                               value="Productos" 
+                               actionListener="#{navigation.products}">
+                    </p:commandLink>
+                </p:panel>
+                 <p:panel id="terceros" rendered='#{app.hasAccess("THIRDS")}' styleClass="borderStyle"  header="Terceros">
+                      <i class="fa fa-cubes"></i> 
+                    <p:commandLink id="mnuTerceros"
+                               update="contentPanel labelModule"
+                               value="Terceros" 
+                               actionListener="#{navigation.thirds}">
+                    </p:commandLink>
+                </p:panel>
+                
+
+
+            </p:dashboard>
+<ui:include src="/inicio/popups/Edit.xhtml"/>
+            <div style="clear:both" />
+        </h:form>
+      
+        <div class="hero-unit hide">
+            <p></p>
+
+            <img src="../resources/images/mettagrup.jpg" alt="Mettagrup" width="100%" class="img-rounded"/>
+
+        </div>
+    </div>
+
+</ui:composition>

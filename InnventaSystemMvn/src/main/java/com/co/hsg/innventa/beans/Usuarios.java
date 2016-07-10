@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u where u.eliminado = 0"),
-    @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario"),
+    @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario AND u.eliminado = 0"),
     @NamedQuery(name = "Usuarios.delete", query = "UPDATE Usuarios u SET u.eliminado=1 WHERE  u.usuario = :usuario"),
 })
 public class Usuarios implements Serializable {

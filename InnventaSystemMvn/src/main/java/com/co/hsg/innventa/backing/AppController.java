@@ -2,6 +2,7 @@ package com.co.hsg.innventa.backing;
 
 
 import com.co.hsg.innventa.backing.util.Actions;
+import com.co.hsg.innventa.backing.util.Permissions;
 import com.co.hsg.innventa.beans.AclAcciones;
 import com.co.hsg.innventa.beans.AclRolesAccion;
 import com.co.hsg.innventa.beans.Parametros;
@@ -65,6 +66,9 @@ public class AppController extends AbstractController<Usuarios> {
         return this.hasAccess(modDB.getId());
     }
     
+    private boolean hasAccess(Modules module) {
+        return this.hasAccess(module.name());
+    }
     public boolean hasAccess(String modID) {
         if(userAccess == null){
             this.logout();
@@ -72,11 +76,44 @@ public class AppController extends AbstractController<Usuarios> {
         }
         AclAcciones mod = userAccess.get(modID);
         if(mod != null){
-            return mod.getAcceso() == Actions.PERMITTED.value;     
+            return mod.getAcceso() == Permissions.PERMITTED.value;     
         }else{
             return false;   
+        }         
+    }
+    
+    public Permissions getAccessType(Modules module,Actions action) {
+        if(userAccess == null){
+            this.logout();
         }
-         
+       
+        AclAcciones mod = userAccess.get(module.name());
+        if(mod != null){
+            short value = 0;
+            switch(action){
+                case ACCESS:
+                    value = mod.getAcceso();
+                    break;
+                case DELETE:
+                    value = mod.getEliminar();
+                    break;
+                case EDIT:
+                   value = mod.getEditar();
+                   break;
+                case EXPORT:
+                   value = mod.getExportar();
+                   break;
+                case IMPORT:
+                   value = mod.getImportar();
+                   break;
+                case VIEW_COSTS:
+                   value = mod.getVerPrecios();
+                   break;
+            }
+            return Permissions.getAction(value);
+        }else{
+            return Permissions.NOT_ALLOWED;   
+        }         
     }
 
     private void defAccessforUser() {
@@ -212,7 +249,7 @@ public class AppController extends AbstractController<Usuarios> {
             user = userLogin;
             
             defAccessforUser();
-            if (userAccess.get(Modules.ADMIN.name()).getAcceso() == Actions.PERMITTED.value) {
+            if (userAccess.get(Modules.ADMIN.name()).getAcceso() == Permissions.PERMITTED.value) {
                 admin =  true;
             }
             

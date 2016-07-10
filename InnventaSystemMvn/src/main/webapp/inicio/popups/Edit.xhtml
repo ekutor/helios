@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="UsuariosEditGenDlg" widgetVar="UsuariosEditGenDialog" modal="true" resizable="true"  appendTo="@(body)" 
+                  header="Editar Usuario" closeOnEscape="true">
+
+            <h:form id="UsuariosEditGenForm">
+                <p:messages  id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" >
+
+
+                        <h:outputLabel value="#{innventa.EditUsuariosLabel_usuario}" for="usuario" />
+                        <h:panelGroup>
+                            <h:outputText id="usuario" value="#{usuariosController.selected.usuario}" />
+                            <p:tooltip for="usuario" value="#{usuariosController.getComponentMessages('usuario', innventa.EditUsuariosHelpText_usuario)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="Contraseña" for="passw" />
+                        <h:panelGroup>
+                            <p:password id="passw" value="#{usuariosController.selected.passw}" feedback="true" inline="true" 
+                                         promptLabel="Ingrese un password" weakLabel="Débil"
+                                         goodLabel="Bueno" strongLabel="Fuerte" 
+                                        required="true" size="20" maxlength="50"
+                                        
+                                        >
+                                <p:ajax event="keypress" update="btnSave"/>
+                            </p:password>
+                            
+                        </h:panelGroup>
+
+                        <p:outputLabel value="Confirmar Contraseña" for="passw2" />
+                        <h:panelGroup>
+                            <p:password id="passw2" value="#{usuariosController.confirmationPass}" title="#{innventa.CreateUsuariosTitle_passw}" required="true" requiredMessage="#{innventa.CreateUsuariosRequiredMessage_passw}" size="20" maxlength="20"/>
+                           
+                        </h:panelGroup>
+                        <p:outputLabel value="#{innventa.EditUsuariosLabel_persona}" for="persona" />
+                        <h:panelGroup>
+                            <h:outputText id="persona" value="#{usuariosController.selected.persona.nombre1} #{usuariosController.selected.persona.apellido1}"/>
+                            <p:tooltip for="persona" value="#{usuariosController.getComponentMessages('persona', innventa.EditUsuariosHelpText_persona)}"/>
+                        </h:panelGroup>
+                        
+                        <p:outputLabel value="Rol" for="rol"  rendered="#{app.isAdmin()}"/>
+                        <h:panelGroup rendered="#{app.isAdmin()}">
+                            <h:panelGroup>
+                                <p:selectOneMenu id="rol" value="#{usuariosController.selected.rol}" required="true" 
+                                                 requiredMessage="El rol es requerido" 
+                                                 converter="#{aclRolesConverter}">
+                                  <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                  <f:selectItems value="#{aclRolesController.items}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem}"
+                                                 itemLabel="#{rolItem.nombre}"
+                                                 />
+  
+                              </p:selectOneMenu>
+                                <p:tooltip for="rol" value="Defina un rol para el usuario"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                    </p:panelGrid>
+                    <p:commandButton id="btnSave" actionListener="#{usuariosController.save}" value="#{innventa.Save}" 
+                                     update=":UsuariosEditGenForm, display" 
+                                     oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditGenDlg'));"
+                                     disabled="#{!usuariosController.validConfirmation()}"
+                                     >
+                       <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('UsuariosEditGenDlg').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

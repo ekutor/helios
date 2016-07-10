@@ -61,8 +61,8 @@
                             <ul class="dropdown-menu">
                               <li>
                                   <p:commandLink id="changePassw" update="contentPanel labelModule" 
-                                                 oncomplete="PF('UsuariosEditDialog').show();" actionListener="#{usuariosController.changeUserPassw()}">
-                                         Cambiar Contraseña
+                                                  actionListener="#{navigation.users()}">
+                                         Perfil de Usuario
                                     </p:commandLink>
                                 </li>
                             </ul>
@@ -81,6 +81,7 @@
                 </div>
             </div>
         </div>
-       
+        <ui:include src="/inicio/popups/Edit.xhtml"/>
+        <ui:include src="/confirmation.xhtml"/>
     </ui:composition>
 </html>
