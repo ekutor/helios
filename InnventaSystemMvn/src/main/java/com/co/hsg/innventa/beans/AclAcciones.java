@@ -69,10 +69,6 @@ public class AclAcciones implements Serializable {
     private short importar;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ver")
-    private short ver;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "ver_precios")
     private short verPrecios;
      
@@ -146,14 +142,6 @@ public class AclAcciones implements Serializable {
 
     public void setImportar(short importar) {
         this.importar = importar;
-    }
-
-    public short getVer() {
-        return ver;
-    }
-
-    public void setVer(short ver) {
-        this.ver = ver;
     }
 
     public short getVerPrecios() {

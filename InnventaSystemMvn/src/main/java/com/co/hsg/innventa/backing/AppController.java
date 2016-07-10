@@ -10,21 +10,26 @@ import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.converter.CryptoConverter;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.UsuariosFacade;
+import static com.sun.faces.facelets.util.Path.context;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSeparator;
 import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuModel;
-import org.primefaces.model.menu.Separator;
 
 /**
  *
@@ -52,7 +57,35 @@ public class AppController extends AbstractController<Usuarios> {
     @Inject
     private ParametrosController params;
     
-    private CryptoConverter crypto;
+   
+    
+    private Map<String,AclAcciones> userAccess;
+
+    private boolean hasAccess(Parametros modDB) {
+        return this.hasAccess(modDB.getId());
+    }
+    
+    public boolean hasAccess(String modID) {
+        if(userAccess == null){
+            this.logout();
+            return false;
+        }
+        AclAcciones mod = userAccess.get(modID);
+        if(mod != null){
+            return mod.getAcceso() == Actions.PERMITTED.value;     
+        }else{
+            return false;   
+        }
+         
+    }
+
+    private void defAccessforUser() {
+        userAccess = new HashMap<>();
+        for (AclRolesAccion actions : user.getRol().getAccionesList()) {
+                AclAcciones actionModule = actions.getAccion();
+                userAccess.put(actionModule.getModulo().getId(), actionModule);
+            }
+    }
 
     public enum Options{
         ORDERS
@@ -60,7 +93,6 @@ public class AppController extends AbstractController<Usuarios> {
 
     public AppController() {
         super(Usuarios.class);
-        crypto = new CryptoConverter();
     }
     
     private void chargeUserMenu(){
@@ -73,24 +105,26 @@ public class AppController extends AbstractController<Usuarios> {
         DefaultSubMenu rhumMenu = new DefaultSubMenu("Recurso Humano");
         DefaultSubMenu admMenu = new DefaultSubMenu("Administracion");
         
-        for(Parametros modBD :listModulesBD){
+        for(Parametros modDB :listModulesBD){
             //No mostrar menu
-            if(modBD.getClave2()== null || "".equals(modBD.getClave2())){
+            if(modDB.getClave2()== null || "".equals(modDB.getClave2())){
                    continue;
                }
-            int modPos = Integer.parseInt(modBD.getClave2());
-            DefaultMenuItem item = new DefaultMenuItem(modBD.getClave1());
+            int modPos = Integer.parseInt(modDB.getClave2());
+            DefaultMenuItem item = new DefaultMenuItem(modDB.getClave1());
             //item.setIcon("ui-icon-"+dinaMod.getIcon());
-            item.setCommand("#{navigation."+modBD.getId().toLowerCase()+"}");
+            item.setCommand("#{navigation."+modDB.getId().toLowerCase()+"}");
             item.setUpdate("contentPanel labelModule");
-         
-            if(modPos >= 10  && modPos < 20){
-                //Mostrar Menu por Modulos
-                modMenu.addElement(item);    
-            }else if(modPos >= 20  && modPos < 30){
-                repMenu.addElement(item);  
-            }else if(modPos >= 30  && modPos < 40){
-                rhumMenu.addElement(item);  
+            
+            if(hasAccess(modDB)){
+                if(modPos >= 10  && modPos < 20){
+                    //Mostrar Menu por Modulos
+                    modMenu.addElement(item);    
+                }else if(modPos >= 20  && modPos < 30){
+                    repMenu.addElement(item);  
+                }else if(modPos >= 30  && modPos < 40){
+                    rhumMenu.addElement(item);  
+                }
             }
         }
         
@@ -157,14 +191,15 @@ public class AppController extends AbstractController<Usuarios> {
     }
      
     public String login() {
-        Usuarios user = ejbFacade.find(username);
+        CryptoConverter crypto = new CryptoConverter();
+        Usuarios userLogin = ejbFacade.find(username);
         FacesContext context = FacesContext.getCurrentInstance();
-        RequestContext reqCont = RequestContext.getCurrentInstance();
-        FacesMessage msg = null;
-        
+       
+        FacesMessage msg;
+        admin = false;
         String encryptedLoginPass = crypto.convertToDatabaseColumn(password);
         
-        if (user == null || !user.getPassw().equals(encryptedLoginPass)) {
+        if (userLogin == null || !userLogin.getPassw().equals(encryptedLoginPass)) {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Usuario o Clave incorrectos, Intente Nuevamente");
             context.addMessage("msgLogin", msg);
             loggedIn = false;
@@ -174,18 +209,13 @@ public class AppController extends AbstractController<Usuarios> {
             return null;
         } else {
             loggedIn = true;
-            this.user = user;
-            admin = false;
-            for (AclRolesAccion actions : user.getRol().getAccionesList()) {
-                AclAcciones actionModule = actions.getAccion();
-                if (actionModule.getModulo().getId().equals(Modules.ADMIN.name())) {
-                    if (actionModule.getAcceso() == Actions.PERMITTED.value) {
-                        admin =  true;
-                        break;
-                    }
-                }
+            user = userLogin;
+            
+            defAccessforUser();
+            if (userAccess.get(Modules.ADMIN.name()).getAcceso() == Actions.PERMITTED.value) {
+                admin =  true;
             }
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", username);
+            
             context.getExternalContext().getSessionMap().put("user", user);
             return "/index?faces-redirect=true";
         }
@@ -193,12 +223,30 @@ public class AppController extends AbstractController<Usuarios> {
 
     public void logout() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            context.invalidateSession();
+            context.getSessionMap().clear();
             loggedIn = false;
             System.out.println("com.co.hsg.innventa.backing.AppController.logout()");
-            String path = FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
-            FacesContext.getCurrentInstance().getExternalContext().redirect(path);
+            String path = context.getApplicationContextPath();
+            context.redirect(path);
+            
+        }catch(java.lang.IllegalStateException ie){
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            HttpServletRequest req = (HttpServletRequest) context.getRequest();
+            HttpServletResponse res = (HttpServletResponse) context.getResponse();
+            
+            HttpSession session = req.getSession(false);
+           
+            loggedIn = false;
+            System.out.println("com.co.hsg.innventa.backing.AppController.logout() for Illegal State");
+            String path = context.getApplicationContextPath();
+  
+            try{
+                res.sendRedirect(path);
+            } catch (IOException exi) {
+                exi.printStackTrace();
+            }
             
         } catch (IOException ex) {
             ex.printStackTrace();

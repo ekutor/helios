@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="false"  appendTo="@(body)" 
+        <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="true"  appendTo="@(body)" 
                   header="Editar Usuario" closeOnEscape="true">
 
             <h:form id="UsuariosEditForm">
@@ -45,7 +45,7 @@
                         <p:outputLabel value="Rol" for="rol"  rendered="#{app.isAdmin()}"/>
                         <h:panelGroup rendered="#{app.isAdmin()}">
                             <h:panelGroup>
-                                <p:selectOneMenu rendered="#{app.isAdmin()}" id="rol" value="#{usuariosController.selected.rol}" required="true" 
+                                <p:selectOneMenu id="rol" value="#{usuariosController.selected.rol}" required="true" 
                                                  requiredMessage="El rol es requerido" 
                                                  converter="#{aclRolesConverter}">
                                   <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
@@ -61,8 +61,8 @@
                         </h:panelGroup>
 
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuariosController.save}" value="#{innventa.Save}" update="display, contentPanel" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditDialog'));">
-                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    <p:commandButton actionListener="#{usuariosController.save}" value="#{innventa.Save}" update="display,:UsuariosListForm:datalist" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditDialog'));">
+                       <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
                     <p:commandButton value="#{innventa.Cancel}" onclick="PF('UsuariosEditDialog').hide()"/>
                 </h:panelGroup>
