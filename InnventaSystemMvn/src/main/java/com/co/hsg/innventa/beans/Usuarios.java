@@ -1,11 +1,8 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,14 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,12 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u where u.eliminado = 0"),
     @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario"),
-    @NamedQuery(name = "Usuarios.findByPassw", query = "SELECT u FROM Usuarios u WHERE u.passw = :passw"),
-    @NamedQuery(name = "Usuarios.findByEliminado", query = "SELECT u FROM Usuarios u WHERE u.eliminado = :eliminado"),
-    @NamedQuery(name = "Usuarios.findByFechaCreacion", query = "SELECT u FROM Usuarios u WHERE u.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Usuarios.findByCreadoPor", query = "SELECT u FROM Usuarios u WHERE u.creadoPor = :creadoPor"),
-    @NamedQuery(name = "Usuarios.findByModificadoPor", query = "SELECT u FROM Usuarios u WHERE u.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Usuarios.findByFechaModificacion", query = "SELECT u FROM Usuarios u WHERE u.fechaModificacion = :fechaModificacion")})
+    @NamedQuery(name = "Usuarios.delete", query = "UPDATE Usuarios u SET u.eliminado=1 WHERE  u.usuario = :usuario"),
+})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +40,6 @@ public class Usuarios implements Serializable {
     private String usuario;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "passw")
     private String passw;
     @Basic(optional = false)
@@ -74,8 +64,9 @@ public class Usuarios implements Serializable {
     @ManyToOne(optional = false)
     private Personas persona;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<AclRolesUsuarios> aclRolesUsuariosList;
+    @JoinColumn(name = "rol", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private AclRoles rol;
 
     public Usuarios() {
     }
@@ -155,16 +146,12 @@ public class Usuarios implements Serializable {
         this.persona = persona;
     }
     
-     @XmlTransient
-    public List<AclRolesUsuarios> getAclRolesUsuariosList() {
-        if(aclRolesUsuariosList == null){
-            aclRolesUsuariosList = new ArrayList<>();
-        }
-        return aclRolesUsuariosList;
+     public AclRoles getRol() {
+        return rol;
     }
 
-    public void setAclRolesUsuariosList(List<AclRolesUsuarios> aclRolesUsuariosList) {
-        this.aclRolesUsuariosList = aclRolesUsuariosList;
+    public void setRol(AclRoles rol) {
+        this.rol = rol;
     }
     
     @Override

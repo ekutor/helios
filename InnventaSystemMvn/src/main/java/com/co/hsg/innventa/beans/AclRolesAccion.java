@@ -1,8 +1,10 @@
 
 package com.co.hsg.innventa.beans;
 
+import com.co.hsg.innventa.backing.util.Utils;
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "AclRolesAccion.findAll", query = "SELECT a FROM AclRolesAccion a WHERE a.eliminado=0"),
     @NamedQuery(name = "AclRolesAccion.findById", query = "SELECT a FROM AclRolesAccion a WHERE a.id = :id"),
-    @NamedQuery(name = "AclRolesAccion.findByRol", query = "SELECT a FROM AclRolesAccion a WHERE a.rol = :rol"),
+    @NamedQuery(name = "AclRolesAccion.findByRol", query = "SELECT a FROM AclRolesAccion a WHERE a.rol = :rol and a.eliminado=0"),
     @NamedQuery(name = "AclRolesAccion.findByAccion", query = "SELECT a FROM AclRolesAccion a WHERE a.accion = :accion"),
     @NamedQuery(name = "AclRolesAccion.findByEliminado", query = "SELECT a FROM AclRolesAccion a WHERE a.eliminado = :eliminado")})
 public class AclRolesAccion implements Serializable {
@@ -38,14 +40,11 @@ public class AclRolesAccion implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JoinColumn(name = "rol", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     private AclRoles rol;
     @JoinColumn(name = "accion", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     private AclAcciones accion;
-    @JoinColumn(name = "modulo", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Parametros modulo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "eliminado")
@@ -80,6 +79,10 @@ public class AclRolesAccion implements Serializable {
     }
 
     public AclAcciones getAccion() {
+        if(accion == null){
+            accion = new AclAcciones();
+            accion.setId(Utils.generateID());
+        }
         return accion;
     }
 

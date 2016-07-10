@@ -129,6 +129,7 @@
                          paginator="false"
                          selectionMode="single"
                          style="text-align: center; max-width: 600px; "
+                         editable="true" editMode="cell"
                         >                
                 <p:column style="text-align: center">
                     <f:facet name="header">
@@ -136,14 +137,19 @@
                     </f:facet>
                     <h:outputText value="#{itemDetail.idProducto.nombre}"/>
                 </p:column>
-
-
-                <p:column >
-                    <f:facet name="header">
-                        <h:outputText value="Cantidad"/>
+                        
+               <p:column headerText="Cantidad">
+                  <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{itemDetail.cantidad}" /></f:facet>
+                    <f:facet name="input">
+                        <p:inputText value="#{itemDetail.cantidad}" style="width:100%">
+                            <p:ajax listener='#{remisionesController.save(itemDetail)}' update=":RemisionesListForm" /> 
+                        </p:inputText>
                     </f:facet>
-                    <h:outputText value="#{itemDetail.cantidad}"/>
+                  </p:cellEditor>
                 </p:column>
+
+               
             </p:dataTable>
 
 

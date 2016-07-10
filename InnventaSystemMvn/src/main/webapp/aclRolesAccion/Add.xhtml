@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosAddDlg" widgetVar="UsuariosAddDlg" 
+                  modal="true" resizable="false" 
+                  appendTo="@(body)"
+                  header="#{innventa.CreateUsuariosTitle}" closeOnEscape="true">
+
+           
+                <h:panelGroup id="find">
+                    <p:panelGrid columns="2" columnClasses="column">
+                       <p:outputLabel value="Usuarios" for="usuariolist" />
+                        <h:panelGroup >
+                            <p:selectOneMenu id="usuariolist" value="#{usuariosController.selected}"
+                                             required="true" 
+                                             requiredMessage="Debe seleccionar un usuario" 
+                                             >
+                                <p:ajax listener="#{usuariosController.selected}" update=":UsuariosAddForm" />
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{usuariosController.items}" 
+                                               var="usuarioItem"
+                                               itemValue="#{usuarioItem}"
+                                               itemLabel="#{usuarioItem.usuario}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="usuariolist" value="#{usuariosController.getComponentMessages('usuario', innventa.CreateUsuariosHelpText_usuario)}"/>
+                        </h:panelGroup>  
+                    </p:panelGrid>
+                
+                </h:panelGroup>
+                <h:form id="UsuariosAddForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_usuario}" for="usuario" />
+                        <h:panelGroup>
+                            <h:outputText id="usuario" value="#{usuariosController.selected.usuario}" title="#{innventa.CreateUsuariosTitle_usuario}"/>      
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_eliminado}" for="eliminado" />
+                        <h:panelGroup>
+                            <p:inputText id="eliminado" value="#{usuariosController.selected.eliminado}" title="#{innventa.CreateUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreateUsuariosRequiredMessage_eliminado}"/>
+                            <p:tooltip for="eliminado" value="#{usuariosController.getComponentMessages('eliminado', innventa.CreateUsuariosHelpText_eliminado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_fechaCreacion}" for="fechaCreacion" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuariosController.selected.fechaCreacion}" title="#{innventa.CreateUsuariosTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.CreateUsuariosRequiredMessage_fechaCreacion}" showOn="button"/>
+                            <p:tooltip for="fechaCreacion" value="#{usuariosController.getComponentMessages('fechaCreacion', innventa.CreateUsuariosHelpText_fechaCreacion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_creadoPor}" for="creadoPor" />
+                        <h:panelGroup>
+                            <p:inputText id="creadoPor" value="#{usuariosController.selected.creadoPor}" title="#{innventa.CreateUsuariosTitle_creadoPor}" size="36" maxlength="36"/>
+                            <p:tooltip for="creadoPor" value="#{usuariosController.getComponentMessages('creadoPor', innventa.CreateUsuariosHelpText_creadoPor)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_modificadoPor}" for="modificadoPor" />
+                        <h:panelGroup>
+                            <p:inputText id="modificadoPor" value="#{usuariosController.selected.modificadoPor}" title="#{innventa.CreateUsuariosTitle_modificadoPor}" size="36" maxlength="36"/>
+                            <p:tooltip for="modificadoPor" value="#{usuariosController.getComponentMessages('modificadoPor', innventa.CreateUsuariosHelpText_modificadoPor)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{innventa.CreateUsuariosLabel_fechaModificacion}" for="fechaModificacion" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuariosController.selected.fechaModificacion}" title="#{innventa.CreateUsuariosTitle_fechaModificacion}"  showOn="button"/>
+                            <p:tooltip for="fechaModificacion" value="#{usuariosController.getComponentMessages('fechaModificacion', innventa.CreateUsuariosHelpText_fechaModificacion)}"/>
+                        </h:panelGroup>
+
+                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuariosController.saveNew}" value="#{innventa.Save}" update="display,:AclRolesAccionListForm,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosAddDlg'));">
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('UsuariosCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

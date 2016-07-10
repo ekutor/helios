@@ -7,10 +7,11 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditUsuariosTitle}" closeOnEscape="true">
+        <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="false"  appendTo="@(body)" 
+                  header="Editar Usuario" closeOnEscape="true">
 
             <h:form id="UsuariosEditForm">
-
+                <p:messages  id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" rendered="#{usuariosController.selected != null}">
 
@@ -21,57 +22,27 @@
                             <p:tooltip for="usuario" value="#{usuariosController.getComponentMessages('usuario', innventa.EditUsuariosHelpText_usuario)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditUsuariosLabel_passw}" for="passw" />
+                        <p:outputLabel value="Contraseña" for="passw" />
                         <h:panelGroup>
-                            <p:inputText id="passw" value="#{usuariosController.selected.passw}" title="#{innventa.EditUsuariosTitle_passw}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_passw}" size="20" maxlength="20"/>
-                            <p:tooltip for="passw" value="#{usuariosController.getComponentMessages('passw', innventa.EditUsuariosHelpText_passw)}"/>
+                            <p:password id="passw" value="#{usuariosController.selected.passw}" feedback="true" inline="true" 
+                                         promptLabel="Ingrese un password" weakLabel="Débil"
+                                         goodLabel="Bueno" strongLabel="Fuerte" 
+                                        required="true" size="20" maxlength="50"/>
+                            
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.EditUsuariosLabel_eliminado}" for="eliminado" />
+                        <p:outputLabel value="Confirmar Contraseña" for="passw2" />
                         <h:panelGroup>
-                            <p:inputText id="eliminado" value="#{usuariosController.selected.eliminado}" title="#{innventa.EditUsuariosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_eliminado}"/>
-                            <p:tooltip for="eliminado" value="#{usuariosController.getComponentMessages('eliminado', innventa.EditUsuariosHelpText_eliminado)}"/>
+                            <p:password id="passw2" value="#{usuariosController.confirmationPass}" title="#{innventa.CreateUsuariosTitle_passw}" required="true" requiredMessage="#{innventa.CreateUsuariosRequiredMessage_passw}" size="20" maxlength="20"/>
+                           
                         </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditUsuariosLabel_fechaCreacion}" for="fechaCreacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuariosController.selected.fechaCreacion}" title="#{innventa.EditUsuariosTitle_fechaCreacion}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_fechaCreacion}" showOn="button"/>
-                            <p:tooltip for="fechaCreacion" value="#{usuariosController.getComponentMessages('fechaCreacion', innventa.EditUsuariosHelpText_fechaCreacion)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditUsuariosLabel_creadoPor}" for="creadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="creadoPor" value="#{usuariosController.selected.creadoPor}" title="#{innventa.EditUsuariosTitle_creadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="creadoPor" value="#{usuariosController.getComponentMessages('creadoPor', innventa.EditUsuariosHelpText_creadoPor)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditUsuariosLabel_modificadoPor}" for="modificadoPor" />
-                        <h:panelGroup>
-                            <p:inputText id="modificadoPor" value="#{usuariosController.selected.modificadoPor}" title="#{innventa.EditUsuariosTitle_modificadoPor}" size="36" maxlength="36"/>
-                            <p:tooltip for="modificadoPor" value="#{usuariosController.getComponentMessages('modificadoPor', innventa.EditUsuariosHelpText_modificadoPor)}"/>
-                        </h:panelGroup>
-
-                        <p:outputLabel value="#{innventa.EditUsuariosLabel_fechaModificacion}" for="fechaModificacion" />
-                        <h:panelGroup>
-                            <p:calendar id="fechaModificacion" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuariosController.selected.fechaModificacion}" title="#{innventa.EditUsuariosTitle_fechaModificacion}"  showOn="button"/>
-                            <p:tooltip for="fechaModificacion" value="#{usuariosController.getComponentMessages('fechaModificacion', innventa.EditUsuariosHelpText_fechaModificacion)}"/>
-                        </h:panelGroup>
-
                         <p:outputLabel value="#{innventa.EditUsuariosLabel_persona}" for="persona" />
                         <h:panelGroup>
-                            <p:selectOneMenu id="persona" value="#{usuariosController.selected.persona}" required="true" requiredMessage="#{innventa.EditUsuariosRequiredMessage_persona}" converter="personasConverter">
-                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                                <f:selectItems value="#{personasController.items}"
-                                               var="personaItem"
-                                               itemValue="#{personaItem}"
-                                               itemLabel="#{personaItem.id.toString()}"
-                                               />
-
-                            </p:selectOneMenu>
+                            <h:outputText id="persona" value="#{usuariosController.selected.persona.nombre1} #{usuariosController.selected.persona.apellido1}"/>
                             <p:tooltip for="persona" value="#{usuariosController.getComponentMessages('persona', innventa.EditUsuariosHelpText_persona)}"/>
                         </h:panelGroup>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuariosController.save}" value="#{innventa.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditDialog'));">
+                    <p:commandButton actionListener="#{usuariosController.save}" value="#{innventa.Save}" update="display,:UsuariosListForm:datalist" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
                     <p:commandButton value="#{innventa.Cancel}" onclick="PF('UsuariosEditDialog').hide()"/>

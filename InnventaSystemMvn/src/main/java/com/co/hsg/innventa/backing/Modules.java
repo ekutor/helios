@@ -13,7 +13,7 @@ public enum Modules {
     INIT("inicio","primary","cubes"), 
     CREATE_ORDER("pedidosCreate","primary","clipboard"),
     CREATE_REMISSION("remisionesProducto","primary","truck"),
-    ACL("aclRolesAccion","info","edit"),
+    ACL("aclRoles","info","edit"),ACLACTIONS("aclRolesAccion","info","edit"),
     ;
    
     private String moduleName;

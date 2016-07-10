@@ -17,6 +17,11 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>cryptoConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.CryptoConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>cuentasConverter</managed-bean-name>
         <managed-bean-class>com.co.hsg.innventa.converter.CuentasConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
@@ -56,5 +61,5 @@
         <managed-bean-class>com.co.hsg.innventa.converter.PedidosProductoConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-   
+     
 </faces-config>

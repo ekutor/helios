@@ -1,8 +1,6 @@
 package com.co.hsg.innventa.backing.validations;
 
 import com.co.hsg.innventa.backing.util.JsfUtil;
-import com.co.hsg.innventa.beans.Pedidos;
-import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import java.util.ArrayList;

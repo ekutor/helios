@@ -31,12 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AclRoles.findAll", query = "SELECT a FROM AclRoles a WHERE a.eliminado=0"),
     @NamedQuery(name = "AclRoles.findById", query = "SELECT a FROM AclRoles a WHERE a.id = :id"),
     @NamedQuery(name = "AclRoles.findByNombre", query = "SELECT a FROM AclRoles a WHERE a.nombre = :nombre"),
-    @NamedQuery(name = "AclRoles.findByDescripcion", query = "SELECT a FROM AclRoles a WHERE a.descripcion = :descripcion"),
-    @NamedQuery(name = "AclRoles.findByFechaCreacion", query = "SELECT a FROM AclRoles a WHERE a.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "AclRoles.findByCreadoPor", query = "SELECT a FROM AclRoles a WHERE a.creadoPor = :creadoPor"),
-    @NamedQuery(name = "AclRoles.findByFechaModificacion", query = "SELECT a FROM AclRoles a WHERE a.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "AclRoles.findByModificadoPor", query = "SELECT a FROM AclRoles a WHERE a.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "AclRoles.findByEliminado", query = "SELECT a FROM AclRoles a WHERE a.eliminado = :eliminado")})
+    @NamedQuery(name = "AclRoles.delete", query = "UPDATE AclRoles p SET p.eliminado =1 WHERE p.id =:id")
+})
 public class AclRoles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,7 +44,7 @@ public class AclRoles implements Serializable {
     private String id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 3, max = 30)
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
@@ -81,7 +77,7 @@ public class AclRoles implements Serializable {
     @Column(name = "eliminado")
     private short eliminado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
-    private List<AclRolesUsuarios> aclRolesUsuariosList;
+    private List<Usuarios> aclRolesUsuariosList;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
     private List<AclRolesAccion> accionesList;
@@ -169,14 +165,14 @@ public class AclRoles implements Serializable {
     }
 
     @XmlTransient
-    public List<AclRolesUsuarios> getAclRolesUsuariosList() {
+    public List<Usuarios> getAclRolesUsuariosList() {
         if(aclRolesUsuariosList == null){
             aclRolesUsuariosList = new ArrayList<>();
         }
         return aclRolesUsuariosList;
     }
 
-    public void setAclRolesUsuariosList(List<AclRolesUsuarios> aclRolesUsuariosList) {
+    public void setAclRolesUsuariosList(List<Usuarios> aclRolesUsuariosList) {
         this.aclRolesUsuariosList = aclRolesUsuariosList;
     }
     

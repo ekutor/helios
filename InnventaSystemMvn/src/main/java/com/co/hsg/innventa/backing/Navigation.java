@@ -51,6 +51,12 @@ public class Navigation implements Serializable {
     public void access() {
         actualModule = Modules.ACL;
     }
+     public void users() {
+        actualModule = Modules.USERS;
+    }
+    public void actions() {
+        actualModule = Modules.ACLACTIONS;
+    }
     
     public void orders() {
         actualModule = Modules.ORDERS;
@@ -155,6 +161,12 @@ public class Navigation implements Serializable {
                 break;
                  case ORDERS:
                     actualModuleCap = "Ordenes de Compra";
+                break;
+                case ACL:
+                    actualModuleCap = "Permisos";
+                break;
+                case ACLACTIONS:
+                    actualModuleCap = "Permisos";
                 break;
                 default:
                     actualModuleCap = Utils.capitalizes(actualModule.getModuleName());

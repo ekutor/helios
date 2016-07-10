@@ -8,14 +8,16 @@
 
     <ui:composition>
 
-        <p:dialog id="PersonasViewDlg" widgetVar="PersonasViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.ViewPersonasTitle}" closeOnEscape="true">
+        <p:dialog id="PersonasViewDlg" widgetVar="PersonasViewDialog" modal="true"
+                  resizable="false"  appendTo="@(body)"
+                  header="#{innventa.ViewPersonasTitle}" closeOnEscape="true">
 
             <h:form id="PersonasViewForm">
 
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" columnClasses="column" rendered="#{personasController.selected != null}">
 
-                        <h:outputText value="#{innventa.ViewPersonasLabel_id}"/>
+                        <h:outputText value="Documento"/>
                         <h:outputText value="#{personasController.selected.id}" title="#{innventa.ViewPersonasTitle_id}"/>
 
                         <h:outputText value="#{innventa.ViewPersonasLabel_nombre1}"/>

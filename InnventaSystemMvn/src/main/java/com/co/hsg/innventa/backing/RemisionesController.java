@@ -9,6 +9,7 @@ import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.session.NamedQuerys;
+import com.co.hsg.innventa.session.RemisionesProductoFacade;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -27,6 +28,9 @@ public class RemisionesController extends AbstractController<Remisiones> {
     private SystemManager systemManager;
     @Inject
     private Navigation nav;
+    @Inject
+    private RemisionesProductoFacade rpfacade;
+    
     private PedidosProducto selectedProduct;
     
     public RemisionesController() {
@@ -77,7 +81,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
         nav.createPurchaseOrder();
         return obj;
     }
-     @Override
+    @Override
     public void saveNew(ActionEvent event) {
         IValidation validator = new PurchasesValidation(selected);
         validator.doValidate();
@@ -85,6 +89,17 @@ public class RemisionesController extends AbstractController<Remisiones> {
             super.saveNew(event);
             nav.remissions();
         }
+    }
+    
+    public void save(RemisionesProducto rp) {
+      /*  IValidation validator = new PurchasesValidation(selected);
+        validator.doValidate();
+        if(!isValidationFailed()){*/
+            selected.setTotalProductos(getCantTotal());
+            
+            super.save(null);
+            rpfacade.edit(rp);
+       // }
     }
     
     @Override

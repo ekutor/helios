@@ -10,43 +10,9 @@
     
     <ui:composition id="leftMenu">
         <h:form id="MenuForm">
-            <p:menu model="#{app.menu}" />
+            <p:menu model="#{app.menu}" styleClass="innMenu" />
         </h:form>
-        <ul id="listMenu" class="nav nav-tabs nav-stacked">
-            <li class="nav-header"><p:outputLabel id="mnuModulos"
-                               value="Modulos Activos" 
-                               styleClass="nav-header"
-                               /></li>
-            <li><p:commandLink id="mnuProductos"
-                               update="contentPanel labelModule"
-                               value="Productos" 
-                               actionListener="#{navigation.products()}">
-                </p:commandLink>
-            </li>
-             <li><p:commandLink id="mnuPedidos" update="contentPanel labelModule" 
-                                value="Ordenes de Compra" actionListener="#{navigation.orders}">
-                               
-                </p:commandLink>
-            </li>
-            <li><p:commandLink id="mnuRemisiones"
-                               update="contentPanel labelModule"
-                               value="Remisiones" 
-                               actionListener="#{navigation.remissions()}">
-                </p:commandLink>
-            </li>     
-            <li><p:commandLink id="mnuClientes"
-                               update="contentPanel labelModule"
-                               value="Clientes" 
-                               actionListener="#{navigation.accounts}">
-                </p:commandLink>
-            </li>
-             <li><p:commandLink id="mnuTerceros"
-                               update="contentPanel labelModule"
-                               value="Terceros" 
-                               actionListener="#{navigation.thirds}">
-                </p:commandLink>
-            </li>
-        </ul>
+                
         <ul class="nav  nav-tabs nav-stacked">
             <li><p:outputLabel id="mnuUtil"
                                value="Utilidades" 

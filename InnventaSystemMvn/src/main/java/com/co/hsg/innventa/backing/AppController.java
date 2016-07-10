@@ -4,6 +4,7 @@ package com.co.hsg.innventa.backing;
 import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.beans.Personas;
 import com.co.hsg.innventa.beans.Usuarios;
+import com.co.hsg.innventa.converter.CryptoConverter;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.UsuariosFacade;
 import java.io.IOException;
@@ -43,6 +44,8 @@ public class AppController extends AbstractController<Usuarios> {
     private UsuariosFacade ejbFacade;
     @Inject
     private ParametrosController params;
+    
+    private CryptoConverter crypto;
 
     public enum Options{
         ORDERS
@@ -50,6 +53,7 @@ public class AppController extends AbstractController<Usuarios> {
 
     public AppController() {
         super(Usuarios.class);
+        crypto = new CryptoConverter();
     }
     
     private void chargeUserMenu(){
@@ -133,8 +137,10 @@ public class AppController extends AbstractController<Usuarios> {
         FacesContext context = FacesContext.getCurrentInstance();
         RequestContext reqCont = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
-        System.out.println("Usuario "+ username+ " pass: "+password);
-        if (user == null || !user.getPassw().equals(password)) {
+        
+        String encryptedLoginPass = crypto.convertToDatabaseColumn(password);
+        
+        if (user == null || !user.getPassw().equals(encryptedLoginPass)) {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Usuario o Clave incorrectos, Intente Nuevamente");
             context.addMessage("msgLogin", msg);
             loggedIn = false;

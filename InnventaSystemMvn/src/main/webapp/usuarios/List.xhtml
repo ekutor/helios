@@ -7,11 +7,13 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form id="UsuariosListForm">
-
+      
+        <div class='panel panel-#{navigation.moduleType("USUARIOS")}'>
+            <div class="panel-heading">Usuarios de Innventa System</div>
         <p:panel header="#{innventa.ListUsuariosTitle}">
             <p:contextMenu id="UsuariosDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('UsuariosListForm:createButton').click();" icon="ui-icon-plus"/>
-                <p:menuitem value="#{innventa.View}" onclick="document.getElementById('UsuariosListForm:viewButton').click();" icon="ui-icon-search"/>
+                
                 <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('UsuariosListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('UsuariosListForm:deleteButton').click();" icon="ui-icon-trash"/>
                 <p:separator/>
@@ -21,42 +23,43 @@
                          value="#{usuariosController.items}"
                          var="item"
                          rowKey="#{item.usuario}"
-                         paginator="true"
-                         rows="30"
-                         rowsPerPageTemplate="10,20,30,40,50,100"
+                         paginator="false"
+                        
                          selectionMode="single"
                          selection="#{usuariosController.selected}">
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{usuariosController.resetParents}"/>
-                <p:ajax event="rowDblselect" onsuccess="document.getElementById('UsuariosListForm:viewButton').click();"/>
-
-                <p:column sortBy="#{item.usuario}" filterBy="#{item.usuario}">
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:editButton,@form:deleteButton,@form:UsuariosDataTableContextMenu" listener="#{usuariosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:editButton @form:deleteButton" listener="#{usuariosController.resetParents}"/>
+            
+                <p:column >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListUsuariosTitle_usuario}"/>
                     </f:facet>
                     <h:outputText value="#{item.usuario}"/>
                 </p:column>
-
-
-                <p:column sortBy="#{item.passw}" filterBy="#{item.passw}">
+                
+                 <p:column >
                     <f:facet name="header">
-                        <h:outputText value="#{innventa.ListUsuariosTitle_passw}"/>
+                        <h:outputText value="Nombre"/>
                     </f:facet>
-                    <h:outputText value="#{item.passw}"/>
+                    <h:outputText value="#{item.persona.nombre1}"/>
+                </p:column>
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Apellido"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.apellido1}"/>
+                </p:column>
+                
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Mail"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.mail}"/>
                 </p:column>
 
-
-                <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListUsuariosTitle_eliminado}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.eliminado}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.fechaCreacion}" filterBy="#{item.fechaCreacion}">
+                <p:column >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListUsuariosTitle_fechaCreacion}"/>
                     </f:facet>
@@ -66,7 +69,7 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
+                <p:column >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListUsuariosTitle_creadoPor}"/>
                     </f:facet>
@@ -74,7 +77,7 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
+                <p:column >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListUsuariosTitle_modificadoPor}"/>
                     </f:facet>
@@ -82,7 +85,7 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.fechaModificacion}" filterBy="#{item.fechaModificacion}">
+                <p:column >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListUsuariosTitle_fechaModificacion}"/>
                     </f:facet>
@@ -91,25 +94,16 @@
                     </h:outputText>
                 </p:column>
 
-                <!--
-                                    <p:column sortBy="#{item.persona.id}" filterBy="#{item.persona.id}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListUsuariosTitle_persona}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.persona.id}"/>
-                                    </p:column>
-                -->
-
             </p:dataTable>
 
             <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{usuariosController.prepareCreate}" update=":UsuariosCreateForm" oncomplete="PF('UsuariosCreateDialog').show()"/>
-            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":UsuariosViewForm" oncomplete="PF('UsuariosViewDialog').show()" disabled="#{empty usuariosController.selected}"/>
-            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":UsuariosEditForm" oncomplete="PF('UsuariosEditDialog').show()" disabled="#{empty usuariosController.selected}"/>
+             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":UsuariosEditForm" oncomplete="PF('UsuariosEditDialog').show()" disabled="#{empty usuariosController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{usuariosController.delete}" update=":growl,datalist" disabled="#{empty usuariosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 
         </p:panel>
+        </div>
         <ui:include src="/confirmation.xhtml"/>
     </h:form>
 
