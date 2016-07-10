@@ -17,8 +17,8 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>cryptoConverter</managed-bean-name>
-        <managed-bean-class>com.co.hsg.innventa.converter.CryptoConverter</managed-bean-class>
+        <managed-bean-name>aclRolesConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.AclRolesConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>

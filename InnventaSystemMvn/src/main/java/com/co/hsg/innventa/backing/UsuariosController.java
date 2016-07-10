@@ -4,7 +4,6 @@ import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.converter.CryptoConverter;
-import java.util.ResourceBundle;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -18,7 +17,7 @@ public class UsuariosController extends AbstractController<Usuarios> {
     private PersonasController personaController;
     @Inject
     private MobilePageController mobilePageController;
-
+    
     private CryptoConverter crypto;
     
     private String confirmationPass;
@@ -87,6 +86,5 @@ public class UsuariosController extends AbstractController<Usuarios> {
             return false;
        } 
     }
-    
     
 }

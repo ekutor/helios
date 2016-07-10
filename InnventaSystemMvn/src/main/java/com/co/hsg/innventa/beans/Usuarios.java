@@ -3,6 +3,7 @@ package com.co.hsg.innventa.beans;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -65,7 +66,7 @@ public class Usuarios implements Serializable {
     private Personas persona;
     
     @JoinColumn(name = "rol", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.MERGE,optional = false)
     private AclRoles rol;
 
     public Usuarios() {

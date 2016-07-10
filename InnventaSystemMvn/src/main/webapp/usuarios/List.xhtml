@@ -10,7 +10,7 @@
       
         <div class='panel panel-#{navigation.moduleType("USUARIOS")}'>
             <div class="panel-heading">Usuarios de Innventa System</div>
-        <p:panel header="#{innventa.ListUsuariosTitle}">
+        <p:panel header="Usuarios Actuales">
             <p:contextMenu id="UsuariosDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('UsuariosListForm:createButton').click();" icon="ui-icon-plus"/>
                 
@@ -58,7 +58,13 @@
                     </f:facet>
                     <h:outputText value="#{item.persona.mail}"/>
                 </p:column>
-
+                
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Rol"/>
+                    </f:facet>
+                    <h:outputText value="#{item.rol.nombre}"/>
+                </p:column>
                 <p:column >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListUsuariosTitle_fechaCreacion}"/>
@@ -96,7 +102,7 @@
 
             </p:dataTable>
 
-            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{usuariosController.prepareCreate}" update=":UsuariosCreateForm" oncomplete="PF('UsuariosCreateDialog').show()"/>
+            <p:commandButton id="createButton"                             icon="ui-icon-person"   value="#{innventa.Create}" actionListener="#{usuariosController.prepareCreate}" update=":UsuariosCreateForm" oncomplete="PF('UsuariosCreateDialog').show()"/>
              <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":UsuariosEditForm" oncomplete="PF('UsuariosEditDialog').show()" disabled="#{empty usuariosController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{usuariosController.delete}" update=":growl,datalist" disabled="#{empty usuariosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>

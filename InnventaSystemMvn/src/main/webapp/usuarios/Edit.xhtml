@@ -41,8 +41,27 @@
                             <h:outputText id="persona" value="#{usuariosController.selected.persona.nombre1} #{usuariosController.selected.persona.apellido1}"/>
                             <p:tooltip for="persona" value="#{usuariosController.getComponentMessages('persona', innventa.EditUsuariosHelpText_persona)}"/>
                         </h:panelGroup>
+                        
+                        <p:outputLabel value="Rol" for="rol"  rendered="#{app.isAdmin()}"/>
+                        <h:panelGroup rendered="#{app.isAdmin()}">
+                            <h:panelGroup>
+                                <p:selectOneMenu rendered="#{app.isAdmin()}" id="rol" value="#{usuariosController.selected.rol}" required="true" 
+                                                 requiredMessage="El rol es requerido" 
+                                                 converter="#{aclRolesConverter}">
+                                  <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                  <f:selectItems value="#{aclRolesController.items}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem}"
+                                                 itemLabel="#{rolItem.nombre}"
+                                                 />
+  
+                              </p:selectOneMenu>
+                                <p:tooltip for="rol" value="Defina un rol para el usuario"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuariosController.save}" value="#{innventa.Save}" update="display,:UsuariosListForm:datalist" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditDialog'));">
+                    <p:commandButton actionListener="#{usuariosController.save}" value="#{innventa.Save}" update="display, contentPanel" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
                     <p:commandButton value="#{innventa.Cancel}" onclick="PF('UsuariosEditDialog').hide()"/>

@@ -1,6 +1,11 @@
 package com.co.hsg.innventa.backing;
 
 
+import com.co.hsg.innventa.backing.util.Actions;
+import static com.co.hsg.innventa.backing.util.Actions.OWNER;
+import static com.co.hsg.innventa.backing.util.Actions.PERMITTED;
+import com.co.hsg.innventa.beans.AclAcciones;
+import com.co.hsg.innventa.beans.AclRolesAccion;
 import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.beans.Personas;
 import com.co.hsg.innventa.beans.Usuarios;
@@ -37,6 +42,8 @@ public class AppController extends AbstractController<Usuarios> {
     private String verMaestros = "show"; 
     private String maestros ="Mostrar Maestros";
     private boolean activarMaestros;
+
+    private boolean admin;
     
     private MenuModel menu;
     
@@ -151,6 +158,16 @@ public class AppController extends AbstractController<Usuarios> {
         } else {
             loggedIn = true;
             this.user = user;
+            admin = false;
+            for (AclRolesAccion actions : user.getRol().getAccionesList()) {
+                AclAcciones actionModule = actions.getAccion();
+                if (actionModule.getModulo().getId().equals(Modules.ADMIN.name())) {
+                    if (actionModule.getAcceso() == Actions.PERMITTED.value) {
+                        admin =  true;
+                        break;
+                    }
+                }
+            }
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", username);
             context.getExternalContext().getSessionMap().put("user", user);
             return "/index?faces-redirect=true";
@@ -172,6 +189,11 @@ public class AppController extends AbstractController<Usuarios> {
      
     }
     
+    public boolean isAdmin(){
+        return admin;
+    }
+    
+     
     public String onload() {
         Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         Usuarios u = (Usuarios) sessionMap.get("user");

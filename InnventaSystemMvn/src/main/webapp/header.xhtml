@@ -58,8 +58,23 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> #{app.username}</a></li>
-                        <li><a href="#"></a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                <span class="glyphicon glyphicon-user"></span> #{app.username}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li>
+                                    <p:commandLink id="changePassw" update="confMaestros contentPanel labelModule" 
+                                                   actionListener="#{usuariosController.setSelected(app.user)}"
+                                                   oncomplete="PF('UsuariosEditDialog').show()">
+                                        Cambiar Contraseña
+                                    </p:commandLink>
+                                </li>
+                            </ul>
+                        
+                        </li>
+                        
                         <li><p:commandLink id="logout" actionListener="#{app.logout}">
                                 <span class="glyphicon glyphicon-log-out"/>
                             </p:commandLink>
@@ -72,6 +87,6 @@
                 </div>
             </div>
         </div>
-       
+       <ui:include src="/usuarios/Edit.xhtml"/>
     </ui:composition>
 </html>

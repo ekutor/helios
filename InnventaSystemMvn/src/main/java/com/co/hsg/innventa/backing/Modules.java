@@ -14,6 +14,7 @@ public enum Modules {
     CREATE_ORDER("pedidosCreate","primary","clipboard"),
     CREATE_REMISSION("remisionesProducto","primary","truck"),
     ACL("aclRoles","info","edit"),ACLACTIONS("aclRolesAccion","info","edit"),
+    ADMIN("Administracion","info","gears"),
     ;
    
     private String moduleName;

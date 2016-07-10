@@ -49,11 +49,29 @@
                                 <f:selectItems value="#{personasController.items}"
                                                var="personaItem"
                                                itemValue="#{personaItem}"
-                                               itemLabel="#{personaItem.nombre1}"
+                                               itemLabel="#{personaItem.nombre1} #{personaItem.apellido1}"
                                                />
 
                             </p:selectOneMenu>
                             <p:tooltip for="persona" value="#{usuariosController.getComponentMessages('persona', innventa.CreateUsuariosHelpText_persona)}"/>
+                        </h:panelGroup>
+                        
+                         <p:outputLabel value="Rol" for="rol"  rendered="#{app.isAdmin()}"/>
+                        <h:panelGroup rendered="#{app.isAdmin()}">
+                            <h:panelGroup>
+                                <p:selectOneMenu rendered="#{app.isAdmin()}" id="rol" value="#{usuariosController.selected.rol}" required="true" 
+                                                 requiredMessage="El rol es requerido" 
+                                                 converter="#{aclRolesConverter}">
+                                  <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                  <f:selectItems value="#{aclRolesController.items}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem}"
+                                                 itemLabel="#{rolItem.nombre}"
+                                                 />
+  
+                              </p:selectOneMenu>
+                                <p:tooltip for="rol" value="Defina un rol para el usuario"/>
+                            </h:panelGroup>
                         </h:panelGroup>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuariosController.saveNew}" value="#{innventa.Save}" update="display,:UsuariosListForm:datalist" oncomplete="handleSubmit(xhr,status,args,PF('UsuariosCreateDialog'));">
