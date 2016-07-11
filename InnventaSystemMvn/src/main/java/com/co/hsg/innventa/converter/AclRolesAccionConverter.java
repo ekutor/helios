@@ -2,16 +2,18 @@ package com.co.hsg.innventa.converter;
 
 import com.co.hsg.innventa.beans.AclRolesAccion;
 import com.co.hsg.innventa.session.AclRolesAccionFacade;
-import com.co.hsg.innventa.backing.util.JsfUtil;
+import com.co.hsg.innventa.backing.util.Permissions;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.convert.FacesConverter;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.inject.Named;
 
-@FacesConverter(value = "aclRolesAccionConverter")
+@Named(value = "aclRolesAccionConverter")
+@RequestScoped
 public class AclRolesAccionConverter implements Converter {
 
     @Inject
@@ -19,33 +21,22 @@ public class AclRolesAccionConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-        if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
-            return null;
+        if (value == null || value.length() == 0) {
+            return 0;
         }
-        return this.ejbFacade.find(getKey(value));
+        Permissions p = Permissions.getValue(value);
+        return p.value;
     }
 
-    java.lang.Integer getKey(String value) {
-        java.lang.Integer key;
-        key = Integer.valueOf(value);
-        return key;
-    }
-
-    String getStringKey(java.lang.Integer value) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(value);
-        return sb.toString();
-    }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-        if (object == null
-                || (object instanceof String && ((String) object).length() == 0)) {
+        if (object == null){
             return null;
         }
-        if (object instanceof AclRolesAccion) {
-            AclRolesAccion o = (AclRolesAccion) object;
-            return getStringKey(o.getId());
+        if (object instanceof Short) {
+            Permissions p = Permissions.getAction((Short) object);
+            return p.visualName;
         } else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), AclRolesAccion.class.getName()});
             return null;

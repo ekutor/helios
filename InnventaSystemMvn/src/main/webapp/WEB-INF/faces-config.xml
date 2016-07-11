@@ -22,6 +22,11 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>aclRolesAccionConverter</managed-bean-name>
+        <managed-bean-class>com.co.hsg.innventa.converter.AclRolesAccionConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>cuentasConverter</managed-bean-name>
         <managed-bean-class>com.co.hsg.innventa.converter.CuentasConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>

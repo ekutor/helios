@@ -66,55 +66,92 @@
       
                <p:column headerText="Acceder">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{item.accion.acceso}"/></f:facet>
+                        <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.acceso}"/></f:facet>
                          <f:facet name="input">
-                            <p:inputText value="#{item.accion.acceso}" style="width:100%"></p:inputText>
+                             <p:selectOneMenu  value="#{item.accion.acceso}" 
+                                                 converter="#{aclRolesAccionConverter}" style="width:100%">
+                                 <f:selectItems value="#{aclRolesController.permittedAtions()}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem.value}"
+                                                 itemLabel="#{rolItem.visualName}"
+                                                 />
+  
+                              </p:selectOneMenu>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>
-                
+               
                 <p:column headerText="Crear">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{item.accion.crear}"/></f:facet>
+                        <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.crear}"/></f:facet>
                          <f:facet name="input">
-                            <p:inputText value="#{item.accion.crear}" style="width:100%"></p:inputText>
+                             <p:selectOneMenu  value="#{item.accion.crear}" 
+                                                 converter="#{aclRolesAccionConverter}" style="width:100%">
+                                 <f:selectItems value="#{aclRolesController.permittedAtions()}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem.value}"
+                                                 itemLabel="#{rolItem.visualName}"
+                                                 />
+  
+                              </p:selectOneMenu>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>
                 
                  <p:column headerText="Editar">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{item.accion.editar}"/></f:facet>
+                        <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.editar}"/></f:facet>
                          <f:facet name="input">
-                            <p:inputText value="#{item.accion.editar}" style="width:100%">
-                            </p:inputText>
+                             <p:selectOneMenu  value="#{item.accion.editar}" 
+                                                 converter="#{aclRolesAccionConverter}" style="width:100%">
+                                 <f:selectItems value="#{aclRolesController.permittedAtions()}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem.value}"
+                                                 itemLabel="#{rolItem.visualName}"
+                                                 />
+  
+                              </p:selectOneMenu>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>
                 
                  <p:column headerText="Eliminar">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{item.accion.eliminar}"/></f:facet>
+                        <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.eliminar}"/></f:facet>
                          <f:facet name="input">
-                            <p:inputText value="#{item.accion.eliminar}" style="width:100%">
-                            </p:inputText>
+                             <p:selectOneMenu  value="#{item.accion.eliminar}" 
+                                                 converter="#{aclRolesAccionConverter}" style="width:100%">
+                                 <f:selectItems value="#{aclRolesController.permittedAtions()}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem.value}"
+                                                 itemLabel="#{rolItem.visualName}"
+                                                 />
+  
+                              </p:selectOneMenu>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>
                 
                  <p:column headerText="Ver Precios">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{item.accion.verPrecios}"/></f:facet>
+                        <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.verPrecios}"/></f:facet>
                          <f:facet name="input">
-                            <p:inputText value="#{item.accion.verPrecios}" style="width:100%">
-                            </p:inputText>
+                                <p:selectOneMenu  value="#{item.accion.verPrecios}" 
+                                                 converter="#{aclRolesAccionConverter}" style="width:100%">
+                                 <f:selectItems value="#{aclRolesController.permittedAtions()}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem.value}"
+                                                 itemLabel="#{rolItem.visualName}"
+                                                 />
+  
+                              </p:selectOneMenu>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>
                 
                  <p:column headerText="Exportar">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{item.accion.exportar}"/></f:facet>
+                        <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.exportar}"/></f:facet>
                          <f:facet name="input">
                             <p:inputText value="#{item.accion.exportar}" style="width:100%">
                             </p:inputText>
@@ -124,7 +161,7 @@
                 
                  <p:column headerText="Importar">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{item.accion.importar}"/></f:facet>
+                        <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.importar}"/></f:facet>
                          <f:facet name="input">
                             <p:inputText value="#{item.accion.importar}" style="width:100%">
                             </p:inputText>

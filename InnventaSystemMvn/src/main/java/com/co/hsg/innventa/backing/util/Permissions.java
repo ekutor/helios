@@ -41,4 +41,20 @@ public enum Permissions {
         }
         return Permissions.NOT_ALLOWED;
     }
+    
+     public static Permissions getValue(String action) {
+        for(Permissions p : Permissions.values()){
+            if(p.visualName.equals(action)){
+                return p;
+            }
+        }
+        return Permissions.NOT_ALLOWED;
+    }
+     
+     public Short getValue(){
+         return value;
+     }
+     public String getVisualName(){
+         return visualName;
+     }
 }

@@ -1,13 +1,16 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
+import com.co.hsg.innventa.backing.util.Permissions;
 import com.co.hsg.innventa.beans.AclAcciones;
 import com.co.hsg.innventa.beans.AclRoles;
 import com.co.hsg.innventa.beans.AclRolesAccion;
 import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -26,6 +29,7 @@ public class AclRolesController extends AbstractController<AclRoles> {
     
     private AclRolesAccion selectedAction;
     private Usuarios selectedUser;
+   
     
     public AclRolesController() {
         // Inform the Abstract parent controller of the concrete AclRoles Entity
@@ -83,5 +87,9 @@ public class AclRolesController extends AbstractController<AclRoles> {
         this.selectedUser = selectedUser;
     }
     
+    public List<Permissions> permittedAtions(){
+        List<Permissions> l  = Arrays.asList(Permissions.values());
+        return l;
+    }
     
 }
