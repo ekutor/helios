@@ -8,9 +8,9 @@
 
     <ui:composition>
 
-        <p:dialog id="AclRolesCreateDlg" widgetVar="AclRolesCreateDialog" modal="true"
+        <p:dialog id="AclRolesCreateDialog" widgetVar="AclRolesCreateDialog" modal="true"
                   resizable="false" 
-                  appendTo="@(body)" 
+                  appendTo="@parent" 
                   header="#{innventa.CreateAclRolesTitle}" closeOnEscape="true">
 
             <h:form id="AclRolesCreateForm">
@@ -39,13 +39,13 @@
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
 
-                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('AclRolesCreateDialog').hide()"/>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('AclRolesCreateDialog').hide()" />
                 </h:panelGroup>
 
             </h:form>
 
         </p:dialog>
-
+ 
     </ui:composition>
 
 </html>

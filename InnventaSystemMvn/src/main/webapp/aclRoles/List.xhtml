@@ -28,11 +28,11 @@
                          selection="#{aclRolesController.selected}"
                          tableStyleClass="table table-striped">
 
-                <p:ajax event="rowSelect"  listener="#{navigation.actions}" update="contentPanel growl "/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:editButton,@form:deleteButton,@form:AclRolesDataTableContextMenu"/>
+                <p:ajax event="rowSelect"  listener="#{navigation.actions}" update="datalist contentPanel growl AclRolesCreateDialog"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:editButton,@form:deleteButton,@form:AclRolesDataTableContextMenu AclRolesCreateDialog"/>
                 <p:ajax event="contextMenu" update="@form:createButton  @form:editButton @form:deleteButton"/>
                 <p:ajax event="rowDblselect" onsuccess=""/>
-
+                
                 <p:column >
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListAclRolesTitle_nombre}"/>
@@ -52,8 +52,8 @@
 
 
             </p:dataTable>
-
-            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{aclRolesController.prepareCreate}" update=":AclRolesCreateForm" oncomplete="PF('AclRolesCreateDialog').show()"/>
+<p:ajax event="close" update="datalist, :AclRolesListForm ,:AclRolesCreateForm:display, :AclRolesCreateForm"/> 
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{aclRolesController.prepareCreate}" update="datalist, :AclRolesListForm ,:AclRolesCreateForm:display" oncomplete="PF('AclRolesCreateDialog').show()"/>
               <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":AclRolesEditForm" oncomplete="PF('AclRolesEditDialog').show()" disabled="#{empty aclRolesController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{aclRolesController.delete(aclRolesController.selected.id)}" update=":growl,datalist" disabled="#{empty aclRolesController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>

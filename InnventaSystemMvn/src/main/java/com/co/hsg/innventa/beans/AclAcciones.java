@@ -51,6 +51,10 @@ public class AclAcciones implements Serializable {
     @NotNull
     @Column(name = "acceso")
     private short acceso;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "crear")
+    private short crear;
      @Basic(optional = false)
     @NotNull
     @Column(name = "editar")
@@ -110,6 +114,14 @@ public class AclAcciones implements Serializable {
 
     public void setAcceso(short acceso) {
         this.acceso = acceso;
+    }
+
+    public short getCrear() {
+        return crear;
+    }
+
+    public void setCrear(short crear) {
+        this.crear = crear;
     }
 
     public short getEditar() {

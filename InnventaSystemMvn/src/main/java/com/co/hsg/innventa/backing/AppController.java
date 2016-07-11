@@ -94,6 +94,9 @@ public class AppController extends AbstractController<Usuarios> {
                 case ACCESS:
                     value = mod.getAcceso();
                     break;
+                case CREATE:
+                    value = mod.getCrear();
+                    break;
                 case DELETE:
                     value = mod.getEliminar();
                     break;

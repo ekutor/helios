@@ -1,7 +1,9 @@
 package com.co.hsg.innventa.backing;
 
+import com.co.hsg.innventa.backing.util.Actions;
 import com.co.hsg.innventa.session.AbstractFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
+import com.co.hsg.innventa.backing.util.Permissions;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.io.Serializable;
 import java.util.Collection;
@@ -32,10 +34,16 @@ public abstract class AbstractController<T> implements Serializable {
 
     @Inject
     protected AbstractFacade<T> ejbFacade;
+    
+    @Inject
+    protected AppController app;
+    
     private Class<T> itemClass;
     protected T selected;
     protected Collection<T> items;
     protected boolean keepList;
+    
+    protected Modules actualModule;
 
     private enum PersistAction {
         CREATE,
@@ -67,7 +75,19 @@ public abstract class AbstractController<T> implements Serializable {
     public void setSelected(T selected) {
         this.selected = selected;
     }
-
+    
+    public boolean isAllowed(String action, String id){
+       Actions act  = Actions.getAction(action);
+       Permissions permission = app.getAccessType(actualModule, act); 
+       if(Permissions.PERMITTED.equals(permission)){
+           return true;
+       }else if(Permissions.OWNER.equals(permission)){
+           if(app.getActualUserId().equals(id)){
+               return true;
+           }
+       }
+       return false;
+    }
     /**
      * Sets any embeddable key fields if an Entity uses composite keys. If the
      * entity does not have composite keys, this method performs no actions and

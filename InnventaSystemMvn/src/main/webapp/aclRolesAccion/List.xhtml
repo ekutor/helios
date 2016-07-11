@@ -25,7 +25,7 @@
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
 
-                    <p:commandButton value="#{innventa.Cancel}" actionListener="#{navigation.access()}" update=" contentPanel ,:growl"/>
+                    <p:commandButton value="#{innventa.Cancel}" actionListener="#{navigation.access()}" update="contentPanel labelModule"/>
                     
                 </h:panelGroup>
               </h:form>
@@ -69,6 +69,15 @@
                         <f:facet name="output"><h:outputText value="#{item.accion.acceso}"/></f:facet>
                          <f:facet name="input">
                             <p:inputText value="#{item.accion.acceso}" style="width:100%"></p:inputText>
+                        </f:facet>
+                   </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Crear">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{item.accion.crear}"/></f:facet>
+                         <f:facet name="input">
+                            <p:inputText value="#{item.accion.crear}" style="width:100%"></p:inputText>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>

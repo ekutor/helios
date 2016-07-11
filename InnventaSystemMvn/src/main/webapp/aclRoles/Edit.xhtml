@@ -17,13 +17,15 @@
 
                         <p:outputLabel value="#{innventa.EditAclRolesLabel_nombre}" for="nombre" />
                         <h:panelGroup>
-                            <p:inputText id="nombre" value="#{aclRolesController.selected.nombre}" title="#{innventa.EditAclRolesTitle_nombre}" required="true" requiredMessage="#{innventa.EditAclRolesRequiredMessage_nombre}" size="30" maxlength="30"/>
+                            <p:inputText id="nombre" value="#{aclRolesController.selected.nombre}" title="#{innventa.EditAclRolesTitle_nombre}" 
+                                         required="true" requiredMessage="#{innventa.EditAclRolesRequiredMessage_nombre}" size="30" maxlength="30"/>
                             <p:tooltip for="nombre" value="#{aclRolesController.getComponentMessages('nombre', innventa.EditAclRolesHelpText_nombre)}"/>
                         </h:panelGroup>
 
                         <p:outputLabel value="#{innventa.EditAclRolesLabel_descripcion}" for="descripcion" />
                         <h:panelGroup>
-                            <p:inputText id="descripcion" value="#{aclRolesController.selected.descripcion}" title="#{innventa.EditAclRolesTitle_descripcion}" required="true" requiredMessage="#{innventa.EditAclRolesRequiredMessage_descripcion}" size="255" maxlength="30"/>
+                            <p:inputText id="descripcion" value="#{aclRolesController.selected.descripcion}" title="#{innventa.EditAclRolesTitle_descripcion}" 
+                                         required="true" requiredMessage="#{innventa.EditAclRolesRequiredMessage_descripcion}" size="30" maxlength="30"/>
                             <p:tooltip for="descripcion" value="#{aclRolesController.getComponentMessages('descripcion', innventa.EditAclRolesHelpText_descripcion)}"/>
                         </h:panelGroup>
 

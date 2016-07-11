@@ -6,7 +6,6 @@ import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.backing.util.Permissions;
 import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.converter.CryptoConverter;
-import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Collection;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -22,8 +21,7 @@ public class UsuariosController extends AbstractController<Usuarios> {
     private PersonasController personaController;
     @Inject
     private MobilePageController mobilePageController;
-    @Inject
-    private AppController app;
+    
     private CryptoConverter crypto;
     
     private String confirmationPass;
@@ -32,6 +30,7 @@ public class UsuariosController extends AbstractController<Usuarios> {
         // Inform the Abstract parent controller of the concrete Usuarios Entity
         super(Usuarios.class);
         crypto = new CryptoConverter();
+        actualModule = Modules.USERS;
     }
 
     /**
