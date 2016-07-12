@@ -82,7 +82,7 @@ public abstract class AbstractController<T> implements Serializable {
        if(Permissions.PERMITTED.equals(permission)){
            return true;
        }else if(Permissions.OWNER.equals(permission)){
-           if(app.getActualUserId().equals(id)){
+           if(Actions.CREATE.equals(act) || app.getActualUserId().equals(id)){
                return true;
            }
        }

@@ -52,14 +52,14 @@
                             <p:tooltip for="und" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
                         </h:panelGroup>
                         
-                        <p:outputLabel value="#{innventa.CreateProductosLabel_precioCompra}" for="precioCompra" />
-                        <h:panelGroup>
+                        <p:outputLabel rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.CreateProductosLabel_precioCompra}" for="precioCompra" />
+                        <h:panelGroup rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
                             <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.CreateProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_precioCompra}"/>
                             <p:tooltip for="precioCompra" value="#{productosController.getComponentMessages('precioCompra', innventa.CreateProductosHelpText_precioCompra)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel value="#{innventa.CreateProductosLabel_precioVenta}" for="precioVenta" />
-                        <h:panelGroup>
+                        <p:outputLabel rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.CreateProductosLabel_precioVenta}" for="precioVenta" />
+                        <h:panelGroup rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
                             <p:inputText id="precioVenta" value="#{productosController.selected.precioVenta}" title="#{innventa.CreateProductosTitle_precioVenta}" required="true"/>
                             <p:tooltip for="precioVenta" value="#{productosController.getComponentMessages('precioVenta', innventa.CreateProductosHelpText_precioVenta)}"/>
                         </h:panelGroup>

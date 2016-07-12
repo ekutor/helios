@@ -50,9 +50,9 @@
                          selection="#{aclRolesController.selectedAction}"
                          editable="true" editMode="cell">
 
-                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesUsuariosDataTableContextMenu" listener="#{aclRolesUsuariosController.resetParents}"/>
-                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesUsuariosDataTableContextMenu" listener="#{aclRolesUsuariosController.resetParents}"/>
-                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{aclRolesUsuariosController.resetParents}"/>
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesUsuariosDataTableContextMenu" />
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:AclRolesUsuariosDataTableContextMenu" />
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" />
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('AclRolesUsuariosListForm:viewButton').click();"/>
 
                 
@@ -153,8 +153,17 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.exportar}"/></f:facet>
                          <f:facet name="input">
-                            <p:inputText value="#{item.accion.exportar}" style="width:100%">
-                            </p:inputText>
+                             <f:facet name="input">
+                                <p:selectOneMenu  value="#{item.accion.exportar}" 
+                                                 converter="#{aclRolesAccionConverter}" style="width:100%">
+                                 <f:selectItems value="#{aclRolesController.permittedAtions()}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem.value}"
+                                                 itemLabel="#{rolItem.visualName}"
+                                                 />
+  
+                              </p:selectOneMenu>
+                        </f:facet>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>
@@ -163,8 +172,17 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText converter="#{aclRolesAccionConverter}" value="#{item.accion.importar}"/></f:facet>
                          <f:facet name="input">
-                            <p:inputText value="#{item.accion.importar}" style="width:100%">
-                            </p:inputText>
+                             <f:facet name="input">
+                                <p:selectOneMenu  value="#{item.accion.importar}" 
+                                                 converter="#{aclRolesAccionConverter}" style="width:100%">
+                                 <f:selectItems value="#{aclRolesController.permittedAtions()}"
+                                                 var="rolItem"
+                                                 itemValue="#{rolItem.value}"
+                                                 itemLabel="#{rolItem.visualName}"
+                                                 />
+  
+                              </p:selectOneMenu>
+                        </f:facet>
                         </f:facet>
                    </p:cellEditor>
                 </p:column>

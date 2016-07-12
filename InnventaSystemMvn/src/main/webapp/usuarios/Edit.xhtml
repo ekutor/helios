@@ -7,11 +7,11 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-         <h:form id="UsuariosEditForm">
+        
         <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="true"  appendTo="@(body)" 
                   header="Editar Usuario" closeOnEscape="true">
 
-           
+            <h:form id="UsuariosEditForm">
                 <p:messages  id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 <h:panelGroup id="display">
                     <p:panelGrid  columns="2" columnClasses="column" >
@@ -67,9 +67,9 @@
                     </p:commandButton>
                     <p:commandButton value="#{innventa.Cancel}" onclick="PF('UsuariosEditDialog').hide()"/>
                 </h:panelGroup>
-
+            </h:form>
         </p:dialog>
-       </h:form>
+       
 
     </ui:composition>
 

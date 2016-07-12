@@ -36,15 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Productos.findByCodigo", query = "SELECT p FROM Productos p WHERE p.codigo = :codigo"),
     @NamedQuery(name = "Productos.findByState", query = "SELECT p FROM Productos p WHERE p.tipoCodigo = :state AND p.eliminado=0 Order by p.nombre"),
     @NamedQuery(name = "Productos.findByNombre", query = "SELECT p FROM Productos p WHERE p.nombre = :nombre"),
-    @NamedQuery(name = "Productos.findByPrecioCompra", query = "SELECT p FROM Productos p WHERE p.precioCompra = :precioCompra"),
-    @NamedQuery(name = "Productos.findByPrecioVenta", query = "SELECT p FROM Productos p WHERE p.precioVenta = :precioVenta"),
-    @NamedQuery(name = "Productos.findByCategoria", query = "SELECT p FROM Productos p WHERE p.categoria = :categoria"),
-    @NamedQuery(name = "Productos.findByCategoriaImpuesto", query = "SELECT p FROM Productos p WHERE p.categoriaImpuesto = :categoriaImpuesto"),
-    @NamedQuery(name = "Productos.findByAtributo", query = "SELECT p FROM Productos p WHERE p.atributo = :atributo"),
-    @NamedQuery(name = "Productos.findByStock", query = "SELECT p FROM Productos p WHERE p.stock = :stock"),
-    @NamedQuery(name = "Productos.findByCreadoPor", query = "SELECT p FROM Productos p WHERE p.creadoPor = :creadoPor"),
-    @NamedQuery(name = "Productos.findByModificadoPor", query = "SELECT p FROM Productos p WHERE p.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Productos.findByEliminado", query = "SELECT p FROM Productos p WHERE p.eliminado = :eliminado"),
     @NamedQuery(name = "Productos.delete", query = "UPDATE Productos p SET p.eliminado = 1 WHERE p.id =:id"),
 })
 public class Productos implements Serializable {

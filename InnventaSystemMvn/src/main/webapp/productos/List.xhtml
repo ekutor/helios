@@ -12,10 +12,10 @@
           
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="ProductosDataTableContextMenu" for="datalist">  
-                <p:menuitem value="#{innventa.Create}" onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.Create}" rendered="#{app.isAllowed("CREATE", "")}" onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>
                 <p:menuitem value="#{innventa.View}" onclick="document.getElementById('ProductosListForm:viewButton').click();" icon="ui-icon-search"/>
-                <p:menuitem value="#{innventa.Edit}" onclick="document.getElementById('ProductosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('ProductosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:menuitem value="#{innventa.Edit}" rendered="#{app.isAllowed("EDIT", productosController.selected.creadoPor)}" onclick="document.getElementById('ProductosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" rendered="#{app.isAllowed("DELETE", productosController.selected.creadoPor)}" onclick="document.getElementById('ProductosListForm:deleteButton').click();" icon="ui-icon-trash"/>
                 <p:separator/>
                 <p:menuitem value="#{innventa.ProductosMenuItem_pedidosProductoList}" icon="ui-icon-search"  action="#{productosController.navigatePedidosProductoList}" disabled="#{empty productosController.selected.pedidosProductoList}" ajax="false"/>  
             </p:contextMenu>
@@ -71,14 +71,14 @@
                         <h:outputText value="#{item.unidadMedida.nombre}"/>
                 </p:column>
                 
-                <p:column sortBy="#{item.precioCompra}" filterBy="#{item.precioCompra}">
+                <p:column sortBy="#{item.precioCompra}" filterBy="#{item.precioCompra}" rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.CreateProductosTitle_precioCompra}"/>
                     </f:facet>
                     <h:outputText value="#{item.precioCompra}"/>
                 </p:column>
 
-                <p:column sortBy="#{item.precioVenta}" filterBy="#{item.precioVenta}">
+                <p:column sortBy="#{item.precioVenta}" filterBy="#{item.precioVenta}" rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListProductosTitle_precioVenta}"/>
                     </f:facet>
@@ -98,53 +98,14 @@
                     </f:facet>
                     <h:outputText value="#{productosController.transformTipoProducto(item.tipoCodigo)}"/>
                 </p:column>
-                <!--
-                                    <p:column sortBy="#{item.categoriaImpuesto}" filterBy="#{item.categoriaImpuesto}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListProductosTitle_categoriaImpuesto}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.categoriaImpuesto}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.atributo}" filterBy="#{item.atributo}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListProductosTitle_atributo}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.atributo}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.creadoPor}" filterBy="#{item.creadoPor}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListProductosTitle_creadoPor}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.creadoPor}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.modificadoPor}" filterBy="#{item.modificadoPor}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListProductosTitle_modificadoPor}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.modificadoPor}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.eliminado}" filterBy="#{item.eliminado}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{innventa.ListProductosTitle_eliminado}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.eliminado}"/>
-                                    </p:column>
-                -->
+              
 
             </p:dataTable>
 
-            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm" oncomplete="PF('ProductosCreateDialog').show()"/>
-            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
+            <p:commandButton id="createButton" rendered="#{app.isAllowed("CREATE", "")}" icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm" oncomplete="PF('ProductosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   rendered="#{app.isAllowed("EDIT", productosController.selected.creadoPor)}" style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
-            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete(productosController.selected.id)}" update=":growl,datalist" disabled="#{empty productosController.selected}">
+            <p:commandButton id="deleteButton" rendered="#{app.isAllowed("DELETE", productosController.selected.creadoPor)}" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete(productosController.selected.id)}" update=":growl,datalist" disabled="#{empty productosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 

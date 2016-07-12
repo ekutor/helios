@@ -54,7 +54,7 @@
             </p:dataTable>
 <p:ajax event="close" update="datalist, :AclRolesListForm ,:AclRolesCreateForm:display, :AclRolesCreateForm"/> 
             <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{aclRolesController.prepareCreate}" update="datalist, :AclRolesListForm ,:AclRolesCreateForm:display" oncomplete="PF('AclRolesCreateDialog').show()"/>
-              <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":AclRolesEditForm" oncomplete="PF('AclRolesEditDialog').show()" disabled="#{empty aclRolesController.selected}"/>
+              <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update="datalist, :AclRolesListForm ,:AclRolesEditForm:display" oncomplete="PF('AclRolesEditDialog').show()" disabled="#{empty aclRolesController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{aclRolesController.delete(aclRolesController.selected.id)}" update=":growl,datalist" disabled="#{empty aclRolesController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
