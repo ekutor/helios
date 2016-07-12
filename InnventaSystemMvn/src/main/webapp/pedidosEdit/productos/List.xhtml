@@ -38,7 +38,7 @@
                     </p:column> 
                 </p:selectOneMenu>
                 <p:column><p:outputLabel value="&#160;" /></p:column>
-                 
+                
                 <p:column>
                     <p:commandButton id="addProductButton" icon="ui-icon-plus"
                                      update="   :ProductosListForm"  
@@ -50,15 +50,7 @@
                 
                  <p:column><p:outputLabel value="&#160;" /></p:column>
                  
-                 <p:column>
-                     <p:commandButton rendered="false" id="createButtonProduct" icon="ui-icon-truck"   
-                                  value="#{innventa.Create}" 
-                                  actionListener="#{productosController.prepareCreate}" 
-                                  update=":ProductosListForm" 
-                                  oncomplete="PF('ProductosCreateDialog').show()"/>
-                  <p:tooltip for="createButtonProduct" value="Crear Producto"/>
-          
-                </p:column>
+                
             </h:panelGrid>
         </h:form>
        
@@ -80,12 +72,10 @@
                          style="text-align: right"
                          editable="true" editMode="cell"
                          >
-
-                <p:ajax event="rowSelect"   update="@form:createButton"/>
-                <p:ajax event="rowUnselect" update="@form:createButton"/>
+         
+              
                 <p:ajax event="contextMenu" update="@form:createButton"/>
-                
-                <p:ajax event="rowEdit" listener="#{pedidosController.onRowEdit}" update="@form:createButton growl" />
+              
                 <p:ajax event="rowEditCancel" listener="#{pedidosController.onRowCancel}" update="@form:createButton growl" />
 
                 <p:column sortBy="#{item.id}" filterBy="#{item.id}" rendered="false">

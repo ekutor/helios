@@ -10,14 +10,14 @@ import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.RemisionesProductoFacade;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 @Named(value = "remisionesController")
-@ViewScoped
+@SessionScoped
 public class RemisionesController extends AbstractController<Remisiones> {
 
     @Inject
@@ -141,6 +141,22 @@ public class RemisionesController extends AbstractController<Remisiones> {
             selected.setTotalProductos(getCantTotal());
         }        
     }
+    
+     public void addAllProducts(ActionEvent ae) {
+        selected.getRemisionesProductoList().clear();
+        for (PedidosProducto prodPedido : selected.getIdPedido().getPedidosProductoList()){
+           RemisionesProducto rp = new RemisionesProducto();
+           rp.setId(Utils.generateID());
+           rp.setCantidad(prodPedido.getCantidad());
+           rp.setEliminado((short)0);
+           rp.setIdProducto(prodPedido.getIdProducto());
+           rp.setIdRemision(selected);
+           selected.getRemisionesProductoList().add(rp);
+           prodPedido.setCantidadEntregada(prodPedido.getCantidad());
+        }
+        selected.setTotalProductos(getCantTotal());
+    }
+     
     public void onRowEdit(String value){
        try{
         if(selectedProduct != null){

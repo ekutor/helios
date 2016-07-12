@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-
+<h:outputScript name="js/innventa.js" />
     <ui:composition>
         <p:dialog id="ProductosEditDlg" 
                   widgetVar="ProductosEditDialog" 
@@ -50,14 +50,14 @@
                             <p:tooltip for="und" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.EditProductosLabel_precioCompra}" for="precioCompra" />
-                        <h:panelGroup rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
+                        <p:outputLabel rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{innventa.EditProductosLabel_precioCompra}" for="precioCompra" />
+                        <h:panelGroup rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}'>
                             <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.EditProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.EditProductosRequiredMessage_precioCompra}"/>
                             <p:tooltip for="precioCompra" value="#{productosController.getComponentMessages('precioCompra', innventa.EditProductosHelpText_precioCompra)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.EditProductosLabel_precioVenta}" for="precioVenta" />
-                        <h:panelGroup rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" >
+                        <p:outputLabel rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{innventa.EditProductosLabel_precioVenta}" for="precioVenta" />
+                        <h:panelGroup rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' >
                             <p:inputText id="precioVenta" value="#{productosController.selected.precioVenta}" title="#{innventa.EditProductosTitle_precioVenta}"/>
                             <p:tooltip for="precioVenta" value="#{productosController.getComponentMessages('precioVenta', innventa.EditProductosHelpText_precioVenta)}"/>
                         </h:panelGroup>

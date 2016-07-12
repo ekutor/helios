@@ -15,7 +15,10 @@ import javax.inject.Inject;
 import java.util.ResourceBundle;
 import javax.ejb.EJBException;
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.ViewHandler;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -300,6 +303,7 @@ public abstract class AbstractController<T> implements Serializable {
      */
     public T prepareCreate(ActionEvent event) {
         T newItem;
+       
         try {
             newItem = itemClass.newInstance();
             this.selected = newItem;
@@ -361,5 +365,14 @@ public abstract class AbstractController<T> implements Serializable {
         //add facesmessage
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Success", panelToUpdate));
     }
-
+    
+    public void refresh() {
+    FacesContext context = FacesContext.getCurrentInstance();
+    Application application = context.getApplication();
+    ViewHandler viewHandler = application.getViewHandler();
+    UIViewRoot viewRoot = viewHandler.createView(context, context
+     .getViewRoot().getViewId());
+    context.setViewRoot(viewRoot);
+    context.renderResponse(); 
+ }
 }

@@ -12,7 +12,9 @@ public enum Modules {
     CATEGORIES_PROD("categoriasProd","info","shopping-cart"),CONFIGURATION("configuracion","info","gears"),
     INIT("inicio","primary","cubes"), 
     CREATE_ORDER("pedidosCreate","primary","clipboard"),
+    EDIT_ORDER("pedidosEdit","primary","clipboard"),
     CREATE_REMISSION("remisionesProducto","primary","truck"),
+     EDIT_REMISSION("remisionesProductoEdit","primary","truck"),
     ACL("aclRoles","info","edit"),ACLACTIONS("aclRolesAccion","info","edit"),
     ADMIN("Administracion","info","gears"),
     ;

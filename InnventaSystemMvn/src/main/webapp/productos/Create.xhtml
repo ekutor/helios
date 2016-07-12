@@ -5,20 +5,20 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-
+<h:outputScript name="js/innventa.js" />
     <ui:composition>
-         <h:form id="ProductosCreateForm">
+         
         <p:dialog id="ProductosCreateDialog" 
                   widgetVar="ProductosCreateDialog" 
                   modal="true" 
                   resizable="true" 
                   width="650" height="500"
-                  appendTo="@(body)" 
+                  appendTo="@parent" 
                   header="#{innventa.CreateProductosTitle}" 
                   closeOnEscape="true">
 
-            <p:ajax event="close" update="ProductosCreateDialog" />
            
+           <h:form id="ProductosCreateForm">
 
                 <h:panelGroup id="display" rendered="#{productosController.selected != null}">
                     <p:panelGrid columns="2" columnClasses="column">
@@ -52,14 +52,14 @@
                             <p:tooltip for="und" value="#{productosController.getComponentMessages('unidadMedida', 'Seleccione una unidad de medida')}"/>
                         </h:panelGroup>
                         
-                        <p:outputLabel rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.CreateProductosLabel_precioCompra}" for="precioCompra" />
-                        <h:panelGroup rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
+                        <p:outputLabel rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{innventa.CreateProductosLabel_precioCompra}" for="precioCompra" />
+                        <h:panelGroup rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}'>
                             <p:inputText id="precioCompra" value="#{productosController.selected.precioCompra}" title="#{innventa.CreateProductosTitle_precioCompra}" required="true" requiredMessage="#{innventa.CreateProductosRequiredMessage_precioCompra}"/>
                             <p:tooltip for="precioCompra" value="#{productosController.getComponentMessages('precioCompra', innventa.CreateProductosHelpText_precioCompra)}"/>
                         </h:panelGroup>
 
-                        <p:outputLabel rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.CreateProductosLabel_precioVenta}" for="precioVenta" />
-                        <h:panelGroup rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
+                        <p:outputLabel rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{innventa.CreateProductosLabel_precioVenta}" for="precioVenta" />
+                        <h:panelGroup rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}'>
                             <p:inputText id="precioVenta" value="#{productosController.selected.precioVenta}" title="#{innventa.CreateProductosTitle_precioVenta}" required="true"/>
                             <p:tooltip for="precioVenta" value="#{productosController.getComponentMessages('precioVenta', innventa.CreateProductosHelpText_precioVenta)}"/>
                         </h:panelGroup>
@@ -118,10 +118,9 @@
 
                     <p:commandButton value="#{innventa.Cancel}" onclick="PF('ProductosCreateDialog').hide()"/>
                 </h:panelGroup>
+               
+               </h:form>
             </p:dialog>
-            </h:form>
-
-      
 
     </ui:composition>
 

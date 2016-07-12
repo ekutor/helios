@@ -7,13 +7,14 @@
       xmlns:p="http://primefaces.org/ui">
     <h:outputScript name="js/innventa.js" />
     <ui:composition>
-
+       
         <div class='panel panel-#{navigation.moduleType("PEDIDOS")} col-md-6' >
-            <div class="panel-heading">Crear Nuevo Pedido</div>
+            <div class="panel-heading">Editar Pedido</div>
 
             <h:form id="PedidosCreateForm"> 
-
+                 
                 <h:panelGroup id="display"  rendered="#{pedidosController.selected != null}">
+                    
                     <p:panelGrid columns="4">
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="ref" />
@@ -116,17 +117,17 @@
                     </h:panelGroup>
 
                 </h:panelGroup>
-                <p:commandButton class="btn btn-success" actionListener="#{pedidosController.saveNew}" 
-                                 value="Crear OC" 
+                <p:commandButton class="btn btn-success" actionListener="#{pedidosController.save}" 
+                                 value="Guardar OC" 
                                  update="display contentPanel growl msgs" 
                                  >
                     <p:confirm header="#{innventa.ConfirmationHeader}" 
                                message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                 </p:commandButton>
                 
-                <p:commandButton class="btn btn-success" actionListener="#{pedidosController.createRemission}" 
-                                 value="Crear OC y Generar Remision" 
-                                 update="display contentPanel growl msgs labelModule" 
+                <p:commandButton class="btn btn-success hide" actionListener="#{pedidosController.createRemission}" 
+                                 value="Guardar OC y Generar Remision" 
+                                 update="display contentPanel growl msgs" 
                                  >
                     <p:confirm header="#{innventa.ConfirmationHeader}" 
                                message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
@@ -143,10 +144,10 @@
 
         </div>
         <div class="col-md-6">
-            <button class="btn btn-success" data-toggle="collapse" data-target="#productOCPanel">Productos de Orden de Compra #{pedidosController.selected.referencia} </button>
-            <div id="productOCPanel" class="panel panel-success collapse">
+            <button class="btn btn-success">Productos de Orden de Compra #{pedidosController.selected.referencia} </button>
+            <div id="productOCPanel" class="panel panel-success">
 
-                <ui:include src="/pedidosCreate/productos/index.xhtml"/>
+                <ui:include src="/pedidosEdit/productos/index.xhtml"/>
             </div>
         </div>
          

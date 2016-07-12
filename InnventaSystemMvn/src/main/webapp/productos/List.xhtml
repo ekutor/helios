@@ -12,10 +12,10 @@
           
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="ProductosDataTableContextMenu" for="datalist">  
-                <p:menuitem value="#{innventa.Create}" rendered="#{app.isAllowed("CREATE", "")}" onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{innventa.Create}" rendered='#{productosController.isAllowed("CREATE", "")}' onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>
                 <p:menuitem value="#{innventa.View}" onclick="document.getElementById('ProductosListForm:viewButton').click();" icon="ui-icon-search"/>
-                <p:menuitem value="#{innventa.Edit}" rendered="#{app.isAllowed("EDIT", productosController.selected.creadoPor)}" onclick="document.getElementById('ProductosListForm:editButton').click();" icon="ui-icon-pencil"/>
-                <p:menuitem value="#{innventa.Delete}" rendered="#{app.isAllowed("DELETE", productosController.selected.creadoPor)}" onclick="document.getElementById('ProductosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:menuitem value="#{innventa.Edit}" rendered='#{productosController.isAllowed("EDIT", productosController.selected.creadoPor)}' onclick="document.getElementById('ProductosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{innventa.Delete}" rendered='#{productosController.isAllowed("DELETE", productosController.selected.creadoPor)}' onclick="document.getElementById('ProductosListForm:deleteButton').click();" icon="ui-icon-trash"/>
                 <p:separator/>
                 <p:menuitem value="#{innventa.ProductosMenuItem_pedidosProductoList}" icon="ui-icon-search"  action="#{productosController.navigatePedidosProductoList}" disabled="#{empty productosController.selected.pedidosProductoList}" ajax="false"/>  
             </p:contextMenu>
@@ -71,14 +71,14 @@
                         <h:outputText value="#{item.unidadMedida.nombre}"/>
                 </p:column>
                 
-                <p:column sortBy="#{item.precioCompra}" filterBy="#{item.precioCompra}" rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
+                <p:column sortBy="#{item.precioCompra}" filterBy="#{item.precioCompra}" rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}'>
                     <f:facet name="header">
                         <h:outputText value="#{innventa.CreateProductosTitle_precioCompra}"/>
                     </f:facet>
                     <h:outputText value="#{item.precioCompra}"/>
                 </p:column>
 
-                <p:column sortBy="#{item.precioVenta}" filterBy="#{item.precioVenta}" rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}">
+                <p:column sortBy="#{item.precioVenta}" filterBy="#{item.precioVenta}" rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}'>
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListProductosTitle_precioVenta}"/>
                     </f:facet>
@@ -102,10 +102,10 @@
 
             </p:dataTable>
 
-            <p:commandButton id="createButton" rendered="#{app.isAllowed("CREATE", "")}" icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm" oncomplete="PF('ProductosCreateDialog').show()"/>
-            <p:commandButton id="viewButton"   rendered="#{app.isAllowed("EDIT", productosController.selected.creadoPor)}" style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
-            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
-            <p:commandButton id="deleteButton" rendered="#{app.isAllowed("DELETE", productosController.selected.creadoPor)}" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete(productosController.selected.id)}" update=":growl,datalist" disabled="#{empty productosController.selected}">
+            <p:commandButton id="createButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm :ProductosCreateForm:display" oncomplete="PF('ProductosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
+            <p:commandButton id="editButton"   rendered='#{productosController.isAllowed("EDIT", productosController.selected.creadoPor)}' style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosCreateForm :ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
+            <p:commandButton id="deleteButton" rendered='#{productosController.isAllowed("DELETE", productosController.selected.creadoPor)}' style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete(productosController.selected.id)}" update=":growl,datalist" disabled="#{empty productosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
 

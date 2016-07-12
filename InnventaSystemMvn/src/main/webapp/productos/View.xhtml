@@ -21,11 +21,11 @@
                         <h:outputText value="#{innventa.ViewProductosLabel_nombre}"/>
                         <h:outputText value="#{productosController.selected.nombre}" title="#{innventa.ViewProductosTitle_nombre}"/>
 
-                        <h:outputText rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.ViewProductosLabel_precioCompra}"/>
-                        <h:outputText rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{productosController.selected.precioCompra}" title="#{innventa.ViewProductosTitle_precioCompra}"/>
+                        <h:outputText rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{innventa.ViewProductosLabel_precioCompra}"/>
+                        <h:outputText rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{productosController.selected.precioCompra}" title="#{innventa.ViewProductosTitle_precioCompra}"/>
 
-                        <h:outputText rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{innventa.ViewProductosLabel_precioVenta}"/>
-                        <h:outputText rendered="#{app.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}" value="#{productosController.selected.precioVenta}" title="#{innventa.ViewProductosTitle_precioVenta}"/>
+                        <h:outputText rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{innventa.ViewProductosLabel_precioVenta}"/>
+                        <h:outputText rendered='#{productosController.isAllowed("VIEW_COSTS", productosController.selected.creadoPor)}' value="#{productosController.selected.precioVenta}" title="#{innventa.ViewProductosTitle_precioVenta}"/>
 
                         <h:outputText value="#{innventa.ViewProductosLabel_categoria}"/>
                         <h:outputText value="#{productosController.selected.categoria.nombre}" 

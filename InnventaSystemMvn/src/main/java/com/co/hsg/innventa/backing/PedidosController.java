@@ -11,14 +11,14 @@ import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.RemisionesFacade;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 @Named(value = "pedidosController")
-@ViewScoped
+@SessionScoped
 public class PedidosController extends AbstractController<Pedidos> {
 
     @Inject
@@ -56,6 +56,13 @@ public class PedidosController extends AbstractController<Pedidos> {
         nav.createOrder();
         return obj;
     }
+    
+
+    public Pedidos editOrder(ActionEvent event) {
+        nav.editOrder();
+        return selected;
+    }
+    
     @Override
     public void delete( String id){
         systemManager.decreaseSequence(NamedQuerys.ORDER_PARAM);
@@ -146,6 +153,12 @@ public class PedidosController extends AbstractController<Pedidos> {
             super.saveNew(event);
             nav.orders();
         }
+    }
+
+    @Override
+    public void save(ActionEvent event) {
+        super.save(event);
+        nav.orders();
     }
     
      public void createRemission(ActionEvent event) {

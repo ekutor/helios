@@ -9,7 +9,7 @@
     <ui:composition>
 
         <div class='panel panel-#{navigation.moduleType("REMISIONES")} col-md-5' >
-            <div class="panel-heading">Crear Nueva Remision</div>
+            <div class="panel-heading">Editar Remision</div>
 
             <h:form id="RemisionesCreateForm"> 
 
@@ -89,7 +89,7 @@
                     </h:panelGroup>
 
                 </h:panelGroup>
-                <p:commandButton class="btn btn-success" actionListener="#{remisionesController.saveNew}" 
+                <p:commandButton class="btn btn-success" actionListener="#{remisionesController.save}" 
                                  value="#{innventa.Save}" 
                                  update="display contentPanel growl msgs" 
                                  >
@@ -100,7 +100,7 @@
 
                 <p:commandButton value="#{innventa.Cancel}" 
                                  update="contentPanel growl" 
-                                 actionListener="#{navigation.remissions()}"
+                                 actionListener="#{navigation.orders}"
                                  immediate="true"
                                  />
 
@@ -112,7 +112,7 @@
             <button class="btn btn-success" data-toggle="collapse" aria-expanded="false" data-target="#productOCPanel">Productos de Orden de Compra #{pedidosController.selected.referencia} </button>
             <div id="productOCPanel" class="panel panel-success ">
 
-                <ui:include src="/remisionesProducto/productos/index.xhtml"/>
+                <ui:include src="/remisionesProductoEdit/productos/index.xhtml"/>
             </div>
         </div>
          

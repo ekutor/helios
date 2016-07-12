@@ -34,6 +34,7 @@ public class ProductosController extends AbstractController<Productos> {
     
     public ProductosController() {
         super(Productos.class);
+        actualModule = Modules.PRODUCTS;
     }
 
     public Productos getFindProduct() {

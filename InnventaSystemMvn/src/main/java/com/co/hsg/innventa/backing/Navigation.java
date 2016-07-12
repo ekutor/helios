@@ -68,11 +68,19 @@ public class Navigation implements Serializable {
         actualModule = Modules.CREATE_ORDER;
     }
     
+    public void editOrder() {
+        actualModule = Modules.EDIT_ORDER;
+    }
+    
     public void remissions() {
         actualModule = Modules.REMISSIONS;
     }
    public void createPurchaseOrder() {
         this.remissions();
+        actualModule = Modules.CREATE_REMISSION;
+    }
+   
+   public void editPurchaseOrder() {
         actualModule = Modules.CREATE_REMISSION;
     }
     
@@ -169,6 +177,12 @@ public class Navigation implements Serializable {
                 case ACLACTIONS:
                     actualModuleCap = "Permisos";
                 break;
+                case CREATE_REMISSION:
+                    actualModuleCap = "Remisiones";
+                    break;
+                case EDIT_REMISSION:
+                    actualModuleCap = "Remisiones";
+                    break;
                 default:
                     actualModuleCap = Utils.capitalizes(actualModule.getModuleName());
                 break;
