@@ -1,8 +1,11 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,12 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,15 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Terceros.findAll", query = "SELECT t FROM Terceros t WHERE t.eliminado=0"),
     @NamedQuery(name = "Terceros.findById", query = "SELECT t FROM Terceros t WHERE t.id = :id"),
     @NamedQuery(name = "Terceros.findByNombre", query = "SELECT t FROM Terceros t WHERE t.nombre = :nombre"),
-    @NamedQuery(name = "Terceros.findByObservaciones", query = "SELECT t FROM Terceros t WHERE t.observaciones = :observaciones"),
-    @NamedQuery(name = "Terceros.findByDireccion", query = "SELECT t FROM Terceros t WHERE t.direccion = :direccion"),
-    @NamedQuery(name = "Terceros.findByContacto", query = "SELECT t FROM Terceros t WHERE t.contacto = :contacto"),
-    @NamedQuery(name = "Terceros.findByTelefono", query = "SELECT t FROM Terceros t WHERE t.telefono = :telefono"),
-    @NamedQuery(name = "Terceros.findByCreadoPor", query = "SELECT t FROM Terceros t WHERE t.creadoPor = :creadoPor"),
-    @NamedQuery(name = "Terceros.findByFechaCreacion", query = "SELECT t FROM Terceros t WHERE t.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Terceros.findByModificadoPor", query = "SELECT t FROM Terceros t WHERE t.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Terceros.findByFechaModificacion", query = "SELECT t FROM Terceros t WHERE t.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "Terceros.findByEliminado", query = "SELECT t FROM Terceros t WHERE t.eliminado = :eliminado"),
     @NamedQuery(name = "Terceros.delete", query = "UPDATE Terceros t SET t.eliminado = 1 WHERE t.id =:id")
 })
 public class Terceros implements Serializable {
@@ -95,6 +91,9 @@ public class Terceros implements Serializable {
     @NotNull
     @Column(name = "eliminado")
     private short eliminado;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entregadoA")
+    private List<Remisiones> remisionesList;
 
     public Terceros() {
     }
@@ -209,6 +208,19 @@ public class Terceros implements Serializable {
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
     }
+    
+    @XmlTransient
+    public List<Remisiones> getRemisionesList() {
+        if(remisionesList == null){
+            remisionesList = new ArrayList<>();
+        }
+        return remisionesList;
+    }
+
+    public void setRemisionesList(List<Remisiones> remisionesList) {
+        this.remisionesList = remisionesList;
+    }
+
 
     @Override
     public int hashCode() {

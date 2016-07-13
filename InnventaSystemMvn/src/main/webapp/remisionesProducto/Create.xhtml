@@ -61,7 +61,16 @@
                         
                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_entregadoA}" for="entregadoA" />
                         <h:panelGroup>
-                            <p:inputText id="entregadoA" value="#{remisionesController.selected.entregadoA}" title="#{innventa.CreateRemisionesTitle_entregadoA}" size="36" maxlength="36"/>
+                            <p:selectOneMenu id="entregadoA" value="#{remisionesController.selected.entregadoA}" required="false" 
+                                             converter="#{tercerosConverter}">
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{tercerosController.items}"
+                                               var="tercItem"
+                                               itemValue="#{tercItem}"
+                                               itemLabel="#{tercItem.nombre}"
+                                               />
+
+                            </p:selectOneMenu>
                             <p:tooltip for="entregadoA" value="#{remisionesController.getComponentMessages('entregadoA', innventa.CreateRemisionesHelpText_entregadoA)}"/>
                         </h:panelGroup>
 
@@ -83,10 +92,6 @@
                         </h:panelGroup>
 
                     </p:panelGrid>
-
-                    <h:panelGroup styleClass="hide">
-                        <p:inputText id="eliminado" value="#{pedidosController.selected.eliminado}" title="#{innventa.CreatePedidosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_eliminado}"/>
-                    </h:panelGroup>
 
                 </h:panelGroup>
                 <p:commandButton class="btn btn-success" actionListener="#{remisionesController.saveNew}" 

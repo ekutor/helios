@@ -32,15 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Remisiones.findAll", query = "SELECT r FROM Remisiones r WHERE r.eliminado=0 ORDER BY r.fechaRemision DESC, r.referencia desc"),
     @NamedQuery(name = "Remisiones.findById", query = "SELECT r FROM Remisiones r WHERE r.id = :id AND r.eliminado=0"),
-    @NamedQuery(name = "Remisiones.findByFechaRemision", query = "SELECT r FROM Remisiones r WHERE r.fechaRemision = :fechaRemision"),
-    @NamedQuery(name = "Remisiones.findByTotalProductos", query = "SELECT r FROM Remisiones r WHERE r.totalProductos = :totalProductos"),
     @NamedQuery(name = "Remisiones.findByEstado", query = "SELECT r FROM Remisiones r WHERE r.estado = :estado AND r.eliminado=0"),
     @NamedQuery(name = "Remisiones.findByEntregadoA", query = "SELECT r FROM Remisiones r WHERE r.entregadoA = :entregadoA"),
-    @NamedQuery(name = "Remisiones.findByCreadoPor", query = "SELECT r FROM Remisiones r WHERE r.creadoPor = :creadoPor"),
-    @NamedQuery(name = "Remisiones.findByFechaCreacion", query = "SELECT r FROM Remisiones r WHERE r.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Remisiones.findByModificadoPor", query = "SELECT r FROM Remisiones r WHERE r.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Remisiones.findByFechaModificacion", query = "SELECT r FROM Remisiones r WHERE r.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "Remisiones.findByEliminado", query = "SELECT r FROM Remisiones r WHERE r.eliminado = :eliminado"),
      @NamedQuery(name = "Remisiones.delete", query = "UPDATE Remisiones e SET e.eliminado = 1 WHERE e.id =:id")})
 public class Remisiones implements Serializable {
 
@@ -70,9 +63,10 @@ public class Remisiones implements Serializable {
     @JoinColumn(name = "estado", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Estados estado;
-    @Size(max = 36)
-    @Column(name = "entregado_a")
-    private String entregadoA;
+    
+    @JoinColumn(name = "entregado_a", referencedColumnName = "id")
+    @ManyToOne(optional = true)
+    private Terceros entregadoA;
 
     @JoinColumn(name = "creado_por", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -98,6 +92,7 @@ public class Remisiones implements Serializable {
     private Pedidos idPedido;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRemision")
     private List<RemisionesProducto> remisionesProductoList;
+
 
     public Remisiones() {
     }
@@ -155,11 +150,11 @@ public class Remisiones implements Serializable {
         this.estado = estado;
     }
 
-    public String getEntregadoA() {
+    public Terceros getEntregadoA() {
         return entregadoA;
     }
 
-    public void setEntregadoA(String entregadoA) {
+    public void setEntregadoA(Terceros entregadoA) {
         this.entregadoA = entregadoA;
     }
 

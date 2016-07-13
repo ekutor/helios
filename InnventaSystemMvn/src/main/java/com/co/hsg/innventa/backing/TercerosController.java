@@ -1,8 +1,6 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
-import com.co.hsg.innventa.beans.Cuentas;
-import com.co.hsg.innventa.beans.ListaPrecios;
 import com.co.hsg.innventa.beans.Terceros;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;

@@ -81,7 +81,7 @@ public class Navigation implements Serializable {
     }
    
    public void editPurchaseOrder() {
-        actualModule = Modules.CREATE_REMISSION;
+        actualModule = Modules.EDIT_REMISSION;
     }
     
     public void ordersConfig() {

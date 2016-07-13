@@ -5,13 +5,16 @@ import com.co.hsg.innventa.session.TercerosFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.convert.FacesConverter;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.inject.Named;
 
-@FacesConverter(value = "tercerosConverter")
+
+@Named(value = "tercerosConverter")
+@RequestScoped
 public class TercerosConverter implements Converter {
 
     @Inject
@@ -22,30 +25,18 @@ public class TercerosConverter implements Converter {
         if (value == null || value.length() == 0 || JsfUtil.isDummySelectItem(component, value)) {
             return null;
         }
-        return this.ejbFacade.find(getKey(value));
-    }
-
-    java.lang.String getKey(String value) {
-        java.lang.String key;
-        key = value;
-        return key;
-    }
-
-    String getStringKey(java.lang.String value) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(value);
-        return sb.toString();
+        return this.ejbFacade.find(value);
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-        if (object == null
-                || (object instanceof String && ((String) object).length() == 0)) {
+        if (object == null){
             return null;
-        }
-        if (object instanceof Terceros) {
+        }else if (object instanceof String){
+                return (String) object;
+        }else if (object instanceof Terceros) {
             Terceros o = (Terceros) object;
-            return getStringKey(o.getId());
+            return o.getId();
         } else {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Terceros.class.getName()});
             return null;

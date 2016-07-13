@@ -16,7 +16,6 @@
                 <p:menuitem value="#{innventa.Delete}" onclick="document.getElementById('PedidosListForm:deleteButton').click();" icon="ui-icon-trash"/> 
                 <p:separator/>
                 <p:menuitem value="#{innventa.PedidosMenuItem_remisionesList}" icon="ui-icon-search"  update="contentPanel labelModule" actionListener="#{pedidosController.navigateRemisionesList}" disabled="#{pedidosController.hasRemisiones()}" ajax="false"/>  
-                <p:menuitem value="#{innventa.PedidosMenuItem_pedidosProductoList}" icon="ui-icon-search"  action="#{pedidosController.navigatePedidosProductoList}" disabled="#{empty pedidosController.selected.pedidosProductoList}" ajax="false"/>  
             </p:contextMenu>
             <p:dataTable id="datalist"
                          value="#{pedidosController.items}"

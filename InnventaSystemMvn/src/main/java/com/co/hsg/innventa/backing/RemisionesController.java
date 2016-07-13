@@ -90,6 +90,13 @@ public class RemisionesController extends AbstractController<Remisiones> {
             nav.remissions();
         }
     }
+
+    @Override
+    public void save(ActionEvent event) {
+        super.save(event); 
+        
+         nav.remissions();
+    }
     
     public void save(RemisionesProducto rp) {
       /*  IValidation validator = new PurchasesValidation(selected);
@@ -125,6 +132,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
     public void setSelectedProduct(PedidosProducto selectedProduct) {
         this.selectedProduct = selectedProduct;
     }
+    
     public void addProduct(ActionEvent ae) {
         
         RemisionesProducto rp = this.getProductFromList(selectedProduct.getIdProducto());
@@ -139,7 +147,11 @@ public class RemisionesController extends AbstractController<Remisiones> {
             selectedProduct.setCantidadEntregada(selectedProduct.getCantidad());
             selected.getRemisionesProductoList().add(rp);
             selected.setTotalProductos(getCantTotal());
-        }        
+        }else{
+            rp.setCantidad(selectedProduct.getCantidad());
+            selectedProduct.setCantidadEntregada(selectedProduct.getCantidad());
+            selected.setTotalProductos(getCantTotal());
+        }       
     }
     
      public void addAllProducts(ActionEvent ae) {

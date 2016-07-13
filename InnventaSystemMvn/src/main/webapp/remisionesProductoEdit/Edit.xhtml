@@ -18,7 +18,7 @@
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
                         <h:panelGroup>
-                            <p:inputText id="referencia" value="#{pedidosController.selected.referencia}" disabled="true"
+                            <p:inputText id="referencia" value="#{remisionesController.selected.idPedido.referencia}" disabled="true"
                                          title="#{innventa.CreatePedidosTitle_referencia}" 
                                          
                                          requiredMessage="#{innventa.CreatePedidosRequiredMessage_referencia}" size="20" maxlength="20"/>
@@ -26,7 +26,7 @@
                         </h:panelGroup>
                          <p:outputLabel value="Cuenta" for="cliente" />
                         <h:panelGroup>
-                            <p:inputText id="cliente" value="#{pedidosController.selected.idCliente.nombre}" disabled="true"/>
+                            <p:inputText id="cliente" value="#{remisionesController.selected.idPedido.idCliente.nombre}" disabled="true"/>
                         </h:panelGroup>
                        
                          <p:outputLabel value="Numero Remision" for="referenciaRem" />
@@ -61,7 +61,17 @@
                         
                        <p:outputLabel value="#{innventa.CreateRemisionesLabel_entregadoA}" for="entregadoA" />
                         <h:panelGroup>
-                            <p:inputText id="entregadoA" value="#{remisionesController.selected.entregadoA}" title="#{innventa.CreateRemisionesTitle_entregadoA}" size="36" maxlength="36"/>
+                            <p:selectOneMenu id="entregadoA" value="#{remisionesController.selected.entregadoA}" required="false" 
+                                             converter="#{tercerosConverter}">
+                                           
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItems value="#{tercerosController.items}"
+                                               var="tercItem"
+                                               itemValue="#{tercItem}"
+                                               itemLabel="#{tercItem.nombre}"
+                                               />
+
+                            </p:selectOneMenu>
                             <p:tooltip for="entregadoA" value="#{remisionesController.getComponentMessages('entregadoA', innventa.CreateRemisionesHelpText_entregadoA)}"/>
                         </h:panelGroup>
 
@@ -84,9 +94,7 @@
 
                     </p:panelGrid>
 
-                    <h:panelGroup styleClass="hide">
-                        <p:inputText id="eliminado" value="#{pedidosController.selected.eliminado}" title="#{innventa.CreatePedidosTitle_eliminado}" required="true" requiredMessage="#{innventa.CreatePedidosRequiredMessage_eliminado}"/>
-                    </h:panelGroup>
+           
 
                 </h:panelGroup>
                 <p:commandButton class="btn btn-success" actionListener="#{remisionesController.save}" 

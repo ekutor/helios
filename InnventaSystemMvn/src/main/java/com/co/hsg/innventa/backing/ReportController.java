@@ -83,7 +83,7 @@ public class ReportController implements Serializable{
                     ri.setContacto(contact.getNombre1()+" "+contact.getApellido1());
                     ri.setDespachador(selected.getCreadoPor().getNombre1()+" "+selected.getCreadoPor().getApellido1());
                     ri.setCantTotal(String.valueOf(selected.getTotalProductos()));
-                    ri.setTercero(selected.getEntregadoA());
+                    ri.setTercero(selected.getEntregadoA().getNombre());
                 }catch(Exception e){
                     
                 }
