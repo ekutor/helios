@@ -112,11 +112,11 @@
                         </h:panelGroup>
                       
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{productosController.saveNew}" value="#{innventa.Save}" update="display,:ProductosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProductosCreateDialog'));">
+                    <p:commandButton actionListener="#{productosController.saveNew}" value="#{innventa.Save}" update="display,:ProductosListForm:datalist,:growl contentPanel" oncomplete="handleSubmit(xhr,status,args,PF('ProductosCreateDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
 
-                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('ProductosCreateDialog').hide()"/>
+                    <p:commandButton value="#{innventa.Cancel}" update="display" onclick="PF('ProductosCreateDialog').hide()"/>
                 </h:panelGroup>
                
                </h:form>

@@ -106,10 +106,10 @@
 
                     
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{productosController.save}" value="#{innventa.Save}" update="display,:ProductosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProductosEditDialog'));">
+                    <p:commandButton actionListener="#{productosController.save}" value="#{innventa.Save}" update="display,:ProductosListForm:datalist,:growl contentPanel" oncomplete="handleSubmit(xhr,status,args,PF('ProductosEditDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
-                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('ProductosEditDialog').hide()"/>
+                    <p:commandButton value="#{innventa.Cancel}" update="display" onclick="PF('ProductosEditDialog').hide()"/>
                 </h:panelGroup>
 
             </h:form>

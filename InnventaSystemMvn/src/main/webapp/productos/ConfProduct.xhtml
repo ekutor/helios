@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductosConfDlg" widgetVar="ProductosConfDialog" 
+                  modal="true" 
+                  resizable="false"  
+                  appendTo="@(body)" 
+                  header="Configurar Productos de Venta" closeOnEscape="true">
+
+            <h:form id="ProductosConfForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{productosController.selected != null}">
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_referencia}"/>
+                        <h:outputText value="#{productosController.selected.referencia}" title="#{innventa.ViewProductosTitle_referencia}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_nombre}"/>
+                        <h:outputText value="#{productosController.selected.nombre}" title="#{innventa.ViewProductosTitle_nombre}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_categoria}"/>
+                        <h:outputText value="#{productosController.selected.categoria.nombre}" 
+                                   
+                                      title="#{innventa.ViewProductosTitle_categoria}"/>
+
+                        <h:outputText value="#{innventa.ViewProductosLabel_tipoCodigo}"/>
+                        <h:outputText value="#{productosController.transformTipoProducto()}" />
+             
+
+                       </p:panelGrid>
+                        <p:separator/>             
+                                <!-- <p:graphicImage value="/images/barca/player.photo}"/> -->  
+                            <h:outputText value="Seleccione los Items que componen el Producto #{productosController.selected.nombre}"/>
+                        <p:pickList value="#{productosController.parentProducts}"
+                                var="player" effect="bounce"
+                                itemValue="#{player}" converter="#{productosConverter}"
+                                showSourceControls="true" showTargetControls="true"
+                                addAllLabel="Agregar Todos" addLabel="Agregar Componente"
+                                removeAllLabel="quitar Todos" removeLabel="Quitar Componente"
+                                style="background-color: #0088cc">
+                                <f:facet name="sourceCaption"> Items de Venta</f:facet>  
+                                <f:facet name="targetCaption"> Seleccionados</f:facet>
+
+                                <p:column style="width:100%">
+                                <!-- <p:graphicImage value="/images/barca/player.photo}"/> -->  
+                                    <f:facet name="header">
+                                        Name
+                                    </f:facet>
+                                    <h:outputText value=" #{player.nombre}" />
+                                </p:column>
+
+                        </p:pickList>
+                        <p:separator/>
+                    <p:commandButton actionListener="#{productosController.save}" value="Guardar Configuracion" update="display,:ProductosListForm:datalist,:growl contentPanel" oncomplete="handleSubmit(xhr,status,args,PF('ProductosConfDialog'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Close}" onclick="PF('ProductosConfDialog').hide()" update="display"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

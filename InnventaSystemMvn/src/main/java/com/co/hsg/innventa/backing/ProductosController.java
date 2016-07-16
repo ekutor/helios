@@ -5,13 +5,17 @@ import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.DualListModel;
 import org.primefaces.model.TreeNode;
 
 @Named(value = "productosController")
@@ -32,11 +36,24 @@ public class ProductosController extends AbstractController<Productos> {
     
     private TreeNode productsTree;
     
+    private DualListModel<Productos> parentProducts;
+     
     public ProductosController() {
         super(Productos.class);
         actualModule = Modules.PRODUCTS;
     }
 
+    public DualListModel<Productos> getParentProducts() {
+        if(parentProducts == null){
+             parentProducts = new DualListModel<Productos>(new ArrayList<>(getItemsForSale()), new ArrayList<Productos>());
+        }
+        return parentProducts;
+    }
+
+    public void setParentProducts(DualListModel<Productos> parentProducts) {
+        this.parentProducts = parentProducts;
+    }
+    
     public Productos getFindProduct() {
         return findProduct;
     }
@@ -83,48 +100,42 @@ public class ProductosController extends AbstractController<Productos> {
         }
         return finded;
      }
- 
+
+    @Override
+    public void save(ActionEvent event) {
+        if(parentProducts != null && !parentProducts.getTarget().isEmpty()){
+            selected.setProductosHijos(parentProducts.getTarget());
+            for(Productos p :selected.getProductosHijos()){
+               p.setProductoPadre(selected);
+            }
+        }
+        super.save(event); 
+    }
+     
+    
     public TreeNode getProductsTree() {
+        initTree();
         return productsTree;
     }
     
      public void setProductsTree(TreeNode root) {
         this.productsTree = root;
     }
-    @PostConstruct
-    public void init() {
-        productsTree = new DefaultTreeNode(new Document("Files", "-", "Folder"), null);
- 
-    }
-    
-    public void addChildNode(){
-       
-        TreeNode documents = new DefaultTreeNode(new Document("Documents", "-", "Folder"), productsTree);
-        TreeNode pictures = new DefaultTreeNode(new Document("Pictures", "-", "Folder"), productsTree);
-        TreeNode movies = new DefaultTreeNode(new Document("Movies", "-", "Folder"), productsTree);
-         
-        TreeNode work = new DefaultTreeNode(new Document("Work", "-", "Folder"), documents);
-        TreeNode primefaces = new DefaultTreeNode(new Document("PrimeFaces", "-", "Folder"), documents);
-         
-        //Documents
-        TreeNode expenses = new DefaultTreeNode("document", new Document("Expenses.doc", "30 KB", "Word Document"), work);
-        TreeNode resume = new DefaultTreeNode("document", new Document("Resume.doc", "10 KB", "Word Document"), work);
-        TreeNode refdoc = new DefaultTreeNode("document", new Document("RefDoc.pages", "40 KB", "Pages Document"), primefaces);
-         
-        //Pictures
-        TreeNode barca = new DefaultTreeNode("picture", new Document("barcelona.jpg", "30 KB", "JPEG Image"), pictures);
-        TreeNode primelogo = new DefaultTreeNode("picture", new Document("logo.jpg", "45 KB", "JPEG Image"), pictures);
-        TreeNode optimus = new DefaultTreeNode("picture", new Document("optimusprime.png", "96 KB", "PNG Image"), pictures);
-         
-        //Movies
-        TreeNode pacino = new DefaultTreeNode(new Document("Al Pacino", "-", "Folder"), movies);
-        TreeNode deniro = new DefaultTreeNode(new Document("Robert De Niro", "-", "Folder"), movies);
-         
-        TreeNode scarface = new DefaultTreeNode("mp3", new Document("Scarface", "15 GB", "Movie File"), pacino);
-        TreeNode carlitosWay = new DefaultTreeNode("mp3", new Document("Carlitos' Way", "24 GB", "Movie File"), pacino);
-         
-        TreeNode goodfellas = new DefaultTreeNode("mp3", new Document("Goodfellas", "23 GB", "Movie File"), deniro);
-        TreeNode untouchables = new DefaultTreeNode("mp3", new Document("Untouchables", "17 GB", "Movie File"), deniro);
+
+    public void initTree() {
+        if(selected!= null){
+            productsTree = new DefaultTreeNode(new Document("Producto", "-", "Folder"), null);
+            TreeNode productsTreeName = new DefaultTreeNode(new Document(selected.getNombre(), "-", "Folder"), productsTree);
+            TreeNode saleProducts = new DefaultTreeNode(new Document("Componentes", "-", "Folder"), productsTreeName);
+            TreeNode supplies = new DefaultTreeNode(new Document("Insumos", "-", "Folder"), productsTreeName);
+            for(Productos p: selected.getProductosHijos()){
+                  TreeNode expenses = new DefaultTreeNode("document", new Document(p.getNombre(), "30 KB", "Word Document"), saleProducts);
+            }
+            productsTree.setExpanded(true);
+            productsTreeName.setExpanded(true);
+            saleProducts.setExpanded(true);
+            supplies.setExpanded(true);
+        }
     }
 
 }

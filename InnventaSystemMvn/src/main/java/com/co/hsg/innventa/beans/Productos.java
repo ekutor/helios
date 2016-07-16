@@ -2,6 +2,7 @@
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -88,6 +89,10 @@ public class Productos implements Serializable {
     @JoinColumn(name = "unidad_medida", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UnidadesMedida unidadMedida;
+    
+    @JoinColumn(name = "producto_padre", referencedColumnName = "id")
+    @ManyToOne( cascade = CascadeType.ALL,optional = true)
+    private Productos productoPadre;
 
     @Basic(optional = false)
     @NotNull
@@ -113,8 +118,12 @@ public class Productos implements Serializable {
     @NotNull
     @Column(name = "eliminado")
     private short eliminado;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
     private List<PedidosProducto> pedidosProductoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoPadre")
+    private List<Productos> productosHijos;
 
     public Productos() {
     }
@@ -213,6 +222,14 @@ public class Productos implements Serializable {
         this.atributo = atributo;
     }
 
+    public Productos getProductoPadre() {
+        return productoPadre;
+    }
+
+    public void setProductoPadre(Productos productoPadre) {
+        this.productoPadre = productoPadre;
+    }
+
     public double getStock() {
         return stock;
     }
@@ -285,7 +302,20 @@ public class Productos implements Serializable {
     public void setPedidosProductoList(List<PedidosProducto> pedidosProductoList) {
         this.pedidosProductoList = pedidosProductoList;
     }
+    
+    @XmlTransient
+    public List<Productos> getProductosHijos() {
+        if(productosHijos == null){
+            productosHijos = new ArrayList<>();
+        }
+        return productosHijos;
+    }
 
+    public void setProductosHijos(List<Productos> productosHijos) {
+        this.productosHijos = productosHijos;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

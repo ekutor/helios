@@ -26,7 +26,7 @@
 
                         <p:outputLabel value="Contraseña" for="passw" />
                         <h:panelGroup>
-                            <p:password id="passw" value="#{usuariosController.selected.passw}" feedback="true" inline="true" 
+                            <p:password id="passw" value="#{usuariosController.selected.passw}" autocomplete="off" feedback="true" inline="true" 
                                          promptLabel="Ingrese un password" weakLabel="Débil"
                                          goodLabel="Bueno" strongLabel="Fuerte" 
                                         required="true" size="20" maxlength="50"/>

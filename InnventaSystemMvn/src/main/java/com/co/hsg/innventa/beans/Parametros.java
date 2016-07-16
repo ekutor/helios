@@ -47,6 +47,9 @@ public class Parametros implements Serializable {
     @Column(name = "clave2")
     private String clave2;
     @Size(max = 20)
+    @Column(name = "clave3")
+    private String clave3;
+    @Size(max = 20)
     @Column(name = "parametro")
     private String parametro;
     @Basic(optional = false)
@@ -88,6 +91,14 @@ public class Parametros implements Serializable {
 
     public void setClave2(String clave2) {
         this.clave2 = clave2;
+    }
+
+    public String getClave3() {
+        return clave3;
+    }
+
+    public void setClave3(String clave3) {
+        this.clave3 = clave3;
     }
 
     public String getParametro() {

@@ -11,7 +11,6 @@ import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.converter.CryptoConverter;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.UsuariosFacade;
-import static com.sun.faces.facelets.util.Path.context;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.primefaces.context.RequestContext;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSeparator;
@@ -159,11 +157,21 @@ public class AppController extends AbstractController<Usuarios> {
             if(hasAccess(modDB)){
                 if(modPos >= 10  && modPos < 20){
                     //Mostrar Menu por Modulos
-                    modMenu.addElement(item);    
+                    //si es submenu principal
+                    if(modDB.getClave3()!= null && "1".equals(modDB.getClave3())){
+                        DefaultSubMenu  submenu = new DefaultSubMenu(modDB.getClave1());
+                        modMenu.addElement(submenu);
+                    }else{
+                        modMenu.addElement(item);   
+                    }
                 }else if(modPos >= 20  && modPos < 30){
                     repMenu.addElement(item);  
                 }else if(modPos >= 30  && modPos < 40){
                     rhumMenu.addElement(item);  
+                }else if(modPos >= 100  && modPos < 200){
+                    if(modMenu.getElements().get(0) instanceof DefaultSubMenu){
+                        ((DefaultSubMenu) modMenu.getElements().get(0)).addElement(item);
+                    }
                 }
             }
         }
