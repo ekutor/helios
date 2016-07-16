@@ -46,7 +46,7 @@
                    <p:commandLink id="mnuProductos"
                                update="contentPanel labelModule"
                                value="Productos" 
-                               actionListener="#{navigation.products}">
+                               actionListener="#{navigation.products_sale()}">
                     </p:commandLink>
                 </p:panel>
                  <p:panel id="terceros" rendered='#{app.hasAccess("THIRDS")}' styleClass="borderStyle"  header="Terceros">

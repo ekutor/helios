@@ -24,6 +24,9 @@ public class Navigation implements Serializable {
 
     @Inject
     ParametrosController parametrosController;
+    
+    @Inject
+    ProductosController products;
 
     /**
      * Define el modulo de configuracion de maestros selecccionado
@@ -57,8 +60,7 @@ public class Navigation implements Serializable {
     public void actions() {
         actualModule = Modules.ACLACTIONS;
     }
-    
- 
+
     public void orders() {
         actualModule = Modules.ORDERS;
     }
@@ -100,6 +102,15 @@ public class Navigation implements Serializable {
     public void products() {
         actualModule = Modules.PRODUCTS;
     }
+    
+    public void products_supply() {
+        actualModule = Modules.PRODUCTS_SUPPLY;
+    }
+    
+    public void products_sale() {
+        actualModule = Modules.PRODUCTS_SALE;
+    }
+            
 
     public void accounts() {
         actualModule = Modules.ACCOUNTS;
@@ -112,6 +123,10 @@ public class Navigation implements Serializable {
 
     public String getActualModule() {
         return actualModule.getModuleName();
+    }
+    
+     public Modules getModule() {
+        return actualModule;
     }
 
     public void setActualModule(String actualModule) {

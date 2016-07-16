@@ -7,6 +7,7 @@ package com.co.hsg.innventa.backing;
 public enum Modules {
     ORDERS("pedidos", "warning","clipboard"),REMISSIONS("remisiones", "primary","truck"),
     ACCOUNTS("clientes","info","users"), PRODUCTS("productos","success","shopping-cart"),
+    PRODUCTS_SALE("productos","success","shopping-cart"),PRODUCTS_SUPPLY("productos","success","shopping-cart"),
     THIRDS("terceros","danger","cubes"),USERS("usuarios","info","users"),MASTERS("maestros","info","edit"),
     STATES_OC("estadosOC","info","edit"),STATES_RM("estadosRM","info","edit"),
     CATEGORIES_PROD("categoriasProd","info","shopping-cart"),CONFIGURATION("configuracion","info","gears"),

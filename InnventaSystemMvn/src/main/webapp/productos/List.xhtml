@@ -17,7 +17,7 @@
                 <p:menuitem value="#{innventa.Edit}" rendered='#{productosController.isAllowed("EDIT", productosController.selected.creadoPor)}' onclick="document.getElementById('ProductosListForm:editButton').click();" icon="ui-icon-pencil"/>
                 <p:menuitem value="#{innventa.Delete}" rendered='#{productosController.isAllowed("DELETE", productosController.selected.creadoPor)}' onclick="document.getElementById('ProductosListForm:deleteButton').click();" icon="ui-icon-trash"/>
                 <p:separator/>
-                <p:menuitem value="Configurar Producto" rendered='#{productosController.isAllowed("CREATE", "")}' onclick="document.getElementById('ProductosListForm:createParentButton').click();" icon="ui-icon-wrench"/>
+                <p:menuitem value="Configurar Producto" rendered='#{productosController.isAllowed("CREATE", "")}' disabled="#{!productosController.isProductSale()}" onclick="document.getElementById('ProductosListForm:createParentButton').click();" icon="ui-icon-wrench"/>
                 <p:separator/>
                 <p:menuitem value="#{innventa.ProductosMenuItem_pedidosProductoList}" icon="ui-icon-search"  action="#{productosController.navigatePedidosProductoList}" disabled="#{empty productosController.selected.pedidosProductoList}" ajax="false"/>  
             </p:contextMenu>
@@ -104,10 +104,10 @@
             </p:dataTable>
 
             <p:commandButton id="createButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm :ProductosCreateForm:display" oncomplete="PF('ProductosCreateDialog').show()"/>
-            <p:commandButton id="createParentButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-wrench"   value="Configurar Producto" update=":ProductosConfForm" oncomplete="PF('ProductosConfDialog').show()" disabled="#{empty productosController.selected}"/>
+            <p:commandButton id="createParentButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-wrench"   value="Configurar Producto" update=":ProductosConfForm" oncomplete="PF('ProductosConfDialog').show()" disabled="#{!productosController.isProductSale()}"/>
           
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
-            <p:commandButton id="editButton"   rendered='#{productosController.isAllowed("EDIT", productosController.selected.creadoPor)}' style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosCreateForm :ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{empty productosController.selected}"/>
+            <p:commandButton id="editButton"   rendered='#{productosController.isAllowed("EDIT", productosController.selected.creadoPor)}' style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosCreateForm :ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{ empty productosController.selected}"/>
             <p:commandButton id="deleteButton" rendered='#{productosController.isAllowed("DELETE", productosController.selected.creadoPor)}' style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete(productosController.selected.id)}" update=":growl,datalist" disabled="#{empty productosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
@@ -117,7 +117,7 @@
     </h:form>
         <div class='panel panel-#{navigation.moduleType("PRODUCTOS")} col-md-2' >
             <div class="panel-heading">Configuracion de Producto</div>
-            <h:form id="formTreeProducts" >
+            <h:form id="formTreeProducts" rendered="#{productosController.isProductSale()}">
                 <p:growl id="messages" showDetail="true" />
                 <p:tree id="treeProducts" value="#{productosController.productsTree}" var="doc" dynamic="true" style="color: #0081c2">
                  

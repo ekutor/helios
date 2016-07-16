@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="ProductosConfDlg" widgetVar="ProductosConfDialog" 
+        <p:dialog id="ProductosConfDialog" widgetVar="ProductosConfDialog" 
                   modal="true" 
                   resizable="false"  
                   appendTo="@(body)" 
@@ -58,7 +58,8 @@
 
                         </p:pickList>
                         <p:separator/>
-                    <p:commandButton actionListener="#{productosController.save}" value="Guardar Configuracion" update="display,:ProductosListForm:datalist,:growl contentPanel" oncomplete="handleSubmit(xhr,status,args,PF('ProductosConfDialog'));">
+                    <p:commandButton actionListener="#{productosController.save}" value="Guardar Configuracion" update="display,:ProductosListForm:datalist,:growl contentPanel" 
+                                     oncomplete="handleSubmit(xhr,status,args,PF('ProductosConfDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
                     <p:commandButton value="#{innventa.Close}" onclick="PF('ProductosConfDialog').hide()" update="display"/>

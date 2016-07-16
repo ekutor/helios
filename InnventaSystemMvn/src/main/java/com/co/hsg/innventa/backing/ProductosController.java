@@ -7,8 +7,6 @@ import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -27,6 +25,9 @@ public class ProductosController extends AbstractController<Productos> {
     
     @Inject
     private ParametrosController params;
+    
+    @Inject
+    private Navigation nav;
             
     private Productos findProduct; 
     
@@ -64,11 +65,25 @@ public class ProductosController extends AbstractController<Productos> {
     
     public Collection<Productos> getItemsForSale() {
         if (itemsForSale == null || !keepList) {
-            itemsForSale = this.chargeItems(NamedQuerys.PRODUCT_STATES, "state", ProcessStates.SALES_PRODUCT.getPermanentID());
+            itemsForSale = this.chargeItems(NamedQuerys.PRODUCT_TYPES, "type", ProcessStates.SALES_PRODUCT.getPermanentID());
             items = null;
         }
         return itemsForSale;
     }
+    
+    @Override
+    public Collection<Productos> getItems() {
+      if (nav.getModule().equals(Modules.PRODUCTS_SUPPLY)){
+          this.chargeItems(NamedQuerys.PRODUCT_TYPES, "type", ProcessStates.ELEMENT.getPermanentID()); 
+      }else{
+          this.chargeItems(NamedQuerys.PRODUCT_TYPES, "type", ProcessStates.SALES_PRODUCT.getPermanentID());
+      }
+       return items;
+    }
+    public boolean isProductSale(){
+        return  nav.getModule().equals(Modules.PRODUCTS_SALE);
+    }
+     
     /**
      * Sets the "items" attribute with a collection of PedidosProducto entities
      * that are retrieved from Productos?cap_first and returns the navigation

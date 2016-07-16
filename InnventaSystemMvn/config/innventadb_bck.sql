@@ -1,51 +1,66 @@
--- MySQL dump 10.13  Distrib 5.6.31, for Linux (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: innventadb
--- ------------------------------------------------------
--- Server version	5.6.31
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 16-07-2016 a las 16:33:07
+-- Versión del servidor: 10.1.10-MariaDB
+-- Versión de PHP: 5.6.19
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `acl_acciones`
+-- Base de datos: `innventadb`
 --
 
-DROP TABLE IF EXISTS `acl_acciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `acl_acciones`
+--
+
 CREATE TABLE `acl_acciones` (
   `id` varchar(255) NOT NULL,
   `eliminado` smallint(6) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `modulo` varchar(255) DEFAULT NULL,
+  `acceso` smallint(6) NOT NULL,
+  `crear` smallint(6) NOT NULL DEFAULT '0',
+  `eliminar` smallint(6) NOT NULL,
+  `editar` smallint(6) NOT NULL,
+  `exportar` smallint(6) NOT NULL,
+  `importar` smallint(6) NOT NULL,
+  `ver_precios` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `acl_acciones`
+-- Volcado de datos para la tabla `acl_acciones`
 --
 
-LOCK TABLES `acl_acciones` WRITE;
-/*!40000 ALTER TABLE `acl_acciones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acl_acciones` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `acl_acciones` (`id`, `eliminado`, `modulo`, `acceso`, `crear`, `eliminar`, `editar`, `exportar`, `importar`, `ver_precios`) VALUES
+('29880cf7-14f0-4209-845a-d53b9dcb6328', 0, 'ORDERS', 1, 1, 1, 1, 1, 1, 1),
+('32e3dc3a-74bd-4cd0-8e2f-53ca56240e51', 0, 'THIRDS', 1, 1, 1, 1, 1, 1, 1),
+('559d76e2-3ec9-462f-b409-d94e4630910f', 0, 'ACCOUNTS', 1, 1, 1, 1, 1, 1, 1),
+('56630120-d4e0-4a46-8bc7-0572fee37fa1', 0, 'REPORTS', 1, 1, 1, 1, 1, 1, 1),
+('8724fc84-df98-4dfb-a81a-dbffb842c59c', 0, 'PRODUCTS_SUPPLY', 1, 1, 1, 1, 1, 1, 1),
+('8a9c0ab9-5c00-44e6-addd-76f2aaa7ff9f', 0, 'USERS', 1, 1, 1, 1, 1, 1, 1),
+('b21f6551-7e3a-474b-af5c-97a6c4044a73', 0, 'PRODUCTS_SALE', 1, 1, 1, 1, 1, 1, 1),
+('d51c3a30-7053-4e82-a675-0a76cfb5e73a', 0, 'REMISSIONS', 1, 1, 1, 1, 1, 1, 1),
+('da023c5a-9a8b-437a-89c4-30be8f6e1d52', 0, 'ADMIN', 1, 1, 1, 1, 1, 1, 1),
+('eb56f4c8-8138-4d3d-9620-5e89624b1370', 0, 'PRODUCTS', 1, 1, 1, 1, 1, 1, 1);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `acl_roles`
+-- Estructura de tabla para la tabla `acl_roles`
 --
 
-DROP TABLE IF EXISTS `acl_roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `acl_roles` (
   `ID` varchar(255) NOT NULL,
   `creado_por` varchar(255) DEFAULT NULL,
@@ -54,157 +69,118 @@ CREATE TABLE `acl_roles` (
   `fecha_creacion` datetime DEFAULT NULL,
   `fecha_modificacion` datetime DEFAULT NULL,
   `modificado_por` varchar(255) DEFAULT NULL,
-  `NOMBRE` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `NOMBRE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `acl_roles`
+-- Volcado de datos para la tabla `acl_roles`
 --
 
-LOCK TABLES `acl_roles` WRITE;
-/*!40000 ALTER TABLE `acl_roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acl_roles` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `acl_roles` (`ID`, `creado_por`, `DESCRIPCION`, `ELIMINADO`, `fecha_creacion`, `fecha_modificacion`, `modificado_por`, `NOMBRE`) VALUES
+('ROL_ADM', '1020413761', 'ADMINISTRADOR DEL SISTEMA', 0, '2016-07-13 07:50:48', '2016-07-13 07:50:48', '1020413761', 'ADMINISTRADOR'),
+('ROL_AUX', '1020413761', 'AUXILIAR DE INVENTARIO', 0, '2016-07-11 07:06:54', '2016-07-11 13:01:15', '1020413761', 'AUXILIAR'),
+('ROL_AUX BO', '1020413761', 'SADSAD', 1, '2016-07-09 15:32:26', '2016-07-09 15:32:26', '1020413761', 'AUXILIAR BODEGA'),
+('ROL_ROL', '1020413761', 'saj', 0, '2016-07-15 19:21:34', '2016-07-15 19:21:34', '1020413761', 'rolxx');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `acl_roles_accion`
+-- Estructura de tabla para la tabla `acl_roles_accion`
 --
 
-DROP TABLE IF EXISTS `acl_roles_accion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `acl_roles_accion` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` int(11) NOT NULL,
   `ACCION` varchar(255) DEFAULT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
-  `ROL` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `ROL` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `acl_roles_accion`
+-- Volcado de datos para la tabla `acl_roles_accion`
 --
 
-LOCK TABLES `acl_roles_accion` WRITE;
-/*!40000 ALTER TABLE `acl_roles_accion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acl_roles_accion` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `acl_roles_accion` (`ID`, `ACCION`, `ELIMINADO`, `ROL`) VALUES
+(127, '8a9c0ab9-5c00-44e6-addd-76f2aaa7ff9f', 0, 'ROL_ADM'),
+(128, '56630120-d4e0-4a46-8bc7-0572fee37fa1', 0, 'ROL_ADM'),
+(129, 'eb56f4c8-8138-4d3d-9620-5e89624b1370', 0, 'ROL_ADM'),
+(130, 'd51c3a30-7053-4e82-a675-0a76cfb5e73a', 0, 'ROL_ADM'),
+(131, '559d76e2-3ec9-462f-b409-d94e4630910f', 0, 'ROL_ADM'),
+(132, '32e3dc3a-74bd-4cd0-8e2f-53ca56240e51', 0, 'ROL_ADM'),
+(133, '29880cf7-14f0-4209-845a-d53b9dcb6328', 0, 'ROL_ADM'),
+(134, 'da023c5a-9a8b-437a-89c4-30be8f6e1d52', 0, 'ROL_ADM'),
+(138, 'b21f6551-7e3a-474b-af5c-97a6c4044a73', 0, 'ROL_ADM'),
+(146, '8724fc84-df98-4dfb-a81a-dbffb842c59c', 0, 'ROL_ADM');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `acl_roles_usuarios`
+-- Estructura de tabla para la tabla `atributos`
 --
 
-DROP TABLE IF EXISTS `acl_roles_usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `acl_roles_usuarios` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ELIMINADO` smallint(6) DEFAULT NULL,
-  `USUARIO` varchar(255) DEFAULT NULL,
-  `rol` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_acl_roles_usuarios_rol` (`rol`),
-  CONSTRAINT `FK_acl_roles_usuarios_rol` FOREIGN KEY (`rol`) REFERENCES `acl_roles` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `acl_roles_usuarios`
---
-
-LOCK TABLES `acl_roles_usuarios` WRITE;
-/*!40000 ALTER TABLE `acl_roles_usuarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `acl_roles_usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `atributos`
---
-
-DROP TABLE IF EXISTS `atributos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `atributos` (
   `ID` varchar(255) NOT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
-  `NOMBRE` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `NOMBRE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `atributos`
+-- Estructura de tabla para la tabla `categorias`
 --
 
-LOCK TABLES `atributos` WRITE;
-/*!40000 ALTER TABLE `atributos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `atributos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `categorias`
---
-
-DROP TABLE IF EXISTS `categorias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categorias` (
   `ID` varchar(255) NOT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
   `IMAGEN` longblob,
   `MODULO` varchar(255) DEFAULT NULL,
   `NOMBRE` varchar(255) DEFAULT NULL,
-  `idpadre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_categorias_idpadre` (`idpadre`),
-  CONSTRAINT `FK_categorias_idpadre` FOREIGN KEY (`idpadre`) REFERENCES `categorias` (`ID`)
+  `idpadre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `categorias`
+-- Volcado de datos para la tabla `categorias`
 --
 
-LOCK TABLES `categorias` WRITE;
-/*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES ('633c5eb3-1155-44a2-9785-4924747dd06a',0,NULL,'PRODUCTOS','METALICO','92701bd1-0759-43e3-836c-e6cb6f13f3b7'),('67ecf673-bfc3-4dc6-b576-8c6883142be9',0,NULL,'PRODUCTOS','GONDOLA',NULL),('8e465b94-1350-4193-bdd3-922eb37f1303',0,NULL,'PRODUCTOS','MADERA','92701bd1-0759-43e3-836c-e6cb6f13f3b7'),('92701bd1-0759-43e3-836c-e6cb6f13f3b7',0,NULL,'PRODUCTOS','METALICO',NULL),('93bce9e2-5038-4687-af8c-0305dd8e5655',0,NULL,'PRODUCTOS','LAMINA 2 X 3','92701bd1-0759-43e3-836c-e6cb6f13f3b7'),('a7efdb57-3122-4b6a-97f4-7553b49c3f19',0,NULL,'PRODUCTOS','PRODUCTOS DE VENTA',NULL),('a8fc8306-a10e-42d6-a522-9b87cae0e630',0,NULL,'PRODUCTOS','INSUMO   XXX','92701bd1-0759-43e3-836c-e6cb6f13f3b7'),('c7afcdff-cdb6-4760-8d9b-fd432897ebd5',1,NULL,'PRODUCTOS','POS','a7efdb57-3122-4b6a-97f4-7553b49c3f19'),('d14d5e03-aa5e-4508-b1e5-c2326b01aff5',0,NULL,'PRODUCTOS','GONDOLA ESPECIAL','67ecf673-bfc3-4dc6-b576-8c6883142be9'),('e3328939-fc0a-4a1c-b397-670874e60f48',1,NULL,'PRODUCTOS','insumo xy',NULL),('f902bf18-b91d-46c3-8300-8e96f51df3ec',0,NULL,'PRODUCTOS','madera BALSO','8e465b94-1350-4193-bdd3-922eb37f1303');
-/*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `categorias` (`ID`, `ELIMINADO`, `IMAGEN`, `MODULO`, `NOMBRE`, `idpadre`) VALUES
+('23cdafe1-c190-48e6-944a-fc4766f63c50', 0, NULL, 'PRODUCTOS', 'MADERA', NULL),
+('3645a47f-095c-44c4-9bb9-17daf3f15a71', 0, NULL, 'PRODUCTOS', 'ENTREPAÑO', '392f989c-8534-4b44-9e3e-1c2b754c9139'),
+('36e5cd7d-1d87-49fa-9f94-7813973efc78', 0, NULL, 'PRODUCTOS', 'PUESTOS DE PAGO', '5f6a78bf-b826-4bbd-a11f-ad7f82917866'),
+('392f989c-8534-4b44-9e3e-1c2b754c9139', 0, NULL, 'PRODUCTOS', 'GONDOLAS', '5f6a78bf-b826-4bbd-a11f-ad7f82917866'),
+('5f6a78bf-b826-4bbd-a11f-ad7f82917866', 0, NULL, 'PRODUCTOS', 'SUPERMERCADOS', '6b4c4e60-1d01-4660-a0a8-92eba3933dd6'),
+('633c5eb3-1155-44a2-9785-4924747dd06a', 1, NULL, 'PRODUCTOS', 'METALICO', '92701bd1-0759-43e3-836c-e6cb6f13f3b7'),
+('67ecf673-bfc3-4dc6-b576-8c6883142be9', 1, NULL, 'PRODUCTOS', 'GONDOLA', NULL),
+('6b4c4e60-1d01-4660-a0a8-92eba3933dd6', 0, NULL, 'PRODUCTOS', 'METAL', NULL),
+('8e465b94-1350-4193-bdd3-922eb37f1303', 1, NULL, 'PRODUCTOS', 'MADERA', '92701bd1-0759-43e3-836c-e6cb6f13f3b7'),
+('92701bd1-0759-43e3-836c-e6cb6f13f3b7', 1, NULL, 'PRODUCTOS', 'METALICO', NULL),
+('93bce9e2-5038-4687-af8c-0305dd8e5655', 1, NULL, 'PRODUCTOS', 'LAMINA 2 X 3', '92701bd1-0759-43e3-836c-e6cb6f13f3b7'),
+('a7efdb57-3122-4b6a-97f4-7553b49c3f19', 1, NULL, 'PRODUCTOS', 'PRODUCTOS DE VENTA', NULL),
+('a8dc0815-a30a-4dc1-a51f-9925c6e8727b', 0, NULL, 'PRODUCTOS', 'BOTADEROS', '5f6a78bf-b826-4bbd-a11f-ad7f82917866'),
+('a8fc8306-a10e-42d6-a522-9b87cae0e630', 1, NULL, 'PRODUCTOS', 'INSUMO   XXX', '92701bd1-0759-43e3-836c-e6cb6f13f3b7'),
+('c7afcdff-cdb6-4760-8d9b-fd432897ebd5', 1, NULL, 'PRODUCTOS', 'POS', 'a7efdb57-3122-4b6a-97f4-7553b49c3f19'),
+('d14d5e03-aa5e-4508-b1e5-c2326b01aff5', 1, NULL, 'PRODUCTOS', 'GONDOLA ESPECIAL', '67ecf673-bfc3-4dc6-b576-8c6883142be9'),
+('e3328939-fc0a-4a1c-b397-670874e60f48', 1, NULL, 'PRODUCTOS', 'insumo xy', NULL),
+('f902bf18-b91d-46c3-8300-8e96f51df3ec', 1, NULL, 'PRODUCTOS', 'madera BALSO', '8e465b94-1350-4193-bdd3-922eb37f1303'),
+('fc8c280a-0597-41f3-9079-f631ad74f9bc', 1, NULL, 'PRODUCTOS', 'BOTADERO', '6b4c4e60-1d01-4660-a0a8-92eba3933dd6');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `categorias_impuestos`
+-- Estructura de tabla para la tabla `categorias_impuestos`
 --
 
-DROP TABLE IF EXISTS `categorias_impuestos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categorias_impuestos` (
   `ID` varchar(255) NOT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
-  `NOMBRE` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `NOMBRE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `categorias_impuestos`
+-- Estructura de tabla para la tabla `cuentas`
 --
 
-LOCK TABLES `categorias_impuestos` WRITE;
-/*!40000 ALTER TABLE `categorias_impuestos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categorias_impuestos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `cuentas`
---
-
-DROP TABLE IF EXISTS `cuentas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuentas` (
   `id` varchar(255) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -218,112 +194,85 @@ CREATE TABLE `cuentas` (
   `fecha_creacion` datetime DEFAULT NULL,
   `modificado_por` varchar(255) DEFAULT NULL,
   `fecha_modificacion` datetime DEFAULT NULL,
-  `eliminado` smallint(6) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_cuentas_estado` (`estado`),
-  KEY `FK_cuentas_lista_precios` (`lista_precios`)
+  `eliminado` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cuentas`
+-- Volcado de datos para la tabla `cuentas`
 --
 
-LOCK TABLES `cuentas` WRITE;
-/*!40000 ALTER TABLE `cuentas` DISABLE KEYS */;
-INSERT INTO `cuentas` VALUES ('165169e8-83b8-450a-9531-4be0a458c473','23432',NULL,NULL,NULL,NULL,'INACTIVA',NULL,'14136571','2016-06-19 08:25:26','14136571','2016-06-19 08:25:26',1),('234324','razon sdaoyodsf',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-19 08:34:53','14136571','2016-06-19 08:34:53',0),('47987564','kjlkjok',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-20 22:03:54','14136571','2016-06-20 22:03:54',0),('6e492f7e-58b7-4c22-9ac7-7286c22c9e8c','213321',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-19 08:17:40','14136571','2016-06-19 08:17:40',1),('7874561230','kvhjgklkjlkjj',NULL,'ñljpojpoij','4645156','1231564','ACTIVA',NULL,'14136571','2016-07-04 12:10:12','14136571','2016-07-04 12:10:12',0),('794545621','COMÑIA Y ASOCIDOS',NULL,'CRA 65 # 28-52','1234564','','ACTIVA',NULL,'14136571','2016-07-04 12:39:30','14136571','2016-07-04 12:39:30',0),('7984564561','empresa yyu',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-21 18:03:47','14136571','2016-06-21 18:03:47',0),('7987','dasd ',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-20 21:55:38','14136571','2016-06-20 21:55:38',0),('798798321798','Empresa xxx',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-19 08:39:48','14136571','2016-06-19 08:39:48',0),('878789','oioi',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-20 22:13:34','14136571','2016-06-20 22:13:34',0),('9874656','empresa yyyy',NULL,NULL,NULL,NULL,'ACTIVA',NULL,'14136571','2016-06-19 09:22:14','14136571','2016-06-19 23:49:00',0);
-/*!40000 ALTER TABLE `cuentas` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `cuentas` (`id`, `nombre`, `tipo_cliente`, `direccion`, `telefono`, `telefono_sec`, `estado`, `lista_precios`, `creado_por`, `fecha_creacion`, `modificado_por`, `fecha_modificacion`, `eliminado`) VALUES
+('900615645.5', 'EXHIBICIONES Y DISEÑOS S.A.S.', NULL, 'CL 34 66 A 58', '2653706', '', 'ACTIVA', NULL, '1020413761', '2016-07-05 10:35:31', '1020413761', '2016-07-05 10:59:44', 0);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `cuentas_contactos`
+-- Estructura de tabla para la tabla `cuentas_contactos`
 --
 
-DROP TABLE IF EXISTS `cuentas_contactos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuentas_contactos` (
   `id_persona` varchar(255) DEFAULT NULL,
   `id_cuenta` varchar(255) DEFAULT NULL,
   `CARGO` varchar(255) DEFAULT NULL,
-  `ELIMINADO` smallint(6) DEFAULT NULL,
-  KEY `FK_cuentas_contactos_id_cliente` (`id_cuenta`),
-  KEY `FK_cuentas_contactos_id_persona` (`id_persona`),
-  CONSTRAINT `FK_cuentas_contactos_id_cuenta` FOREIGN KEY (`id_cuenta`) REFERENCES `cuentas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_cuentas_contactos_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `personas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `ELIMINADO` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cuentas_contactos`
+-- Volcado de datos para la tabla `cuentas_contactos`
 --
 
-LOCK TABLES `cuentas_contactos` WRITE;
-/*!40000 ALTER TABLE `cuentas_contactos` DISABLE KEYS */;
-INSERT INTO `cuentas_contactos` VALUES ('987454564','9874656','cargooo',0),('798456456','7987','AP_DIR',0),('79879856456','47987564','AP_SEC',0),('87987986','878789','AP_SEC',0),('79845641','7984564561','AP_COM',0),('1564564','7874561230','AP_COM',0),('454564','794545621','AP_ASI',0);
-/*!40000 ALTER TABLE `cuentas_contactos` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `cuentas_contactos` (`id_persona`, `id_cuenta`, `CARGO`, `ELIMINADO`) VALUES
+('70569547', '900615645.5', 'AP_GER', 0);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `cuentas_direccion`
+-- Estructura de tabla para la tabla `cuentas_direccion`
 --
 
-DROP TABLE IF EXISTS `cuentas_direccion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuentas_direccion` (
   `ID` varchar(255) NOT NULL,
   `DIRECCION` varchar(255) DEFAULT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
-  `id_cliente` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_cuentas_direccion_id_cliente` (`id_cliente`),
-  CONSTRAINT `FK_cuentas_direccion_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cuentas` (`id`)
+  `id_cliente` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `cuentas_direccion`
+-- Estructura de tabla para la tabla `estados`
 --
 
-LOCK TABLES `cuentas_direccion` WRITE;
-/*!40000 ALTER TABLE `cuentas_direccion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cuentas_direccion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `estados`
---
-
-DROP TABLE IF EXISTS `estados`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `estados` (
   `ID` varchar(255) NOT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
   `ESTADO` varchar(255) DEFAULT NULL,
-  `MODULO` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `MODULO` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `estados`
+-- Volcado de datos para la tabla `estados`
 --
 
-LOCK TABLES `estados` WRITE;
-/*!40000 ALTER TABLE `estados` DISABLE KEYS */;
-INSERT INTO `estados` VALUES ('06afb827-2cb4-4e08-abe4-757ba0dc69b5',0,'TERMINADA','ORDERS'),('13625479-9841-4047-adad-9741eed735d3',0,'SOLICITADA','ORDERS'),('1dcd7183-2c8d-4379-9b50-225a647283a0',0,'PAGADA','ORDERS'),('226fd06d-05eb-40d5-8c04-ee0f0a2e277a',0,'ACEPTADA','ORDERS'),('6228d8d2-7456-43ce-b7ba-47fabc2a142f',0,'FINALIZADA','ORDERS'),('8d88996b-464d-46db-900e-e24bae8508fa',0,'ENTREGADA','ORDERS'),('a400bb03-1310-4b12-89fd-0e62bdc792ea',0,'ENTREGA PARCIAL','ORDERS'),('a861b528-b9fc-4876-90d8-9e7a6dd33251',0,'EN PROCESO','ORDERS'),('ACTIVA',0,'ACTIVA','ACCOUNTS'),('bdb2e05f-ec7d-492b-9c36-43722c40a9e7',1,'SOLICITADA','ORDERS'),('INACTIVA',0,'INACTIVA','ACCOUNTS');
-/*!40000 ALTER TABLE `estados` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `estados` (`ID`, `ELIMINADO`, `ESTADO`, `MODULO`) VALUES
+('06afb827-2cb4-4e08-abe4-757ba0dc69b5', 0, 'TERMINADA', 'ORDERS'),
+('13625479-9841-4047-adad-9741eed735d3', 0, 'SOLICITADA', 'ORDERS'),
+('1dcd7183-2c8d-4379-9b50-225a647283a0', 0, 'PAGADA', 'ORDERS'),
+('226fd06d-05eb-40d5-8c04-ee0f0a2e277a', 0, 'ACEPTADA', 'ORDERS'),
+('6228d8d2-7456-43ce-b7ba-47fabc2a142f', 0, 'FINALIZADA', 'ORDERS'),
+('8d88996b-464d-46db-900e-e24bae8508fa', 0, 'ENTREGADA', 'ORDERS'),
+('a400bb03-1310-4b12-89fd-0e62bdc792ea', 0, 'ENTREGA PARCIAL', 'ORDERS'),
+('a861b528-b9fc-4876-90d8-9e7a6dd33251', 0, 'EN PROCESO', 'ORDERS'),
+('ACTIVA', 0, 'ACTIVA', 'ACCOUNTS'),
+('bdb2e05f-ec7d-492b-9c36-43722c40a9e7', 1, 'SOLICITADA', 'ORDERS'),
+('INACTIVA', 0, 'INACTIVA', 'ACCOUNTS');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `impuestos`
+-- Estructura de tabla para la tabla `impuestos`
 --
 
-DROP TABLE IF EXISTS `impuestos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `impuestos` (
   `ID` varchar(255) NOT NULL,
   `CATEGORIA` varchar(255) DEFAULT NULL,
@@ -333,136 +282,117 @@ CREATE TABLE `impuestos` (
   `NOMBRE` varchar(255) DEFAULT NULL,
   `TARIFA` double DEFAULT NULL,
   `valido_desde` datetime DEFAULT NULL,
-  `impuesto_padre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_impuestos_impuesto_padre` (`impuesto_padre`),
-  CONSTRAINT `FK_impuestos_impuesto_padre` FOREIGN KEY (`impuesto_padre`) REFERENCES `impuestos` (`ID`)
+  `impuesto_padre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `impuestos`
+-- Estructura de tabla para la tabla `insumos_producto`
 --
 
-LOCK TABLES `impuestos` WRITE;
-/*!40000 ALTER TABLE `impuestos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `impuestos` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `insumos_producto` (
+  `id` int(11) NOT NULL,
+  `producto_padre` varchar(255) NOT NULL,
+  `insumo` varchar(255) NOT NULL,
+  `tipo_calculo` int(11) NOT NULL,
+  `cantidad` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `lineas_impuestos`
+-- Estructura de tabla para la tabla `lineas_impuestos`
 --
 
-DROP TABLE IF EXISTS `lineas_impuestos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lineas_impuestos` (
   `ID` varchar(255) NOT NULL,
   `BASE` double DEFAULT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
   `IMPUESTO` varchar(255) DEFAULT NULL,
   `MONTO` double DEFAULT NULL,
-  `RECIBO` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `RECIBO` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `lineas_impuestos`
+-- Estructura de tabla para la tabla `lista_precios`
 --
 
-LOCK TABLES `lineas_impuestos` WRITE;
-/*!40000 ALTER TABLE `lineas_impuestos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lineas_impuestos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `lista_precios`
---
-
-DROP TABLE IF EXISTS `lista_precios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lista_precios` (
   `ID` varchar(255) NOT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
   `NOMBRE` varchar(255) DEFAULT NULL,
   `PORCENTAJE` tinyint(1) DEFAULT '0',
-  `VALOR_PORCENTAJE` smallint(6) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `VALOR_PORCENTAJE` smallint(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `lista_precios`
+-- Estructura de tabla para la tabla `pagos`
 --
 
-LOCK TABLES `lista_precios` WRITE;
-/*!40000 ALTER TABLE `lista_precios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lista_precios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pagos`
---
-
-DROP TABLE IF EXISTS `pagos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pagos` (
   `ID` varchar(255) NOT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
   `id_trans` varchar(255) DEFAULT NULL,
   `PAGO` varchar(255) DEFAULT NULL,
   `RECIBO` varchar(255) DEFAULT NULL,
-  `TOTAL` double DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `TOTAL` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `pagos`
+-- Estructura de tabla para la tabla `parametros`
 --
 
-LOCK TABLES `pagos` WRITE;
-/*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `parametros`
---
-
-DROP TABLE IF EXISTS `parametros`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `parametros` (
   `ID` varchar(255) NOT NULL,
-  `CLAVE1` varchar(255) DEFAULT NULL,
-  `CLAVE2` varchar(255) DEFAULT NULL,
+  `CLAVE1` varchar(20) DEFAULT NULL,
+  `CLAVE2` varchar(20) DEFAULT NULL,
+  `CLAVE3` varchar(20) DEFAULT NULL,
   `ELIMINADO` smallint(6) DEFAULT NULL,
-  `PARAMETRO` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `PARAMETRO` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `parametros`
+-- Volcado de datos para la tabla `parametros`
 --
 
-LOCK TABLES `parametros` WRITE;
-/*!40000 ALTER TABLE `parametros` DISABLE KEYS */;
-INSERT INTO `parametros` VALUES ('09f23661-2537-4ebb-b397-b6d01cc38c68','RM','11',0,'CONF_REMISSIONS'),('86b0b849-4f2a-410a-8540-618608983eaf','OC','21',0,'CONF_ORDERS'),('AP_ASI','ASISTENTE',NULL,0,'ACCOUNTS_POSITION'),('AP_COM','COMERCIAL',NULL,0,'ACCOUNTS_POSITION'),('AP_DIR','DIRECTOR',NULL,0,'ACCOUNTS_POSITION'),('AP_GER','GERENTE',NULL,0,'ACCOUNTS_POSITION'),('AP_OPE','OPERARIO',NULL,0,'ACCOUNTS_POSITION'),('AP_SEC','SECRETEARIA',NULL,0,'ACCOUNTS_POSITION'),('AP_TEC','TECNICO',NULL,0,'ACCOUNTS_POSITION'),('ID_C','CEDULA',NULL,0,'IDENTIFICATION'),('ID_NIT','NIT',NULL,0,'IDENTIFICATION'),('PRODUCT_TYPE1','PRODUCTO DE VENTA',NULL,0,'PRODUCT_TYPE'),('PRODUCT_TYPE2','INSUMO',NULL,0,'PRODUCT_TYPE');
-/*!40000 ALTER TABLE `parametros` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `parametros` (`ID`, `CLAVE1`, `CLAVE2`, `CLAVE3`, `ELIMINADO`, `PARAMETRO`) VALUES
+('09f23661-2537-4ebb-b397-b6d01cc38c68', 'RM', '430', NULL, 0, 'CONF_REMISSIONS'),
+('86b0b849-4f2a-410a-8540-618608983eaf', 'OC', '159', NULL, 0, 'CONF_ORDERS'),
+('ACCOUNTS', 'Clientes', '14', NULL, 0, 'MODULES'),
+('ADMIN', 'Administracion', '40', '1', 0, 'MODULES'),
+('AP_ASI', 'ASISTENTE', NULL, NULL, 0, 'ACCOUNTS_POSITION'),
+('AP_COM', 'COMERCIAL', NULL, NULL, 0, 'ACCOUNTS_POSITION'),
+('AP_DIR', 'DIRECTOR', NULL, NULL, 0, 'ACCOUNTS_POSITION'),
+('AP_GER', 'GERENTE', NULL, NULL, 0, 'ACCOUNTS_POSITION'),
+('AP_OPE', 'OPERARIO', NULL, NULL, 0, 'ACCOUNTS_POSITION'),
+('AP_SEC', 'SECRETEARIA', NULL, NULL, 0, 'ACCOUNTS_POSITION'),
+('AP_TEC', 'TECNICO', NULL, NULL, 0, 'ACCOUNTS_POSITION'),
+('ID_C', 'CEDULA', NULL, NULL, 0, 'IDENTIFICATION'),
+('ID_NIT', 'NIT', NULL, NULL, 0, 'IDENTIFICATION'),
+('ORDERS', 'Ordenes de Compra', '12', NULL, 0, 'MODULES'),
+('PRODUCTS', 'Productos', '10', '1', 0, 'MODULES'),
+('PRODUCTS_SALE', 'De Venta', '111', NULL, 0, 'MODULES'),
+('PRODUCTS_SUPPLY', 'Insumos', '112', NULL, 0, 'MODULES'),
+('PRODUCT_TYPE1', 'PRODUCTO DE VENTA', NULL, NULL, 0, 'PRODUCT_TYPE'),
+('PRODUCT_TYPE2', 'INSUMO', NULL, NULL, 0, 'PRODUCT_TYPE'),
+('REMISSIONS', 'Remisiones', '13', NULL, 0, 'MODULES'),
+('REPORTS', 'Reportes', '20', '1', 0, 'MODULES'),
+('THIRDS', 'Terceros', '15', NULL, 0, 'MODULES'),
+('USERS', 'Usuarios', '30', NULL, 0, 'MODULES');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `pedidos`
+-- Estructura de tabla para la tabla `pedidos`
 --
 
-DROP TABLE IF EXISTS `pedidos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pedidos` (
   `id` varchar(255) NOT NULL,
   `cantidad_pendientes` int(11) DEFAULT NULL,
@@ -478,32 +408,41 @@ CREATE TABLE `pedidos` (
   `observaciones` varchar(255) DEFAULT NULL,
   `referencia` varchar(255) DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
-  `id_cliente` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_pedidos_id_cliente` (`id_cliente`),
-  KEY `FK_pedidos_estado` (`estado`),
-  CONSTRAINT `FK_pedidos_estado` FOREIGN KEY (`estado`) REFERENCES `estados` (`ID`),
-  CONSTRAINT `FK_pedidos_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cuentas` (`id`)
+  `id_cliente` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pedidos`
+-- Volcado de datos para la tabla `pedidos`
 --
 
-LOCK TABLES `pedidos` WRITE;
-/*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES ('1eb5be14-6460-4742-88c3-9cf1440397ae',0,15,'14136571','',0,'2016-07-04 08:20:33',NULL,'2016-07-04 08:20:33','2016-07-19','14136571','esta es una remision','OC00018','8d88996b-464d-46db-900e-e24bae8508fa','798798321798'),('1f7e100a-4d0d-4989-bbb8-6911508dc2ef',0,1,'14136571','',0,'2016-07-03 07:50:54',NULL,'2016-07-03 07:50:54','2016-07-21','14136571','oc 15','OC00015','8d88996b-464d-46db-900e-e24bae8508fa','798798321798'),('2a2e5f96-8c8c-4aab-9213-4fb86cf2e497',0,15,'14136571','',0,'2016-06-21 18:49:54','2016-06-01','2016-06-21 18:49:54','2016-06-02','14136571','','OC00005','13625479-9841-4047-adad-9741eed735d3','7984564561'),('2e25c21f-150a-4501-ad9a-78f9ff334e65',0,2,'14136571','',0,'2016-07-03 07:39:57',NULL,'2016-07-03 07:39:57','2016-07-05','14136571','orden 14','OC00014','8d88996b-464d-46db-900e-e24bae8508fa','7984564561'),('2f6589dc-cc67-45a3-821f-5b158ecffb7a',0,0,'14136571','',0,'2016-06-21 22:52:18',NULL,'2016-06-21 22:52:18','2016-06-09','14136571','','OC00008','06afb827-2cb4-4e08-abe4-757ba0dc69b5','234324'),('467cf2d3-b3e4-477b-8a6f-82938c7fba61',0,15,'14136571','',0,'2016-07-04 08:35:27',NULL,'2016-07-04 08:35:27','2016-07-06','14136571','remision xxxksj','OC00020','13625479-9841-4047-adad-9741eed735d3','234324'),('52ba8dc7-caee-40c7-aae0-6b0302e60d56',0,61,'14136571','',0,'2016-07-03 08:07:15',NULL,'2016-07-03 08:07:15','2016-07-05','14136571','orden','OC00017','226fd06d-05eb-40d5-8c04-ee0f0a2e277a','798798321798'),('5c019884-9f93-4186-a01a-3725e0c73dfa',0,2,'14136571','',0,'2016-06-21 22:24:17','2016-06-21','2016-06-21 22:24:17','2016-06-15','14136571','','OC00006','13625479-9841-4047-adad-9741eed735d3','9874656'),('66f9ec68-0e5a-4664-a4f9-5325200f58ec',0,0,'14136571','',0,'2016-06-21 23:01:21',NULL,'2016-06-21 23:01:21','2016-06-15','14136571','','OC00009','13625479-9841-4047-adad-9741eed735d3','47987564'),('6ab953fb-eb5b-4ecc-aaae-8f01b62fa9f7',0,15,'14136571','',0,'2016-07-03 07:54:17',NULL,'2016-07-03 07:54:17','2016-07-28','14136571','or c 1555','OC00015','8d88996b-464d-46db-900e-e24bae8508fa','234324'),('86c73509-e3b7-4a5a-ba75-1ab50f73b228',0,0,'14136571','',0,'2016-07-02 07:17:38',NULL,'2016-07-02 07:17:38','2016-07-13','14136571','','OC00012','13625479-9841-4047-adad-9741eed735d3','7984564561'),('8d42ce72-720f-45d5-8ca5-c874c48135f2',0,54,'14136571','',0,'2016-07-04 17:10:59',NULL,'2016-07-04 17:10:59','2016-07-13','14136571','','OC00021','13625479-9841-4047-adad-9741eed735d3','794545621'),('911267d2-faf3-44d8-bba7-d9501d86f7a2',0,51,'14136571','',0,'2016-06-23 23:01:35','2016-06-23','2016-06-23 23:01:35','2016-06-23','14136571','','OC00011','13625479-9841-4047-adad-9741eed735d3','798798321798'),('929f4f36-37b7-4dbf-80c5-bf41189b5aae',0,15,'14136571','',0,'2016-07-02 08:12:42',NULL,'2016-07-02 08:12:42','2016-07-14','14136571','','OC00013','13625479-9841-4047-adad-9741eed735d3','7984564561'),('a00bbc7d-1800-473e-880c-c53c09665d3c',0,0,'14136571','',0,'2016-07-01 22:00:58',NULL,'2016-07-01 22:00:58','2016-07-14','14136571','','OC00012','226fd06d-05eb-40d5-8c04-ee0f0a2e277a','7984564561'),('b480ac48-27a3-47dc-a113-cf759a05f728',0,15,'14136571','',0,'2016-07-04 08:30:04',NULL,'2016-07-04 08:30:04','2016-07-21','14136571','sapdudsai','OC00019','1dcd7183-2c8d-4379-9b50-225a647283a0','7984564561'),('cdacb2c5-9ace-4a23-bdb8-9cd59ece9c3a',0,0,'14136571','asdk{ñkdsa',0,'2016-06-20 22:16:45','2016-06-15','2016-06-20 22:16:45','2016-06-13','14136571','observaciones','OC00003','13625479-9841-4047-adad-9741eed735d3','9874656'),('d0adc8aa-f764-4ea7-962c-fe057f494350',0,13,'14136571','',0,'2016-07-02 06:27:41',NULL,'2016-07-02 06:27:41','2016-07-06','14136571','','OC00012','13625479-9841-4047-adad-9741eed735d3','7984564561'),('dba7629f-2819-4e3d-acec-89b7cadc5086',0,0,'14136571','adssad',0,'2016-06-21 18:06:48','2016-09-30','2016-06-21 18:06:48','2016-06-21','14136571','','OC00004','13625479-9841-4047-adad-9741eed735d3','9874656'),('edfbec23-7593-460c-b533-c20324c4b167',0,0,'14136571','',0,'2016-06-21 23:04:19',NULL,'2016-06-21 23:04:19','2016-06-08','14136571','','OC00010','13625479-9841-4047-adad-9741eed735d3','7987'),('f8577cf5-1555-4ab2-b8dc-977e2b0392b7',0,15,'14136571','',0,'2016-07-03 08:06:22',NULL,'2016-07-03 08:06:22','2016-07-13','14136571','producto sin remision','OC00016','1dcd7183-2c8d-4379-9b50-225a647283a0','9874656'),('fe7f0706-1335-4b83-a1ce-111783688b8c',0,0,'14136571','',0,'2016-06-21 22:45:25',NULL,'2016-06-21 22:45:25','2016-06-21','14136571','','OC00007','13625479-9841-4047-adad-9741eed735d3','234324');
-/*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `pedidos` (`id`, `cantidad_pendientes`, `cantidad_total`, `creado_por`, `descripcion`, `eliminado`, `fecha_creacion`, `fecha_entrega`, `fecha_modificacion`, `fecha_pedido`, `modificado_por`, `observaciones`, `referencia`, `estado`, `id_cliente`) VALUES
+('04baa1b4-88a4-4565-8b55-aa4acd3e0290', 0, 9, '1020413761', '', 0, '2016-07-06 06:14:13', '2016-01-25', '2016-07-06 06:14:13', '2016-01-25', '1020413761', '', 'OC00015', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('11ae1769-38b8-42d3-8b13-8277cfd2d93a', 0, 308, '1020413761', '', 0, '2016-07-05 22:41:21', NULL, '2016-07-05 22:41:21', '2016-01-04', '1020413761', '', 'OC00001', '6228d8d2-7456-43ce-b7ba-47fabc2a142f', '900615645.5'),
+('3b506903-c873-4432-820c-fc6a50388588', 0, 24, '1020413761', '', 0, '2016-07-06 06:00:43', '2016-01-12', '2016-07-06 06:00:43', '2016-01-12', '1020413761', '', 'OC00005', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('48064538-d4e9-47c9-a3de-edac081bef9a', 0, 210, '1020413761', '', 0, '2016-07-06 12:03:07', '2016-07-06', '2016-07-11 23:19:44', '2016-07-06', '1020413761', 'Se entrega de la mercancia en buen estado, Despacho Bodega Britalia.sadsad', 'OC00156', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('48bb2179-a1bf-4687-b3f6-3d30636ff531', 0, 6, '1020413761', '', 0, '2016-07-06 06:01:49', '2016-01-13', '2016-07-06 06:01:49', '2016-01-13', '1020413761', '', 'OC00006', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('4ba71c41-3e7f-43c1-b946-5bbaa43f1533', 0, 47, '1020413761', '', 0, '2016-07-09 00:09:36', NULL, '2016-07-09 00:09:36', '2016-07-07', '1020413761', '', 'OC00159', '06afb827-2cb4-4e08-abe4-757ba0dc69b5', '900615645.5'),
+('5c5fb5b2-eebc-4ab0-bb32-96733b4a8d0b', 0, 2, '1020413761', '', 0, '2016-07-06 06:08:10', '2016-01-20', '2016-07-06 06:08:10', '2016-01-20', '1020413761', '', 'OC00010', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('6cdfaff8-ec98-4748-aa7f-cac0b44d4e5d', 0, 12, '1020413761', '', 0, '2016-07-08 22:41:12', NULL, '2016-07-08 22:41:12', '2016-07-20', '1020413761', '', 'OC00157', '13625479-9841-4047-adad-9741eed735d3', '900615645.5'),
+('8b2c7f28-364b-4647-8fb7-90d005ec2622', 0, 10, '1020413761', '', 0, '2016-07-06 06:11:35', '2016-01-21', '2016-07-06 06:11:35', '2016-01-21', '1020413761', '', 'OC00013', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('8cd8eeb0-fba0-44ef-8289-1d263eb4da05', 0, 2, '1020413761', '', 0, '2016-07-06 06:07:36', '2016-01-19', '2016-07-06 06:07:36', '2016-01-19', '1020413761', '', 'OC00009', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('90d8ef64-7262-4078-ad68-807d188985d7', 0, 110, '1020413761', '', 0, '2016-07-06 06:05:36', '2016-01-16', '2016-07-06 06:05:36', '2016-01-16', '1020413761', 'Esta se Remite con otra orden que tiene reprocesos.', 'OC00007', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('9734086e-bfc9-4909-8f3f-8cace3e4a54d', 0, 6, '1020413761', '', 0, '2016-07-06 06:06:58', '2016-01-19', '2016-07-06 06:06:58', '2016-01-19', '1020413761', '', 'OC00008', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('b1b34e39-a54d-46de-af7d-e2c87a96b6ba', 0, 41, '1020413761', '', 0, '2016-07-08 22:45:52', NULL, '2016-07-12 07:58:49', '2016-07-21', '1020413761', '', 'OC00158', '1dcd7183-2c8d-4379-9b50-225a647283a0', '900615645.5'),
+('b7b162db-afef-455b-9aaa-012d3335e7c3', 0, 38, '1020413761', '', 0, '2016-07-05 23:49:22', '2016-01-07', '2016-07-05 23:49:22', '2016-01-07', '1020413761', '', 'OC00002', '06afb827-2cb4-4e08-abe4-757ba0dc69b5', '900615645.5'),
+('cd780ff2-7251-43b4-8c12-abf694102552', 0, 30, '1020413761', '', 0, '2016-07-05 10:53:02', '2016-07-01', '2016-07-05 10:53:02', '2016-07-01', '1020413761', 'Se hace entrega de la mercancía en buen estado.', 'OC00155', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('d9e9e076-afee-4b1d-88ab-e211a6b169a1', 0, 24, '1020413761', '', 0, '2016-07-06 06:10:43', '2016-01-21', '2016-07-06 06:10:43', '2016-01-21', '1020413761', '', 'OC00012', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('dd5f1bd8-c6fb-4395-9f57-7162fd67eaa7', 0, 15, '1020413761', '', 0, '2016-07-06 05:54:39', NULL, '2016-07-06 05:54:39', '2016-01-08', '1020413761', '', 'OC00003', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('e56995cb-9f24-4bbe-b099-7c22239732bc', 0, 23, '1020413761', '', 0, '2016-07-06 06:12:50', '2016-01-21', '2016-07-06 06:12:50', '2016-01-21', '1020413761', '', 'OC00014', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('ee46d986-e333-4c83-8826-ef106a858504', 0, 30, '1020413761', '', 0, '2016-07-06 06:09:38', '2016-01-21', '2016-07-06 06:09:38', '2016-01-21', '1020413761', '', 'OC00011', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5'),
+('f466365f-e96d-4a5b-b19d-6c7703cbce5a', 0, 132, '1020413761', '', 0, '2016-07-06 05:59:23', '2016-01-12', '2016-07-06 05:59:23', '2016-01-12', '1020413761', '', 'OC00004', '8d88996b-464d-46db-900e-e24bae8508fa', '900615645.5');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `pedidos_producto`
+-- Estructura de tabla para la tabla `pedidos_producto`
 --
 
-DROP TABLE IF EXISTS `pedidos_producto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pedidos_producto` (
   `ID` varchar(255) NOT NULL,
   `CANTIDAD` int(11) DEFAULT NULL,
@@ -512,86 +451,69 @@ CREATE TABLE `pedidos_producto` (
   `valor_total` double DEFAULT NULL,
   `valor_unitario` double DEFAULT NULL,
   `id_pedido` varchar(255) DEFAULT NULL,
-  `id_producto` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `FK_pedidos_producto_id_producto` (`id_producto`),
-  KEY `FK_pedidos_producto_id_pedido` (`id_pedido`),
-  CONSTRAINT `FK_pedidos_producto_id_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`),
-  CONSTRAINT `FK_pedidos_producto_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`)
+  `id_producto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pedidos_producto`
+-- Volcado de datos para la tabla `pedidos_producto`
 --
 
-LOCK TABLES `pedidos_producto` WRITE;
-/*!40000 ALTER TABLE `pedidos_producto` DISABLE KEYS */;
-INSERT INTO `pedidos_producto` VALUES ('02ca4aeb-e233-4709-8f01-fd37ed6f2c35',0,0,0,0,1000,'fe7f0706-1335-4b83-a1ce-111783688b8c','43d75b3d-e777-4596-b48f-6a925b764f04'),('02f4923c-b7ea-47ec-9209-37bfe18cd70c',12,12,0,4200000,350000,'8d42ce72-720f-45d5-8ca5-c874c48135f2','f1c036a1-ee3d-4bef-8214-071c1be5e3b5'),('0b5a463a-f3a6-4fc5-86b5-3cb3e46d9aa7',15,15,0,3000000,200000,'1eb5be14-6460-4742-88c3-9cf1440397ae','a82b7b59-2fc2-4485-b10c-171fcab90049'),('0b991286-a030-4cb7-bbec-09e99ac7a485',10,10,0,1234560,123456,'8d42ce72-720f-45d5-8ca5-c874c48135f2','783f0a67-34c0-4d0d-971c-f85e05f189b2'),('20d8aca3-124c-4a09-88a5-0ce02daac896',36,0,0,54000000,1500000,'911267d2-faf3-44d8-bba7-d9501d86f7a2','a3207d52-ac35-4686-a22b-5f20e60e7a34'),('350f8c6b-0e28-49fd-9725-31d512275f68',15,15,0,15000,1000,'6ab953fb-eb5b-4ecc-aaae-8f01b62fa9f7','43d75b3d-e777-4596-b48f-6a925b764f04'),('413d74a8-b99d-46b2-b775-26d09ea7e487',2,2,0,2000,1000,'2e25c21f-150a-4501-ad9a-78f9ff334e65','43d75b3d-e777-4596-b48f-6a925b764f04'),('4cb51c22-ef09-44d9-a8b2-673e66c5d149',5,0,0,50000,10000,'911267d2-faf3-44d8-bba7-d9501d86f7a2','4efddfa5-0153-403e-8461-3a2bc3aa74ee'),('54d9310e-7697-44d4-bc8b-152b12b48e1c',36,36,0,54000000,1500000,'52ba8dc7-caee-40c7-aae0-6b0302e60d56','a3207d52-ac35-4686-a22b-5f20e60e7a34'),('5aade432-f89a-436d-a42c-251fe8d5f951',1,0,0,350000,350000,'a00bbc7d-1800-473e-880c-c53c09665d3c','d4931e85-2f04-4d42-b95c-7b268159e52a'),('5d8148a0-7bfe-4080-969e-9badf3b4f5dd',15,0,0,15000,1000,'929f4f36-37b7-4dbf-80c5-bf41189b5aae','43d75b3d-e777-4596-b48f-6a925b764f04'),('66907793-d531-4953-85f6-3ea31589d406',14,0,0,14000,1000,'a00bbc7d-1800-473e-880c-c53c09665d3c','43d75b3d-e777-4596-b48f-6a925b764f04'),('7ba9d496-e437-43e7-9615-146e5f818dce',0,0,0,0,1000,'2f6589dc-cc67-45a3-821f-5b158ecffb7a','43d75b3d-e777-4596-b48f-6a925b764f04'),('7fcabc34-3ccc-45e7-8892-b9dddd5a5da4',11,0,0,396000,36000,'86c73509-e3b7-4a5a-ba75-1ab50f73b228','50c64a5d-291b-4e0e-a2e4-5a5eda5a9c5f'),('8761a859-dfa6-4617-816a-716b7de95d2e',15,0,0,15000,1000,'2a2e5f96-8c8c-4aab-9213-4fb86cf2e497','43d75b3d-e777-4596-b48f-6a925b764f04'),('91246219-fd45-46ab-87b5-e2c06ed82c6c',7,7,0,1750000,250000,'8d42ce72-720f-45d5-8ca5-c874c48135f2','61d5a8d1-0b60-4dab-a705-390769ffaecc'),('93afc9a9-354f-4a4a-81eb-0e7c9dc478b3',10,0,0,360000,36000,'a00bbc7d-1800-473e-880c-c53c09665d3c','50c64a5d-291b-4e0e-a2e4-5a5eda5a9c5f'),('9432a2ac-89a3-495c-8baa-eee9d9aff2a6',100,0,0,20000000,200000,'dba7629f-2819-4e3d-acec-89b7cadc5086','a82b7b59-2fc2-4485-b10c-171fcab90049'),('979a13c4-9992-4fc3-b1d0-e19410283e1d',15,15,0,15000,1000,'467cf2d3-b3e4-477b-8a6f-82938c7fba61','43d75b3d-e777-4596-b48f-6a925b764f04'),('998cd1ef-c879-463c-82be-f53f91363cef',10,10,0,10000,1000,'8d42ce72-720f-45d5-8ca5-c874c48135f2','43d75b3d-e777-4596-b48f-6a925b764f04'),('99e0c023-8592-4ac6-8df9-461e5f070f7d',15,0,0,15000,1000,'f8577cf5-1555-4ab2-b8dc-977e2b0392b7','43d75b3d-e777-4596-b48f-6a925b764f04'),('a1b1d9ca-d90d-414d-aadf-0ae141f3dc55',15,15,0,15000,1000,'b480ac48-27a3-47dc-a113-cf759a05f728','43d75b3d-e777-4596-b48f-6a925b764f04'),('acec6c1f-d33e-491d-b3f6-fe5227d6b241',15,15,0,3000000,200000,'8d42ce72-720f-45d5-8ca5-c874c48135f2','a82b7b59-2fc2-4485-b10c-171fcab90049'),('bf54d0da-25fc-43e4-9be3-26759c524beb',12,0,0,0,250000,'d0adc8aa-f764-4ea7-962c-fe057f494350','61d5a8d1-0b60-4dab-a705-390769ffaecc'),('c1d1986f-f50b-4664-a919-8a954aeea000',25,25,0,25000,1000,'52ba8dc7-caee-40c7-aae0-6b0302e60d56','43d75b3d-e777-4596-b48f-6a925b764f04'),('c753bd1b-28fc-4789-91ba-3afb54c0b3de',1,1,0,1000,1000,'1f7e100a-4d0d-4989-bbb8-6911508dc2ef','43d75b3d-e777-4596-b48f-6a925b764f04'),('d58ca33d-5394-49ba-8967-2d233b07a433',12,0,0,12000,1000,'86c73509-e3b7-4a5a-ba75-1ab50f73b228','43d75b3d-e777-4596-b48f-6a925b764f04'),('d8cef308-bda8-4752-b67b-02b76804c2b3',1,0,0,0,1000,'d0adc8aa-f764-4ea7-962c-fe057f494350','43d75b3d-e777-4596-b48f-6a925b764f04'),('da3b02ec-8500-42ff-a8b5-47dd188c38b8',0,0,0,0,1000,'cdacb2c5-9ace-4a23-bdb8-9cd59ece9c3a','43d75b3d-e777-4596-b48f-6a925b764f04'),('e101ebe2-5133-4f2b-a88c-10c3ed987308',10,0,0,10000,1000,'911267d2-faf3-44d8-bba7-d9501d86f7a2','43d75b3d-e777-4596-b48f-6a925b764f04'),('fdc76964-b61c-46e4-882f-34b0dc131346',2,0,0,500000,250000,'5c019884-9f93-4186-a01a-3725e0c73dfa','61d5a8d1-0b60-4dab-a705-390769ffaecc');
-/*!40000 ALTER TABLE `pedidos_producto` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `pedidos_producto` (`ID`, `CANTIDAD`, `cantidad_entregada`, `ELIMINADO`, `valor_total`, `valor_unitario`, `id_pedido`, `id_producto`) VALUES
+('0415cb5d-0920-4fff-b437-042d26f2bc54', 2, 2, 0, 200, 100, '8cd8eeb0-fba0-44ef-8289-1d263eb4da05', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('04de9bbe-b0b4-4a01-aa94-f29135505d67', 2, 2, 0, 200, 100, '9734086e-bfc9-4909-8f3f-8cace3e4a54d', 'a2411366-d135-4114-bcc5-369a737c1c85'),
+('0e7a93a3-8503-4983-8aa1-ef36f347908a', 4, 0, 0, 200, 100, '11ae1769-38b8-42d3-8b13-8277cfd2d93a', '280edafb-0d8a-4e84-ab37-e8092d2703e1'),
+('1123dc55-3771-4730-b114-9fe5fcd53631', 10, 10, 0, 1000, 100, 'cd780ff2-7251-43b4-8c12-abf694102552', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('1a7c372c-9253-4941-a2a8-4dcaa3298c2a', 8, 0, 0, 800, 100, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba', 'c969ba62-2bed-48a3-a59b-880d87c8e1df'),
+('1d83c509-529a-4797-9c72-60c50225c095', 44, 44, 0, 4400, 100, 'f466365f-e96d-4a5b-b19d-6c7703cbce5a', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('1dde978a-8253-4163-9289-25d2b848609e', 10, 10, 0, 1000, 100, 'b7b162db-afef-455b-9aaa-012d3335e7c3', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('1e2988e5-7e51-4373-8d57-6862e2c2a734', 8, 8, 0, 800, 100, 'b7b162db-afef-455b-9aaa-012d3335e7c3', '8edcbd34-99e3-4bf0-8da7-24816d97e8f2'),
+('27d74796-f4a1-4b29-8c86-2d0c926f9b39', 5, 5, 0, 500, 100, 'dd5f1bd8-c6fb-4395-9f57-7162fd67eaa7', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('2df7f8a8-7118-4e19-87ac-9d84c958f01e', 2, 2, 0, 200, 100, '5c5fb5b2-eebc-4ab0-bb32-96733b4a8d0b', '280edafb-0d8a-4e84-ab37-e8092d2703e1'),
+('31fe33b2-6e8d-4509-92e8-0b0f15467211', 50, 0, 0, 5000, 100, '11ae1769-38b8-42d3-8b13-8277cfd2d93a', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('33f4b7fc-ebcd-42aa-a92a-2e18d6dc2aac', 86, 86, 0, 8600, 100, '90d8ef64-7262-4078-ad68-807d188985d7', '79b1052d-bcb1-469f-8748-5f4bc69ae97a'),
+('3c9db0e4-894f-4a72-acc4-e8a6df7a9218', 10, 10, 0, 1000, 100, 'ee46d986-e333-4c83-8826-ef106a858504', 'a2411366-d135-4114-bcc5-369a737c1c85'),
+('3edab77e-ede7-49ed-949d-99e38db36b07', 1, 0, 0, 100, 100, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba', '280edafb-0d8a-4e84-ab37-e8092d2703e1'),
+('4dfd2d70-c4f2-4cd6-9cf6-3fbf268884f7', 33, 0, 0, 3300, 100, '11ae1769-38b8-42d3-8b13-8277cfd2d93a', 'a2411366-d135-4114-bcc5-369a737c1c85'),
+('4ecf1442-9eac-432e-89ab-a85971cc3560', 16, 16, 0, 1600, 100, '3b506903-c873-4432-820c-fc6a50388588', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('6091ac52-a152-4347-9149-6d2f078d5a8e', 20, 20, 0, 2000, 100, 'e56995cb-9f24-4bbe-b099-7c22239732bc', '280edafb-0d8a-4e84-ab37-e8092d2703e1'),
+('63c80ef2-1c56-4b4b-987a-90092f892f93', 17, 0, 0, 1700, 100, '11ae1769-38b8-42d3-8b13-8277cfd2d93a', '06cb9820-68c7-4cbd-a2f2-fd195e789100'),
+('64c1e99f-45aa-4529-a2ea-86ac5df38df3', 20, 20, 0, 2000, 100, '48064538-d4e9-47c9-a3de-edac081bef9a', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('6772ffad-b8e8-40d6-8f4d-0497e1fb231f', 7, 12, 0, 700, 100, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba', 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e'),
+('6ad74343-11ef-4cd4-8bee-f6627e6234e8', 25, 0, 0, 2500, 100, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba', 'db5b7a57-cda0-4808-ae09-8ae5130693d5'),
+('6c86b6de-c874-4158-9433-3e7d582b49d7', 12, 12, 0, 1200, 100, '6cdfaff8-ec98-4748-aa7f-cac0b44d4e5d', 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e'),
+('6ed06e75-3cd9-40c4-8341-657f5134b344', 10, 10, 0, 1000, 100, 'cd780ff2-7251-43b4-8c12-abf694102552', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('7060ea59-2751-4f59-9045-38032ecda8fe', 67, 0, 0, 5800, 100, '11ae1769-38b8-42d3-8b13-8277cfd2d93a', '79b1052d-bcb1-469f-8748-5f4bc69ae97a'),
+('7388fe6b-9a3d-42cc-8d8a-976a9752bfb1', 4, 4, 0, 400, 100, '9734086e-bfc9-4909-8f3f-8cace3e4a54d', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('76f24f01-c074-4ef4-8912-e19b3702f1b0', 10, 10, 0, 1000, 100, 'cd780ff2-7251-43b4-8c12-abf694102552', '79b1052d-bcb1-469f-8748-5f4bc69ae97a'),
+('7afb85cd-5330-4907-8902-f92a950c07f5', 50, 50, 0, 5000, 100, '48064538-d4e9-47c9-a3de-edac081bef9a', 'a2411366-d135-4114-bcc5-369a737c1c85'),
+('7bd5d95f-0209-4385-affb-2234f31740df', 3, 3, 0, 300, 100, 'e56995cb-9f24-4bbe-b099-7c22239732bc', 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e'),
+('7c12e9c1-6388-4423-866e-e1817692133c', 2, 2, 0, 200, 100, 'b7b162db-afef-455b-9aaa-012d3335e7c3', 'e72d8a91-3f7d-40e2-8609-be2c41077919'),
+('8517fc44-9af6-4b5b-9760-6cfdfea4e10f', 24, 24, 0, 2400, 100, '90d8ef64-7262-4078-ad68-807d188985d7', 'a2411366-d135-4114-bcc5-369a737c1c85'),
+('92b016d5-dec9-4d98-b78d-e563b2ef110f', 10, 10, 0, 1000, 100, '8b2c7f28-364b-4647-8fb7-90d005ec2622', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('9a7b1f3c-cb8d-4e98-b0d8-869bd6901cf2', 11, 11, 0, 1100, 100, '4ba71c41-3e7f-43c1-b946-5bbaa43f1533', 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e'),
+('a2f6a022-538d-4c23-bf39-c51304dd18f7', 20, 20, 0, 2000, 100, '48064538-d4e9-47c9-a3de-edac081bef9a', '79b1052d-bcb1-469f-8748-5f4bc69ae97a'),
+('a66e9652-edae-4d9c-89b6-5acedb5fa5ca', 1, 1, 0, 100, 100, 'dd5f1bd8-c6fb-4395-9f57-7162fd67eaa7', '79b1052d-bcb1-469f-8748-5f4bc69ae97a'),
+('a9c17c2d-f971-4972-bd73-19f61a67c4b1', 9, 9, 0, 900, 100, '04baa1b4-88a4-4565-8b55-aa4acd3e0290', 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e'),
+('adc3b874-ae2f-4766-b7e2-ae43d41f9eef', 120, 120, 0, 12000, 100, '48064538-d4e9-47c9-a3de-edac081bef9a', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('b1c7eb10-a129-4749-a169-25bc3efb5db0', 8, 8, 0, 800, 100, 'd9e9e076-afee-4b1d-88ab-e211a6b169a1', 'a2411366-d135-4114-bcc5-369a737c1c85'),
+('b59ec0b7-9c86-47d9-90fd-36084c89d331', 44, 44, 0, 4400, 100, 'f466365f-e96d-4a5b-b19d-6c7703cbce5a', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('b613e989-ee42-43cc-8a38-2c8eae1bace2', 6, 6, 0, 600, 100, '48bb2179-a1bf-4687-b3f6-3d30636ff531', '280edafb-0d8a-4e84-ab37-e8092d2703e1'),
+('b6268e5b-7411-487f-8703-9b638195b6a2', 18, 18, 0, 1800, 100, 'b7b162db-afef-455b-9aaa-012d3335e7c3', '82289b0a-9159-4a10-93fe-4c0559ade658'),
+('bc34dff6-9de6-46a1-978b-2a94ed7ae227', 36, 36, 0, 3600, 100, '4ba71c41-3e7f-43c1-b946-5bbaa43f1533', '8edcbd34-99e3-4bf0-8da7-24816d97e8f2'),
+('c20c24f7-3d2d-4407-b899-34dfc3b019a5', 20, 20, 0, 2000, 100, 'ee46d986-e333-4c83-8826-ef106a858504', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('d7a42b83-ccf5-4881-8bd5-756eb8ce38a7', 4, 4, 0, 400, 100, 'dd5f1bd8-c6fb-4395-9f57-7162fd67eaa7', '0ee4a9e7-cb2c-4b14-bdbe-00622eeebf1d'),
+('d7e16751-ef96-497d-ba43-df16c5eb981a', 137, 0, 0, 13700, 100, '11ae1769-38b8-42d3-8b13-8277cfd2d93a', '5664c1d8-223c-4436-9e4c-ea082069e842'),
+('e34cd948-31ba-4060-8a4c-467d42bb7c82', 5, 5, 0, 500, 100, 'dd5f1bd8-c6fb-4395-9f57-7162fd67eaa7', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('e53ee8d4-49e2-4c77-b8c8-6d03f7c65bf5', 44, 44, 0, 4400, 100, 'f466365f-e96d-4a5b-b19d-6c7703cbce5a', '79b1052d-bcb1-469f-8748-5f4bc69ae97a'),
+('f1b0fb57-dc61-4f97-be7f-e7dee0b31bb7', 8, 8, 0, 800, 100, '3b506903-c873-4432-820c-fc6a50388588', 'a2411366-d135-4114-bcc5-369a737c1c85'),
+('f2225c62-7917-41ea-b130-7b2fdf8130cc', 16, 16, 0, 1600, 100, 'd9e9e076-afee-4b1d-88ab-e211a6b169a1', '5664c1d8-223c-4436-9e4c-ea082069e842');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `persona_dirs`
+-- Estructura de tabla para la tabla `personas`
 --
 
-DROP TABLE IF EXISTS `persona_dirs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `persona_dirs` (
-  `ID` varchar(255) NOT NULL,
-  `DIRECCION` varchar(255) DEFAULT NULL,
-  `ELIMINADO` smallint(6) DEFAULT NULL,
-  `id_persona` int(11) DEFAULT NULL,
-  `OBSERVACION` varchar(255) DEFAULT NULL,
-  `PRINCIPAL` tinyint(1) DEFAULT '0',
-  `TIPO` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `persona_dirs`
---
-
-LOCK TABLES `persona_dirs` WRITE;
-/*!40000 ALTER TABLE `persona_dirs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `persona_dirs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `persona_mails`
---
-
-DROP TABLE IF EXISTS `persona_mails`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `persona_mails` (
-  `ID` varchar(255) NOT NULL,
-  `ELIMINADO` datetime DEFAULT NULL,
-  `id_persona` varchar(255) DEFAULT NULL,
-  `MAIL` varchar(255) DEFAULT NULL,
-  `PRINCIPAL` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `persona_mails`
---
-
-LOCK TABLES `persona_mails` WRITE;
-/*!40000 ALTER TABLE `persona_mails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `persona_mails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `personas`
---
-
-DROP TABLE IF EXISTS `personas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `personas` (
   `id` varchar(255) NOT NULL,
   `apellido1` varchar(255) DEFAULT NULL,
@@ -602,27 +524,29 @@ CREATE TABLE `personas` (
   `nombre2` varchar(255) DEFAULT NULL,
   `sexo` varchar(255) DEFAULT NULL,
   `tipo_documento` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `mail` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `personas`
+-- Volcado de datos para la tabla `personas`
 --
 
-LOCK TABLES `personas` WRITE;
-/*!40000 ALTER TABLE `personas` DISABLE KEYS */;
-INSERT INTO `personas` VALUES ('',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('123','123','123',0,NULL,'123','123','M','123'),('12315464','jkjdok','',0,NULL,'jasok','','M','cedula'),('14136571','sanchez',NULL,NULL,NULL,'hector',NULL,NULL,'cedula'),('1564564','oijipoi','',0,NULL,'asjdpoijda','oo','M','ID_C'),('234243','234','324',0,NULL,'234','234','M','324'),('43243432','wer','',0,NULL,'wer','','M','wer'),('454564','jsajpo','',0,NULL,'persona',' ','F','ID_C'),('79845641','qweqew','qwewq',0,'2016-06-22','sdds','wqewq','F','ID_C'),('798456456','jljl','jljl',0,'2016-06-07','jkjlj','lj','M','ipoip'),('79879856456','LKJLKJ','LKJLKJ',0,'2016-06-01','nlmlknlJLKJLK','JLKJLKJ','M','ID_C'),('87987986','45564','',0,'2016-06-20','56456456','','M','ID_C'),('987454564','asd','',0,NULL,'asd','asd','M','sad');
-/*!40000 ALTER TABLE `personas` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `personas` (`id`, `apellido1`, `apellido2`, `eliminado`, `fecha_nacim`, `nombre1`, `nombre2`, `sexo`, `tipo_documento`, `mail`) VALUES
+('10204', 'Higuita', 'Delgado', 0, NULL, 'Jeferson', '', 'M', 'ID_C', NULL),
+('1020413761', 'Higuita', 'Delgado', 0, '1988-02-11', 'Juliana', '', 'F', 'ID_C', NULL),
+('1234564', 'ddsajldsa', '', 0, NULL, 'Empresa', '', 'M', 'ID_C', NULL),
+('12346', 'Dairo', '', 0, '2016-06-01', 'Dairo', '', 'M', 'ID_C', NULL),
+('13', 'adskñkñasd', '', 0, NULL, 'hcetor', '', 'M', 'ID_C', NULL),
+('70569547', 'LONDOÑO', 'ARISTISABAL', 0, NULL, 'DAIRO', 'ALFONSO', 'M', 'ID_C', 'dairo@gmail.coms'),
+('asd', 'asd', 'sad', 0, '2016-07-19', 'asd', 'asd', 'M', 'ID_C', NULL),
+('sad', 'nmnb', 'yteasd', 0, NULL, 'ghfgh', 'asd', 'M', 'ID_C', NULL);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `personas_tels`
+-- Estructura de tabla para la tabla `personas_tels`
 --
 
-DROP TABLE IF EXISTS `personas_tels`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `personas_tels` (
   `id` varchar(255) NOT NULL,
   `eliminado` smallint(6) DEFAULT NULL,
@@ -630,27 +554,45 @@ CREATE TABLE `personas_tels` (
   `id_persona` varchar(255) DEFAULT NULL,
   `principal` tinyint(1) DEFAULT '0',
   `telefono` varchar(255) DEFAULT NULL,
-  `tipo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `tipo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `personas_tels`
+-- Estructura de tabla para la tabla `persona_dirs`
 --
 
-LOCK TABLES `personas_tels` WRITE;
-/*!40000 ALTER TABLE `personas_tels` DISABLE KEYS */;
-/*!40000 ALTER TABLE `personas_tels` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `persona_dirs` (
+  `ID` varchar(255) NOT NULL,
+  `DIRECCION` varchar(255) DEFAULT NULL,
+  `ELIMINADO` smallint(6) DEFAULT NULL,
+  `id_persona` int(11) DEFAULT NULL,
+  `OBSERVACION` varchar(255) DEFAULT NULL,
+  `PRINCIPAL` tinyint(1) DEFAULT '0',
+  `TIPO` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Estructura de tabla para la tabla `persona_mails`
 --
 
-DROP TABLE IF EXISTS `productos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `persona_mails` (
+  `ID` varchar(255) NOT NULL,
+  `ELIMINADO` datetime DEFAULT NULL,
+  `id_persona` varchar(255) DEFAULT NULL,
+  `MAIL` varchar(255) DEFAULT NULL,
+  `PRINCIPAL` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
 CREATE TABLE `productos` (
   `id` varchar(255) NOT NULL,
   `atributo` varchar(255) DEFAULT NULL,
@@ -670,57 +612,62 @@ CREATE TABLE `productos` (
   `tipo_codigo` varchar(255) DEFAULT NULL,
   `categoria` varchar(255) DEFAULT NULL,
   `unidad_medida` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_productos_categoria` (`categoria`),
-  KEY `FK_unidad_medida` (`unidad_medida`),
-  CONSTRAINT `FK_productos_categoria` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`ID`),
-  CONSTRAINT `FK_unidades_medida` FOREIGN KEY (`unidad_medida`) REFERENCES `unidades_medida` (`id`)
+  `producto_padre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `productos`
+-- Volcado de datos para la tabla `productos`
 --
 
-LOCK TABLES `productos` WRITE;
-/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES ('43d75b3d-e777-4596-b48f-6a925b764f04',NULL,NULL,NULL,'14136571',0,'2016-06-18 17:31:54','2016-06-23 23:05:29','14136571','Gondola de 3 metros x 5 metros','',100,1000,'dondola xxx',300,'PRODUCT_TYPE1','633c5eb3-1155-44a2-9785-4924747dd06a','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('4efddfa5-0153-403e-8461-3a2bc3aa74ee',NULL,NULL,NULL,'14136571',0,'2016-06-18 16:46:31','2016-07-03 09:09:31','14136571','mesas','',5000,10000,'wertyui',100,'PRODUCT_TYPE2','633c5eb3-1155-44a2-9785-4924747dd06a','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('50c64a5d-291b-4e0e-a2e4-5a5eda5a9c5f',NULL,NULL,NULL,'14136571',0,'2016-06-18 18:14:43','2016-06-18 18:14:43','14136571','usoijcapj','',0,36000,'nuevo producto',0,'PRODUCT_TYPE2','67ecf673-bfc3-4dc6-b576-8c6883142be9','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('61d5a8d1-0b60-4dab-a705-390769ffaecc',NULL,NULL,NULL,'14136571',0,'2016-06-18 17:01:05','2016-06-18 17:01:05','14136571','Gondolas de 2 X 5','',0,250000,'',100,'PRODUCT_TYPE1','633c5eb3-1155-44a2-9785-4924747dd06a','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('7649d3a2-faea-470b-86d6-5f76f74879a9',NULL,NULL,NULL,'14136571',1,'2016-06-18 17:41:39','2016-06-18 17:41:39','14136571','qwe','',0,234324,'qwe',0,'PRODUCT_TYPE1','633c5eb3-1155-44a2-9785-4924747dd06a','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('783f0a67-34c0-4d0d-971c-f85e05f189b2',NULL,NULL,NULL,'14136571',0,'2016-07-04 12:00:13','2016-07-04 12:02:06','14136571','ref3','ewrfewr',0,123456,'erf3',0,'PRODUCT_TYPE1','8e465b94-1350-4193-bdd3-922eb37f1303','aca83d9f-358f-11e6-a718-507b9d9f0aad'),('96c23cf9-a279-4cd3-a38a-9de37cb84344',NULL,NULL,NULL,'14136571',0,'2016-07-04 11:59:36','2016-07-04 11:59:36','14136571','ref222222222','sin converter',0,1234,'ref2',0,'PRODUCT_TYPE2','67ecf673-bfc3-4dc6-b576-8c6883142be9','7d8c332c-358f-11e6-a718-507b9d9f0aad'),('a3207d52-ac35-4686-a22b-5f20e60e7a34',NULL,NULL,NULL,'14136571',0,'2016-06-18 18:17:04','2016-06-21 12:55:29','14136571','Producto CC','asd',0,1500000,'Ref 12346',0,'PRODUCT_TYPE1','93bce9e2-5038-4687-af8c-0305dd8e5655','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('a82b7b59-2fc2-4485-b10c-171fcab90049',NULL,NULL,NULL,'14136571',0,'2016-06-21 18:02:18','2016-06-21 18:02:18','14136571','Gondola de  50 *20','',0,200000,'GON5',100,'PRODUCT_TYPE1','633c5eb3-1155-44a2-9785-4924747dd06a','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('cf36a656-5b4c-4748-876c-e6d4aae865c7',NULL,NULL,NULL,'14136571',0,'2016-07-04 10:21:45','2016-07-04 10:21:45','14136571','asd','asd',0,120,'asd',0,'com.co.hsg.innventa.beans.Parametros[ id=PRODUCT_TYPE1 ]','8e465b94-1350-4193-bdd3-922eb37f1303','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('d4931e85-2f04-4d42-b95c-7b268159e52a',NULL,NULL,NULL,'14136571',0,'2016-06-24 16:17:08','2016-06-24 16:17:08','14136571','gondola xxx','asdasd',0,350000,'ref 4252',0,'PRODUCT_TYPE1','633c5eb3-1155-44a2-9785-4924747dd06a','7d8c25bb-358f-11e6-a718-507b9d9f0aad'),('f1c036a1-ee3d-4bef-8214-071c1be5e3b5',NULL,NULL,NULL,'14136571',0,'2016-06-18 16:28:06','2016-06-18 16:28:06','14136571','igiuiu','sad',2500,350000,'rtiy',0,'PRODUCT_TYPE1','67ecf673-bfc3-4dc6-b576-8c6883142be9','7d8c25bb-358f-11e6-a718-507b9d9f0aad');
-/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `productos` (`id`, `atributo`, `categoria_impuesto`, `codigo`, `creado_por`, `eliminado`, `fecha_creacion`, `fecha_modificacion`, `modificado_por`, `nombre`, `observaciones`, `precio_compra`, `precio_venta`, `referencia`, `stock`, `tipo_codigo`, `categoria`, `unidad_medida`, `producto_padre`) VALUES
+('06559bfb-083e-4546-aac7-d29861241361', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 21:51:48', '2016-07-14 22:08:14', '1020413761', 'Gondola Especial de 135 x 120 cm pata alta', '', 0, 100, 'GON13513', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('06cb9820-68c7-4cbd-a2f2-fd195e789100', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 22:28:57', '2016-07-05 22:28:57', '1020413761', 'Gondola de 110 x 120 cm sin espaldar', '', 0, 100, 'GON110120', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('0ee4a9e7-cb2c-4b14-bdbe-00622eeebf1d', NULL, NULL, NULL, '1020413761', 0, '2016-07-06 05:51:58', '2016-07-06 05:51:58', '1020413761', 'Entrepaño central de 135 x 45 cm', '', 0, 100, 'ENT13545', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('11fc17d7-98d4-46d0-9cb0-4714b9c4248d', NULL, NULL, NULL, '1020413761', 1, '2016-07-04 21:52:21', '2016-07-05 10:44:34', '1020413761', 'Entrepaño central de 120 cm', '', 0, 100, 'ENT120', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('280edafb-0d8a-4e84-ab37-e8092d2703e1', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 22:28:00', '2016-07-05 22:28:00', '1020413761', 'PUESTO DE PAGO', '', 0, 100, 'PPAG', 0, 'PRODUCT_TYPE1', '36e5cd7d-1d87-49fa-9f94-7813973efc78', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('4e5041ce-8ec1-480a-8511-59dec4981296', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 20:18:06', '2016-07-04 20:18:06', '1020413761', 'Gondola Especial de 135 x 110 cm', '', 0, 100, 'GON135', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('5664c1d8-223c-4436-9e4c-ea082069e842', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 10:45:14', '2016-07-05 10:45:14', '1020413761', 'Entrepaño Central de 120 x 45 cm', '', 0, 100, 'ENT12045', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('60b70af8-3a42-423a-af6b-d74a5b998b15', NULL, NULL, NULL, '10204', 0, '2016-07-11 21:43:03', '2016-07-11 21:43:03', '10204', 'werewr', 'werrew', 0, NULL, 'werewr', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', 'aca83d9f-358f-11e6-a718-507b9d9f0aad', NULL),
+('61e5de09-af29-46dd-8639-f8ab72f78b70', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 21:54:58', '2016-07-04 21:54:58', '1020413761', 'Gondola de 135 x 90 cm', '', 0, 100, 'GON13590', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('702d13eb-abda-4b08-bf57-46178958e391', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 21:53:26', '2016-07-04 21:53:26', '1020413761', 'Entrepaño Central de 90 x 45 cm', '', 0, 100, 'ENT9045', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', '8edcbd34-99e3-4bf0-8da7-24816d97e8f2'),
+('79b1052d-bcb1-469f-8748-5f4bc69ae97a', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 10:45:55', '2016-07-05 10:45:55', '1020413761', 'Entrepaño de Piso de 120 x 55 cm', '', 0, 100, 'ENTP12055', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', 'a2b044be-b95e-4d6f-9ced-b2370001c891'),
+('7b702d60-3c8b-4daf-b744-659e638c921f', NULL, NULL, NULL, '10204', 0, '2016-07-11 20:55:03', '2016-07-11 20:58:28', '1020413761', 'aaaaa', 'dsadsad', 0, NULL, '2121231', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('82289b0a-9159-4a10-93fe-4c0559ade658', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 23:47:48', '2016-07-05 23:47:48', '1020413761', 'Cremallera pared 2 M', '', 0, 100, 'CRM2', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('8edcbd34-99e3-4bf0-8da7-24816d97e8f2', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 22:33:17', '2016-07-14 22:09:59', '1020413761', 'Entrepaño central de 100 x 45 cm', '', 0, 100, 'ENT10045', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('9fec8be7-9199-4514-87c6-723b16f4c277', NULL, NULL, NULL, '10204', 0, '2016-07-11 21:40:38', '2016-07-11 21:40:38', '10204', 'sad', 'asd', 0, NULL, 'asdda', 0, 'PRODUCT_TYPE1', '23cdafe1-c190-48e6-944a-fc4766f63c50', 'aca83d9f-358f-11e6-a718-507b9d9f0aad', NULL),
+('a2411366-d135-4114-bcc5-369a737c1c85', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 22:27:10', '2016-07-05 22:27:10', '1020413761', 'Gondola de 135 x 120 cm', '', 0, 100, 'GON135120', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('a2b044be-b95e-4d6f-9ced-b2370001c891', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 10:40:20', '2016-07-15 20:04:22', '1020413761', 'Góndola de 110 x 120 cm', '', 100, 100, 'GON110', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('b2ac18b6-f15c-4ca8-969f-bb4c98ae5a00', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 21:54:25', '2016-07-04 21:54:25', '1020413761', 'Entrepaño Central de 70 x 45 cm', '', 0, 100, 'ENT7045', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('c09ee133-d645-4ae5-b415-a685bd40b384', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 23:53:17', '2016-07-05 23:53:17', '1020413761', 'Gondola especial doble cara de 135 x 120 cm', '', 0, 100, 'GONDCAR', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 21:53:49', '2016-07-14 21:57:18', '1020413761', 'Botaderos', '', 0, 100, 'BOT01', 0, 'PRODUCT_TYPE1', 'a8dc0815-a30a-4dc1-a51f-9925c6e8727b', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', '06559bfb-083e-4546-aac7-d29861241361'),
+('c7b0a43f-677c-4817-aa79-c9f3d40c41eb', NULL, NULL, NULL, '10204', 0, '2016-07-11 21:42:32', '2016-07-11 21:42:32', '10204', 'ewrr', 'ewr', 0, NULL, 'werrew', 0, 'PRODUCT_TYPE2', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('c969ba62-2bed-48a3-a59b-880d87c8e1df', NULL, NULL, NULL, '10204', 0, '2016-07-11 21:49:24', '2016-07-11 21:49:24', '10204', '11', '', 0, 100, '11', 0, 'PRODUCT_TYPE1', '6b4c4e60-1d01-4660-a0a8-92eba3933dd6', 'c3e2cf81-358f-11e6-a718-507b9d9f0aad', NULL),
+('d40443c9-38b5-4ff6-8d35-5de5ef85ca3d', NULL, NULL, NULL, '10204', 0, '2016-07-11 21:40:59', '2016-07-11 21:40:59', '10204', 'nuevo xxxx', 'sad', 0, NULL, 'nuevo xxx', 0, 'PRODUCT_TYPE1', '23cdafe1-c190-48e6-944a-fc4766f63c50', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('db5b7a57-cda0-4808-ae09-8ae5130693d5', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 21:52:59', '2016-07-14 22:00:53', '1020413761', 'Entrepaño Central 110 x 45 cm', '', 0, 100, 'ENT11045', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('e72d8a91-3f7d-40e2-8609-be2c41077919', NULL, NULL, NULL, '1020413761', 0, '2016-07-05 22:32:28', '2016-07-05 22:32:28', '1020413761', 'Entrepaño Central de 80 x 45 cm', '', 0, 100, 'ENT8045', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('e8aada71-ab3d-4781-991b-cd4127cd3f80', NULL, NULL, NULL, '1020413761', 0, '2016-07-04 20:18:46', '2016-07-11 21:18:04', '1020413761', 'Gondola Especial de 135 x 70 cm', '', 0, 100, 'GON135708', 0, 'PRODUCT_TYPE1', '392f989c-8534-4b44-9e3e-1c2b754c9139', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL),
+('fce9c480-8f55-40f5-9c88-480245ce6681', NULL, NULL, NULL, '1020413761', 0, '2016-07-11 21:18:51', '2016-07-11 21:18:51', '1020413761', 'asd', 'asd', 0, 1, 'asd', 0, 'PRODUCT_TYPE1', '3645a47f-095c-44c4-9bb9-17daf3f15a71', '7d8c25bb-358f-11e6-a718-507b9d9f0aad', NULL);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `recibos`
+-- Estructura de tabla para la tabla `recibos`
 --
 
-DROP TABLE IF EXISTS `recibos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `recibos` (
   `id` varchar(255) NOT NULL,
   `atributos` int(11) DEFAULT NULL,
   `eliminado` smallint(6) DEFAULT NULL,
   `fecha_fin` datetime DEFAULT NULL,
-  `fecha_inicio` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `fecha_inicio` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `recibos`
+-- Estructura de tabla para la tabla `remisiones`
 --
 
-LOCK TABLES `recibos` WRITE;
-/*!40000 ALTER TABLE `recibos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recibos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `remisiones`
---
-
-DROP TABLE IF EXISTS `remisiones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `remisiones` (
   `id` varchar(255) NOT NULL,
   `referencia` varchar(20) DEFAULT NULL,
@@ -734,64 +681,135 @@ CREATE TABLE `remisiones` (
   `fecha_remision` date DEFAULT NULL,
   `modificado_por` varchar(255) DEFAULT NULL,
   `total_productos` int(11) DEFAULT NULL,
-  `id_pedido` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_remisiones_id_pedido` (`id_pedido`),
-  KEY `ESTADO` (`ESTADO`),
-  KEY `FK_UserCreator` (`creado_por`) USING BTREE,
-  CONSTRAINT `FK_remisiones_creador` FOREIGN KEY (`creado_por`) REFERENCES `personas` (`id`),
-  CONSTRAINT `FK_remisiones_id_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`)
+  `id_pedido` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `remisiones`
+-- Volcado de datos para la tabla `remisiones`
 --
 
-LOCK TABLES `remisiones` WRITE;
-/*!40000 ALTER TABLE `remisiones` DISABLE KEYS */;
-INSERT INTO `remisiones` VALUES ('2646fb4c-2157-4f0a-8ce9-efa64feefa4b','RM00009','14136571','sapdudsai',0,NULL,'1dcd7183-2c8d-4379-9b50-225a647283a0','2016-07-04 08:30:07','2016-07-04 08:30:07','2016-07-21','14136571',0,'b480ac48-27a3-47dc-a113-cf759a05f728'),('544d77c3-017c-4422-843a-a85c1aa1047b','RM00011','14136571','',0,NULL,'13625479-9841-4047-adad-9741eed735d3','2016-07-04 17:11:01','2016-07-04 17:11:01','2016-07-13','14136571',54,'8d42ce72-720f-45d5-8ca5-c874c48135f2'),('730d3b7d-f700-4612-923e-7d4cc6d99764','RM00008','14136571','',0,'','06afb827-2cb4-4e08-abe4-757ba0dc69b5','2016-07-04 08:27:02','2016-07-04 08:27:02','2016-07-12','14136571',10,'1eb5be14-6460-4742-88c3-9cf1440397ae'),('ed9c1c2b-c260-4636-87b2-f98a16e4e9bb','RM00010','14136571','remision xxxksj',0,NULL,'13625479-9841-4047-adad-9741eed735d3','2016-07-04 08:35:48','2016-07-04 08:35:48','2016-07-06','14136571',0,'467cf2d3-b3e4-477b-8a6f-82938c7fba61');
-/*!40000 ALTER TABLE `remisiones` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `remisiones` (`id`, `referencia`, `creado_por`, `observaciones`, `eliminado`, `entregado_a`, `ESTADO`, `fecha_creacion`, `fecha_modificacion`, `fecha_remision`, `modificado_por`, `total_productos`, `id_pedido`) VALUES
+('00c2866f-0e3a-4b58-a7e5-fe93abc4ae64', 'RM00267', '1020413761', 'Se hace entrega de la mercancia en buen estado', 0, '', '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-05 23:24:16', '2016-07-05 23:24:16', '2016-01-04', '1020413761', 101, '11ae1769-38b8-42d3-8b13-8277cfd2d93a'),
+('02f3b7d7-ef61-4d39-bef8-ea7f99c59713', 'RM00268', '1020413761', 'Se hace entrega de la mercancía en buen estado', 0, '', '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-05 23:35:15', '2016-07-05 23:35:15', '2016-01-05', '1020413761', 178, '11ae1769-38b8-42d3-8b13-8277cfd2d93a'),
+('11c3513e-8bfc-482b-a5e8-54d171ba6eac', 'RM00274', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:01:49', '2016-07-06 06:01:49', '2016-01-13', '1020413761', 6, '48bb2179-a1bf-4687-b3f6-3d30636ff531'),
+('12fe62c8-c95d-4b32-beb5-6fad5dbe3537', 'RM00282', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:12:50', '2016-07-06 06:12:50', '2016-01-21', '1020413761', 23, 'e56995cb-9f24-4bbe-b099-7c22239732bc'),
+('2131b053-3324-4eae-9eb0-beaf43e3007a', 'RM00429', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-12 06:42:51', '2016-07-12 08:07:16', '2016-07-20', '1020413761', 41, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba'),
+('36ad98f1-5f4c-4f19-a6e6-15ea824c99df', 'RM00269', '1020413761', '', 0, '', '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-05 23:39:46', '2016-07-05 23:39:46', '2016-01-05', '1020413761', 29, '11ae1769-38b8-42d3-8b13-8277cfd2d93a'),
+('3d152bd9-3f24-4017-916a-e98f6c75e08b', 'RM00275', '1020413761', 'Esta se Remite con otra orden que tiene reprocesos.', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:05:37', '2016-07-06 06:05:37', '2016-01-16', '1020413761', 110, '90d8ef64-7262-4078-ad68-807d188985d7'),
+('4c23c45b-2996-4ad8-bb9e-78440a16c676', 'RM00283', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:14:13', '2016-07-06 06:14:13', '2016-01-25', '1020413761', 9, '04baa1b4-88a4-4565-8b55-aa4acd3e0290'),
+('66911382-5240-4f22-88e6-deb812fef318', 'RM00276', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:06:58', '2016-07-06 06:06:58', '2016-01-19', '1020413761', 6, '9734086e-bfc9-4909-8f3f-8cace3e4a54d'),
+('79cc0d60-28c8-4a3d-98d6-abdef94ed571', 'RM00279', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:09:39', '2016-07-06 06:09:39', '2016-01-21', '1020413761', 30, 'ee46d986-e333-4c83-8826-ef106a858504'),
+('7fa28b0c-58cf-4715-9214-fe889da5695a', 'RM00424', '1020413761', 'Se hace entrega de la mercancía en buen estado, Despacho Bodega Britalia.sadasdasdds', 0, 'dsasdsad', '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 12:03:07', '2016-07-06 13:04:27', '2016-07-06', '1020413761', 210, '48064538-d4e9-47c9-a3de-edac081bef9a'),
+('875c1157-f231-4c7e-af05-9725e8c19e36', 'RM00427', '1020413761', '', 0, NULL, '06afb827-2cb4-4e08-abe4-757ba0dc69b5', '2016-07-09 00:09:38', '2016-07-09 00:10:17', '2016-07-07', '1020413761', 59, '4ba71c41-3e7f-43c1-b946-5bbaa43f1533'),
+('884b43d4-8a4c-4fd2-8d9b-507ef70b9f7e', 'RM00281', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:11:35', '2016-07-06 06:11:35', '2016-01-21', '1020413761', 10, '8b2c7f28-364b-4647-8fb7-90d005ec2622'),
+('89ba9a04-c766-4124-ba82-fa723d091cd3', 'RM00278', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:08:11', '2016-07-06 06:08:11', '2016-01-20', '1020413761', 2, '5c5fb5b2-eebc-4ab0-bb32-96733b4a8d0b'),
+('92b0e6f1-3968-4370-9cdf-02ea49744471', 'RM00425', '1020413761', '', 0, '', '13625479-9841-4047-adad-9741eed735d3', '2016-07-08 17:45:36', '2016-07-12 07:57:46', '2016-07-27', '1020413761', 286, '48064538-d4e9-47c9-a3de-edac081bef9a'),
+('9c316564-ae2f-409e-aacb-ab341eec7483', 'RM00271', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 05:54:39', '2016-07-06 05:54:39', '2016-01-08', '1020413761', 15, 'dd5f1bd8-c6fb-4395-9f57-7162fd67eaa7'),
+('aa97e35d-804d-4440-92ff-9a78ed1c8cd3', 'RM00428', '1020413761', '', 0, '', '1dcd7183-2c8d-4379-9b50-225a647283a0', '2016-07-12 00:06:33', '2016-07-12 00:06:33', '2016-07-12', '1020413761', 40, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba'),
+('b546c02c-c2bb-43ad-8829-439e6dda2968', 'RM00430', '1020413761', '', 0, NULL, '226fd06d-05eb-40d5-8c04-ee0f0a2e277a', '2016-07-12 06:43:27', '2016-07-12 06:43:27', '2016-07-08', '1020413761', 40, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba'),
+('bfee5e01-b5a9-4e48-af1c-7d11d57d5b47', 'RM00280', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:10:43', '2016-07-06 06:10:43', '2016-01-21', '1020413761', 24, 'd9e9e076-afee-4b1d-88ab-e211a6b169a1'),
+('c653404e-a6e7-482b-b2ac-4dc6b3ab57ed', 'RM00270', '1020413761', '', 0, NULL, '06afb827-2cb4-4e08-abe4-757ba0dc69b5', '2016-07-05 23:49:22', '2016-07-05 23:49:22', '2016-01-07', '1020413761', 38, 'b7b162db-afef-455b-9aaa-012d3335e7c3'),
+('cb04fa96-58b8-4674-8fc6-2ea672030bb7', 'RM00272', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 05:59:24', '2016-07-06 05:59:24', '2016-01-12', '1020413761', 132, 'f466365f-e96d-4a5b-b19d-6c7703cbce5a'),
+('cb0eb298-0f35-45c1-bdea-4e6e83eb0ea2', 'RM00423', '1020413761', 'Se hace entrega de la mercancía en buen estado.', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-05 10:53:02', '2016-07-05 10:53:02', '2016-07-01', '1020413761', 30, 'cd780ff2-7251-43b4-8c12-abf694102552'),
+('d2eb790d-c398-42df-86ab-9be21598654c', 'RM00426', '1020413761', '', 0, NULL, '13625479-9841-4047-adad-9741eed735d3', '2016-07-08 22:41:15', '2016-07-08 22:41:15', '2016-07-20', '1020413761', 12, '6cdfaff8-ec98-4748-aa7f-cac0b44d4e5d'),
+('d7bd8518-3b37-4fe3-86c5-6d9d45eb3674', 'RM00273', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:00:43', '2016-07-06 06:00:43', '2016-01-12', '1020413761', 24, '3b506903-c873-4432-820c-fc6a50388588'),
+('e9bbd332-29f7-40e0-8777-4eeb921aaaab', 'RM00428', '1020413761', '', 1, NULL, '1dcd7183-2c8d-4379-9b50-225a647283a0', '2016-07-08 22:45:53', '2016-07-08 22:45:53', '2016-07-21', '1020413761', 12, 'b1b34e39-a54d-46de-af7d-e2c87a96b6ba'),
+('eddaa3e0-4e52-432c-9fd6-4027d03854ac', 'RM00277', '1020413761', '', 0, NULL, '8d88996b-464d-46db-900e-e24bae8508fa', '2016-07-06 06:07:36', '2016-07-06 06:07:36', '2016-01-19', '1020413761', 2, '8cd8eeb0-fba0-44ef-8289-1d263eb4da05'),
+('f24e8a5c-10e3-49ba-91a7-a2725fa4b6d9', 'RM00427', '1020413761', '', 1, '', '06afb827-2cb4-4e08-abe4-757ba0dc69b5', '2016-07-08 22:41:55', '2016-07-08 22:41:55', '2016-07-07', '1020413761', 12, '6cdfaff8-ec98-4748-aa7f-cac0b44d4e5d');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `remisiones_producto`
+-- Estructura de tabla para la tabla `remisiones_producto`
 --
 
-DROP TABLE IF EXISTS `remisiones_producto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `remisiones_producto` (
   `id` varchar(255) NOT NULL,
   `cantidad` smallint(6) DEFAULT NULL,
   `eliminado` smallint(6) DEFAULT NULL,
   `id_producto` varchar(255) DEFAULT NULL,
-  `id_remision` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_remisiones_producto_id_remision` (`id_remision`),
-  KEY `FK_producto_id` (`id_producto`) USING BTREE,
-  CONSTRAINT `FK_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
-  CONSTRAINT `FK_remisiones_producto_id_remision` FOREIGN KEY (`id_remision`) REFERENCES `remisiones` (`id`)
+  `id_remision` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `remisiones_producto`
+-- Volcado de datos para la tabla `remisiones_producto`
 --
 
-LOCK TABLES `remisiones_producto` WRITE;
-/*!40000 ALTER TABLE `remisiones_producto` DISABLE KEYS */;
-INSERT INTO `remisiones_producto` VALUES ('37da5ee3-2de0-4512-ba89-3e27143bd6f6',12,0,'f1c036a1-ee3d-4bef-8214-071c1be5e3b5','544d77c3-017c-4422-843a-a85c1aa1047b'),('5c1f9bc1-9a8c-4a9f-a861-2ac62d8524a7',10,0,'43d75b3d-e777-4596-b48f-6a925b764f04','544d77c3-017c-4422-843a-a85c1aa1047b'),('803698cb-4c7c-4f48-9711-5c76237d7369',15,0,'a82b7b59-2fc2-4485-b10c-171fcab90049','730d3b7d-f700-4612-923e-7d4cc6d99764'),('9b7634d8-4605-4b88-b246-6724d82deeac',15,0,'43d75b3d-e777-4596-b48f-6a925b764f04','ed9c1c2b-c260-4636-87b2-f98a16e4e9bb'),('cf5d73c6-5560-427e-b73f-532462b1587a',10,0,'783f0a67-34c0-4d0d-971c-f85e05f189b2','544d77c3-017c-4422-843a-a85c1aa1047b'),('f4c12926-484f-481e-9700-8a2e33c64bb3',15,0,'a82b7b59-2fc2-4485-b10c-171fcab90049','544d77c3-017c-4422-843a-a85c1aa1047b'),('f7becfd4-f1bf-42fd-a34a-f7e616131bab',7,0,'61d5a8d1-0b60-4dab-a705-390769ffaecc','544d77c3-017c-4422-843a-a85c1aa1047b');
-/*!40000 ALTER TABLE `remisiones_producto` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `remisiones_producto` (`id`, `cantidad`, `eliminado`, `id_producto`, `id_remision`) VALUES
+('021ed92b-f449-4ff7-b785-f0d5e093bbe8', 4, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '66911382-5240-4f22-88e6-deb812fef318'),
+('02b7aff9-cccf-4d61-8719-daec4a028dc5', 9, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', '36ad98f1-5f4c-4f19-a6e6-15ea824c99df'),
+('030a3c9f-b37d-48c0-8262-39bfe8bedb81', 16, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', 'bfee5e01-b5a9-4e48-af1c-7d11d57d5b47'),
+('0387ca92-763c-4783-baf6-107e5c9f5e6c', 44, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', 'cb04fa96-58b8-4674-8fc6-2ea672030bb7'),
+('04fac491-7c1a-4088-9c83-a90c6747d565', 2, 0, 'e72d8a91-3f7d-40e2-8609-be2c41077919', 'c653404e-a6e7-482b-b2ac-4dc6b3ab57ed'),
+('093cf6a6-e2f5-4c44-95fa-74c01d86f5c6', 17, 0, '06cb9820-68c7-4cbd-a2f2-fd195e789100', '02f3b7d7-ef61-4d39-bef8-ea7f99c59713'),
+('0a57336a-71ca-4728-b44d-a350d655c6d0', 36, 0, '8edcbd34-99e3-4bf0-8da7-24816d97e8f2', '875c1157-f231-4c7e-af05-9725e8c19e36'),
+('1ab44134-c37d-4c58-bbb1-9dd233b76051', 86, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', '3d152bd9-3f24-4017-916a-e98f6c75e08b'),
+('1b68a59c-e718-42e2-92ec-32ee0212cc40', 7, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', 'aa97e35d-804d-4440-92ff-9a78ed1c8cd3'),
+('1b7ddad2-e9a2-4f16-9df3-b417af0a8e8d', 18, 0, '82289b0a-9159-4a10-93fe-4c0559ade658', 'c653404e-a6e7-482b-b2ac-4dc6b3ab57ed'),
+('20e813af-0c04-4e77-8f44-8a66487ee6e7', 100, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '92b0e6f1-3968-4370-9cdf-02ea49744471'),
+('2b85b7e4-14a1-406e-8837-ff90d14c4932', 120, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '7fa28b0c-58cf-4715-9214-fe889da5695a'),
+('2c7c745b-31ba-487f-a1c8-dcb5f11e40ba', 10, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', 'c653404e-a6e7-482b-b2ac-4dc6b3ab57ed'),
+('2f66dff1-ab82-4630-9715-ca0d6536241c', 44, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', 'cb04fa96-58b8-4674-8fc6-2ea672030bb7'),
+('32a8e2b2-7e80-4d01-888d-6210b2e9662d', 8, 0, 'c969ba62-2bed-48a3-a59b-880d87c8e1df', '2131b053-3324-4eae-9eb0-beaf43e3007a'),
+('3ab3172a-f17a-4eed-a3ac-318983f5c1d4', 10, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', 'cb0eb298-0f35-45c1-bdea-4e6e83eb0ea2'),
+('40bc6bee-1af4-4722-8ab8-cd26353eaf53', 9, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '36ad98f1-5f4c-4f19-a6e6-15ea824c99df'),
+('4148a9ce-168d-4b74-a5d0-7bf0d1569cff', 11, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', '92b0e6f1-3968-4370-9cdf-02ea49744471'),
+('42037cbd-196f-488e-bda4-e5f392b8cffa', 6, 0, '280edafb-0d8a-4e84-ab37-e8092d2703e1', '11c3513e-8bfc-482b-a5e8-54d171ba6eac'),
+('445f7641-d16c-4aa4-9006-3fec4851df80', 16, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', 'd7bd8518-3b37-4fe3-86c5-6d9d45eb3674'),
+('4470e152-7869-4dba-8c71-83c712562671', 8, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', 'bfee5e01-b5a9-4e48-af1c-7d11d57d5b47'),
+('45866a34-c4c9-4803-826f-198e5afeb760', 8, 0, 'c969ba62-2bed-48a3-a59b-880d87c8e1df', 'aa97e35d-804d-4440-92ff-9a78ed1c8cd3'),
+('46a0a1bf-2efa-4556-9b03-e3a8fbcf087c', 12, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', 'd2eb790d-c398-42df-86ab-9be21598654c'),
+('46dd4ebf-3a7d-4b2e-88dc-8936713e5dac', 7, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', '2131b053-3324-4eae-9eb0-beaf43e3007a'),
+('4a9b4864-5eae-4e96-8b6a-c42aa5d27742', 8, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', 'd7bd8518-3b37-4fe3-86c5-6d9d45eb3674'),
+('53c6de96-5cf3-4269-8814-c703d9f2d124', 24, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', '3d152bd9-3f24-4017-916a-e98f6c75e08b'),
+('583f752b-c202-4432-a7e9-b1c6582354fd', 1, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', '4c23c45b-2996-4ad8-bb9e-78440a16c676'),
+('5c164906-a47a-4450-9841-256c39187a6c', 8, 0, '8edcbd34-99e3-4bf0-8da7-24816d97e8f2', 'c653404e-a6e7-482b-b2ac-4dc6b3ab57ed'),
+('5c3fed6f-5825-43a9-9c20-5207fd906587', 2, 0, '280edafb-0d8a-4e84-ab37-e8092d2703e1', '89ba9a04-c766-4124-ba82-fa723d091cd3'),
+('5d618fd0-eba0-4b03-96d7-a4c6ca024025', 62, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '02f3b7d7-ef61-4d39-bef8-ea7f99c59713'),
+('608322f9-a275-43bc-a452-0a24e0f49ad7', 20, 0, '280edafb-0d8a-4e84-ab37-e8092d2703e1', '12fe62c8-c95d-4b32-beb5-6fad5dbe3537'),
+('60ef935c-4d48-4dec-8118-424dad244015', 50, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', '7fa28b0c-58cf-4715-9214-fe889da5695a'),
+('619e6500-4ad9-4952-946a-10418f7c2d25', 10, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', 'cb0eb298-0f35-45c1-bdea-4e6e83eb0ea2'),
+('6286bcb1-6472-494c-9fb4-3c276a5647c7', 85, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', '92b0e6f1-3968-4370-9cdf-02ea49744471'),
+('633a7cd0-d939-4bd0-bfb7-721f6613789b', 12, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', 'f24e8a5c-10e3-49ba-91a7-a2725fa4b6d9'),
+('649921dc-a7c4-499e-aed0-0f715605b50c', 3, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', '12fe62c8-c95d-4b32-beb5-6fad5dbe3537'),
+('66593054-54ba-4df8-9ea5-c5c7c13f5105', 25, 0, 'db5b7a57-cda0-4808-ae09-8ae5130693d5', 'aa97e35d-804d-4440-92ff-9a78ed1c8cd3'),
+('6e9bfe0a-0ddd-47fa-af5f-a754afbc588c', 50, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', '92b0e6f1-3968-4370-9cdf-02ea49744471'),
+('6f32d0cb-9e95-46a3-a08f-9d0969ffb572', 2, 0, '280edafb-0d8a-4e84-ab37-e8092d2703e1', '00c2866f-0e3a-4b58-a7e5-fe93abc4ae64'),
+('7739420f-bcc1-404a-8ece-37befed586c0', 10, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', '79cc0d60-28c8-4a3d-98d6-abdef94ed571'),
+('776ed60b-115b-4bde-97a3-1339d808e111', 5, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', '9c316564-ae2f-409e-aacb-ab341eec7483'),
+('79a74487-7b30-4692-9119-d508ec7d4acd', 25, 0, 'db5b7a57-cda0-4808-ae09-8ae5130693d5', '2131b053-3324-4eae-9eb0-beaf43e3007a'),
+('84754d72-6eed-4cd8-8319-6ce479740521', 20, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', '92b0e6f1-3968-4370-9cdf-02ea49744471'),
+('871f1b4f-edc5-493d-9b16-35c0a83026c0', 33, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', '00c2866f-0e3a-4b58-a7e5-fe93abc4ae64'),
+('87c4dfc1-d385-4f35-a967-d8618fe08362', 1, 0, '280edafb-0d8a-4e84-ab37-e8092d2703e1', '2131b053-3324-4eae-9eb0-beaf43e3007a'),
+('91728e1c-6d68-441d-9ad2-7c3343f3da63', 20, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '79cc0d60-28c8-4a3d-98d6-abdef94ed571'),
+('979b798e-3ea7-4226-b61c-859c3cbe0731', 5, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '9c316564-ae2f-409e-aacb-ab341eec7483'),
+('a05154d5-69bb-4710-8867-89e4505a0da9', 58, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', '02f3b7d7-ef61-4d39-bef8-ea7f99c59713'),
+('a1ad76f5-8fe3-4ebc-97ba-94e6b2ab02ff', 2, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', 'eddaa3e0-4e52-432c-9fd6-4027d03854ac'),
+('a4155117-5709-46ba-ac75-e91119204398', 20, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', '7fa28b0c-58cf-4715-9214-fe889da5695a'),
+('a5933fb5-67ff-4690-9da5-0bf0fae7981a', 10, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', 'cb0eb298-0f35-45c1-bdea-4e6e83eb0ea2'),
+('a71ceb9d-e949-40f2-91d2-4c05a7be902a', 9, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', '36ad98f1-5f4c-4f19-a6e6-15ea824c99df'),
+('ac56a656-0e74-4059-b45f-3e690caddacc', 4, 0, '0ee4a9e7-cb2c-4b14-bdbe-00622eeebf1d', '9c316564-ae2f-409e-aacb-ab341eec7483'),
+('b3b235d6-99bb-4703-bdc3-c6d69c279ac2', 12, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', 'e9bbd332-29f7-40e0-8777-4eeb921aaaab'),
+('bec2a45c-0389-4b04-9e75-969ab5addaae', 23, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', '875c1157-f231-4c7e-af05-9725e8c19e36'),
+('c39441ee-7c00-46d6-b1b2-cafa9f3366cc', 25, 0, 'db5b7a57-cda0-4808-ae09-8ae5130693d5', 'b546c02c-c2bb-43ad-8829-439e6dda2968'),
+('c4bd603c-8bad-4332-aeea-f2c087942d79', 20, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', '92b0e6f1-3968-4370-9cdf-02ea49744471'),
+('c60143a6-06b0-4eba-983d-48552854f77b', 7, 0, 'c4a68db1-dfb0-402f-8fb6-8a6c013f5b9e', 'b546c02c-c2bb-43ad-8829-439e6dda2968'),
+('df0941f5-e553-467e-8eba-229b1007c05d', 41, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', '02f3b7d7-ef61-4d39-bef8-ea7f99c59713'),
+('df31bfb1-be5b-41b1-b01a-311294e2d78d', 8, 0, 'c969ba62-2bed-48a3-a59b-880d87c8e1df', 'b546c02c-c2bb-43ad-8829-439e6dda2968'),
+('e07da2ff-704d-4dee-8713-b199d79f5971', 1, 0, '79b1052d-bcb1-469f-8748-5f4bc69ae97a', '9c316564-ae2f-409e-aacb-ab341eec7483'),
+('e9b746cc-7c7d-4c1e-847c-4a31d16083b7', 44, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', 'cb04fa96-58b8-4674-8fc6-2ea672030bb7'),
+('ea58f1b1-ae1c-40e2-9fa4-af4098926898', 2, 0, 'a2411366-d135-4114-bcc5-369a737c1c85', '66911382-5240-4f22-88e6-deb812fef318'),
+('ee8f1cae-688f-4e20-9bb4-8d8b2fcd2866', 10, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '884b43d4-8a4c-4fd2-8d9b-507ef70b9f7e'),
+('f05a229e-a111-4221-9135-4fc92f446d98', 20, 0, 'a2b044be-b95e-4d6f-9ced-b2370001c891', '7fa28b0c-58cf-4715-9214-fe889da5695a'),
+('f4970248-7dc0-48d0-9df7-996648dcfca0', 66, 0, '5664c1d8-223c-4436-9e4c-ea082069e842', '00c2866f-0e3a-4b58-a7e5-fe93abc4ae64'),
+('f4ee4e75-851b-4f1e-b889-f2aceea57b9a', 2, 0, '280edafb-0d8a-4e84-ab37-e8092d2703e1', '36ad98f1-5f4c-4f19-a6e6-15ea824c99df');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `terceros`
+-- Estructura de tabla para la tabla `terceros`
 --
 
-DROP TABLE IF EXISTS `terceros`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `terceros` (
   `id` varchar(255) NOT NULL,
   `contacto` varchar(255) DEFAULT NULL,
@@ -803,121 +821,82 @@ CREATE TABLE `terceros` (
   `modificado_por` varchar(255) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `observaciones` varchar(255) DEFAULT NULL,
-  `telefono` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `telefono` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `terceros`
+-- Volcado de datos para la tabla `terceros`
 --
 
-LOCK TABLES `terceros` WRITE;
-/*!40000 ALTER TABLE `terceros` DISABLE KEYS */;
-/*!40000 ALTER TABLE `terceros` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `terceros` (`id`, `contacto`, `creado_por`, `direccion`, `eliminado`, `fecha_creacion`, `fecha_modificacion`, `modificado_por`, `nombre`, `observaciones`, `telefono`) VALUES
+('14648301-a473-4e5a-8bb0-40b5bac7f1ff', 'sad', '1020413761', 'ASD', 0, '2016-07-12 00:07:28', '2016-07-12 00:07:28', '1020413761', 'ASD', 'sad', 'asd'),
+('6020344e-8e5c-4db9-8979-30fc1c1348aa', '1234564', '1020413761', 'DIRA', 0, '2016-07-12 07:56:48', '2016-07-12 07:56:48', '1020413761', 'TRANSPORTES XXX', '', '1231'),
+('ae95acfa-6224-4f79-b995-489dcc3a5304', 'asd', '1020413761', 'ASD', 1, '2016-07-05 05:50:18', '2016-07-05 05:50:18', '1020413761', 'SAD', 'asd', 'asd'),
+('c65d9d41-1ebe-4f48-a057-f4d9921eb737', '13', '1020413761', 'WRE', 1, '2016-07-05 05:51:01', '2016-07-05 05:51:01', '1020413761', 'REWR', '3465', '23443');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `tipos_cliente`
+-- Estructura de tabla para la tabla `tipos_cliente`
 --
 
-DROP TABLE IF EXISTS `tipos_cliente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipos_cliente` (
   `id` varchar(255) NOT NULL,
   `eliminado` smallint(6) DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `nombre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tipos_cliente`
+-- Estructura de tabla para la tabla `tipos_dir`
 --
 
-LOCK TABLES `tipos_cliente` WRITE;
-/*!40000 ALTER TABLE `tipos_cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tipos_cliente` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tipos_dir`
---
-
-DROP TABLE IF EXISTS `tipos_dir`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipos_dir` (
   `id` varchar(255) NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `nombre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tipos_dir`
+-- Estructura de tabla para la tabla `tipos_tel`
 --
 
-LOCK TABLES `tipos_dir` WRITE;
-/*!40000 ALTER TABLE `tipos_dir` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tipos_dir` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tipos_tel`
---
-
-DROP TABLE IF EXISTS `tipos_tel`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipos_tel` (
   `id` varchar(255) NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `nombre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tipos_tel`
+-- Estructura de tabla para la tabla `unidades_medida`
 --
 
-LOCK TABLES `tipos_tel` WRITE;
-/*!40000 ALTER TABLE `tipos_tel` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tipos_tel` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `unidades_medida`
---
-
-DROP TABLE IF EXISTS `unidades_medida`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `unidades_medida` (
   `id` varchar(36) NOT NULL,
-  `nombre` varchar(80) NOT NULL,
-  PRIMARY KEY (`id`)
+  `nombre` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `unidades_medida`
+-- Volcado de datos para la tabla `unidades_medida`
 --
 
-LOCK TABLES `unidades_medida` WRITE;
-/*!40000 ALTER TABLE `unidades_medida` DISABLE KEYS */;
-INSERT INTO `unidades_medida` VALUES ('7d8c25bb-358f-11e6-a718-507b9d9f0aad','UNIDADES'),('7d8c332c-358f-11e6-a718-507b9d9f0aad','GRAMOS'),('aca83d9f-358f-11e6-a718-507b9d9f0aad','KILOS'),('aca84b06-358f-11e6-a718-507b9d9f0aad','PULGADAS'),('c3e2c2ea-358f-11e6-a718-507b9d9f0aad','METROS'),('c3e2cf81-358f-11e6-a718-507b9d9f0aad','CENTIMETROS');
-/*!40000 ALTER TABLE `unidades_medida` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `unidades_medida` (`id`, `nombre`) VALUES
+('7d8c25bb-358f-11e6-a718-507b9d9f0aad', 'UNIDADES'),
+('7d8c332c-358f-11e6-a718-507b9d9f0aad', 'GRAMOS'),
+('aca83d9f-358f-11e6-a718-507b9d9f0aad', 'KILOS'),
+('aca84b06-358f-11e6-a718-507b9d9f0aad', 'PULGADAS'),
+('c3e2c2ea-358f-11e6-a718-507b9d9f0aad', 'METROS'),
+('c3e2cf81-358f-11e6-a718-507b9d9f0aad', 'CENTIMETROS');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `usuario` varchar(255) NOT NULL,
   `creado_por` varchar(255) DEFAULT NULL,
@@ -927,29 +906,347 @@ CREATE TABLE `usuarios` (
   `modificado_por` varchar(255) DEFAULT NULL,
   `passw` varchar(255) DEFAULT NULL,
   `persona` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`usuario`),
-  KEY `FK_usuarios_persona` (`persona`),
-  CONSTRAINT `FK_usuarios_persona` FOREIGN KEY (`persona`) REFERENCES `personas` (`id`)
+  `rol` varchar(36) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('',NULL,NULL,NULL,NULL,NULL,NULL,NULL),('admin',NULL,NULL,NULL,NULL,NULL,'admin','14136571');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `usuarios` (`usuario`, `creado_por`, `eliminado`, `fecha_creacion`, `fecha_modificacion`, `modificado_por`, `passw`, `persona`, `rol`) VALUES
+('admin', 'admin', 0, '2016-06-25 12:47:49', '2016-07-10 10:42:35', '1020413761', 'iS6KhTMiqrSlSve3Eh/lCg==', '1020413761', 'ROL_ADM'),
+('dairo', '1020413761', 0, '2016-07-09 23:26:15', '2016-07-09 23:42:34', '1020413761', '1JWXgAjM86iHqcW+2vYfIA==', '12346', 'ROL_AUX BO'),
+('jeferson', '1020413761', 0, '2016-07-09 23:17:22', '2016-07-12 07:51:35', '1020413761', '8Ugao0W1H/T1+3XDL272Aw==', '10204', 'ROL_AUX'),
+('uoiuoiewuiewq', '1020413761', 0, '2016-07-10 06:28:57', '2016-07-11 22:24:03', '1020413761', '9iAOddxXQTaZlX/zgpYkOw==', '70569547', 'ROL_AUX');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `acl_acciones`
+--
+ALTER TABLE `acl_acciones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `modulo` (`modulo`) USING BTREE;
+
+--
+-- Indices de la tabla `acl_roles`
+--
+ALTER TABLE `acl_roles`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `acl_roles_accion`
+--
+ALTER TABLE `acl_roles_accion`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_aclra_RolIDX` (`ROL`),
+  ADD KEY `FK_aclra_AccionIDX` (`ACCION`) USING BTREE;
+
+--
+-- Indices de la tabla `atributos`
+--
+ALTER TABLE `atributos`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_categorias_idpadre` (`idpadre`);
+
+--
+-- Indices de la tabla `categorias_impuestos`
+--
+ALTER TABLE `categorias_impuestos`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `cuentas`
+--
+ALTER TABLE `cuentas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_cuentas_estado` (`estado`),
+  ADD KEY `FK_cuentas_lista_precios` (`lista_precios`);
+
+--
+-- Indices de la tabla `cuentas_contactos`
+--
+ALTER TABLE `cuentas_contactos`
+  ADD KEY `FK_cuentas_contactos_id_cliente` (`id_cuenta`),
+  ADD KEY `FK_cuentas_contactos_id_persona` (`id_persona`);
+
+--
+-- Indices de la tabla `cuentas_direccion`
+--
+ALTER TABLE `cuentas_direccion`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_cuentas_direccion_id_cliente` (`id_cliente`);
+
+--
+-- Indices de la tabla `estados`
+--
+ALTER TABLE `estados`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `impuestos`
+--
+ALTER TABLE `impuestos`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_impuestos_impuesto_padre` (`impuesto_padre`);
+
+--
+-- Indices de la tabla `insumos_producto`
+--
+ALTER TABLE `insumos_producto`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `producto_padre` (`producto_padre`),
+  ADD KEY `insumo` (`insumo`);
+
+--
+-- Indices de la tabla `lineas_impuestos`
+--
+ALTER TABLE `lineas_impuestos`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `lista_precios`
+--
+ALTER TABLE `lista_precios`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `parametros`
+--
+ALTER TABLE `parametros`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_pedidos_id_cliente` (`id_cliente`),
+  ADD KEY `FK_pedidos_estado` (`estado`);
+
+--
+-- Indices de la tabla `pedidos_producto`
+--
+ALTER TABLE `pedidos_producto`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_pedidos_producto_id_producto` (`id_producto`),
+  ADD KEY `FK_pedidos_producto_id_pedido` (`id_pedido`);
+
+--
+-- Indices de la tabla `personas`
+--
+ALTER TABLE `personas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `personas_tels`
+--
+ALTER TABLE `personas_tels`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `persona_dirs`
+--
+ALTER TABLE `persona_dirs`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `persona_mails`
+--
+ALTER TABLE `persona_mails`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_productos_categoria` (`categoria`),
+  ADD KEY `FK_unidad_medida` (`unidad_medida`),
+  ADD KEY `IDX_Productos` (`producto_padre`) USING BTREE;
+
+--
+-- Indices de la tabla `recibos`
+--
+ALTER TABLE `recibos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `remisiones`
+--
+ALTER TABLE `remisiones`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_remisiones_id_pedido` (`id_pedido`),
+  ADD KEY `ESTADO` (`ESTADO`),
+  ADD KEY `FK_UserCreator` (`creado_por`) USING BTREE,
+  ADD KEY `FK_rem_terceros` (`entregado_a`);
+
+--
+-- Indices de la tabla `remisiones_producto`
+--
+ALTER TABLE `remisiones_producto`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_remisiones_producto_id_remision` (`id_remision`),
+  ADD KEY `FK_producto_id` (`id_producto`) USING BTREE;
+
+--
+-- Indices de la tabla `terceros`
+--
+ALTER TABLE `terceros`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_tercero_contacto` (`contacto`);
+
+--
+-- Indices de la tabla `tipos_cliente`
+--
+ALTER TABLE `tipos_cliente`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipos_dir`
+--
+ALTER TABLE `tipos_dir`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipos_tel`
+--
+ALTER TABLE `tipos_tel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `unidades_medida`
+--
+ALTER TABLE `unidades_medida`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`usuario`),
+  ADD KEY `FK_usuarios_persona` (`persona`),
+  ADD KEY `rol` (`rol`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `acl_roles_accion`
+--
+ALTER TABLE `acl_roles_accion`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+--
+-- AUTO_INCREMENT de la tabla `insumos_producto`
+--
+ALTER TABLE `insumos_producto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `acl_acciones`
+--
+ALTER TABLE `acl_acciones`
+  ADD CONSTRAINT `FK_aclmodulo` FOREIGN KEY (`modulo`) REFERENCES `parametros` (`ID`);
+
+--
+-- Filtros para la tabla `acl_roles_accion`
+--
+ALTER TABLE `acl_roles_accion`
+  ADD CONSTRAINT `FK_acl_Accion` FOREIGN KEY (`ACCION`) REFERENCES `acl_acciones` (`id`),
+  ADD CONSTRAINT `FK_aclra_Rol` FOREIGN KEY (`ROL`) REFERENCES `acl_roles` (`ID`);
+
+--
+-- Filtros para la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD CONSTRAINT `FK_categorias_idpadre` FOREIGN KEY (`idpadre`) REFERENCES `categorias` (`ID`);
+
+--
+-- Filtros para la tabla `cuentas_contactos`
+--
+ALTER TABLE `cuentas_contactos`
+  ADD CONSTRAINT `FK_cuentas_contactos_id_cuenta` FOREIGN KEY (`id_cuenta`) REFERENCES `cuentas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_cuentas_contactos_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `personas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `cuentas_direccion`
+--
+ALTER TABLE `cuentas_direccion`
+  ADD CONSTRAINT `FK_cuentas_direccion_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cuentas` (`id`);
+
+--
+-- Filtros para la tabla `impuestos`
+--
+ALTER TABLE `impuestos`
+  ADD CONSTRAINT `FK_impuestos_impuesto_padre` FOREIGN KEY (`impuesto_padre`) REFERENCES `impuestos` (`ID`);
+
+--
+-- Filtros para la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `FK_pedidos_estado` FOREIGN KEY (`estado`) REFERENCES `estados` (`ID`),
+  ADD CONSTRAINT `FK_pedidos_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cuentas` (`id`);
+
+--
+-- Filtros para la tabla `pedidos_producto`
+--
+ALTER TABLE `pedidos_producto`
+  ADD CONSTRAINT `FK_pedidos_producto_id_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`),
+  ADD CONSTRAINT `FK_pedidos_producto_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`);
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `FK_padre` FOREIGN KEY (`producto_padre`) REFERENCES `productos` (`id`),
+  ADD CONSTRAINT `FK_productos_categoria` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`ID`),
+  ADD CONSTRAINT `FK_unidades_medida` FOREIGN KEY (`unidad_medida`) REFERENCES `unidades_medida` (`id`);
+
+--
+-- Filtros para la tabla `remisiones`
+--
+ALTER TABLE `remisiones`
+  ADD CONSTRAINT `FK_remisiones_creador` FOREIGN KEY (`creado_por`) REFERENCES `personas` (`id`),
+  ADD CONSTRAINT `FK_remisiones_id_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`);
+
+--
+-- Filtros para la tabla `remisiones_producto`
+--
+ALTER TABLE `remisiones_producto`
+  ADD CONSTRAINT `FK_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
+  ADD CONSTRAINT `FK_remisiones_producto_id_remision` FOREIGN KEY (`id_remision`) REFERENCES `remisiones` (`id`);
+
+--
+-- Filtros para la tabla `terceros`
+--
+ALTER TABLE `terceros`
+  ADD CONSTRAINT `FK_tercero_contacto` FOREIGN KEY (`contacto`) REFERENCES `personas` (`id`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `FK_usuarios_persona` FOREIGN KEY (`persona`) REFERENCES `personas` (`id`),
+  ADD CONSTRAINT `FK_usuarios_rol` FOREIGN KEY (`rol`) REFERENCES `acl_roles` (`ID`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2016-07-12 22:35:38
