@@ -12,13 +12,13 @@
             <div class="panel-heading">Crear Nueva Remision</div>
 
             <h:form id="RemisionesCreateForm"> 
-
+               
                 <h:panelGroup id="display"  rendered="#{remisionesController.selected != null}">
                     <p:panelGrid columns="2">
 
                         <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
-                        <h:panelGroup>
-                            <p:inputText id="referencia" value="#{pedidosController.selected.referencia}" disabled="true"
+                        <h:panelGroup id="ref">
+                            <p:inputText id="referencia" value="#{remisionesController.orderRef}" disabled="true"
                                          title="#{innventa.CreatePedidosTitle_referencia}" 
                                          
                                          requiredMessage="#{innventa.CreatePedidosRequiredMessage_referencia}" size="20" maxlength="20"/>
@@ -80,8 +80,8 @@
                                              required="true" 
                                              requiredMessage="#{innventa.CreatePedidosRequiredMessage_estado}" 
                                              converter="#{estadosConverter}">
-                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                                <f:selectItems value='#{estadosController.chargeItems("PEDIDOS")}'
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}" />
+                                <f:selectItems value='#{estadosController.chargeItems("REMISIONES")}'
                                                var="estadoItem"
                                                itemValue="#{estadoItem}"
                                                itemLabel="#{estadoItem.estado}"
@@ -96,7 +96,7 @@
                 </h:panelGroup>
                 <p:commandButton class="btn btn-success" actionListener="#{remisionesController.saveNew}" 
                                  value="#{innventa.Save}" 
-                                 update="display contentPanel growl msgs" 
+                                 update="display contentPanel msgs" 
                                  >
                     <p:confirm header="#{innventa.ConfirmationHeader}" 
                                message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
@@ -104,7 +104,7 @@
 
 
                 <p:commandButton value="#{innventa.Cancel}" 
-                                 update="contentPanel growl" 
+                                 update="contentPanel msgs" 
                                  actionListener="#{navigation.remissions()}"
                                  immediate="true"
                                  />
@@ -114,7 +114,7 @@
 
         </div>
         <div class="col-md-7">
-            <button class="btn btn-success" data-toggle="collapse" aria-expanded="false" data-target="#productOCPanel">Productos de Orden de Compra #{pedidosController.selected.referencia} </button>
+            <button class="btn btn-success" data-toggle="collapse" aria-expanded="false" data-target="#productOCPanel">Productos de Orden de Compra</button>
             <div id="productOCPanel" class="panel panel-success ">
 
                 <ui:include src="/remisionesProducto/productos/index.xhtml"/>

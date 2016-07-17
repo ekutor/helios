@@ -11,12 +11,19 @@
         <p:dialog id="ProductosConfDialog" widgetVar="ProductosConfDialog" 
                   modal="true" 
                   resizable="false"  
-                  appendTo="@(body)" 
+                  appendTo="@parent" 
                   header="Configurar Productos de Venta" closeOnEscape="true">
 
             <h:form id="ProductosConfForm">
-
                 <h:panelGroup id="display">
+                    <p:contextMenu id="ProductosConfFormContextMenu" for="picker">  
+                        <p:menuitem value="Definir Cantidad" icon="ui-icon-plus" id="item">
+                             <p:outputLabel value="Cantidad de Componentes por Producto" />
+                            <p:inputText value="#{productosController.qty}" />
+                            <p:commandButton value="Guardar" actionListener="#{productosController.addQty}"  />
+                            <h:outputText value="#{productosController.qty}" />
+                        </p:menuitem>
+                      </p:contextMenu>
                     <p:panelGrid columns="2" columnClasses="column" rendered="#{productosController.selected != null}">
 
                         <h:outputText value="#{innventa.ViewProductosLabel_referencia}"/>
@@ -38,12 +45,12 @@
                         <p:separator/>             
                                 <!-- <p:graphicImage value="/images/barca/player.photo}"/> -->  
                             <h:outputText value="Seleccione los Items que componen el Producto #{productosController.selected.nombre}"/>
-                        <p:pickList value="#{productosController.parentProducts}"
-                                var="player" effect="bounce"
-                                itemValue="#{player}" converter="#{productosConverter}"
+                        <p:pickList id="picker" value="#{productosController.parentProducts}"
+                                var="child" effect="bounce"
+                                itemValue="#{child}" converter="#{productosConverter}"
                                 showSourceControls="true" showTargetControls="true"
                                 addAllLabel="Agregar Todos" addLabel="Agregar Componente"
-                                removeAllLabel="quitar Todos" removeLabel="Quitar Componente"
+                                removeAllLabel="quitar Todos" removeLabel="Quitar Componente"                                
                                 style="background-color: #0088cc">
                                 <f:facet name="sourceCaption"> Items de Venta</f:facet>  
                                 <f:facet name="targetCaption"> Seleccionados</f:facet>
@@ -53,12 +60,13 @@
                                     <f:facet name="header">
                                         Name
                                     </f:facet>
-                                    <h:outputText value=" #{player.nombre}" />
+                                    <h:outputText value=" #{child.nombre}" />
                                 </p:column>
-
+                             
+            
                         </p:pickList>
                         <p:separator/>
-                    <p:commandButton actionListener="#{productosController.save}" value="Guardar Configuracion" update="display,:ProductosListForm:datalist,:growl contentPanel" 
+                    <p:commandButton actionListener="#{productosController.save}" value="Guardar Configuracion" update="display :ProductosListForm:datalist, contentPanel" 
                                      oncomplete="handleSubmit(xhr,status,args,PF('ProductosConfDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
@@ -66,7 +74,7 @@
                 </h:panelGroup>
 
             </h:form>
-
+               
         </p:dialog>
 
     </ui:composition>

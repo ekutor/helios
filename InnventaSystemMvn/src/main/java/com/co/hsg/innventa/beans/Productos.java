@@ -119,6 +119,9 @@ public class Productos implements Serializable {
     @Column(name = "eliminado")
     private short eliminado;
     
+    @Column(name = "cant_en_padre")
+    private int cantEnPadre;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
     private List<PedidosProducto> pedidosProductoList;
     
@@ -292,6 +295,14 @@ public class Productos implements Serializable {
 
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
+    }
+
+    public int getCantEnPadre() {
+        return cantEnPadre;
+    }
+
+    public void setCantEnPadre(int cantEnPadre) {
+        this.cantEnPadre = cantEnPadre;
     }
 
     @XmlTransient

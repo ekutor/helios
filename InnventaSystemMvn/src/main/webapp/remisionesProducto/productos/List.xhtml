@@ -8,9 +8,8 @@
 
     <div class="panel panel-default">
         <h:form id="ProductosSearchSmallForm">
-            <h:panelGrid columns="7" style="margin-bottom:10px" 
-                         >
-                <p:outputLabel for="advanced" value="Productos en la Orden de Compra " />
+            <h:panelGrid columns="6" style="margin-bottom:10px">
+                <p:outputLabel for="advanced" value="Productos Pendientes de Entrega " />
                 <p:selectOneMenu id="advanced" 
                                  value="#{remisionesController.selectedProduct}" 
                                  converter="#{pedidosProductoConverter}"
@@ -19,7 +18,7 @@
                                  styleClass="col-md-6"
 
                                  >
-                    <f:selectItems value="#{remisionesController.selected.idPedido.pedidosProductoList}" 
+                    <f:selectItems value="#{remisionesController.incPendingOrders}" 
                                    var="selectedItem"
                                    itemLabel="#{selectedItem.idProducto.nombre}" 
                                    itemValue="#{selectedItem}" 
@@ -28,20 +27,29 @@
                                                partialSubmit="false"
                                                listener="#{dialog.docTypeChanged}"
                                                event="change"/> -->
-                    <p:column>
+                    <p:column headerText="Orden Compra">
+                        <h:outputText value="#{t.idPedido.referencia}" />
+                    </p:column>
+                     <p:column headerText="Fecha Solicitada">
+                        <h:outputText value="#{t.idPedido.fechaPedido}">
+                            <f:convertDateTime locale="es" pattern="dd/MMMMM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Producto">
                         <h:outputText value="#{t.idProducto.nombre}" />
                     </p:column>
-                    <p:column>
+                    <p:column headerText="Referencia">
                         <h:outputText value="#{t.idProducto.referencia}" />
                     </p:column>
-                    <p:column>
+                    <p:column headerText="Cantidad Solicitada">
                         <h:outputText value="#{t.cantidad}" />
                     </p:column>
                 </p:selectOneMenu>
                  <p:column><p:outputLabel value="&#160;" /></p:column>
+                  
                 <p:column>
                     <p:commandButton id="addProductButton" icon="ui-icon-plus"
-                                     update="   :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos"  
+                                     update="   :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
                                      actionListener="#{remisionesController.addProduct(ActionEvent)}" 
                                      />
                     <p:tooltip for="addProductButton" value="Agrega un producto de la Orden de Compra a la Remision"/>
@@ -51,12 +59,17 @@
                   <p:column><p:outputLabel value="&#160;" /></p:column>
                     <p:column>
                     <p:commandButton id="addAllProductsButton" icon="ui-icon-arrowreturnthick-1-s"
-                                     update="   :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos"  
+                                     update="   :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
                                      actionListener="#{remisionesController.addAllProducts(ActionEvent)}" 
                                      />
                     <p:tooltip for="addAllProductsButton" value="Agrega todos los productos de la Orden de Compra a la Remision"/>
 
                 </p:column>
+                  
+                   <p:outputLabel for="checkMore" value="Incluir ordenes de compra pendientes del cliente" />
+                  <p:selectBooleanCheckbox id="checkMore" value="#{remisionesController.allPendings}">
+                     <p:ajax update=" @form:advanced :RemisionesCreateForm:ref" listener="#{remisionesController.chargeAllPendings()}" />
+                 </p:selectBooleanCheckbox>
                 
             </h:panelGrid>
         </h:form>
@@ -88,21 +101,31 @@
                     </f:facet>
                     <h:outputText value="#{item.id}"/>
                 </p:column>
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="O. C. "/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPedido.referencia}"/>
+                </p:column>
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Referencia"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idProducto.referencia}"/>
+                </p:column>
                 <p:column >
                     <f:facet name="header">
                         <h:outputText value="Producto"/>
                     </f:facet>
                     <h:outputText value="#{item.idProducto.nombre}"/>
                 </p:column>
-                
-                
 
                 <p:column headerText="Cantidad">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
                         <f:facet name="input">
                             <p:inputText value="#{item.cantidad}" style="width:100%">
-                                <p:ajax listener="#{remisionesController.onRowEdit(item.cantidad)}" update=":RemisionesCreateForm:panelCantidadProductos" />
+                                <p:ajax listener="#{remisionesController.onRowEdit(item, item.cantidad)}" update=":RemisionesCreateForm:panelCantidadProductos" />
                             </p:inputText>
                         </f:facet>
                     </p:cellEditor>
@@ -114,7 +137,7 @@
       
             <p:commandButton id="deleteButton"  icon="ui-icon-trash"  value="#{innventa.Delete}" 
                              actionListener="#{remisionesController.delProduct(ActionEvent)}" 
-                             update=":ProductosListForm,:growl,datalist, :RemisionesCreateForm:panelCantidadProductos" 
+                             update=":ProductosListForm,msgs,datalist, :RemisionesCreateForm:panelCantidadProductos" 
                              disabled="#{empty remisionesController.selectedProduct}"/>
 
 

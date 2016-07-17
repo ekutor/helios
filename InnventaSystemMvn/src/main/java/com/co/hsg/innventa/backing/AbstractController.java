@@ -154,7 +154,7 @@ public abstract class AbstractController<T> implements Serializable {
         return items;
     }
      
-    public Collection<T> chargeItems(NamedQuerys namedQuery, String param, String value) {
+    public Collection<T> chargeItems(NamedQuerys namedQuery, String param, Object value) {
         try{
          
             items = this.ejbFacade.findAllByQuery(namedQuery.getQuery(), param, value );

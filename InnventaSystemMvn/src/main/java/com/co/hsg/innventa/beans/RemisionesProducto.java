@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
@@ -55,6 +50,10 @@ public class RemisionesProducto implements Serializable {
     @JoinColumn(name = "id_remision", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Remisiones idRemision;
+    
+    @JoinColumn(name = "id_pedido", referencedColumnName = "id")
+    @ManyToOne(optional = true)
+    private Pedidos idPedido;
 
     public RemisionesProducto() {
     }
@@ -109,6 +108,14 @@ public class RemisionesProducto implements Serializable {
         this.idRemision = idRemision;
     }
 
+    public Pedidos getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Pedidos idPedido) {
+        this.idPedido = idPedido;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

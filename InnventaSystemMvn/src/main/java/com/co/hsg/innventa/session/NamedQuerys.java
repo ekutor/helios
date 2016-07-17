@@ -15,6 +15,7 @@ public enum NamedQuerys {
     ACCOUNTS_POSITIONS_PARAM("Parametros.accountPositions", "ACCOUNTS_POSITION"),
     PARAMS("Parametros.findByParametro",""),
     PARAM_MODULES("Parametros.modules",""),
+    ORDERS_PENDING("Pedidos.pendings",""),
     ;
     
     private String query;

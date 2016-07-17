@@ -33,17 +33,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0 ORDER BY p.fechaPedido DESC, p.referencia DESC"),
     @NamedQuery(name = "Pedidos.findById", query = "SELECT p FROM Pedidos p WHERE p.id = :id"),
     @NamedQuery(name = "Pedidos.findByReferencia", query = "SELECT p FROM Pedidos p WHERE p.referencia = :referencia"),
-    @NamedQuery(name = "Pedidos.findByFechaPedido", query = "SELECT p FROM Pedidos p WHERE p.fechaPedido = :fechaPedido"),
-    @NamedQuery(name = "Pedidos.findByFechaEntrega", query = "SELECT p FROM Pedidos p WHERE p.fechaEntrega = :fechaEntrega"),
-    @NamedQuery(name = "Pedidos.findByCantidadTotal", query = "SELECT p FROM Pedidos p WHERE p.cantidadTotal = :cantidadTotal"),
-    @NamedQuery(name = "Pedidos.findByDescripcion", query = "SELECT p FROM Pedidos p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Pedidos.findByObservaciones", query = "SELECT p FROM Pedidos p WHERE p.observaciones = :observaciones"),
-    @NamedQuery(name = "Pedidos.findByCantidadPendientes", query = "SELECT p FROM Pedidos p WHERE p.cantidadPendientes = :cantidadPendientes"),
-    @NamedQuery(name = "Pedidos.findByCreadoPor", query = "SELECT p FROM Pedidos p WHERE p.creadoPor = :creadoPor"),
-    @NamedQuery(name = "Pedidos.findByFechaCreacion", query = "SELECT p FROM Pedidos p WHERE p.fechaCreacion = :fechaCreacion"),
-    @NamedQuery(name = "Pedidos.findByModificadoPor", query = "SELECT p FROM Pedidos p WHERE p.modificadoPor = :modificadoPor"),
-    @NamedQuery(name = "Pedidos.findByFechaModificacion", query = "SELECT p FROM Pedidos p WHERE p.fechaModificacion = :fechaModificacion"),
-    @NamedQuery(name = "Pedidos.findByEliminado", query = "SELECT p FROM Pedidos p WHERE p.eliminado = :eliminado"),
+    @NamedQuery(name = "Pedidos.pendings", query = "SELECT p FROM Pedidos p "
+            + "WHERE p.estado.id != 'ORDERS_CANCELED' "
+            + "AND p.estado.id != 'ORDERS_DELIVERED' "
+            + "AND p.estado.id != 'ORDERS_PAID' "
+            + "AND p.idCliente = :cliente"),
     @NamedQuery(name = "Pedidos.delete", query = "UPDATE Pedidos p SET p.eliminado =1 WHERE p.id =:id")})
 
 public class Pedidos implements Serializable {
@@ -114,8 +108,13 @@ public class Pedidos implements Serializable {
     private Estados estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
     private List<Remisiones> remisionesList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
     private List<PedidosProducto> pedidosProductoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
+    private List<RemisionesProducto> remisionesProductoList;
+    
 
     public Pedidos() {
     }
@@ -274,13 +273,25 @@ public class Pedidos implements Serializable {
     @XmlTransient
     public List<PedidosProducto> getPedidosProductoList() {
         if(pedidosProductoList == null){
-            pedidosProductoList = new ArrayList<PedidosProducto>();
+            pedidosProductoList = new ArrayList<>();
         }
         return pedidosProductoList;
     }
 
     public void setPedidosProductoList(List<PedidosProducto> pedidosProductoList) {
         this.pedidosProductoList = pedidosProductoList;
+    }
+    
+    @XmlTransient
+    public List<RemisionesProducto> getRemisionesProductoList() {
+        if(remisionesProductoList == null){
+            remisionesProductoList = new ArrayList<>();
+        }
+        return remisionesProductoList;
+    }
+
+    public void setRemisionesProductoList(List<RemisionesProducto> remisionesProductoList) {
+        this.remisionesProductoList = remisionesProductoList;
     }
 
     @Override

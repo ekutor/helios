@@ -62,7 +62,7 @@
                         <h:outputText value="#{innventa.ListRemisionesTitle_fechaRemision}"/>
                     </f:facet>
                     <h:outputText value="#{item.fechaRemision}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime locale="es" pattern="dd/MMMMM/yyyy" />
                     </h:outputText>
                 </p:column>
 
@@ -94,7 +94,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListRemisionesTitle_entregadoA}"/>
                     </f:facet>
-                    <h:outputText value="#{item.entregadoA}"/>
+                    <h:outputText value="#{item.entregadoA.nombre}"/>
                 </p:column>
 
 

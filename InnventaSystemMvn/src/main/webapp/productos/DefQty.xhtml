@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:outputScript name="js/innventa.js" />
+    <ui:composition>
+         
+        <p:dialog id="ProductosDefQty" 
+                  widgetVar="ProductosDefQty" 
+                  modal="true" 
+                  resizable="true" 
+                  width="650" height="500"
+                  appendTo="@parent" 
+                  header="#{innventa.CreateProductosTitle}" 
+                  closeOnEscape="true">
+
+           
+           <h:form id="ProductosDefQtyForm">
+
+                <h:panelGroup id="display" rendered="#{productosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="Cantidad de productos asociados para ..." for="referencia" />
+                        <h:panelGroup>
+                            <p:inputText id="referencia" value="#{productosController.selected.referencia}" title="#{innventa.CreateProductosTitle_referencia}" size="50" maxlength="255"/>
+                            <p:tooltip for="referencia" value="#{productosController.getComponentMessages('referencia', innventa.CreateProductosHelpText_referencia)}"/>
+                        </h:panelGroup>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productosController.saveNew}" value="#{innventa.Save}" update=":ProductosConfForm" oncomplete="handleSubmit(xhr,status,args,PF('ProductosDefQty'));">
+                        
+                    </p:commandButton>
+
+                    <p:commandButton value="#{innventa.Cancel}" update="display" onclick="PF('ProductosDefQty').hide()"/>
+                </h:panelGroup>
+               
+               </h:form>
+            </p:dialog>
+
+    </ui:composition>
+
+</html>

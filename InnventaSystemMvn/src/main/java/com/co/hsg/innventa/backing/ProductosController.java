@@ -38,7 +38,10 @@ public class ProductosController extends AbstractController<Productos> {
     private TreeNode productsTree;
     
     private DualListModel<Productos> parentProducts;
-     
+    private Productos selectedchildProduct;
+    
+    private String qty;
+    
     public ProductosController() {
         super(Productos.class);
         actualModule = Modules.PRODUCTS;
@@ -61,6 +64,27 @@ public class ProductosController extends AbstractController<Productos> {
 
     public void setFindProduct(Productos findProduct) {
         this.findProduct = findProduct;
+    }
+    
+    public void setSelectedChild(Productos selectedProduct){
+        if(selectedProduct != null){
+            selectedchildProduct = selectedProduct;
+        }
+    }
+
+    public String getQty() {
+        return qty;
+    }
+
+    public void setQty(String qty) {
+        this.qty = qty;
+    }
+    
+    public void addQty(ActionEvent e){
+        
+    }
+    public Productos getSelectedChild(){
+        return selectedchildProduct;
     }
     
     public Collection<Productos> getItemsForSale() {

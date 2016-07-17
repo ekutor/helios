@@ -104,7 +104,7 @@
             </p:dataTable>
 
             <p:commandButton id="createButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm :ProductosCreateForm:display" oncomplete="PF('ProductosCreateDialog').show()"/>
-            <p:commandButton id="createParentButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-wrench"   value="Configurar Producto" update=":ProductosConfForm" oncomplete="PF('ProductosConfDialog').show()" disabled="#{!productosController.isProductSale()}"/>
+            <p:commandButton id="createParentButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-wrench"   value="Configurar Producto" update=":ProductosConfForm, :ProductosConfForm:display" oncomplete="PF('ProductosConfDialog').show()" disabled="#{!productosController.isProductSale()}"/>
           
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":ProductosViewForm" oncomplete="PF('ProductosViewDialog').show()" disabled="#{empty productosController.selected}"/>
             <p:commandButton id="editButton"   rendered='#{productosController.isAllowed("EDIT", productosController.selected.creadoPor)}' style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" update=":ProductosCreateForm :ProductosEditForm" oncomplete="PF('ProductosEditDialog').show()" disabled="#{ empty productosController.selected}"/>
