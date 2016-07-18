@@ -152,6 +152,9 @@ public class RemisionesController extends AbstractController<Remisiones> {
             String idAux = "";
             orderRef = "";
             for(RemisionesProducto rem : selected.getRemisionesProductoList()){
+                if(rem.getIdPedido() == null){
+                    continue;
+                }
                 if(!idAux.equals(rem.getIdPedido().getReferencia())){
                     orderRef += rem.getIdPedido().getReferencia(); 
                     orderRef += "-";
@@ -227,7 +230,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
            rp = buildRemisionProducto(pedProd);
        }
        rp.setIdPedido(pedProd.getIdPedido());
-       rp.setCantidad(pedProd.getCantidad());  
+       rp.setCantidad(calculateDiff(pedProd));  
        selected.setTotalProductos(getCantTotal());
     }
     
@@ -309,10 +312,22 @@ public class RemisionesController extends AbstractController<Remisiones> {
     public  List<ReportInfo> generateInfo() {
         List<ReportInfo> list = new ArrayList<>();
         if (selected != null) {
+            int auxQty=0;
+            String auxId="";
+            ReportInfo auxRi = null;
             for (RemisionesProducto rem : selected.getRemisionesProductoList()) {
                 ReportInfo ri = new ReportInfo();
                 
-                ri.setCantidad(rem.getCantidad());
+                if(auxId.equals(rem.getIdProducto().getId())){
+                    auxQty += rem.getCantidad();
+                    auxRi.setCantidad(auxQty);
+                    continue;
+                }else{
+                    auxQty = rem.getCantidad();
+                    auxId = rem.getIdProducto().getId();
+                    auxRi = ri;
+                }
+                ri.setCantidad(auxQty);
                 ri.setNombre(rem.getIdProducto().getNombre());
                 
                 ri.setNombreCliente(selected.getIdPedido().getIdCliente().getNombre());
@@ -349,6 +364,19 @@ public class RemisionesController extends AbstractController<Remisiones> {
 
     public void setSelectedRemisionProduct(RemisionesProducto selectedRemisionProduct) {
         this.selectedRemisionProduct = selectedRemisionProduct;
+    }
+
+    private int calculateDiff(PedidosProducto pedProd) {
+        int qty = 0;
+        for( Remisiones rem: pedProd.getIdPedido().getRemisionesList()){
+            for( RemisionesProducto oldRemission : rem.getRemisionesProductoList()){
+               if(oldRemission.getIdProducto().equals(pedProd.getIdProducto())){
+                   qty += oldRemission.getCantidad();
+               } 
+            }
+        }
+        qty = pedProd.getCantidad() - qty;
+        return qty;
     }
     
    
