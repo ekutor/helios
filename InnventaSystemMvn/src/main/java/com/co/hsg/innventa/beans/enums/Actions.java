@@ -1,4 +1,4 @@
-package com.co.hsg.innventa.backing.util;
+package com.co.hsg.innventa.beans.enums;
 
 /**
  *

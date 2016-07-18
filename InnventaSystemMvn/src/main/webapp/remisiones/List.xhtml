@@ -35,22 +35,9 @@
                 <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:RemisionesDataTableContextMenu" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{remisionesController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('RemisionesListForm:viewButton').click();"/>
-                
-                  <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
-                    <f:facet name="header">
-                        <h:outputText value="#{innventa.ListRemisionesTitle_idPedido}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idPedido.referencia}"/>
-                </p:column>
-                
-                <p:column sortBy="#{item.idPedido.descripcion}" filterBy="#{item.idPedido.descripcion}">
-                    <f:facet name="header">
-                        <h:outputText value="Cuenta"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idPedido.idCliente.nombre}"/>
-                </p:column>
-                
-                <p:column sortBy="#{item.remision}" filterBy="#{item.remision}">
+               
+                            
+                <p:column sortBy="#{item.referencia}" filterBy="#{item.referencia}">
                     <f:facet name="header">
                         <h:outputText value="Remision"/>
                     </f:facet>
@@ -66,7 +53,13 @@
                     </h:outputText>
                 </p:column>
 
-
+                 <p:column sortBy="#{item.idPedido.idCliente.nombre}" filterBy="#{item.idPedido.idCliente.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="Cuenta"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPedido.idCliente.nombre}"/>
+                </p:column>
+                
                 <p:column sortBy="#{item.observaciones}" filterBy="#{item.observaciones}">
                     <f:facet name="header">
                         <h:outputText value="Observaciones"/>
@@ -101,7 +94,7 @@
             </p:dataTable>
 
             <p:commandButton id="createButton" rendered="false" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
-            <p:commandButton id="createReportButton" disabled="#{empty remisionesController.selected.idPedido}" ajax="false" icon="ui-icon-document" value="Generar Documento" action="#{reportController.print(remisionesController.selected)}" update=":growl, :RemisionesListForm">
+            <p:commandButton id="createReportButton" disabled="#{empty remisionesController.selected.idPedido}" ajax="false" icon="ui-icon-document" value="Generar Documento" action="#{reportController.print()}" update=":growl, :RemisionesListForm">
                   
             </p:commandButton>
         
@@ -130,24 +123,31 @@
                          selectionMode="single"
                          style="text-align: center; max-width: 600px; "
                          editable="true" editMode="cell"
-                        >                
-                <p:column style="text-align: center">
-                    <f:facet name="header">
-                        <h:outputText value="Producto"/>
-                    </f:facet>
-                    <h:outputText value="#{itemDetail.idProducto.nombre}"/>
-                </p:column>
+                        >        
                         
-               <p:column headerText="Cantidad">
-                  <p:cellEditor>
-                    <f:facet name="output"><h:outputText value="#{itemDetail.cantidad}" /></f:facet>
-                    <f:facet name="input">
-                        <p:inputText value="#{itemDetail.cantidad}" style="width:100%">
-                            <p:ajax listener='#{remisionesController.save(itemDetail)}' update=":RemisionesListForm" /> 
-                        </p:inputText>
-                    </f:facet>
-                  </p:cellEditor>
-                </p:column>
+                           <p:column style="text-align: center">
+                               <f:facet name="header">
+                                   <h:outputText value="Orden de Compra"/>
+                               </f:facet>
+                               <h:outputText value="#{itemDetail.idPedido.referencia}"/>
+                           </p:column>
+                           <p:column style="text-align: center">
+                               <f:facet name="header">
+                                   <h:outputText value="Producto"/>
+                               </f:facet>
+                               <h:outputText value="#{itemDetail.idProducto.nombre}"/>
+                           </p:column>
+
+                          <p:column headerText="Cantidad">
+                             <p:cellEditor>
+                               <f:facet name="output"><h:outputText value="#{itemDetail.cantidad}" /></f:facet>
+                               <f:facet name="input">
+                                   <p:inputText value="#{itemDetail.cantidad}" style="width:100%">
+                                       <p:ajax listener='#{remisionesController.save(ActionEvent, itemDetail)}' update=":RemisionesListForm msgs" /> 
+                                   </p:inputText>
+                               </f:facet>
+                             </p:cellEditor>
+                           </p:column>
 
                
             </p:dataTable>

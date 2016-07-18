@@ -39,10 +39,14 @@ public class EstadosController extends AbstractController<Estados> {
         return this.mobilePageController.getMobilePagesPrefix() + "/pedidos/index";
     }
 
-    public Collection<Estados> chargeItems(String moduleName) {
-        actualModule = Modules.getModule(moduleName);
+    public Collection<Estados> chargeItems(String moduleName, int option) {
+      actualModule = Modules.getModule(moduleName);
+      return chargeItems(actualModule);
+    }
+    
+    public Collection<Estados> chargeItems(Modules module) {
         String param = "modulo";
-        items = this.chargeItems(NamedQuerys.STATUS, param, actualModule.name().toUpperCase());
+        items = this.chargeItems(NamedQuerys.STATUS, param, module.name().toUpperCase());
         return items;
     }
 

@@ -1,9 +1,9 @@
 package com.co.hsg.innventa.backing;
 
-import com.co.hsg.innventa.backing.util.Actions;
+import com.co.hsg.innventa.beans.enums.Actions;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.backing.util.MobilePageController;
-import com.co.hsg.innventa.backing.util.Permissions;
+import com.co.hsg.innventa.beans.enums.Permissions;
 import com.co.hsg.innventa.beans.Usuarios;
 import com.co.hsg.innventa.converter.CryptoConverter;
 import java.util.Collection;

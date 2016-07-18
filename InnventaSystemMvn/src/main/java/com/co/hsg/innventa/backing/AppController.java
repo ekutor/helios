@@ -1,8 +1,8 @@
 package com.co.hsg.innventa.backing;
 
 
-import com.co.hsg.innventa.backing.util.Actions;
-import com.co.hsg.innventa.backing.util.Permissions;
+import com.co.hsg.innventa.beans.enums.Actions;
+import com.co.hsg.innventa.beans.enums.Permissions;
 import com.co.hsg.innventa.beans.AclAcciones;
 import com.co.hsg.innventa.beans.AclRolesAccion;
 import com.co.hsg.innventa.beans.Parametros;

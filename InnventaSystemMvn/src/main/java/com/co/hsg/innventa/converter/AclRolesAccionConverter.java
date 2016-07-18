@@ -2,7 +2,7 @@ package com.co.hsg.innventa.converter;
 
 import com.co.hsg.innventa.beans.AclRolesAccion;
 import com.co.hsg.innventa.session.AclRolesAccionFacade;
-import com.co.hsg.innventa.backing.util.Permissions;
+import com.co.hsg.innventa.beans.enums.Permissions;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.RequestScoped;

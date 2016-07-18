@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import javax.servlet.http.HttpServletResponse;
@@ -33,10 +34,13 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @ViewScoped
 public class ReportController implements Serializable{
     
-    public void print(Remisiones selected) throws JRException {
+    @Inject
+    RemisionesController remController;
+    
+    public void print() throws JRException {
         try {
             JasperPrint jasperPrint;
-            List<ReportInfo> info = this.generateInfo(selected);
+            List<ReportInfo> info = remController.generateInfo();
             
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
@@ -62,43 +66,6 @@ public class ReportController implements Serializable{
             e.printStackTrace();
         }
 
-    }
-
-
-    private List<ReportInfo> generateInfo(Remisiones selected) {
-        List<ReportInfo> list = new ArrayList<>();
-        if (selected != null) {
-            for (RemisionesProducto rem : selected.getRemisionesProductoList()) {
-                ReportInfo ri = new ReportInfo();
-                
-                ri.setCantidad(rem.getCantidad());
-                ri.setNombre(rem.getIdProducto().getNombre());
-                
-                ri.setNombreCliente(selected.getIdPedido().getIdCliente().getNombre());
-                ri.setDirCliente(selected.getIdPedido().getIdCliente().getDireccionPpal());
-                ri.setTelCliente(selected.getIdPedido().getIdCliente().getTelefonoPpal());
-                try{
-                    Personas contact = selected.getIdPedido().getIdCliente().getPersona().get(0).getPersona();
-                    String pre = ("F".equals(contact.getSexo()))?"Sra. ":"Sr.  ";
-                    ri.setContacto(contact.getNombre1()+" "+contact.getApellido1());
-                    ri.setDespachador(selected.getCreadoPor().getNombre1()+" "+selected.getCreadoPor().getApellido1());
-                    ri.setCantTotal(String.valueOf(selected.getTotalProductos()));
-                    ri.setTercero(selected.getEntregadoA().getNombre());
-                }catch(Exception e){
-                    
-                }
-               
-                ri.setNitCliente("Nit: "+selected.getIdPedido().getIdCliente().getId());
-                ri.setNumOrden(selected.getIdPedido().getReferencia());
-                ri.setFechaEntrega(Utils.getFormattedDate(selected.getFechaRemision()));
-                ri.setReferencia(selected.getReferencia());
-                ri.setObservaciones(selected.getObservaciones());
-                
-                
-                list.add(ri);
-            }
-        }
-        return list;
     }
 
 }

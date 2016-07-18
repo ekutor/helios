@@ -49,7 +49,7 @@
                   
                 <p:column>
                     <p:commandButton id="addProductButton" icon="ui-icon-plus"
-                                     update="   :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
+                                     update=":RemisionesCreateForm:ref  :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
                                      actionListener="#{remisionesController.addProduct(ActionEvent)}" 
                                      />
                     <p:tooltip for="addProductButton" value="Agrega un producto de la Orden de Compra a la Remision"/>
@@ -59,7 +59,7 @@
                   <p:column><p:outputLabel value="&#160;" /></p:column>
                     <p:column>
                     <p:commandButton id="addAllProductsButton" icon="ui-icon-arrowreturnthick-1-s"
-                                     update="   :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
+                                     update=":RemisionesCreateForm:ref  :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
                                      actionListener="#{remisionesController.addAllProducts(ActionEvent)}" 
                                      />
                     <p:tooltip for="addAllProductsButton" value="Agrega todos los productos de la Orden de Compra a la Remision"/>
@@ -68,7 +68,7 @@
                   
                    <p:outputLabel for="checkMore" value="Incluir ordenes de compra pendientes del cliente" />
                   <p:selectBooleanCheckbox id="checkMore" value="#{remisionesController.allPendings}">
-                     <p:ajax update=" @form:advanced :RemisionesCreateForm:ref" listener="#{remisionesController.chargeAllPendings()}" />
+                     <p:ajax update="@form:advanced" listener="#{remisionesController.chargeAllPendings()}" />
                  </p:selectBooleanCheckbox>
                 
             </h:panelGrid>
@@ -87,13 +87,14 @@
                          rows="30"
                          rowsPerPageTemplate="10,20,30,40,50,100"
                          selectionMode="single"
-                         selection="#{remisionesController.selectedProduct}"
+                         selection="#{remisionesController.selectedRemisionProduct}"
                          tableStyleClass="table table-striped"
                          editable="true" editMode="cell"
                          >
 
-            
-                
+               <p:ajax event="rowSelect"  
+                        update="@form:deleteButton"/>
+                         
                
                 <p:column sortBy="#{item.id}" filterBy="#{item.id}" rendered="false">
                     <f:facet name="header">
@@ -125,7 +126,7 @@
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
                         <f:facet name="input">
                             <p:inputText value="#{item.cantidad}" style="width:100%">
-                                <p:ajax listener="#{remisionesController.onRowEdit(item, item.cantidad)}" update=":RemisionesCreateForm:panelCantidadProductos" />
+                                <p:ajax listener="#{remisionesController.onRowEdit(item, item.cantidad)}" update="@form:datalist @form:deleteButton :RemisionesCreateForm:panelCantidadProductos msgs" />
                             </p:inputText>
                         </f:facet>
                     </p:cellEditor>
@@ -136,9 +137,9 @@
 
       
             <p:commandButton id="deleteButton"  icon="ui-icon-trash"  value="#{innventa.Delete}" 
-                             actionListener="#{remisionesController.delProduct(ActionEvent)}" 
+                             actionListener="#{remisionesController.delProduct}" 
                              update=":ProductosListForm,msgs,datalist, :RemisionesCreateForm:panelCantidadProductos" 
-                             disabled="#{empty remisionesController.selectedProduct}"/>
+                             disabled="#{empty remisionesController.selectedRemisionProduct}"/>
 
 
         </div>

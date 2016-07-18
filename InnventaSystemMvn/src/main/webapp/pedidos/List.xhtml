@@ -55,7 +55,7 @@
                         <h:outputText value="#{innventa.ListPedidosTitle_fechaPedido}"/>
                     </f:facet>
                     <h:outputText value="#{item.fechaPedido}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime locale="es" pattern="dd/MMMM/yyyy" />
                     </h:outputText>
                 </p:column>
 
@@ -64,7 +64,7 @@
                         <h:outputText value="#{innventa.ListPedidosTitle_fechaCreacion}"/>
                     </f:facet>
                     <h:outputText value="#{item.fechaCreacion}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:convertDateTime locale="es" pattern="dd/MMMM/yyyy" />
                     </h:outputText>
                 </p:column>
 
@@ -73,7 +73,7 @@
                         <h:outputText value="#{innventa.ListPedidosTitle_fechaEntrega}"/>
                     </f:facet>
                     <h:outputText value="#{item.fechaEntrega}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                        <f:convertDateTime locale="es" pattern="dd/MMM/yyyy" />
                     </h:outputText>
                 </p:column>
 
@@ -100,18 +100,11 @@
                     <h:outputText value="#{item.estado.estado}"/>
                 </p:column>
 
-                    <p:column sortBy="#{item.cantidadPendientes}" filterBy="#{item.cantidadPendientes}">
-                        <f:facet name="header">
-                            <h:outputText value="#{innventa.ListPedidosTitle_cantidadPendientes}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cantidadPendientes}"/>
-                    </p:column>
-
-
+                
             </p:dataTable>
 
             <p:commandButton id="createButton" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{pedidosController.prepareCreate}" update=":contentPanel" />
-            <p:commandButton id="createPurchaseButton" disabled="#{empty pedidosController.selected.id}" icon="ui-icon-document" value="Crear Remision" actionListener="#{remisionesController.prepareCreate}" update="contentPanel labelModule" />
+            <p:commandButton id="createPurchaseButton" disabled="#{pedidosController.delivered}" icon="ui-icon-document" value="Crear Remision" actionListener="#{remisionesController.prepareCreate}" update="contentPanel labelModule" />
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{innventa.View}" update=":PedidosViewForm" oncomplete="PF('PedidosViewDialog').show()" disabled="#{empty pedidosController.selected}"/>
             <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{innventa.Edit}" actionListener="#{navigation.editOrder()}" update=":contentPanel" disabled="#{empty pedidosController.selected}"/>
             <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{pedidosController.delete(pedidosController.selected.id)}" update=":growl,datalist" disabled="#{empty pedidosController.selected}">

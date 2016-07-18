@@ -1,9 +1,9 @@
 package com.co.hsg.innventa.backing;
 
-import com.co.hsg.innventa.backing.util.Actions;
+import com.co.hsg.innventa.beans.enums.Actions;
 import com.co.hsg.innventa.session.AbstractFacade;
 import com.co.hsg.innventa.backing.util.JsfUtil;
-import com.co.hsg.innventa.backing.util.Permissions;
+import com.co.hsg.innventa.beans.enums.Permissions;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.io.Serializable;
 import java.util.Collection;

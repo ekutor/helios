@@ -65,7 +65,7 @@
                                              requiredMessage="#{innventa.CreatePedidosRequiredMessage_estado}" 
                                              converter="#{estadosConverter}">
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
-                                <f:selectItems value='#{estadosController.chargeItems("PEDIDOS")}'
+                                <f:selectItems value='#{estadosController.chargeItems("PEDIDOS",0)}'
                                                var="estadoItem"
                                                itemValue="#{estadoItem}"
                                                itemLabel="#{estadoItem.estado}"

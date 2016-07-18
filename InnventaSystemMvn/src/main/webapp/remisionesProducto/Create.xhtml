@@ -8,7 +8,7 @@
     <h:outputScript name="js/innventa.js" />
     <ui:composition>
 
-        <div class='panel panel-#{navigation.moduleType("REMISIONES")} col-md-5' >
+        <div class='panel panel-#{navigation.moduleType("REMISIONES")} col-md-4' >
             <div class="panel-heading">Crear Nueva Remision</div>
 
             <h:form id="RemisionesCreateForm"> 
@@ -20,9 +20,7 @@
                         <h:panelGroup id="ref">
                             <p:inputText id="referencia" value="#{remisionesController.orderRef}" disabled="true"
                                          title="#{innventa.CreatePedidosTitle_referencia}" 
-                                         
-                                         requiredMessage="#{innventa.CreatePedidosRequiredMessage_referencia}" size="20" maxlength="20"/>
-                            <p:tooltip for="referencia" value="#{pedidosController.getComponentMessages('referencia', innventa.CreatePedidosHelpText_referencia)}"/>
+                                        size="30"/>
                         </h:panelGroup>
                          <p:outputLabel value="Cuenta" for="cliente" />
                         <h:panelGroup>
@@ -81,7 +79,7 @@
                                              requiredMessage="#{innventa.CreatePedidosRequiredMessage_estado}" 
                                              converter="#{estadosConverter}">
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}" />
-                                <f:selectItems value='#{estadosController.chargeItems("REMISIONES")}'
+                                <f:selectItems value='#{estadosController.chargeItems("REMISIONES",0)}'
                                                var="estadoItem"
                                                itemValue="#{estadoItem}"
                                                itemLabel="#{estadoItem.estado}"
@@ -113,7 +111,7 @@
             </h:form>
 
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <button class="btn btn-success" data-toggle="collapse" aria-expanded="false" data-target="#productOCPanel">Productos de Orden de Compra</button>
             <div id="productOCPanel" class="panel panel-success ">
 

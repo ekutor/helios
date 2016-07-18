@@ -4,11 +4,13 @@ import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.backing.validations.IValidation;
 import com.co.hsg.innventa.backing.validations.OrdersValidation;
+import com.co.hsg.innventa.beans.Estados;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
+import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.RemisionesFacade;
 import javax.enterprise.context.SessionScoped;
@@ -29,6 +31,8 @@ public class PedidosController extends AbstractController<Pedidos> {
     private SystemManager systemManager;
     @Inject
     private RemisionesController remisionController;
+     @Inject
+    private EstadosController estadosController;
     
     @Inject
     private RemisionesFacade remisionFacade;
@@ -53,6 +57,17 @@ public class PedidosController extends AbstractController<Pedidos> {
         Pedidos obj = super.prepareCreate(event); 
         
         obj.setReferencia(systemManager.getSequence(NamedQuerys.ORDER_PARAM));
+        
+        Estados defStates = null;
+        for( Estados it :estadosController.chargeItems(Modules.ORDERS)){
+            if(it.getId().equals(ProcessStates.ORDERS_ACCEPTED.getPermanentID())){
+                defStates = it;
+                break;
+            }
+        }
+        
+        obj.setEstado(defStates);
+        
         nav.createOrder();
         return obj;
     }
@@ -268,7 +283,30 @@ public class PedidosController extends AbstractController<Pedidos> {
         }
         //selected.getRemisionesList().add(rem);
     }
-    
-    
+
+    public boolean isDelivered() {
+        if(selected == null){
+            return true;
+        }else {
+            return validateProcessDeliveredFinished();
+        }
+    }
+
+    private boolean validateProcessDeliveredFinished() {
+        ProcessStates process = ProcessStates.getState(selected.getEstado().getId());
+        switch(process){
+            case ORDERS_CANCELED:
+                return true;
+            case ORDERS_PAID:
+                return true;
+            case ORDERS_DELIVERED:
+                return true;
+        }
+        int total = 0;
+        for(PedidosProducto pp:selected.getPedidosProductoList()){
+            total += pp.getCantidadEntregada();
+        }
+        return (selected.getCantidadTotal() <= total);
+    }
 
 }
