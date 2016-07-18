@@ -121,7 +121,7 @@ public abstract class AbstractController<T> implements Serializable {
      * @return a collection of Entity items returned by the data layer
      */
     public Collection<T> getItems() {
-        if (items == null || !keepList) {
+        if (items == null ) {
             items = this.ejbFacade.findAll();
         }
         keepList = false;
@@ -143,6 +143,19 @@ public abstract class AbstractController<T> implements Serializable {
         return selected;
     }
     
+     public T chargeItem(NamedQuerys namedQuery , String value) {
+        try{
+            selected = this.ejbFacade.findByQuery(namedQuery.getQuery(), namedQuery.getParamValue(), value);
+            if(selected == null){
+                this.prepareCreate(null);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+           
+        return selected;
+    }
+     
      public Collection<T> chargeItems(NamedQuerys namedQuery) {
         try{
          

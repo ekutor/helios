@@ -40,6 +40,8 @@ public class RemisionesController extends AbstractController<Remisiones> {
     private RemisionesProductoFacade rpfacade;
     @Inject
     private EstadosController estadosController;
+    @Inject
+    PurchasesValidation validator;
     
     private PedidosProducto selectedProduct;
     private RemisionesProducto selectedRemisionProduct;
@@ -91,7 +93,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
         Remisiones obj = super.prepareCreate(event);
         obj.setReferencia(systemManager.getSequence(NamedQuerys.REMISSION_PARAM));
          if(pedidoController.getSelected() != null){
-            obj.setIdPedido(pedidoController.getSelected() );
+            obj.setIdPedido(pedidoController.getSelected());
             incPendingOrders = new ArrayList<>(pedidoController.getSelected().getPedidosProductoList());
          }
         Estados defStates = estadosController.chargeItems(Modules.REMISSIONS).iterator().next();
@@ -101,7 +103,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
     }
     @Override
     public void saveNew(ActionEvent event) {
-        IValidation validator = new PurchasesValidation(selected);
+        validator.setPurchase(selected);
         validator.doValidate();
         if(!isValidationFailed()){
             saveOrders();
@@ -112,7 +114,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
 
     @Override
     public void save(ActionEvent event) {
-        IValidation validator = new PurchasesValidation(selected);
+        validator.setPurchase(selected);
         validator.doValidate();
         if(!isValidationFailed()){
             saveOrders();
@@ -225,13 +227,16 @@ public class RemisionesController extends AbstractController<Remisiones> {
     }
     
     private void addProduct(PedidosProducto pedProd){
-       RemisionesProducto rp = this.getProductFromList(pedProd);
-       if(rp == null){
-           rp = buildRemisionProducto(pedProd);
-       }
-       rp.setIdPedido(pedProd.getIdPedido());
-       rp.setCantidad(calculateDiff(pedProd));  
-       selected.setTotalProductos(getCantTotal());
+        int diff = calculateDiff(pedProd);
+        if(diff != 0){
+            RemisionesProducto rp = this.getProductFromList(pedProd);
+            if(rp == null){
+                rp = buildRemisionProducto(pedProd);
+            }
+            rp.setIdPedido(pedProd.getIdPedido());
+            rp.setCantidad(diff);  
+            selected.setTotalProductos(getCantTotal());
+        }
     }
     
     private RemisionesProducto buildRemisionProducto(PedidosProducto pedProd){
@@ -262,7 +267,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
        }
     }
     
-    public void saveOrders(){
+    public void saveOrders(){   
         for( RemisionesProducto remProd : selected.getRemisionesProductoList()){
             pedidoController.save(remProd.getIdPedido(), null);
         }
@@ -368,7 +373,8 @@ public class RemisionesController extends AbstractController<Remisiones> {
 
     private int calculateDiff(PedidosProducto pedProd) {
         int qty = 0;
-        for( Remisiones rem: pedProd.getIdPedido().getRemisionesList()){
+        Pedidos order = pedidoController.chargeItem(NamedQuerys.ORDER_SINGLE, pedProd.getIdPedido().getId());
+        for( Remisiones rem: order.getRemisionesList()){
             for( RemisionesProducto oldRemission : rem.getRemisionesProductoList()){
                if(oldRemission.getIdProducto().equals(pedProd.getIdProducto())){
                    qty += oldRemission.getCantidad();

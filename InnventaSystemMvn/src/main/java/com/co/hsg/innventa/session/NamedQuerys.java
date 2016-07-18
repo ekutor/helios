@@ -6,6 +6,7 @@ package com.co.hsg.innventa.session;
  */
 public enum NamedQuerys {
     ORDER_PARAM("Parametros.orders", "CONF_ORDERS"),
+    ORDER_SINGLE("Pedidos.findById", "id"),
     REMISSION_PARAM("Parametros.remissions","CONF_REMISSIONS"),
     PRODUCT_TYPES_PARAM("Parametros.productTypes", "PRODUCT_TYPE"),
     PRODUCT_TYPES("Productos.findByType", ""),

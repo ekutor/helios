@@ -67,6 +67,18 @@ public abstract class AbstractFacade<T> {
         return newItem;
     }
     
+     public T findByQuery(String namedQuery, String param , String value) {
+         T newItem = null;
+        try{
+        TypedQuery<T> q = getEntityManager().createNamedQuery(namedQuery,entityClass);
+        q.setParameter(param, value);
+        newItem = q.getSingleResult();
+        }catch(Exception e){
+             //e.printStackTrace();
+        }
+        return newItem;
+    }
+    
     public List<T> findAllByQuery(String namedQuery, String param, Object value) {
         TypedQuery<T> q = getEntityManager().createNamedQuery(namedQuery,entityClass);
         q.setParameter(param, value);

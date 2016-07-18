@@ -1,26 +1,42 @@
 package com.co.hsg.innventa.backing.validations;
 
+import com.co.hsg.innventa.backing.PedidosController;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
-import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.enums.ProcessStates;
+import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author hectsaga
  */
+@Named(value = "purchasesValidation")
+@ViewScoped
 public class PurchasesValidation extends AbstractValidation {
 
-    private final Remisiones purchase;
+    private Remisiones purchase;
+    @Inject
+    PedidosController pedidosController;
+    
+    public PurchasesValidation() {
+    }
 
-    public PurchasesValidation(Remisiones purchase) {
+    public Remisiones getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Remisiones purchase) {
         this.purchase = purchase;
     }
+
 
     @Override
     public void doValidate() {
@@ -51,23 +67,23 @@ public class PurchasesValidation extends AbstractValidation {
         int cantTotal = 0;
         int deliveredQty = 0;
         int qty = 0;
-        int cantPedProd = 0;
+       
         if (purchase != null && !purchase.getRemisionesProductoList().isEmpty()) {
             for (RemisionesProducto remProd : purchase.getRemisionesProductoList()) {
                 cantTotal += remProd.getCantidad();
-                cantPedProd += remProd.getCantidad();
                 for (PedidosProducto pedProd : remProd.getIdPedido().getPedidosProductoList()) {
+                    deliveredQty = 0;
                     if (remProd.getIdProducto().equals(pedProd.getIdProducto())) {
-                        deliveredQty = pedProd.getCantidadEntregada();
+                        
                         qty = pedProd.getCantidad();
-                         int allDelivered = validateRemissionsQty(pedProd.getIdPedido(),remProd,deliveredQty, qty);
+                         int allDelivered = validateRemissionsQty(pedProd.getIdPedido().getId(),remProd,deliveredQty, qty);
                         if( allDelivered == 0){
                             errors.add("Para la orden "+pedProd.getIdPedido().getReferencia()+" ya se entregaron "+allDelivered+" articulos " + 
                                     remProd.getIdProducto().getNombre());
                             break;
                         }
-                        pedProd.setCantidadEntregada(pedProd.getCantidadEntregada() + remProd.getCantidad());
-
+                        deliveredQty = remProd.getCantidad();
+                       
                     } else if (remProd.getIdProducto().getProductoPadre() != null
                             && remProd.getIdProducto().getProductoPadre().equals(pedProd.getIdProducto())) {
                         if (remProd.getIdProducto().getCantEnPadre() <= 0) {
@@ -85,17 +101,17 @@ public class PurchasesValidation extends AbstractValidation {
                         } else {
                             elementsDelivered = (remProd.getCantidad() - surplus) / remProd.getIdProducto().getCantEnPadre();
                         }
-                        int allDelivered = validateRemissionsQty(pedProd.getIdPedido(),remProd,remProd.getCantidad(), qty);
+                        int allDelivered = validateRemissionsQty(pedProd.getIdPedido().getId(),remProd,remProd.getCantidad(), qty);
                         if( allDelivered != 0){
                             errors.add("Para la orden "+pedProd.getIdPedido().getReferencia()+" ya se entregaron "+allDelivered+" articulos " + 
                                     remProd.getIdProducto().getNombre());
                             break;
                         }
-                        cantPedProd = (elementsDelivered < cantPedProd) ? elementsDelivered : cantPedProd;
+                        deliveredQty = (elementsDelivered < deliveredQty || deliveredQty == 0) ? elementsDelivered : deliveredQty;
 
                     }
 
-                    pedProd.setCantidadEntregada(cantPedProd);
+                    pedProd.setCantidadEntregada(pedProd.getCantidadEntregada()+ deliveredQty);
                 }
                 if ( deliveredQty > qty ) {
                     errors.add("se estan entregando mas articulos de los solicitados en la Orden " + remProd.getIdPedido().getReferencia());
@@ -141,8 +157,10 @@ public class PurchasesValidation extends AbstractValidation {
         return isValid;
     }
 
-    private int validateRemissionsQty(Pedidos order, RemisionesProducto remProduct, int elementsDelivered, int requiredQty) {
+    private int validateRemissionsQty(String orderId, RemisionesProducto remProduct, int elementsDelivered, int requiredQty) {
         int totalDelivered = 0;
+        //Recargar Pedido
+        Pedidos order = pedidosController.chargeItem(NamedQuerys.ORDER_SINGLE, orderId);
         for(Remisiones r :order.getRemisionesList()){
             for( RemisionesProducto rp : r.getRemisionesProductoList()){
                 if(rp.equals(remProduct)){

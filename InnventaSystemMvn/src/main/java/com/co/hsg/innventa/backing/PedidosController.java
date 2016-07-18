@@ -13,6 +13,7 @@ import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.RemisionesFacade;
+import java.util.Collection;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
@@ -70,6 +71,12 @@ public class PedidosController extends AbstractController<Pedidos> {
         
         nav.createOrder();
         return obj;
+    }
+    
+    @Override
+     public Collection<Pedidos> getItems() {
+        items = this.ejbFacade.findAll();
+        return items;
     }
     
 
@@ -308,5 +315,6 @@ public class PedidosController extends AbstractController<Pedidos> {
         }
         return (selected.getCantidadTotal() <= total);
     }
-
+   
+   
 }

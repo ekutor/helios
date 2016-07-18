@@ -30,8 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "pedidos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0 ORDER BY p.fechaPedido DESC, p.referencia DESC"),
-    @NamedQuery(name = "Pedidos.findById", query = "SELECT p FROM Pedidos p WHERE p.id = :id"),
+    @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0 ORDER BY p.referencia DESC, p.fechaPedido DESC "),
+    @NamedQuery(name = "Pedidos.findById", query = "SELECT p FROM Pedidos p WHERE p.id = :id AND p.eliminado=0"),
     @NamedQuery(name = "Pedidos.findByReferencia", query = "SELECT p FROM Pedidos p WHERE p.referencia = :referencia"),
     @NamedQuery(name = "Pedidos.pendings", query = "SELECT p FROM Pedidos p "
             + "WHERE p.estado.id != 'ORDERS_CANCELED' "
