@@ -16,12 +16,11 @@
                 <h:panelGroup id="display"  rendered="#{remisionesController.selected != null}">
                     <p:panelGrid columns="2">
 
-                        <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
-                        <h:panelGroup>
-                            <p:inputText id="referencia" value="#{remisionesController.selected.idPedido.referencia}" disabled="true"
+                       <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
+                        <h:panelGroup id="ref">
+                            <p:inputText id="referencia" value="#{remisionesController.orderRef}" disabled="true"
                                          title="#{innventa.CreatePedidosTitle_referencia}" 
-                                         size="30"/>
-                            <p:tooltip for="referencia" value="#{pedidosController.getComponentMessages('referencia', innventa.CreatePedidosHelpText_referencia)}"/>
+                                        size="30"/>
                         </h:panelGroup>
                          <p:outputLabel value="Cuenta" for="cliente" />
                         <h:panelGroup>

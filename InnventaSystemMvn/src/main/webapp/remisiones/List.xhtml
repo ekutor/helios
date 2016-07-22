@@ -139,14 +139,8 @@
                            </p:column>
 
                           <p:column headerText="Cantidad">
-                             <p:cellEditor>
-                               <f:facet name="output"><h:outputText value="#{itemDetail.cantidad}" /></f:facet>
-                               <f:facet name="input">
-                                   <p:inputText value="#{itemDetail.cantidad}" style="width:100%">
-                                       <p:ajax listener='#{remisionesController.save(ActionEvent, itemDetail)}' update=":RemisionesListForm msgs" /> 
-                                   </p:inputText>
-                               </f:facet>
-                             </p:cellEditor>
+                              <h:outputText value="#{itemDetail.cantidad}" />
+                            
                            </p:column>
 
                

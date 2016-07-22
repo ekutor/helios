@@ -89,10 +89,6 @@ public class Productos implements Serializable {
     @JoinColumn(name = "unidad_medida", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UnidadesMedida unidadMedida;
-    
-    @JoinColumn(name = "producto_padre", referencedColumnName = "id")
-    @ManyToOne( cascade = CascadeType.ALL,optional = true)
-    private Productos productoPadre;
 
     @Basic(optional = false)
     @NotNull
@@ -119,14 +115,14 @@ public class Productos implements Serializable {
     @Column(name = "eliminado")
     private short eliminado;
     
-    @Column(name = "cant_en_padre")
-    private int cantEnPadre;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
     private List<PedidosProducto> pedidosProductoList;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "componente")
+    private List<ProductosComponentes> productosParte;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoPadre")
-    private List<Productos> productosHijos;
+    private List<ProductosComponentes> productosHijos;
 
     public Productos() {
     }
@@ -225,14 +221,6 @@ public class Productos implements Serializable {
         this.atributo = atributo;
     }
 
-    public Productos getProductoPadre() {
-        return productoPadre;
-    }
-
-    public void setProductoPadre(Productos productoPadre) {
-        this.productoPadre = productoPadre;
-    }
-
     public double getStock() {
         return stock;
     }
@@ -297,14 +285,6 @@ public class Productos implements Serializable {
         this.eliminado = eliminado;
     }
 
-    public int getCantEnPadre() {
-        return cantEnPadre;
-    }
-
-    public void setCantEnPadre(int cantEnPadre) {
-        this.cantEnPadre = cantEnPadre;
-    }
-
     @XmlTransient
     public List<PedidosProducto> getPedidosProductoList() {
         return pedidosProductoList;
@@ -315,14 +295,26 @@ public class Productos implements Serializable {
     }
     
     @XmlTransient
-    public List<Productos> getProductosHijos() {
+    public List<ProductosComponentes> getProductosParte() {
+        if(productosParte == null){
+            productosParte = new ArrayList<>();
+        }
+        return productosParte;
+    }
+
+    public void setProductosParte(List<ProductosComponentes> productosParte) {
+        this.productosParte = productosParte;
+    }
+    
+    @XmlTransient
+    public List<ProductosComponentes> getProductosHijos() {
         if(productosHijos == null){
             productosHijos = new ArrayList<>();
         }
         return productosHijos;
     }
 
-    public void setProductosHijos(List<Productos> productosHijos) {
+    public void setProductosHijos(List<ProductosComponentes> productosHijos) {
         this.productosHijos = productosHijos;
     }
 

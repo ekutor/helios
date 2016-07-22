@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pedidos.findAll", query = "SELECT p FROM Pedidos p WHERE p.eliminado=0 ORDER BY p.referencia DESC, p.fechaPedido DESC "),
-    @NamedQuery(name = "Pedidos.findById", query = "SELECT p FROM Pedidos p WHERE p.id = :id AND p.eliminado=0"),
+    @NamedQuery(name = "Pedidos.findById", query = "SELECT p FROM Pedidos p  INNER JOIN FETCH p.remisionesProductoList WHERE p.id = :id AND p.eliminado=0"),
     @NamedQuery(name = "Pedidos.findByReferencia", query = "SELECT p FROM Pedidos p WHERE p.referencia = :referencia"),
     @NamedQuery(name = "Pedidos.pendings", query = "SELECT p FROM Pedidos p "
             + "WHERE p.estado.id != 'ORDERS_CANCELED' "
@@ -109,7 +109,7 @@ public class Pedidos implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
     private List<PedidosProducto> pedidosProductoList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idPedido")
     private List<RemisionesProducto> remisionesProductoList;
     
 

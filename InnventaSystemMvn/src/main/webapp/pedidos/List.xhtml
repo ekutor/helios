@@ -150,7 +150,7 @@
                     <f:facet name="header">
                         <h:outputText value="Cantidad Entregada"/>
                     </f:facet>
-                    <h:outputText value="#{itemDetail.cantidadEntregada}"/>
+                     <h:outputText value="#{pedidosController.calculateDeliveryQty(itemDetail.idProducto)}"/>
                 </p:column>
                         
                 <p:column>

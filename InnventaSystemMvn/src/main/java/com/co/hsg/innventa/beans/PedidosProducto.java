@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.co.hsg.innventa.beans;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -44,8 +40,7 @@ public class PedidosProducto implements Serializable {
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
-    @Column(name = "cantidad_entregada")
-    private int cantidadEntregada;
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "valor_unitario")
@@ -93,15 +88,6 @@ public class PedidosProducto implements Serializable {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
-    public int getCantidadEntregada() {
-        return cantidadEntregada;
-    }
-
-    public void setCantidadEntregada(int cantidadEntregada) {
-        this.cantidadEntregada = cantidadEntregada;
-    }
-    
     
     public double getValorUnitario() {
         return valorUnitario;

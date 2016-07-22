@@ -9,8 +9,8 @@
     <div class="panel panel-default">
         <h:form id="ProductosSearchSmallForm">
             <h:panelGrid columns="6" style="margin-bottom:10px">
-                <p:outputLabel for="advanced" value="Productos Pendientes de Entrega " />
-                <p:selectOneMenu id="advanced" 
+                <p:outputLabel for="listProdPendientes" value="Productos Pendientes de Entrega " />
+                <p:selectOneMenu id="listProdPendientes" 
                                  value="#{remisionesController.selectedProduct}" 
                                  converter="#{pedidosProductoConverter}"
                                  var="t" 
@@ -49,7 +49,7 @@
                   
                 <p:column>
                     <p:commandButton id="addProductButton" icon="ui-icon-plus"
-                                     update=":RemisionesCreateForm:ref  :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
+                                     update=":RemisionesCreateForm:ref :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos "  
                                      actionListener="#{remisionesController.addProduct(ActionEvent)}" 
                                      />
                     <p:tooltip for="addProductButton" value="Agrega un producto de la Orden de Compra a la Remision"/>
@@ -59,7 +59,7 @@
                   <p:column><p:outputLabel value="&#160;" /></p:column>
                     <p:column>
                     <p:commandButton id="addAllProductsButton" icon="ui-icon-arrowreturnthick-1-s"
-                                     update=":RemisionesCreateForm:ref  :ProductosListForm, :RemisionesCreateForm:panelCantidadProductos msgs"  
+                                     update=":RemisionesCreateForm:ref :ProductosListForm :RemisionesCreateForm:panelCantidadProductos "  
                                      actionListener="#{remisionesController.addAllProducts(ActionEvent)}" 
                                      />
                     <p:tooltip for="addAllProductsButton" value="Agrega todos los productos de la Orden de Compra a la Remision"/>
@@ -68,7 +68,7 @@
                   
                    <p:outputLabel for="checkMore" value="Incluir ordenes de compra pendientes del cliente" />
                   <p:selectBooleanCheckbox id="checkMore" value="#{remisionesController.allPendings}">
-                     <p:ajax update="@form:advanced" listener="#{remisionesController.chargeAllPendings()}" />
+                     <p:ajax update=" @form:listProdPendientes :RemisionesCreateForm:ref" listener="#{remisionesController.chargeAllPendings()}" />
                  </p:selectBooleanCheckbox>
                 
             </h:panelGrid>
@@ -92,9 +92,8 @@
                          editable="true" editMode="cell"
                          >
 
-               <p:ajax event="rowSelect"  
-                        update="@form:deleteButton"/>
                          
+               
                
                 <p:column sortBy="#{item.id}" filterBy="#{item.id}" rendered="false">
                     <f:facet name="header">
@@ -126,7 +125,7 @@
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
                         <f:facet name="input">
                             <p:inputText value="#{item.cantidad}" style="width:100%">
-                                <p:ajax listener="#{remisionesController.onRowEdit(item, item.cantidad)}" update="@form:datalist @form:deleteButton :RemisionesCreateForm:panelCantidadProductos msgs" />
+                                <p:ajax listener="#{remisionesController.onRowEdit(item, item.cantidad)}" update=":RemisionesCreateForm:panelCantidadProductos" />
                             </p:inputText>
                         </f:facet>
                     </p:cellEditor>
@@ -137,9 +136,9 @@
 
       
             <p:commandButton id="deleteButton"  icon="ui-icon-trash"  value="#{innventa.Delete}" 
-                             actionListener="#{remisionesController.delProduct}" 
-                             update=":ProductosListForm,msgs,datalist, :RemisionesCreateForm:panelCantidadProductos" 
-                             disabled="#{empty remisionesController.selectedRemisionProduct}"/>
+                             actionListener="#{remisionesController.delProduct(ActionEvent)}" 
+                             update=":ProductosListForm,msgs,datalist, :RemisionesCreateForm:panelCantidadProductos :RemisionesCreateForm:ref" 
+                             disabled="#{empty remisionesController.selectedProduct}"/>
 
 
         </div>

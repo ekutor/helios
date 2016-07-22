@@ -8,12 +8,16 @@ import com.co.hsg.innventa.beans.Estados;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Productos;
+import com.co.hsg.innventa.beans.ProductosComponentes;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.RemisionesFacade;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
@@ -286,13 +290,13 @@ public class PedidosController extends AbstractController<Pedidos> {
             rp.setEliminado((short)0);
             rp.setId(Utils.generateID());
             rem.getRemisionesProductoList().add(rp);
-            pprod.setCantidadEntregada(pprod.getCantidad());
+            
         }
         //selected.getRemisionesList().add(rem);
     }
 
     public boolean isDelivered() {
-        if(selected == null){
+        if(selected == null || selected.getId() == null){
             return true;
         }else {
             return validateProcessDeliveredFinished();
@@ -311,10 +315,41 @@ public class PedidosController extends AbstractController<Pedidos> {
         }
         int total = 0;
         for(PedidosProducto pp:selected.getPedidosProductoList()){
-            total += pp.getCantidadEntregada();
+            total += this.calculateDeliveryQty(pp.getIdProducto());
         }
         return (selected.getCantidadTotal() <= total);
     }
    
+    public int calculateDeliveryQty(Productos selectedProd){
+        int qty = 0;
+             Map<Remisiones , Integer> auxParents = new HashMap<>();
+       // Pedidos order = chargeItem(NamedQuerys.ORDER_SINGLE, selected.getId());
+        for( RemisionesProducto rp : selected.getRemisionesProductoList()){
+            if(rp.getIdProducto().equals(selectedProd)){
+                qty += rp.getCantidad();
+            }else if(!rp.getIdProducto().getProductosParte().isEmpty()){
+                int purchaseqty = 0;
+                int cont = 0;
+                for(ProductosComponentes ph :selectedProd.getProductosHijos()){
+                    if(ph.getComponente().equals(rp.getIdProducto()) &&
+                            ph.getProductoPadre().equals(selectedProd)){
+                        purchaseqty = rp.getCantidad() / ph.getCantidad();
+                        break;
+                    }
+                }
+
+                if(auxParents.containsKey(rp.getIdRemision())){
+                    int tempVal = auxParents.get(rp.getIdRemision());
+                    purchaseqty = (tempVal > purchaseqty )? purchaseqty : tempVal ;
+                    qty = qty - tempVal;
+                }
+                    auxParents.put(rp.getIdRemision(), purchaseqty);
+                    
+                    qty += purchaseqty;
+            }
+        }
+      
+        return qty;
+    }
    
 }

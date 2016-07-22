@@ -5,7 +5,7 @@ import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.Collection;
 
-import javax.faces.event.ActionEvent;
+
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -16,6 +16,9 @@ public class ParametrosController extends AbstractController<Parametros> {
 
     @Inject
     private MobilePageController mobilePageController;
+    @Inject 
+    private Navigation nav;
+    
     private NamedQuerys actualParam;
     
     private String confTitle;
@@ -71,9 +74,10 @@ public class ParametrosController extends AbstractController<Parametros> {
     }
 
     
-    public void save(ActionEvent event) {
+    public void save() {
         this.selected.setParametro(actualParam.getParamValue());
-        super.save(event);
+        super.save(null);
+        nav.init();
     }
     
      public void save(NamedQuerys param) {

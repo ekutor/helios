@@ -3,6 +3,7 @@ package com.co.hsg.innventa.backing;
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.beans.Parametros;
 import com.co.hsg.innventa.beans.Productos;
+import com.co.hsg.innventa.beans.ProductosComponentes;
 import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.ArrayList;
@@ -143,10 +144,14 @@ public class ProductosController extends AbstractController<Productos> {
     @Override
     public void save(ActionEvent event) {
         if(parentProducts != null && !parentProducts.getTarget().isEmpty()){
-            selected.setProductosHijos(parentProducts.getTarget());
-            for(Productos p :selected.getProductosHijos()){
-               p.setProductoPadre(selected);
+            for(Productos p : parentProducts.getTarget()){
+                ProductosComponentes pc = new ProductosComponentes();
+                pc.setComponente(p);
+                pc.setProductoPadre(selected);
+                pc.setCantidad(1);
+                selected.getProductosParte().add(pc);
             }
+
         }
         super.save(event); 
     }
@@ -167,8 +172,8 @@ public class ProductosController extends AbstractController<Productos> {
             TreeNode productsTreeName = new DefaultTreeNode(new Document(selected.getNombre(), "-", "Folder"), productsTree);
             TreeNode saleProducts = new DefaultTreeNode(new Document("Componentes", "-", "Folder"), productsTreeName);
             TreeNode supplies = new DefaultTreeNode(new Document("Insumos", "-", "Folder"), productsTreeName);
-            for(Productos p: selected.getProductosHijos()){
-                  TreeNode expenses = new DefaultTreeNode("document", new Document(p.getNombre(), "30 KB", "Word Document"), saleProducts);
+            for(ProductosComponentes p: selected.getProductosHijos()){
+                  TreeNode expenses = new DefaultTreeNode("document", new Document(p.getComponente().getNombre(), "30 KB", "Word Document"), saleProducts);
             }
             productsTree.setExpanded(true);
             productsTreeName.setExpanded(true);

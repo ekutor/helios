@@ -3,13 +3,13 @@ package com.co.hsg.innventa.backing;
 import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.backing.util.Utils;
-import com.co.hsg.innventa.backing.validations.IValidation;
 import com.co.hsg.innventa.backing.validations.PurchasesValidation;
 import com.co.hsg.innventa.beans.Estados;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Personas;
 import com.co.hsg.innventa.beans.Productos;
+import com.co.hsg.innventa.beans.ProductosComponentes;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.ReportInfo;
@@ -119,12 +119,14 @@ public class RemisionesController extends AbstractController<Remisiones> {
         if(!isValidationFailed()){
             saveOrders();
             super.save(event); 
-             nav.remissions();
+            nav.remissions();
         }
     }
     
     public void save(ActionEvent event, RemisionesProducto rp) {
-        if(!PurchasesValidation.validateQyuantityProducts(rp, rp.getCantidad())){
+        validator.setPurchase(selected);
+        validator.doValidate();
+        if(!isValidationFailed()){
             saveOrders();
             super.save(null);
             rpfacade.edit(rp);
@@ -196,7 +198,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
            Collection<Pedidos> pendings = pedidoController.chargeItems(NamedQuerys.ORDERS_PENDING, "cliente", selected.getIdPedido().getIdCliente());
            for( Pedidos pend:pendings){
                for(PedidosProducto pendProd :pend.getPedidosProductoList()){
-                  if(pendProd.getCantidad() != pendProd.getCantidadEntregada()){
+                  if(pendProd.getCantidad() != pedidoController.calculateDeliveryQty(pendProd.getIdProducto())){
                       if(!incPendingOrders.contains(pendProd)){
                          incPendingOrders.add(pendProd);
                       }
@@ -227,16 +229,17 @@ public class RemisionesController extends AbstractController<Remisiones> {
     }
     
     private void addProduct(PedidosProducto pedProd){
-        int diff = calculateDiff(pedProd);
-        if(diff != 0){
+       // int diff = calculateDiff(pedProd);
+        //if(diff != 0){
             RemisionesProducto rp = this.getProductFromList(pedProd);
             if(rp == null){
                 rp = buildRemisionProducto(pedProd);
+                // rp.setCantidad(diff);  
+                selected.getRemisionesProductoList().add(rp);
+                selected.setTotalProductos(getCantTotal());
             }
-            rp.setIdPedido(pedProd.getIdPedido());
-            rp.setCantidad(diff);  
-            selected.setTotalProductos(getCantTotal());
-        }
+            
+       // }
     }
     
     private RemisionesProducto buildRemisionProducto(PedidosProducto pedProd){
@@ -246,7 +249,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
         rp.setIdProducto(pedProd.getIdProducto());
         rp.setIdRemision(selected);
         rp.setCantidad(pedProd.getCantidad());
-        selected.getRemisionesProductoList().add(rp);
+        rp.setIdPedido(pedProd.getIdPedido());
         return rp;
         
     }
@@ -260,7 +263,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
     public void onRowEdit(RemisionesProducto prodSelec,String value){
        try{
            int valueInt = Integer.parseInt(value);
-           PurchasesValidation.validateQyuantityProducts(prodSelec, valueInt);
+           validator.validateQuantityProducts(prodSelec, valueInt, selected.getId());
            selected.setTotalProductos(this.getCantTotal());
        }catch(Exception e){
            e.printStackTrace();
@@ -293,21 +296,30 @@ public class RemisionesController extends AbstractController<Remisiones> {
             
         }
     }
+    private ProductosComponentes getComponentParent(Productos product, Productos productParent) {
+        for(ProductosComponentes pp : product.getProductosParte()){
+            if(pp.getProductoPadre().equals(productParent)){
+                return pp;
+            }
+        }
+        return null;
+    }
 
     private void buildDetailRemissionProduct(PedidosProducto selectedProduct) {
          if(selectedProduct.getIdProducto().getProductosHijos().isEmpty()){
               this.addProduct(selectedProduct); 
            }else{
-               for(Productos p :selectedProduct.getIdProducto().getProductosHijos()){
-                   if(p.getCantEnPadre() == 0){
+               for(ProductosComponentes p :selectedProduct.getIdProducto().getProductosHijos()){
+                                    
+                   if(p.getCantidad() == 0){
                        JsfUtil.addErrorMessage("Producto Mal Configurado", "La cantidad mínima de productos parte en un producto Principal esta mal definida, "+
-                               " articulos "+p.getNombre());
+                               " articulos "+p.getComponente().getNombre());
                        break;
                    }
                    PedidosProducto pp = new PedidosProducto();
                    pp.setIdPedido(selectedProduct.getIdPedido());
-                   pp.setCantidad(selectedProduct.getCantidad() * p.getCantEnPadre());
-                   pp.setIdProducto(p);
+                   pp.setCantidad(selectedProduct.getCantidad() * p.getCantidad());
+                   pp.setIdProducto(p.getComponente());
                    this.addProduct(pp);
                }
                
