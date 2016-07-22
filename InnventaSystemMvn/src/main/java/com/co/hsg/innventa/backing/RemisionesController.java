@@ -198,7 +198,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
            Collection<Pedidos> pendings = pedidoController.chargeItems(NamedQuerys.ORDERS_PENDING, "cliente", selected.getIdPedido().getIdCliente());
            for( Pedidos pend:pendings){
                for(PedidosProducto pendProd :pend.getPedidosProductoList()){
-                  if(pendProd.getCantidad() != pedidoController.calculateDeliveryQty(pendProd.getIdProducto())){
+                  if(pendProd.getCantidad() != pedidoController.calculateDeliveryQty(pendProd)){
                       if(!incPendingOrders.contains(pendProd)){
                          incPendingOrders.add(pendProd);
                       }
@@ -270,9 +270,12 @@ public class RemisionesController extends AbstractController<Remisiones> {
        }
     }
     
-    public void saveOrders(){   
+    public void saveOrders(){  
         for( RemisionesProducto remProd : selected.getRemisionesProductoList()){
-            pedidoController.save(remProd.getIdPedido(), null);
+            if(!remProd.getIdPedido().getRemisionesProductoList().contains(remProd)){
+                remProd.getIdPedido().getRemisionesProductoList().add(remProd);
+            }
+            
         }
     }
     public int getCantTotal() {

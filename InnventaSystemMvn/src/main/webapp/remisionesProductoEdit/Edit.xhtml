@@ -9,14 +9,14 @@
     <ui:composition>
 
         <div class='panel panel-#{navigation.moduleType("REMISIONES")} col-md-4' >
-            <div class="panel-heading">Editar Remision</div>
+            <div class="panel-heading">Crear Nueva Remision</div>
 
             <h:form id="RemisionesCreateForm"> 
-
+               
                 <h:panelGroup id="display"  rendered="#{remisionesController.selected != null}">
                     <p:panelGrid columns="2">
 
-                       <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
+                        <p:outputLabel value="#{innventa.CreatePedidosLabel_referencia}" for="referencia" />
                         <h:panelGroup id="ref">
                             <p:inputText id="referencia" value="#{remisionesController.orderRef}" disabled="true"
                                          title="#{innventa.CreatePedidosTitle_referencia}" 
@@ -24,7 +24,7 @@
                         </h:panelGroup>
                          <p:outputLabel value="Cuenta" for="cliente" />
                         <h:panelGroup>
-                            <p:inputText id="cliente" value="#{remisionesController.selected.idPedido.idCliente.nombre}" disabled="true"/>
+                            <p:inputText id="cliente" value="#{pedidosController.selected.idCliente.nombre}" disabled="true"/>
                         </h:panelGroup>
                        
                          <p:outputLabel value="Numero Remision" for="referenciaRem" />
@@ -61,7 +61,6 @@
                         <h:panelGroup>
                             <p:selectOneMenu id="entregadoA" value="#{remisionesController.selected.entregadoA}" required="false" 
                                              converter="#{tercerosConverter}">
-                                           
                                 <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
                                 <f:selectItems value="#{tercerosController.items}"
                                                var="tercItem"
@@ -79,7 +78,7 @@
                                              required="true" 
                                              requiredMessage="#{innventa.CreatePedidosRequiredMessage_estado}" 
                                              converter="#{estadosConverter}">
-                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}"/>
+                                <f:selectItem itemLabel="#{innventa.SelectOneMessage}" />
                                 <f:selectItems value='#{estadosController.chargeItems("REMISIONES",0)}'
                                                var="estadoItem"
                                                itemValue="#{estadoItem}"
@@ -87,17 +86,15 @@
                                                />
 
                             </p:selectOneMenu>
-                            <p:tooltip for="estado" value="#{pedidosController.getComponentMessages('estado', innventa.CreatePedidosHelpText_estado)}"/>
+                           
                         </h:panelGroup>
 
                     </p:panelGrid>
 
-           
-
                 </h:panelGroup>
                 <p:commandButton class="btn btn-success" actionListener="#{remisionesController.save}" 
                                  value="#{innventa.Save}" 
-                                 update="display contentPanel growl msgs" 
+                                 update="display contentPanel msgs" 
                                  >
                     <p:confirm header="#{innventa.ConfirmationHeader}" 
                                message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
@@ -105,8 +102,8 @@
 
 
                 <p:commandButton value="#{innventa.Cancel}" 
-                                 update="contentPanel growl" 
-                                 actionListener="#{navigation.orders}"
+                                 update="contentPanel msgs" 
+                                 actionListener="#{navigation.remissions()}"
                                  immediate="true"
                                  />
 
@@ -115,7 +112,7 @@
 
         </div>
         <div class="col-md-8">
-            <button class="btn btn-success" data-toggle="collapse" aria-expanded="false" data-target="#productOCPanel">Productos de Orden de Compra #{pedidosController.selected.referencia} </button>
+            <button class="btn btn-success" data-toggle="collapse" aria-expanded="false" data-target="#productOCPanel">Productos de Orden de Compra</button>
             <div id="productOCPanel" class="panel panel-success ">
 
                 <ui:include src="/remisionesProducto/productos/index.xhtml"/>
