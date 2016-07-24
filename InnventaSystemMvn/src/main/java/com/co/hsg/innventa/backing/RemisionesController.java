@@ -273,11 +273,17 @@ public class RemisionesController extends AbstractController<Remisiones> {
     public void saveOrders(){  
         for( RemisionesProducto remProd : selected.getRemisionesProductoList()){
             if(!remProd.getIdPedido().getRemisionesProductoList().contains(remProd)){
-                remProd.getIdPedido().getRemisionesProductoList().add(remProd);
+                if(pedidoController.selected != null && remProd.getIdPedido().equals(pedidoController.selected)){
+                   if(!pedidoController.selected.getRemisionesProductoList().contains(remProd)){
+                      pedidoController.selected.getRemisionesProductoList().add(remProd);
+                   }
+                }
             }
             
         }
     }
+    
+ 
     public int getCantTotal() {
         
         int cantTotal = 0;

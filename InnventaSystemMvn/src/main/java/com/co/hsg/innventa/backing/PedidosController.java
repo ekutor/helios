@@ -315,16 +315,22 @@ public class PedidosController extends AbstractController<Pedidos> {
         }
         int total = 0;
         for(PedidosProducto pp:selected.getPedidosProductoList()){
-            total += this.calculateDeliveryQty(pp.getIdProducto());
+            total += this.calculateDeliveryQty(pp);
         }
         return (selected.getCantidadTotal() <= total);
     }
    
-    public int calculateDeliveryQty(Productos selectedProd){
+    public int calculateDeliveryQty(PedidosProducto selectedPedidoProducto){
         int qty = 0;
-             Map<Remisiones , Integer> auxParents = new HashMap<>();
-       // Pedidos order = chargeItem(NamedQuerys.ORDER_SINGLE, selected.getId());
-        for( RemisionesProducto rp : selected.getRemisionesProductoList()){
+       Map<Remisiones , Integer> auxParents = new HashMap<>();
+       Pedidos pedidos = this.chargeSingleItem(NamedQuerys.ORDER_SINGLE, selected.getId());
+       //Pedidos pedidos = selected;
+       if(pedidos == null){
+         pedidos = selectedPedidoProducto.getIdPedido();
+       }
+       Productos selectedProd = selectedPedidoProducto.getIdProducto();
+       
+        for( RemisionesProducto rp : pedidos.getRemisionesProductoList()){
             if(rp.getIdProducto().equals(selectedProd)){
                 qty += rp.getCantidad();
             }else if(!rp.getIdProducto().getProductosParte().isEmpty()){

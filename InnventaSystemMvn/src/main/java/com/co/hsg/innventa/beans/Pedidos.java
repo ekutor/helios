@@ -109,7 +109,7 @@ public class Pedidos implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedido")
     private List<PedidosProducto> pedidosProductoList;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idPedido")
+    @OneToMany(mappedBy = "idPedido")
     private List<RemisionesProducto> remisionesProductoList;
     
 

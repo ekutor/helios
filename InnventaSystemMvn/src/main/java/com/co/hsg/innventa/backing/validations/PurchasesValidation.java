@@ -79,14 +79,17 @@ public class PurchasesValidation extends AbstractValidation {
                 if(remProd.getIdProducto().getProductosParte().isEmpty()){
                     total += remProd.getCantidad();
                 }else{
-                    qty = remProd.getCantidad() / actualParent.getCantidad();
-                    if(auxParents.containsKey(actualParent.getProductoPadre())){
-                        int tempVal = auxParents.get(actualParent.getProductoPadre());
-                        qty = (tempVal > qty )? qty : tempVal ;
-                        total = total - tempVal;
+                    if(actualParent != null){
+                        qty = remProd.getCantidad() / actualParent.getCantidad();
+                        if(auxParents.containsKey(actualParent.getProductoPadre())){
+                            int tempVal = auxParents.get(actualParent.getProductoPadre());
+                            qty = (tempVal > qty )? qty : tempVal ;
+                            total = total - tempVal;
+                        }
+                        auxParents.put(actualParent.getProductoPadre(), qty);
+                    }else{
+                       qty = remProd.getCantidad(); 
                     }
-                    auxParents.put(actualParent.getProductoPadre(), qty);
-                    
                     total += qty;
                 }
                 
@@ -104,13 +107,15 @@ public class PurchasesValidation extends AbstractValidation {
         int qty = 0;
         boolean isValid = true;
         for(PedidosProducto ped : productPurchase.getIdPedido().getPedidosProductoList()){
-              deliveredQty = pedidosController.calculateDeliveryQty(ped.getIdProducto());
+              deliveredQty = pedidosController.calculateDeliveryQty(ped);
               qty = ped.getCantidad();
               
               if(productPurchase.getIdProducto().getProductosParte().size() > 0){
                    ProductosComponentes parent = getComponentParent(productPurchase.getIdProducto(), ped.getIdProducto());
-                   deliveredQty = deliveredQty * parent.getCantidad();
-                   qty = qty * parent.getCantidad();
+                   if(parent != null){
+                    deliveredQty = deliveredQty * parent.getCantidad();
+                    qty = qty * parent.getCantidad();
+                   }
                    actualParent = parent;
                }
                if(actualId != null && productPurchase.getIdRemision().getId().equals(actualId)){
