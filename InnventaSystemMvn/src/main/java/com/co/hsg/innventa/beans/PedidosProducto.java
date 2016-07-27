@@ -40,7 +40,8 @@ public class PedidosProducto implements Serializable {
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
-
+    @Column(name = "cantidad_entregada")
+    private int cantidadEntregada;
     @Basic(optional = false)
     @NotNull
     @Column(name = "valor_unitario")
@@ -88,6 +89,15 @@ public class PedidosProducto implements Serializable {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    public int getCantidadEntregada() {
+        return cantidadEntregada;
+    }
+
+    public void setCantidadEntregada(int cantidadEntregada) {
+        this.cantidadEntregada = cantidadEntregada;
+    }
+    
     
     public double getValorUnitario() {
         return valorUnitario;

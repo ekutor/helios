@@ -11,11 +11,12 @@ public enum Modules {
     THIRDS("terceros","danger","cubes"),USERS("usuarios","info","users"),MASTERS("maestros","info","edit"),
     STATES_OC("estadosOC","info","edit"),STATES_RM("estadosRM","info","edit"),
     CATEGORIES_PROD("categoriasProd","info","shopping-cart"),CONFIGURATION("configuracion","info","gears"),
+    REPORTS_ORDERS("reportes","info","clipboard"),
     INIT("inicio","primary","cubes"), 
     CREATE_ORDER("pedidosCreate","primary","clipboard"),
     EDIT_ORDER("pedidosEdit","primary","clipboard"),
     CREATE_REMISSION("remisionesProducto","primary","truck"),
-     EDIT_REMISSION("remisionesProductoEdit","primary","truck"),
+    EDIT_REMISSION("remisionesProductoEdit","primary","truck"),
     ACL("aclRoles","info","edit"),ACLACTIONS("aclRolesAccion","info","edit"),
     ADMIN("Administracion","info","gears"),
     ;

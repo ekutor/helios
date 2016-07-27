@@ -37,7 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
             + "WHERE p.estado.id != 'ORDERS_CANCELED' "
             + "AND p.estado.id != 'ORDERS_DELIVERED' "
             + "AND p.estado.id != 'ORDERS_PAID' "
-            + "AND p.idCliente = :cliente"),
+            + "AND p.idCliente = :cliente "
+            + "AND p.eliminado = 0 "
+            + "ORDER BY p.referencia DESC, p.fechaPedido DESC"),
     @NamedQuery(name = "Pedidos.delete", query = "UPDATE Pedidos p SET p.eliminado =1 WHERE p.id =:id")})
 
 public class Pedidos implements Serializable {

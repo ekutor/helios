@@ -8,3 +8,4 @@ InnventaSystemMvn/config/innventadb-20160713.sql
 InnventaSystemMvn/config/innventadb_bck_old.sql
 InnventaSystemMvn/config/innventadb_old.sql
 InnventaSystemMvn/config/innventadbbck.sql
+*.sql

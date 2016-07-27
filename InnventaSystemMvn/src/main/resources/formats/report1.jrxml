@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="caa9e367-fcbd-43c1-8796-278e008b21c8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pedidos.`cantidad_total` AS pedidos_cantidad_total,
+     pedidos.`cantidad_pendientes` AS pedidos_cantidad_pendientes,
+     pedidos.`fecha_pedido` AS pedidos_fecha_pedido,
+     pedidos.`referencia` AS pedidos_referencia,
+     pedidos.`estado` AS pedidos_estado,
+     pedidos_producto.`CANTIDAD` AS pedidos_producto_CANTIDAD,
+     pedidos_producto.`cantidad_entregada` AS pedidos_producto_cantidad_entregada,
+     remisiones_producto.`cantidad` AS remisiones_producto_cantidad,
+     remisiones.`referencia` AS remisiones_referencia,
+     remisiones.`ESTADO` AS remisiones_ESTADO,
+     remisiones.`fecha_remision` AS remisiones_fecha_remision,
+     remisiones.`total_productos` AS remisiones_total_productos,
+     productos.`nombre` AS productos_nombre,
+     cuentas.`nombre` AS cuentas_nombre,
+     pedidos_producto.`id_producto` AS pedidos_producto_id_producto,
+     pedidos_producto.`id_pedido` AS pedidos_producto_id_pedido
+FROM
+     `pedidos` pedidos INNER JOIN `pedidos_producto` pedidos_producto ON pedidos.`id` = pedidos_producto.`id_pedido`
+     INNER JOIN `remisiones_producto` remisiones_producto ON pedidos.`id` = remisiones_producto.`id_pedido`
+     INNER JOIN `cuentas` cuentas ON pedidos.`id_cliente` = cuentas.`id`
+     INNER JOIN `remisiones` remisiones ON remisiones_producto.`id_remision` = remisiones.`id`
+     INNER JOIN `productos` productos ON remisiones_producto.`id_producto` = productos.`id`
+     AND productos.`id` = pedidos_producto.`id_producto`]]>
+	</queryString>
+	<field name="pedidos_cantidad_total" class="java.lang.Integer"/>
+	<field name="pedidos_cantidad_pendientes" class="java.lang.Integer"/>
+	<field name="pedidos_fecha_pedido" class="java.sql.Date"/>
+	<field name="pedidos_referencia" class="java.lang.String"/>
+	<field name="pedidos_estado" class="java.lang.String"/>
+	<field name="pedidos_producto_CANTIDAD" class="java.lang.Integer"/>
+	<field name="pedidos_producto_cantidad_entregada" class="java.lang.Integer"/>
+	<field name="remisiones_producto_cantidad" class="java.lang.Integer"/>
+	<field name="remisiones_referencia" class="java.lang.String"/>
+	<field name="remisiones_ESTADO" class="java.lang.String"/>
+	<field name="remisiones_fecha_remision" class="java.sql.Date"/>
+	<field name="remisiones_total_productos" class="java.lang.Integer"/>
+	<field name="productos_nombre" class="java.lang.String"/>
+	<field name="cuentas_nombre" class="java.lang.String"/>
+	<field name="pedidos_producto_id_producto" class="java.lang.String"/>
+	<field name="pedidos_producto_id_pedido" class="java.lang.String"/>
+	<group name="pedidos_referencia">
+		<groupExpression><![CDATA[$F{pedidos_referencia}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField>
+					<reportElement style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#990099" uuid="1278a191-a525-4cce-a575-64383ce3cf98"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pedidos_referencia}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="4eb7c082-3c5b-40b8-abef-a46b738617c0"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="pedidos_producto_id_producto">
+		<groupExpression><![CDATA[$F{pedidos_producto_id_producto}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="4" width="460" height="20" uuid="fcf1bf3e-7f0f-4a7d-8d42-6d8771ae4049"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pedidos_producto_id_producto}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="remisiones_referencia">
+		<groupExpression><![CDATA[$F{remisiones_referencia}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="3cd0987b-2983-44f3-8939-9cb02af54abe"/>
+				<imageExpression><![CDATA["leaf_banner_violet.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="0f25e89f-94cd-4984-a2ca-9163fd511d37"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Leaf Violet Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="63" y="46" width="200" height="22" uuid="229753e7-0730-404d-b736-fb31cb1eac7b"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Leaf Violet SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="0318e9d0-bf38-4d6f-bcc6-1eaa20bab901"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="42" height="15" uuid="ffe8793a-f4a0-4806-aa5e-a60c12d2b6e6"/>
+				<text><![CDATA[pedidos_cantidad_total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="42" y="19" width="42" height="15" uuid="d2d8db4d-1cc9-481d-9a88-796d2a44d71b"/>
+				<text><![CDATA[pedidos_cantidad_pendientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="84" y="19" width="42" height="15" uuid="ffce1de6-600b-493b-b436-2365fe4c80cd"/>
+				<text><![CDATA[pedidos_fecha_pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="126" y="19" width="42" height="15" uuid="c84a706c-dab2-4b62-9cf9-ed9691cc7785"/>
+				<text><![CDATA[pedidos_estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="168" y="19" width="42" height="15" uuid="a2f67d40-a7c6-4d44-8d7a-a02a9f23887a"/>
+				<text><![CDATA[pedidos_producto_CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="210" y="19" width="42" height="15" uuid="9b57712a-060d-4e4b-97eb-39ff02e7b55c"/>
+				<text><![CDATA[pedidos_producto_cantidad_entregada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="252" y="19" width="42" height="15" uuid="6aba4163-146a-49c4-9aa9-f9c7482167c9"/>
+				<text><![CDATA[remisiones_producto_cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="294" y="19" width="42" height="15" uuid="54ed9bf4-a89b-46f8-9983-33d592ffb6ec"/>
+				<text><![CDATA[remisiones_ESTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="336" y="19" width="42" height="15" uuid="832b0769-8ef9-444d-841c-837260d95f89"/>
+				<text><![CDATA[remisiones_fecha_remision]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="378" y="19" width="42" height="15" uuid="a342c1f5-1c9b-44c5-b343-a675525faa68"/>
+				<text><![CDATA[remisiones_total_productos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="420" y="19" width="42" height="15" uuid="04958a3a-9a01-4d06-849d-1e6e4449c10b"/>
+				<text><![CDATA[productos_nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="462" y="19" width="42" height="15" uuid="cd5b63a5-833a-4778-937e-0174a3eb9085"/>
+				<text><![CDATA[cuentas_nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="504" y="19" width="42" height="15" uuid="40a975f5-bb1e-4b6d-8e44-6d88267fdac3"/>
+				<text><![CDATA[pedidos_producto_id_pedido]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="0d4c4142-f2d2-448b-9717-5a84e91c82b0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="42" height="15" uuid="624bb72e-120f-4e4e-9fce-6b649be4d5b7"/>
+				<textFieldExpression><![CDATA[$F{pedidos_cantidad_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="42" y="0" width="42" height="15" uuid="48a430e9-0770-4d05-bf11-2325a2814c6c"/>
+				<textFieldExpression><![CDATA[$F{pedidos_cantidad_pendientes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="84" y="0" width="42" height="15" uuid="504882d7-5a7e-40c5-ba49-3778e35374b1"/>
+				<textFieldExpression><![CDATA[$F{pedidos_fecha_pedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="126" y="0" width="42" height="15" uuid="f5854509-b264-4df7-816e-37d49416ca0d"/>
+				<textFieldExpression><![CDATA[$F{pedidos_estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="168" y="0" width="42" height="15" uuid="bcc6849c-290c-464d-b28e-6682091b06f6"/>
+				<textFieldExpression><![CDATA[$F{pedidos_producto_CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="210" y="0" width="42" height="15" uuid="0ef0414e-4dee-4d94-ad3c-30ae8917fc7b"/>
+				<textFieldExpression><![CDATA[$F{pedidos_producto_cantidad_entregada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="252" y="0" width="42" height="15" uuid="861407ba-6fe5-4dab-99a1-cd63bb62366b"/>
+				<textFieldExpression><![CDATA[$F{remisiones_producto_cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="294" y="0" width="42" height="15" uuid="61e86ce6-0f30-4990-afef-1cead1e78bb2"/>
+				<textFieldExpression><![CDATA[$F{remisiones_ESTADO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="336" y="0" width="42" height="15" uuid="30eef273-93bd-4841-9b73-6cbd6d4b887c"/>
+				<textFieldExpression><![CDATA[$F{remisiones_fecha_remision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="378" y="0" width="42" height="15" uuid="308fbfe8-52ab-40ad-8383-54da553829f0"/>
+				<textFieldExpression><![CDATA[$F{remisiones_total_productos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="420" y="0" width="42" height="15" uuid="ff1bf1c1-b404-48db-a3dc-4db20b7b4cd3"/>
+				<textFieldExpression><![CDATA[$F{productos_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="462" y="0" width="42" height="15" uuid="341f69d2-46b1-4e6e-a1dd-a836900bd3c7"/>
+				<textFieldExpression><![CDATA[$F{cuentas_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="504" y="0" width="42" height="15" uuid="686e290d-2b91-40d1-90e0-a59e8131ebd0"/>
+				<textFieldExpression><![CDATA[$F{pedidos_producto_id_pedido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="7b9458fc-beab-48b3-b259-8bc66a5a55d8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="0e943228-3271-42e6-bd8f-7a832924cd81"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="27f5f096-e389-466e-8680-dbd5c16f53dc"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="10a8d420-46f6-4f9c-951c-57e895c825db"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

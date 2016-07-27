@@ -4,6 +4,7 @@ import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.backing.util.MobilePageController;
 import com.co.hsg.innventa.backing.util.Utils;
 import com.co.hsg.innventa.backing.validations.PurchasesValidation;
+import com.co.hsg.innventa.beans.Cuentas;
 import com.co.hsg.innventa.beans.Estados;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
@@ -339,6 +340,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
         List<ReportInfo> list = new ArrayList<>();
         if (selected != null) {
             int auxQty=0;
+            int total = 0;
             String auxId="";
             ReportInfo auxRi = null;
             for (RemisionesProducto rem : selected.getRemisionesProductoList()) {
@@ -354,32 +356,42 @@ public class RemisionesController extends AbstractController<Remisiones> {
                     auxRi = ri;
                 }
                 ri.setCantidad(auxQty);
+                total += auxQty;
                 ri.setNombre(rem.getIdProducto().getNombre());
                 
-                ri.setNombreCliente(selected.getIdPedido().getIdCliente().getNombre());
-                ri.setDirCliente(selected.getIdPedido().getIdCliente().getDireccionPpal());
-                ri.setTelCliente(selected.getIdPedido().getIdCliente().getTelefonoPpal());
                 try{
-                    Personas contact = selected.getIdPedido().getIdCliente().getPersona().get(0).getPersona();
+                    Cuentas cuenta = selected.getRemisionesProductoList().get(0).getIdPedido().getIdCliente();
+                    Personas contact = cuenta.getPersona().get(0).getPersona();
                     String pre = ("F".equals(contact.getSexo()))?"Sra. ":"Sr.  ";
+                    
+                    ri.setNombreCliente(cuenta.getNombre());
+                    ri.setDirCliente(cuenta.getDireccionPpal());
+                    ri.setTelCliente(cuenta.getTelefonoPpal());
+                
                     ri.setContacto(contact.getNombre1()+" "+contact.getApellido1());
                     ri.setDespachador(selected.getCreadoPor().getNombre1()+" "+selected.getCreadoPor().getApellido1());
-                    ri.setCantTotal(String.valueOf(selected.getTotalProductos()));
-                    ri.setTercero(selected.getEntregadoA().getNombre());
-                }catch(Exception e){
+                    ri.setCantTotal(String.valueOf(total));
                     
+                    
+                    ri.setNitCliente("Nit: "+cuenta.getId());
+                    ri.setNumOrden(this.getOrderRef());
+                    ri.setFechaEntrega(Utils.getFormattedDate(selected.getFechaRemision()));
+                    ri.setReferencia(selected.getReferencia());
+                    ri.setObservaciones(selected.getObservaciones());
+                    if(selected.getEntregadoA() != null){
+                        ri.setTercero(selected.getEntregadoA().getNombre());
+                    }
+
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
                
-                ri.setNitCliente("Nit: "+selected.getIdPedido().getIdCliente().getId());
-                ri.setNumOrden(this.getOrderRef());
-                ri.setFechaEntrega(Utils.getFormattedDate(selected.getFechaRemision()));
-                ri.setReferencia(selected.getReferencia());
-                ri.setObservaciones(selected.getObservaciones());
-                
+               
                 
                 list.add(ri);
             }
-            
+            selected.setTotalProductos(total);
+            super.save(null);
         }
         return list;
     }

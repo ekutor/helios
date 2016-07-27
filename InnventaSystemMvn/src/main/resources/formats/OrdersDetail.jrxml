@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RemissionFormatsss" pageWidth="595" pageHeight="842" columnWidth="475" leftMargin="60" rightMargin="60" topMargin="40" bottomMargin="40" uuid="b44f99e3-fd17-45ce-b171-eae2ed08f7f2">
+	<property name="ireport.zoom" value="1.6105100000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="63"/>
+	<parameter name="LOGO" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\GitRepos\\helios\\InnventaSystemMvn\\src\\main\\resources\\formats\\logo.jpg"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="referencia" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="nombreCliente" class="java.lang.String"/>
+	<field name="nitCliente" class="java.lang.String"/>
+	<field name="dirCliente" class="java.lang.String"/>
+	<field name="telCliente" class="java.lang.String"/>
+	<field name="fechaEntrega" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="contacto" class="java.lang.String"/>
+	<field name="numOrden" class="java.lang.String"/>
+	<field name="tercero" class="java.lang.String"/>
+	<field name="despachador" class="java.lang.String"/>
+	<field name="cantTotal" class="java.lang.String"/>
+	<pageHeader>
+		<band height="216" splitType="Stretch">
+			<elementGroup>
+				<rectangle>
+					<reportElement x="313" y="0" width="162" height="38" uuid="8f7f3cf9-e2cb-40c1-82ce-4b746925775c"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="313" y="0" width="162" height="20" uuid="66696bda-e02e-4766-9521-a0fdc4a230dc"/>
+					<textElement textAlignment="Center">
+						<font fontName="VerdanaNegrilla" size="12"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<text><![CDATA[REMISION]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="313" y="20" width="162" height="17" uuid="d8cc209d-d54d-4f7b-b82d-d9417bc74d3d"/>
+					<textElement textAlignment="Center">
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["No. "+$F{referencia}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+			<image>
+				<reportElement x="0" y="0" width="180" height="57" uuid="db9f5308-f9c7-4f99-b9bb-50a34dce1447"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<elementGroup>
+				<rectangle>
+					<reportElement mode="Transparent" x="219" y="140" width="256" height="60" uuid="1f6c8a4b-70ba-4908-a8fb-a69930f92d29"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="140" width="219" height="60" uuid="bf6094ad-d128-4cc4-ac95-fa2883d75aee"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="140" width="219" height="15" uuid="7e30ed65-a0bb-43bf-9b1b-bf495a5f867f"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Señor:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="219" y="170" width="116" height="15" uuid="740f2f0d-6ebb-4045-8b2d-9d030c09415b"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Numero Orden"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="219" y="185" width="116" height="15" uuid="b27d363b-9a45-4b51-8dff-2d21816ee69a"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Contacto"]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="219" y="170" width="256" height="15" uuid="9715b586-804c-4423-aa4d-c4afb3016e3b"/>
+				</rectangle>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="170" width="219" height="15" uuid="5762b9be-dc3c-441d-9837-980b52c5a64d"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dirCliente}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="335" y="185" width="140" height="15" uuid="23c0362c-e669-4079-8974-a5de78cd1ee2"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{contacto}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="335" y="155" width="140" height="15" uuid="3cc5c55e-abf7-49b2-8f15-e5e36191e9ed"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="335" y="170" width="140" height="15" uuid="18e73d81-62aa-4fa7-bd6f-d14d33b81e1e"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{numOrden}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="335" y="140" width="140" height="15" uuid="be17949d-2705-4147-a153-5abf7c3b08d7"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal" isStrikeThrough="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fechaEntrega}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="219" y="140" width="116" height="15" uuid="d60b7afd-b5c9-4ff5-aab8-e1c994ffe8e4"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Fecha Entrega"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="219" y="155" width="116" height="15" uuid="35a989b6-0033-4bec-b889-da4e975c00c9"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Vendedor"]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="219" y="140" width="256" height="15" uuid="76f010d8-0467-43e3-91c8-ff100076b192"/>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="155" width="219" height="15" uuid="b129c85b-c357-4f8f-8f43-3658f1a86d11"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="185" width="219" height="15" uuid="695f560f-4ed4-4d14-9ca9-66ced7045192"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{telCliente}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="219" y="155" width="256" height="15" uuid="651807ec-9985-4e38-af83-80abeddc9274"/>
+				</rectangle>
+			</elementGroup>
+			<elementGroup>
+				<textField>
+					<reportElement x="0" y="72" width="162" height="13" uuid="33e4f6e0-a88f-4803-a834-72419c1b1e7a"/>
+					<textElement>
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Mettagrup S.A.S."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="85" width="162" height="13" uuid="260be919-b5be-4dff-8f35-4469531ddad5"/>
+					<textElement>
+						<font fontName="VerdanaNegrilla"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["NIT: 900507876-7"]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+			<line>
+				<reportElement x="335" y="140" width="1" height="60" uuid="e07999e7-2192-4f1d-ba19-34cb2b9cd7a3"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="281" y="0" width="194" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="6e2f1245-0cc2-4501-a11e-f8a979264ab4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="281" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="9e7c365a-516a-4b58-b7c7-b51cb59c23f3"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="281" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="8f786356-c206-4354-80aa-8109dabe08d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VerdanaNegrilla"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="281" y="0" width="194" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="aee5a1ea-c992-4bcf-8fd4-c20d0b54d3df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VerdanaNegrilla"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="281" height="15" uuid="e062e0fc-cd19-49ed-90cb-19466eaea773"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="10" rightIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="281" height="15" uuid="74d061a3-a9c8-4469-8fe8-5c9b01970460"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="281" y="0" width="194" height="15" uuid="04dc9570-f36b-4b28-a72c-28799e312f0d"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="281" y="0" width="194" height="15" uuid="c72c1325-0fe7-44fc-bc9b-dcd1a4f9b44d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="10" rightIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="150" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="475" height="47" uuid="d27d42de-80f1-4efd-9f6d-3eaadebcad87"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="475" height="47" isPrintWhenDetailOverflows="true" uuid="ef66a9f2-1456-4abd-b2f3-84564a41fb91"/>
+				<textElement>
+					<font fontName="VerdanaNormal"/>
+					<paragraph leftIndent="10" rightIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["OBSERVACIONES: "+$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<elementGroup>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="93" width="219" height="37" uuid="d937b82b-6d74-48bb-bb50-6262accb8959"/>
+					<graphicElement>
+						<pen lineWidth="1.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="219" y="93" width="256" height="37" uuid="5dc4533c-5827-4a86-8320-c7bc1ed638ee"/>
+					<graphicElement>
+						<pen lineWidth="1.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="219" y="93" width="256" height="37" uuid="78493a73-e260-45ae-947b-883603dfa013"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="10" rightIndent="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tercero}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="219" y="73" width="256" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="67596b51-1ec4-47a0-b023-5c80fdcd978b"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="73" width="219" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="396e73d0-d55b-478e-ab89-0a128aa4b296"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="73" width="219" height="20" forecolor="#000000" backcolor="#333333" uuid="f529efbe-3c21-4acd-8a1b-16b182fc722a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="VerdanaNegrilla"/>
+					</textElement>
+					<text><![CDATA[DESPACHADO POR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="219" y="73" width="256" height="20" forecolor="#000000" backcolor="#333333" uuid="ae443f55-f5be-4c67-b0db-6f9ecda45374"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="VerdanaNegrilla"/>
+					</textElement>
+					<text><![CDATA[RECIBIDO POR]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="93" width="219" height="37" uuid="59503163-f38e-49f1-93d5-133ddfac2d16"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="VerdanaNormal"/>
+						<paragraph leftIndent="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{despachador}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="281" y="46" width="194" height="21" isPrintWhenDetailOverflows="true" uuid="3e23f70f-9cd1-4075-8074-7085d8adb2fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VerdanaNegrilla"/>
+					<paragraph leftIndent="10" rightIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="219" y="47" width="62" height="20" forecolor="#FFFFFF" backcolor="#333333" uuid="e0a66d46-5c45-41da-bce0-24a568387c49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VerdanaNegrilla"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="281" y="47" width="194" height="20" uuid="1b88f564-263a-47c5-bc48-2848ede90e77"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="40">
+			<line>
+				<reportElement x="0" y="0" width="475" height="1" uuid="6a0328cc-fca4-413d-9087-4678eaacb342"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="4" width="475" height="10" uuid="07f231b2-a21c-40c5-9bca-b33ca056f66a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="VerdanaNegrilla" size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mettagrup S.A.S."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="475" height="10" uuid="2b4e907d-64bb-4886-b1ad-34df66150003"/>
+				<textElement textAlignment="Center">
+					<font fontName="VerdanaCursiva" size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CR 49 # 63a -44"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="24" width="475" height="10" uuid="2eec7616-2491-4306-8bec-db0a7b763665"/>
+				<textElement textAlignment="Center">
+					<font fontName="VerdanaCursiva" size="7"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tel: 444 52 57 - 310 403 56 92"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

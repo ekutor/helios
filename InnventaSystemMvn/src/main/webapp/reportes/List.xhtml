@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                 xmlns:pe="http://primefaces.org/ui/extensions">
+    
+    <h:form id="EstadosListForm">
+
+        <div class='panel panel-#{navigation.moduleType("REPORTS_ORDERS")}' >
+            <div class="panel-heading">#{navigation.actualModuleCap} de Ordenes de Compra</div>
+                   
+  
+                
+            <p:dataTable id="datalist"
+                         value='#{reportsController.chargeInfoOrders()}'
+                         var="item"
+                         rowKey="#{item.id}"
+                         paginator="false"
+                         rows="20"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                       
+                         tableStyleClass="table table-striped"  >
+
+                <p:ajax event="rowSelect"   update="@form:cancelButton"/>
+                <p:ajax event="rowUnselect" update="@form:cancelButton"/>
+
+                <p:column sortBy="#{item.referencia}">
+                    <f:facet name="header">
+                        <h:outputText value="Orden"/>
+                    </f:facet>
+                    <h:outputText value="#{item.referencia}"/>
+                </p:column>
+                
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosTitle_fechaPedido}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaPedido}">
+                        <f:convertDateTime locale="es" pattern="dd/MMMM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                
+                 <p:column sortBy="#{item.estado}">
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad Solicitada"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidadTotal}"/>
+                </p:column>
+                
+                 <p:column sortBy="#{item.estado}">
+                    <f:facet name="header">
+                        <h:outputText value="Estado"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estado.estado}"/>
+                </p:column>
+                
+                               
+
+
+
+            </p:dataTable>
+
+         
+            <p:commandButton id="cancelButton"  value="#{innventa.Cancel}" actionListener="#{navigation.init()}" update="contentPanel labelModule"/>
+          
+
+        </div>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

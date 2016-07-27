@@ -178,6 +178,13 @@ public class AppController extends AbstractController<Usuarios> {
         
         menu.addElement(modMenu);
         if(repMenu.getElementsCount() > 0){
+            
+            
+            DefaultMenuItem reportItem = new DefaultMenuItem("Informe de O.C.");
+            //item.setIcon("ui-icon-"+dinaMod.getIcon());
+            reportItem.setCommand("#{navigation.reports(\"ORDERS\")}");
+            reportItem.setUpdate("contentPanel labelModule");
+            repMenu.addElement(reportItem);
             menu.addElement(new DefaultSeparator());
             menu.addElement(repMenu); 
         }

@@ -26,6 +26,9 @@ public class Navigation implements Serializable {
     ParametrosController parametrosController;
     
     @Inject
+    ReportsController reports;
+    
+    @Inject
     ProductosController products;
 
     /**
@@ -90,9 +93,16 @@ public class Navigation implements Serializable {
         parametrosController.cargarObj(Modules.ORDERS);
         actualModule = Modules.CONFIGURATION;
     }
+    
      public void remissionsConfig() {
         parametrosController.cargarObj(Modules.REMISSIONS);
         actualModule = Modules.CONFIGURATION;
+    }
+     
+    public void reports(String report) {
+      
+      reports.cargarObj(Modules.getModule(report));
+      actualModule = Modules.REPORTS_ORDERS;
     }
     
     public void thirds() {

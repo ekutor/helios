@@ -94,7 +94,7 @@
             </p:dataTable>
 
             <p:commandButton id="createButton" rendered="false" icon="ui-icon-plus" value="#{innventa.Create}" actionListener="#{remisionesController.prepareCreate}" update="contentPanel"/>
-            <p:commandButton id="createReportButton" disabled="#{empty remisionesController.selected.idPedido}" ajax="false" icon="ui-icon-document" value="Generar Documento" action="#{reportController.print()}" update=":growl, :RemisionesListForm">
+            <p:commandButton id="createReportButton" disabled="#{empty remisionesController.selected}" ajax="false" icon="ui-icon-document" value="Generar Documento" action="#{reportController.print()}" update=":growl, :RemisionesListForm">
                   
             </p:commandButton>
         

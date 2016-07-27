@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="EstadosEditDlgOC" widgetVar="EstadosEditDialogOC" modal="true" resizable="false"  appendTo="@(body)" header="#{innventa.EditEstadosTitle}" closeOnEscape="true">
+
+            <h:form id="EstadosEditFormOC">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{estadosController.selected != null}">
+
+        
+                     
+                        <h:panelGroup rendered="false">
+                        <h:outputText id="id" value="#{estadosController.selected.id}" />
+                        <p:tooltip for="id" value="#{estadosController.getComponentMessages('id', innventa.EditEstadosHelpText_id)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditEstadosLabel_estado}" for="estado" />
+                      <h:panelGroup>
+                        <p:inputText id="estado" value="#{estadosController.selected.estado}" title="#{innventa.EditEstadosTitle_estado}" required="true" requiredMessage="#{innventa.EditEstadosRequiredMessage_estado}" size="20" maxlength="20"/>
+                        <p:tooltip for="estado" value="#{estadosController.getComponentMessages('estado', innventa.EditEstadosHelpText_estado)}"/>
+                      </h:panelGroup>
+
+                                <p:outputLabel value="#{innventa.EditEstadosLabel_modulo}" for="modulo" />
+                      <h:panelGroup>
+                        <p:inputText id="modulo" value="#{estadosController.selected.modulo}" title="#{innventa.EditEstadosTitle_modulo}" required="true" requiredMessage="#{innventa.EditEstadosRequiredMessage_modulo}" size="36" maxlength="36"/>
+                        <p:tooltip for="modulo" value="#{estadosController.getComponentMessages('modulo', innventa.EditEstadosHelpText_modulo)}"/>
+                      </h:panelGroup>
+                                
+                      <h:panelGroup rendered="false">
+                        <p:inputText id="eliminado" value="#{estadosController.selected.eliminado}" title="#{innventa.EditEstadosTitle_eliminado}" required="true" requiredMessage="#{innventa.EditEstadosRequiredMessage_eliminado}"/>
+                        <p:tooltip for="eliminado" value="#{estadosController.getComponentMessages('eliminado', innventa.EditEstadosHelpText_eliminado)}"/>
+                      </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estadosController.save}" value="#{innventa.Save}" update="display,:EstadosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstadosEditDialogOC'));">
+                        <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{innventa.Cancel}" onclick="PF('EstadosEditDialogOC').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
