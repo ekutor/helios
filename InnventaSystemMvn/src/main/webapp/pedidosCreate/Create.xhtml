@@ -124,7 +124,7 @@
                                message="#{innventa.ConfirmCreateMessage}" icon="ui-icon-alert"/>
                 </p:commandButton>
                 
-                <p:commandButton class="btn btn-success" actionListener="#{pedidosController.createRemission}" 
+                <p:commandButton class="btn btn-success" rendered="false" actionListener="#{pedidosController.createRemission}" 
                                  value="Crear OC y Generar Remision" 
                                  update="display contentPanel growl msgs labelModule" 
                                  >

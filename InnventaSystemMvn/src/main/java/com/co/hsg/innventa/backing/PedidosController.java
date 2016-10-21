@@ -8,15 +8,12 @@ import com.co.hsg.innventa.beans.Estados;
 import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Productos;
-import com.co.hsg.innventa.beans.ProductosComponentes;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.RemisionesFacade;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
@@ -300,12 +297,11 @@ public class PedidosController extends AbstractController<Pedidos> {
         if(selected == null || selected.getId() == null){
             return true;
         }else {
-           // return validateProcessDeliveredFinished();
-           return false;
+            return validateProcessDeliveredFinished();
         }
     }
 
-  /*  private boolean validateProcessDeliveredFinished() {
+   private boolean validateProcessDeliveredFinished() {
         ProcessStates process = ProcessStates.getState(selected.getEstado().getId());
         switch(process){
             case ORDERS_CANCELED:
@@ -317,9 +313,9 @@ public class PedidosController extends AbstractController<Pedidos> {
         }
         int total = 0;
         for(PedidosProducto pp:selected.getPedidosProductoList()){
-            total += this.calculateDeliveryQty(pp);
+            total += pp.getCantidadEntregada();
         }
         return (selected.getCantidadTotal() <= total);
-    }*/
+    }
    
 }

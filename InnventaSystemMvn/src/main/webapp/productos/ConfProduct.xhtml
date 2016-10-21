@@ -12,18 +12,12 @@
                   modal="true" 
                   resizable="false"  
                   appendTo="@parent" 
+                  width="650" height="500"
                   header="Configurar Productos de Venta" closeOnEscape="true">
 
             <h:form id="ProductosConfForm">
                 <h:panelGroup id="display">
-                    <p:contextMenu id="ProductosConfFormContextMenu" for="picker">  
-                        <p:menuitem value="Definir Cantidad" icon="ui-icon-plus" id="item">
-                             <p:outputLabel value="Cantidad de Componentes por Producto" />
-                            <p:inputText value="#{productosController.qty}" />
-                            <p:commandButton value="Guardar" actionListener="#{productosController.addQty}"  />
-                            <h:outputText value="#{productosController.qty}" />
-                        </p:menuitem>
-                      </p:contextMenu>
+
                     <p:panelGrid columns="2" columnClasses="column" rendered="#{productosController.selected != null}">
 
                         <h:outputText value="#{innventa.ViewProductosLabel_referencia}"/>
@@ -34,47 +28,125 @@
 
                         <h:outputText value="#{innventa.ViewProductosLabel_categoria}"/>
                         <h:outputText value="#{productosController.selected.categoria.nombre}" 
-                                   
+
                                       title="#{innventa.ViewProductosTitle_categoria}"/>
 
                         <h:outputText value="#{innventa.ViewProductosLabel_tipoCodigo}"/>
                         <h:outputText value="#{productosController.transformTipoProducto()}" />
-             
 
-                       </p:panelGrid>
-                        <p:separator/>             
-                                <!-- <p:graphicImage value="/images/barca/player.photo}"/> -->  
-                            <h:outputText value="Seleccione los Items que componen el Producto #{productosController.selected.nombre}"/>
-                        <p:pickList id="picker" value="#{productosController.parentProducts}"
-                                var="child" effect="bounce"
-                                itemValue="#{child}" converter="#{productosConverter}"
-                                showSourceControls="true" showTargetControls="true"
-                                addAllLabel="Agregar Todos" addLabel="Agregar Componente"
-                                removeAllLabel="quitar Todos" removeLabel="Quitar Componente"                                
-                                style="background-color: #0088cc">
-                                <f:facet name="sourceCaption"> Items de Venta</f:facet>  
-                                <f:facet name="targetCaption"> Seleccionados</f:facet>
 
-                                <p:column style="width:100%">
-                                <!-- <p:graphicImage value="/images/barca/player.photo}"/> -->  
-                                    <f:facet name="header">
-                                        Name
-                                    </f:facet>
-                                    <h:outputText value=" #{child.nombre}" />
+                    </p:panelGrid>
+                    <p:separator/> 
+
+
+                    <div class="panel panel-default">
+                        <h:form id="ConfProductsSmallForm">
+
+
+                            <h:panelGrid columns="2" style="margin-bottom:10px" 
+                                         >
+                                <h:outputText value="Seleccione los Items que componen el Producto "/>
+                               <p:column><p:outputLabel value="&#160;" /></p:column>
+                                <p:selectOneMenu id="advanced" 
+                                                 value="#{productosController.findProduct}" 
+                                                 converter="#{productosConverter}" 
+                                                 var="t" 
+                                                 filter="true" 
+                                                 filterMatchMode="contains"
+                                                 styleClass="col-md-3"
+
+                                                 >
+                                    <f:selectItems value="#{productosController.itemsForSale}" 
+                                                   var="selectedItem"
+                                                   itemLabel="#{selectedItem.nombre}" 
+                                                   itemValue="#{selectedItem}" 
+                                                   />
+
+                                    <p:column>
+                                        <h:outputText value="#{t.nombre}" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText value="#{t.referencia}" />
+                                    </p:column> 
+                                </p:selectOneMenu>
+                               
+                                <p:column>
+                                    <p:commandButton id="addProductButton" icon="ui-icon-plus"
+                                                     update=":ProductosListConfForm"  
+                                                     actionListener="#{productosController.targetProducts.add(productosController.findProduct)}" 
+                                                     />
+                                    <p:tooltip for="addProductButton" value="Agregar Item como un componentre del producto"/>
+
                                 </p:column>
-                             
-            
-                        </p:pickList>
-                        <p:separator/>
-                    <p:commandButton actionListener="#{productosController.save}" value="Guardar Configuracion" update="display :ProductosListForm:datalist, contentPanel" 
+
+
+                            </h:panelGrid>
+                        </h:form>
+
+                    </div>
+                    <p:separator/>
+                </h:panelGroup>
+            </h:form>
+
+            <h:form id="ProductosListConfForm">
+                <div class='panel panel-#{navigation.moduleType("PRODUCTOS")}'>
+                    <div class="panel-heading"></div>
+
+                    <p:dataTable id="datalist"
+                                 value="#{productosController.targetProducts}"
+                                 var="item"
+                                 rowKey="#{item.id}"
+                                 paginator="false"
+                                 rows="5"
+                                 rowsPerPageTemplate="10,20,30,40,50,100"
+                                 selectionMode="single"
+                                 selection="#{productosController.componentSelected}"
+                                 tableStyleClass="table table-striped "
+                                 style="text-align: right"
+                                 editable="true" editMode="cell"
+                                 >
+
+                        <p:ajax event="rowSelect"   update=""/>
+                        <p:ajax event="rowUnselect" update=""/>
+
+
+
+                        <p:column sortBy="#{item.id}" filterBy="#{item.id}" rendered="false">
+                            <f:facet name="header">
+                                <h:outputText value="#{innventa.ListProductosTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column style="text-align: left">
+                            <f:facet name="header">
+                                <h:outputText value="Producto"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+
+
+                        <p:column headerText="Cantidad">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{item.atributo}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{item.atributo}" style="width:100%" label="CAnt">
+                                        <!-- <p:ajax listener={pedidosController.onRowEdit(item.cantidad)}" update=":PedidosCreateForm:panelTotalOC, :PedidosCreateForm:panelCantidadOC, :ProductosListForm" />
+                                        --></p:inputText></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+
+                    </p:dataTable>
+                    <p:separator/>
+
+                    <p:commandButton actionListener="#{productosController.save}" value="Guardar Configuracion" update="@parent :ProductosListForm:datalist, contentPanel" 
                                      oncomplete="handleSubmit(xhr,status,args,PF('ProductosConfDialog'));">
                         <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>
-                    <p:commandButton value="#{innventa.Close}" onclick="PF('ProductosConfDialog').hide()" update="display"/>
-                </h:panelGroup>
+                    <p:commandButton value="#{innventa.Close}" onclick="PF('ProductosConfDialog').hide()" update="@parent"/>
 
+                </div> 
             </h:form>
-               
+
         </p:dialog>
 
     </ui:composition>

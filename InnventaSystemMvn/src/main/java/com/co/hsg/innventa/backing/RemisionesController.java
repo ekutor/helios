@@ -14,6 +14,7 @@ import com.co.hsg.innventa.beans.ProductosComponentes;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.ReportInfo;
+import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -52,6 +53,7 @@ public class RemisionesController extends AbstractController<Remisiones> {
     private boolean allPendings;
 
     private Map<Productos, Integer> qtyPurchaseProducts;
+    private Collection<Estados> orderStates;
 
     public RemisionesController() {
         // Inform the Abstract parent controller of the concrete Remisiones Entity
@@ -95,6 +97,9 @@ public class RemisionesController extends AbstractController<Remisiones> {
     public Remisiones prepareCreate(ActionEvent event) {
         Remisiones obj = super.prepareCreate(event);
         qtyPurchaseProducts = new HashMap<>();
+        if(orderStates == null){
+           orderStates = estadosController.chargeItems(Modules.ORDERS);
+        }
         obj.setReferencia(systemManager.getSequence(NamedQuerys.REMISSION_PARAM));
         if (pedidoController.getSelected() != null) {
             obj.setIdPedido(pedidoController.getSelected());
@@ -287,17 +292,32 @@ public class RemisionesController extends AbstractController<Remisiones> {
     }
 
     public void saveOrders(boolean isNew) {
+     
         if (isNew) {
             for (RemisionesProducto remProd : selected.getRemisionesProductoList()) {
                 List<PedidosProducto> op = ppController.chargeOrderProducts(remProd.getIdPedido());
+                int total = 0;
                 for (PedidosProducto prodOrder : op) {
                     int purchaseQty = qtyPurchaseProducts.get(prodOrder.getIdProducto());
                     prodOrder.setCantidadEntregada(prodOrder.getCantidadEntregada() + purchaseQty);
+                    total +=purchaseQty;
                     ppController.save(prodOrder, null);
                 }
+                remProd.getIdPedido().setCantidadPendientes(remProd.getIdPedido().getCantidadPendientes() + total);
+                if(remProd.getIdPedido().getCantidadTotal() == remProd.getIdPedido().getCantidadPendientes()){
+                    for( Estados st : orderStates){
+                        if(st.getId().equals(ProcessStates.ORDERS_DELIVERED.getPermanentID())){
+                            remProd.getIdPedido().setEstado(st);
+                            break;
+                        }
+                    }
+                }
+                pedidoController.save(remProd.getIdPedido(), null);
             }
 
         }
+        
+        
     }
 
     public int getCantTotal() {

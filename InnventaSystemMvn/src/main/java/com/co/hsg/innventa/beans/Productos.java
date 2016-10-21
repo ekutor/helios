@@ -82,6 +82,10 @@ public class Productos implements Serializable {
     @Size(max = 500)
     @Column(name = "observaciones")
     private String observaciones;
+
+    @Column(name = "cantidad_unidades")
+    private short cantUnidades;
+      
     
     @JoinColumn(name = "categoria", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -283,6 +287,14 @@ public class Productos implements Serializable {
 
     public void setEliminado(short eliminado) {
         this.eliminado = eliminado;
+    }
+
+    public short getCantUnidades() {
+        return cantUnidades;
+    }
+
+    public void setCantUnidades(short cantUnidades) {
+        this.cantUnidades = cantUnidades;
     }
 
     @XmlTransient

@@ -73,6 +73,7 @@ public class PurchasesValidation extends AbstractValidation {
     }
 
     public boolean validateQuantityProductsDelivered(RemisionesProducto productPurchase, int modifiedValue, boolean showAdvice) {
+        return true;/*
         int deliveredQty = 0;
         int expectedAmount;
         boolean isValid = true;
@@ -107,7 +108,7 @@ public class PurchasesValidation extends AbstractValidation {
             }
         }
 
-        return isValid;
+        return isValid;*/
     }
 
     private static ProductosComponentes getComponentParent(Productos product, Productos productParent) {

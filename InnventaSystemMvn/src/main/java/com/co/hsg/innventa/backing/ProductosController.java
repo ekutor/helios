@@ -8,13 +8,14 @@ import com.co.hsg.innventa.beans.enums.ProcessStates;
 import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultTreeNode;
-import org.primefaces.model.DualListModel;
 import org.primefaces.model.TreeNode;
 
 @Named(value = "productosController")
@@ -30,7 +31,9 @@ public class ProductosController extends AbstractController<Productos> {
     @Inject
     private Navigation nav;
             
-    private Productos findProduct; 
+    private Productos findProduct;
+    
+    private Productos componentSelected;
     
     private Collection<Parametros> info;
     
@@ -38,25 +41,22 @@ public class ProductosController extends AbstractController<Productos> {
     
     private TreeNode productsTree;
     
-    private DualListModel<Productos> parentProducts;
-    private Productos selectedchildProduct;
-    
-    private String qty;
+    private List<Productos> targetProducts;
     
     public ProductosController() {
         super(Productos.class);
         actualModule = Modules.PRODUCTS;
     }
 
-    public DualListModel<Productos> getParentProducts() {
-        if(parentProducts == null){
-             parentProducts = new DualListModel<Productos>(new ArrayList<>(getItemsForSale()), new ArrayList<Productos>());
+    public List<Productos> getTargetProducts() {
+        if(targetProducts == null){
+             targetProducts = new ArrayList<Productos>();
         }
-        return parentProducts;
+        return targetProducts;
     }
 
-    public void setParentProducts(DualListModel<Productos> parentProducts) {
-        this.parentProducts = parentProducts;
+    public void setTargetProducts(List<Productos> targetProducts) {
+        this.targetProducts = targetProducts;
     }
     
     public Productos getFindProduct() {
@@ -64,28 +64,20 @@ public class ProductosController extends AbstractController<Productos> {
     }
 
     public void setFindProduct(Productos findProduct) {
-        this.findProduct = findProduct;
-    }
-    
-    public void setSelectedChild(Productos selectedProduct){
-        if(selectedProduct != null){
-            selectedchildProduct = selectedProduct;
-        }
+        this.findProduct = findProduct;this.findProduct.setAtributo("1");
     }
 
-    public String getQty() {
-        return qty;
+    public void onSelect(SelectEvent event) {
+        FacesContext context = FacesContext.getCurrentInstance();
+       // context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
     }
 
-    public void setQty(String qty) {
-        this.qty = qty;
+    public Productos getComponentSelected() {
+        return componentSelected;
     }
-    
-    public void addQty(ActionEvent e){
-        
-    }
-    public Productos getSelectedChild(){
-        return selectedchildProduct;
+
+    public void setComponentSelected(Productos componentSelected) {
+        this.componentSelected = componentSelected;
     }
     
     public Collection<Productos> getItemsForSale() {
@@ -143,15 +135,16 @@ public class ProductosController extends AbstractController<Productos> {
 
     @Override
     public void save(ActionEvent event) {
-        if(parentProducts != null && !parentProducts.getTarget().isEmpty()){
-            for(Productos p : parentProducts.getTarget()){
+        if(targetProducts != null && !targetProducts.isEmpty()){
+            selected.setAtributo("1");
+            targetProducts.add(selected);
+            for(Productos p : targetProducts){
                 ProductosComponentes pc = new ProductosComponentes();
                 pc.setComponente(p);
                 pc.setProductoPadre(selected);
-                pc.setCantidad(1);
+                pc.setCantidad(Short.parseShort(p.getAtributo()));
                 selected.getProductosParte().add(pc);
             }
-
         }
         super.save(event); 
     }

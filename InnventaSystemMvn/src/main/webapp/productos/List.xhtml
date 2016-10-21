@@ -9,7 +9,7 @@
 
     <h:form id="ProductosListForm">
          <div class='panel panel-#{navigation.moduleType("PRODUCTOS")} col-sm-2 col-md-10'>
-          
+           
             <div class="panel-heading">Lista de #{navigation.actualModuleCap}</div>
             <p:contextMenu id="ProductosDataTableContextMenu" for="datalist">  
                 <p:menuitem value="#{innventa.Create}" rendered='#{productosController.isAllowed("CREATE", "")}' onclick="document.getElementById('ProductosListForm:createButton').click();" icon="ui-icon-plus"/>
@@ -21,6 +21,8 @@
                 <p:separator/>
                 <p:menuitem value="#{innventa.ProductosMenuItem_pedidosProductoList}" icon="ui-icon-search"  action="#{productosController.navigatePedidosProductoList}" disabled="#{empty productosController.selected.pedidosProductoList}" ajax="false"/>  
             </p:contextMenu>
+            
+              
             <p:dataTable id="datalist"
                          value="#{productosController.items}"
                          var="item"
@@ -102,7 +104,6 @@
               
 
             </p:dataTable>
-
             <p:commandButton id="createButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-plus"   value="#{innventa.Create}" actionListener="#{productosController.prepareCreate}" update=":ProductosCreateForm :ProductosCreateForm:display" oncomplete="PF('ProductosCreateDialog').show()"/>
             <p:commandButton id="createParentButton" rendered='#{productosController.isAllowed("CREATE", "")}' icon="ui-icon-wrench"   value="Configurar Producto" update=":ProductosConfForm, :ProductosConfForm:display" oncomplete="PF('ProductosConfDialog').show()" disabled="#{!productosController.isProductSale()}"/>
           
@@ -111,6 +112,7 @@
             <p:commandButton id="deleteButton" rendered='#{productosController.isAllowed("DELETE", productosController.selected.creadoPor)}' style="visibility: hidden;" icon="ui-icon-trash"  value="#{innventa.Delete}" actionListener="#{productosController.delete(productosController.selected.id)}" update=":growl,datalist" disabled="#{empty productosController.selected}">
                 <p:confirm header="#{innventa.ConfirmationHeader}" message="#{innventa.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
             </p:commandButton>
+        
 
         </div>
         <ui:include src="/confirmation.xhtml"/>
