@@ -74,7 +74,10 @@ public class Pedidos implements Serializable {
     @Size(max = 500)
     @Column(name = "observaciones")
     private String observaciones;
-
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cantidad_pendientes")
+    private int cantidadPendientes;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 36)
@@ -191,6 +194,14 @@ public class Pedidos implements Serializable {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public int getCantidadPendientes() {
+        return cantidadPendientes;
+    }
+
+    public void setCantidadPendientes(int cantidadPendientes) {
+        this.cantidadPendientes = cantidadPendientes;
     }
 
     public String getCreadoPor() {

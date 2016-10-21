@@ -1,7 +1,12 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
+import com.co.hsg.innventa.beans.Pedidos;
+import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.beans.RemisionesProducto;
+import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -38,5 +43,19 @@ public class RemisionesProductoController extends AbstractController<RemisionesP
         if (this.getSelected() != null && idRemisionController.getSelected() == null) {
             idRemisionController.setSelected(this.getSelected().getIdRemision());
         }
+    }
+
+    public int getQtyDelivered(Pedidos order , Productos p) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("pedido", order );
+        params.put("producto", p );
+        int result = 0;
+        Object total = this.ejbFacade.getBySimpleQuery(NamedQuerys.PURCHASE_DELIVERED.getQuery(), params);
+        if(total != null){
+            Number res = (Number) total;
+            result = res.intValue();
+        }
+        return result;
+
     }
 }

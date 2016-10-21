@@ -125,7 +125,7 @@
                         <f:facet name="output"><h:outputText value="#{item.cantidad}" /></f:facet>
                         <f:facet name="input">
                             <p:inputText value="#{item.cantidad}" style="width:100%">
-                                <p:ajax listener="#{remisionesController.onRowEdit(item, item.cantidad)}" update=":RemisionesCreateForm:panelCantidadProductos" />
+                                <p:ajax listener="#{remisionesController.onRowEdit(item, item.cantidad)}" update="@form:datalist :RemisionesCreateForm:panelCantidadProductos msgs" />
                             </p:inputText>
                         </f:facet>
                     </p:cellEditor>

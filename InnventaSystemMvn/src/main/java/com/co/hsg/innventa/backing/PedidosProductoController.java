@@ -1,7 +1,12 @@
 package com.co.hsg.innventa.backing;
 
 import com.co.hsg.innventa.backing.util.MobilePageController;
+import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
+import com.co.hsg.innventa.session.NamedQuerys;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.event.ActionEvent;
@@ -53,5 +58,11 @@ public class PedidosProductoController extends AbstractController<PedidosProduct
         if (this.getSelected() != null && idPedidoController.getSelected() == null) {
             idPedidoController.setSelected(this.getSelected().getIdPedido());
         }
+    }
+    
+    public List<PedidosProducto> chargeOrderProducts( Pedidos order ){
+        Collection<PedidosProducto> orderProducts = this.ejbFacade.findAllByQuery(NamedQuerys.ORDERS_PRODUCTS.getQuery(), "pedido", order);
+        return new ArrayList<>(orderProducts);
+      
     }
 }

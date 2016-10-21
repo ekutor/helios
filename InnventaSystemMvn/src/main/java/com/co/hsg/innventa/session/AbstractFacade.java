@@ -5,9 +5,11 @@ import com.co.hsg.innventa.backing.util.JsfUtil;
 import com.co.hsg.innventa.backing.util.Utils;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -89,7 +91,17 @@ public abstract class AbstractFacade<T> {
         TypedQuery<T> q = getEntityManager().createNamedQuery(namedQuery,entityClass);
         return q.getResultList();
     }
-
+    
+     public Object getBySimpleQuery(String namedQuery, Map<String,Object> params) {
+        Query q = getEntityManager().createNamedQuery(namedQuery);
+        Iterator<Map.Entry<String, Object>> it = params.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry<String, Object> entry = it.next();
+            q.setParameter(entry.getKey(), entry.getValue());
+        }
+        return q.getSingleResult();
+    }
+     
     public List<T> findAll() {
         /*javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));

@@ -289,8 +289,9 @@ public abstract class AbstractController<T> implements Serializable {
                         this.ejbFacade.remove(id);                    
                         break;
                 }
-              
+               if(successMessage != null){
                 JsfUtil.addSuccessMessage(successMessage);
+               }
             } catch (EJBException ex) {
                 Throwable cause = JsfUtil.getRootCause(ex.getCause());
                 if (cause != null) {

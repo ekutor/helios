@@ -1,19 +1,17 @@
 package com.co.hsg.innventa.backing.validations;
 
-import com.co.hsg.innventa.backing.PedidosController;
+import com.co.hsg.innventa.backing.PedidosProductoController;
+import com.co.hsg.innventa.backing.RemisionesProductoController;
 import com.co.hsg.innventa.backing.util.JsfUtil;
-import com.co.hsg.innventa.beans.Pedidos;
 import com.co.hsg.innventa.beans.PedidosProducto;
 import com.co.hsg.innventa.beans.Productos;
 import com.co.hsg.innventa.beans.ProductosComponentes;
 import com.co.hsg.innventa.beans.Remisiones;
 import com.co.hsg.innventa.beans.RemisionesProducto;
 import com.co.hsg.innventa.beans.enums.ProcessStates;
-import com.co.hsg.innventa.session.NamedQuerys;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,10 +26,10 @@ public class PurchasesValidation extends AbstractValidation {
 
     private Remisiones purchase;
     @Inject
-    PedidosController pedidosController;
+    PedidosProductoController pedidosProdController;
+    @Inject
+    RemisionesProductoController remisionesProdController;
 
-    private ProductosComponentes actualParent;
-    
     public PurchasesValidation() {
     }
 
@@ -42,7 +40,6 @@ public class PurchasesValidation extends AbstractValidation {
     public void setPurchase(Remisiones purchase) {
         this.purchase = purchase;
     }
-
 
     @Override
     public void doValidate() {
@@ -70,88 +67,56 @@ public class PurchasesValidation extends AbstractValidation {
     }
 
     public void validateTotals() {
-         int  qty = 0;
-         Map<Productos , Integer> auxParents = new HashMap<>();
-        if (purchase != null && !purchase.getRemisionesProductoList().isEmpty()) {
-            int total = 0;
-            for (RemisionesProducto remProd : purchase.getRemisionesProductoList()) {
-                validateQuantityProducts(remProd, remProd.getCantidad(), purchase.getId());
-                if(remProd.getIdProducto().getProductosParte().isEmpty()){
-                    total += remProd.getCantidad();
-                }else{
-                    if(actualParent != null){
-                        qty = remProd.getCantidad() / actualParent.getCantidad();
-                        if(auxParents.containsKey(actualParent.getProductoPadre())){
-                            int tempVal = auxParents.get(actualParent.getProductoPadre());
-                            qty = (tempVal > qty )? qty : tempVal ;
-                            total = total - tempVal;
-                        }
-                        auxParents.put(actualParent.getProductoPadre(), qty);
-                    }else{
-                       qty = remProd.getCantidad(); 
-                    }
-                    total += qty;
-                }
-                
-            }
-            if(purchase.getIdPedido().getCantidadTotal() < total){
-                errors.add("Esta intentando entregar más productos que los solicitados en la Orden "+purchase.getIdPedido().getReferencia());
-            }else{
-                purchase.setTotalProductos(total);
-            }
+        if (purchase.getIdPedido().getCantidadTotal() < purchase.getTotalProductos()) {
+           // errors.add("Esta intentando entregar más productos que los solicitados en la Orden " + purchase.getIdPedido().getReferencia());
         }
     }
-    
-    public boolean validateQuantityProducts(RemisionesProducto productPurchase, int modifiedValue, String actualId){
+
+    public boolean validateQuantityProductsDelivered(RemisionesProducto productPurchase, int modifiedValue, boolean showAdvice) {
         int deliveredQty = 0;
-        int qty = 0;
+        int expectedAmount;
         boolean isValid = true;
-        for(PedidosProducto ped : productPurchase.getIdPedido().getPedidosProductoList()){
-              deliveredQty = pedidosController.calculateDeliveryQty(ped);
-              qty = ped.getCantidad();
-              
-              if(productPurchase.getIdProducto().getProductosParte().size() > 0){
-                   ProductosComponentes parent = getComponentParent(productPurchase.getIdProducto(), ped.getIdProducto());
-                   if(parent != null){
-                    deliveredQty = deliveredQty * parent.getCantidad();
-                    qty = qty * parent.getCantidad();
-                   }
-                   actualParent = parent;
-               }
-               if(actualId != null && productPurchase.getIdRemision().getId().equals(actualId)){
-                    deliveredQty = deliveredQty - productPurchase.getCantidad();
-               }
-               
-                if( qty == deliveredQty && qty != 0){
-                        JsfUtil.addErrorMessage("Cantidad Completada ", "Ya se entregaron todos los articulos "+
-                                ped.getIdProducto().getNombre()+" de la Orden "+ped.getIdPedido().getReferencia());
-                        productPurchase.setCantidad(deliveredQty);
-                        isValid = false;
-                        break;
-                }else if(qty < deliveredQty + modifiedValue && qty != 0){
-                    deliveredQty  = qty - deliveredQty;
-                    JsfUtil.addErrorMessage("Cantidad Superada ", "En la Orden "+ped.getIdPedido().getReferencia()+
-                            " solo faltan  "+
-                            (deliveredQty) +
-                            " articulos de "+productPurchase.getIdProducto().getNombre() );
-                    productPurchase.setCantidad(deliveredQty);
-                    isValid = false;
-                    break;
+        List<PedidosProducto> list = pedidosProdController.chargeOrderProducts(productPurchase.getIdPedido());
+        for (PedidosProducto lp : list) {
+            deliveredQty = remisionesProdController.getQtyDelivered(lp.getIdPedido(), lp.getIdProducto());
+            expectedAmount = lp.getCantidad() - lp.getCantidadEntregada();
+            ProductosComponentes parent = getComponentParent(productPurchase.getIdProducto(), lp.getIdProducto());
+            if (parent != null) {
+                expectedAmount *= parent.getCantidad();
+            }
+            
+            if ( expectedAmount == 0 ) {
+                if(showAdvice){
+                    JsfUtil.addErrorMessage("Cantidad Completada ", "Ya se entregaron todos los articulos "
+                        + lp.getIdProducto().getNombre() + " de la Orden " + lp.getIdPedido().getReferencia());
                 }
+                productPurchase.setCantidad(0);
+                isValid = false;
+                break;
+            } else if (expectedAmount < deliveredQty +  modifiedValue ) {
+                expectedAmount = expectedAmount - deliveredQty;
+                if(showAdvice){
+                    JsfUtil.addErrorMessage("Cantidad Superada ", "En la Orden " + lp.getIdPedido().getReferencia()
+                            + " solo faltan  "
+                            + expectedAmount
+                            + " articulos de " + productPurchase.getIdProducto().getNombre());
+                }
+                productPurchase.setCantidad(expectedAmount);
+                isValid = false;
+                break;
+            }
         }
+
         return isValid;
     }
 
-
     private static ProductosComponentes getComponentParent(Productos product, Productos productParent) {
-        for(ProductosComponentes pp : product.getProductosParte()){
-            if(pp.getProductoPadre().equals(productParent)){
+        for (ProductosComponentes pp : product.getProductosParte()) {
+            if (pp.getProductoPadre().equals(productParent)) {
                 return pp;
             }
         }
         return null;
     }
-
-
 
 }

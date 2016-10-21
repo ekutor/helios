@@ -44,11 +44,18 @@
                     </h:outputText>
                 </p:column>
                 
-                 <p:column sortBy="#{item.estado}">
+                 <p:column >
                     <f:facet name="header">
                         <h:outputText value="Cantidad Solicitada"/>
                     </f:facet>
                     <h:outputText value="#{item.cantidadTotal}"/>
+                </p:column>
+                
+                 <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad Pendientes"/>
+                    </f:facet>
+                     <h:outputText value="#{item.cantidadPendientes}"/>
                 </p:column>
                 
                  <p:column sortBy="#{item.estado}">

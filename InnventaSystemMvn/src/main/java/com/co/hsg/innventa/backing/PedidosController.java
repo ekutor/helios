@@ -16,7 +16,6 @@ import com.co.hsg.innventa.session.NamedQuerys;
 import com.co.hsg.innventa.session.RemisionesFacade;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -38,7 +37,8 @@ public class PedidosController extends AbstractController<Pedidos> {
     private RemisionesController remisionController;
      @Inject
     private EstadosController estadosController;
-    
+    @Inject 
+    private PedidosProductoController ppController;
     @Inject
     private RemisionesFacade remisionFacade;
     @Inject
@@ -143,6 +143,7 @@ public class PedidosController extends AbstractController<Pedidos> {
                 cantTotal += pedido.getCantidad();
             }
             p.setCantidadTotal(cantTotal);
+            p.setCantidadPendientes(cantTotal);
         }
         return cantTotal;
     }
@@ -299,11 +300,12 @@ public class PedidosController extends AbstractController<Pedidos> {
         if(selected == null || selected.getId() == null){
             return true;
         }else {
-            return validateProcessDeliveredFinished();
+           // return validateProcessDeliveredFinished();
+           return false;
         }
     }
 
-    private boolean validateProcessDeliveredFinished() {
+  /*  private boolean validateProcessDeliveredFinished() {
         ProcessStates process = ProcessStates.getState(selected.getEstado().getId());
         switch(process){
             case ORDERS_CANCELED:
@@ -318,44 +320,6 @@ public class PedidosController extends AbstractController<Pedidos> {
             total += this.calculateDeliveryQty(pp);
         }
         return (selected.getCantidadTotal() <= total);
-    }
-   
-    public int calculateDeliveryQty(PedidosProducto selectedPedidoProducto){
-        int qty = 0;
-       Map<Remisiones , Integer> auxParents = new HashMap<>();
-       Pedidos pedidos = this.chargeSingleItem(NamedQuerys.ORDER_SINGLE, selected.getId());
-       //Pedidos pedidos = selected;
-       if(pedidos == null){
-         pedidos = selectedPedidoProducto.getIdPedido();
-       }
-       Productos selectedProd = selectedPedidoProducto.getIdProducto();
-       
-        for( RemisionesProducto rp : pedidos.getRemisionesProductoList()){
-            if(rp.getIdProducto().equals(selectedProd)){
-                qty += rp.getCantidad();
-            }else if(!rp.getIdProducto().getProductosParte().isEmpty()){
-                int purchaseqty = 0;
-                int cont = 0;
-                for(ProductosComponentes ph :selectedProd.getProductosHijos()){
-                    if(ph.getComponente().equals(rp.getIdProducto()) &&
-                            ph.getProductoPadre().equals(selectedProd)){
-                        purchaseqty = rp.getCantidad() / ph.getCantidad();
-                        break;
-                    }
-                }
-
-                if(auxParents.containsKey(rp.getIdRemision())){
-                    int tempVal = auxParents.get(rp.getIdRemision());
-                    purchaseqty = (tempVal > purchaseqty )? purchaseqty : tempVal ;
-                    qty = qty - tempVal;
-                }
-                    auxParents.put(rp.getIdRemision(), purchaseqty);
-                    
-                    qty += purchaseqty;
-            }
-        }
-      
-        return qty;
-    }
+    }*/
    
 }

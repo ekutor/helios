@@ -23,8 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "pedidos_producto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PedidosProducto.findAll", query = "SELECT p FROM PedidosProducto p"),
-    @NamedQuery(name = "PedidosProducto.findById", query = "SELECT p FROM PedidosProducto p WHERE p.id = :id"),
+    @NamedQuery(name = "PedidosProducto.findAll", query = "SELECT p FROM PedidosProducto p WHERE p.eliminado = 0"),
+    @NamedQuery(name = "PedidosProducto.findById", query = "SELECT p FROM PedidosProducto p WHERE p.idPedido = :pedido AND p.eliminado = 0"),
     @NamedQuery(name = "PedidosProducto.findByCantidad", query = "SELECT p FROM PedidosProducto p WHERE p.cantidad = :cantidad"),
     @NamedQuery(name = "PedidosProducto.findByEliminado", query = "SELECT p FROM PedidosProducto p WHERE p.eliminado = :eliminado")})
 public class PedidosProducto implements Serializable {

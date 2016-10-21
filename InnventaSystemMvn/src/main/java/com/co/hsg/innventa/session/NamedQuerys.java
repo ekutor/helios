@@ -17,6 +17,8 @@ public enum NamedQuerys {
     PARAMS("Parametros.findByParametro",""),
     PARAM_MODULES("Parametros.modules",""),
     ORDERS_PENDING("Pedidos.pendings",""),
+    ORDERS_PRODUCTS("PedidosProducto.findById",""),
+    PURCHASE_DELIVERED("RemisionesProducto.sum",""),
     ;
     
     private String query;

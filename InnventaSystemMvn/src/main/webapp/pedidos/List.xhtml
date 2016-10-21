@@ -79,11 +79,18 @@
                 </p:column>
 
 
-                <p:column sortBy="#{item.cantidadTotal}" filterBy="#{item.cantidadTotal}">
+                <p:column>
                     <f:facet name="header">
                         <h:outputText value="#{innventa.ListPedidosTitle_cantidadTotal}"/>
                     </f:facet>
                     <h:outputText value="#{item.cantidadTotal}"/>
+                </p:column>
+                
+                  <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{innventa.ListPedidosTitle_cantidadPendientes}"/>
+                    </f:facet>
+                      <h:outputText value="#{item.cantidadPendientes}"/>
                 </p:column>
 
 
@@ -148,9 +155,9 @@
                         
                  <p:column >
                     <f:facet name="header">
-                        <h:outputText value="Cantidad Entregada"/>
+                        <h:outputText value="Cantidad Pendientes"/>
                     </f:facet>
-                     <h:outputText value="#{pedidosController.calculateDeliveryQty(itemDetail)}"/>
+                     <h:outputText value="#{itemDetail.cantidad - itemDetail.cantidadEntregada}"/>
                 </p:column>
                         
                 <p:column>

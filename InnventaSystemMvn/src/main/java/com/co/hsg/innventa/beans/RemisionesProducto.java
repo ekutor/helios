@@ -24,10 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RemisionesProducto.findAll", query = "SELECT r FROM RemisionesProducto r"),
-    @NamedQuery(name = "RemisionesProducto.findById", query = "SELECT r FROM RemisionesProducto r WHERE r.id = :id"),
-    @NamedQuery(name = "RemisionesProducto.findByIdProducto", query = "SELECT r FROM RemisionesProducto r WHERE r.idProducto = :idProducto"),
-    @NamedQuery(name = "RemisionesProducto.findByCantidad", query = "SELECT r FROM RemisionesProducto r WHERE r.cantidad = :cantidad"),
-    @NamedQuery(name = "RemisionesProducto.findByEliminado", query = "SELECT r FROM RemisionesProducto r WHERE r.eliminado = :eliminado")})
+    @NamedQuery(name = "RemisionesProducto.sum", query = "SELECT SUM(r.cantidad) FROM RemisionesProducto r "
+            + "WHERE r.idPedido = :pedido "
+            + "AND r.idProducto = :producto "
+            + "AND r.eliminado = 0 "
+            + "AND r.idPedido.eliminado = 0")
+})
 public class RemisionesProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
